@@ -1,0 +1,74 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Login</title>
+    <link href="~/Models/css/reset.css" rel="stylesheet" />
+    <link href="~/Models/css/style.css" rel="stylesheet" />
+    <link rel="icon" type="image/x-icon" href="~/login.ico">
+    <link href="~/Models/js/scripts.js" rel="stylesheet" />
+</head>
+
+<body style="font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">
+    <header>
+        <div>
+            <div class="login-div">
+                <h1 style="font-weight:bold;">Tela de Login</h1>
+            </div>
+            <nav>
+                <p>Preencha os campos a seguir para realizar seu login.</p>
+            </nav>
+        </div>
+    </header>
+    <main>
+        <form id="formulario" autocomplete="off" action="~/Login.cshtml" onclick="formularioAlerta()">
+            <section style="margin: 0px 300px">
+                <div class="main-box">
+                    <div class="txt">
+                        <h2>Login</h2>
+                        <div style="border-bottom: 1px solid rgb(190, 190, 190); padding: 6px;">
+
+                        </div>
+                    </div>
+                    <div class="info">
+                        <ul>
+                            <li>
+                                <p style="padding: 18px 0px;">Usuário</p>
+                                <label><input id="usuario" type="text" placeholder="Insira seu usuário" required maxlength="15" minlength="4"></label>
+                            </li>
+                            <li>
+                                <p style="padding: 18px 0px;">Senha</p>
+                                <label><input id="senha" type="password" placeholder="Insira sua senha" required maxlength="15" minlength="4"></label>
+                            </li>
+                        </ul>
+                        <div class="button">
+                            <button onclick="executarLogin()" type="submit">Logar</button>
+                        </div>
+                    </div>
+                    <div style="border-bottom: 1px solid rgb(190, 190, 190); padding-top: 22px;"></div>
+                </div>
+            </section>
+        </form>
+    </main>
+    <div class="alertaFormulario" onclick="formularioAlerta()">
+        <p id="confirmacao"></p>
+    </div>
+    <div>
+        <div class="linkMenu" id="linkMenu">
+            <a id="linkMenu" href="~/View/Menu.cshtml">Ir para o Menu</a>
+        </div>
+    </div>
+    <footer>
+        <div>
+            AVA © All rights reserved
+        </div>
+    </footer>
+</body>
+</html>
+
+<script src="~/Models/js/scripts.js"></script>
