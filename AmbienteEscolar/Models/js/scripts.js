@@ -35,3 +35,8 @@ function formularioAlerta() {
         document.getElementById("confirmacao").innerHTML = "Preencha todos os campos.";
     }
 }
+
+function limparCampos() {
+    document.getElementById("nome").value = "";
+    document.getElementById("email").value = "";
+}

@@ -1,0 +1,114 @@
+﻿@using AmbienteEscolar.Business.BancoDeDados;
+@using AmbienteEscolar.Business.Repositorios;
+@using AmbienteEscolar.Business.Classes;
+
+@{
+    //Layout nulo, por enquanto (mudar para _Layout, assim que estiver pronto)
+    Layout = null;
+    BancoDados.DBConnect();
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Cadastro de Aluno</title>
+    <link href="~/models/css/reset.css" rel="stylesheet" />
+    <link href="~/Models/css/menu.css" rel="stylesheet" />
+    <link rel="icon" type="image/x-icon" href="~/avaicon.ico">
+</head>
+
+<body>
+    <header>
+        <div>
+            header (_layout)
+        </div>
+    </header>
+    <nav>
+        <div>
+            <br />
+            nav (cinta de navegação)
+            <br />
+            <div class="dropdown">
+                <button onclick="dropDownAluno()" class="dropbtn">Aluno</button>
+                <div id="dropDown" class="dropdown-content">
+                    <a href="#Cadastro">Cadastro</a>
+                    <a href="#Listar">Listar</a>
+                    <a href="#textInfo">text-info...</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <br /><br /><br /><br />
+    <main>
+        <div>
+            <br />
+            <form action="/" method="post">
+                <h2>Informações sobre o aluno para matrícula:</h2>
+                <br />
+                <label>Nome:</label>
+                <input id="nome" type="text" name="nome" placeholder="Insira seu nome aqui" formmethod="post" />
+                <br />
+                <label>E-mail:</label>
+                <input id="email" type="email" name="email" placeholder="Insira seu nome aqui" formmethod="post" />
+                <br />
+                <button onclick="limparCampos()">Cancelar</button>
+                <br />
+                <label>Selecione o curso:</label>
+                <br />
+                <input id="radioBox" type="radio" name="radiobox" formmethod="post" />
+                <span id="radiobox">System Developer</span>
+                <br />
+                <input id="radioBox" type="radio" name="radiobox" formmethod="post" />
+                <span id="radiobox">Design Patterns</span>
+                <br />
+                <input id="radioBox" type="radio" name="radiobox" formmethod="post" />
+                <span id="radiobox">Software Engineer</span>
+                <br />
+                <input id="radioBox" type="radio" name="radiobox" formmethod="post" />
+                <span id="radiobox">Agile Software Especialization</span>
+                <br />
+                <input id="radioBox" type="radio" name="radiobox" formmethod="post" />
+                <span id="radiobox">Project Manager</span>
+                <br />
+            </form>
+
+            @{
+                List<string> alunos = AlunoRepository.BuscarAlunos();
+            }
+
+            <main>
+                <div>
+                    <h2>Listar Alunos:</h2>
+                    <br />
+                    <button>Listar</button>
+                    <table>
+                        @foreach (string item in alunos)
+                        {
+                            <div>
+                                @item
+                            </div>
+                        }
+                    </table>
+                </div>
+            </main>
+            <br />
+        </div>
+    </main>
+    <footer>
+        <div>
+            footer
+        </div>
+    </footer>
+</body>
+</html>
+
+<script>
+    let
+
+</script>
+
+
+<script src="~/Models/js/siteActions.js"></script>
+<script src="~/Models/js/scripts.js"></script>
