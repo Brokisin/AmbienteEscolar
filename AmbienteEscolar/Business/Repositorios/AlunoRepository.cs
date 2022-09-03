@@ -13,7 +13,7 @@ namespace AmbienteEscolar.Business.Repositorios
     {
         Banco banco = new Banco();
 
-        public static List<String> BuscarAlunos()
+        public static List<String> BuscarNomeAlunos()
         {
             List<string> alunos = new List<string>();
             
@@ -51,12 +51,47 @@ namespace AmbienteEscolar.Business.Repositorios
             List<string> listaAlunos = new List<string>();
 
             string query = "SELECT * FROM aluno";
+
+            List<string>[] aluno = new List<string>[4];
+            aluno[0] = new List<string>();
+            aluno[1] = new List<string>();
+            aluno[2] = new List<string>();
+            aluno[3] = new List<string>();
+
+            if (BancoDados.OpenConnection() == true)
+            {
+                MySqlCommand cmd = new MySqlCommand(query, BancoDados.connection);
+                MySqlDataReader dataReader = cmd.ExecuteReader();
+
+                while (dataReader.Read())
+                {
+                    aluno[0].Add(dataReader["id"] + "");
+                    aluno[1].Add(dataReader["nome"] + "");
+                    aluno[2].Add(dataReader["email"] + "");
+                    aluno[3].Add(dataReader["id_curso"] + "");
+                }
+                dataReader.Close();
+                BancoDados.CloseConnection();
+
+                return aluno;
+            }
+            else
+            {
+                return aluno;
+            }
+        }
+
+
+
+
+        /*public static List<string>[] ListarAlunos()
+        {
+            List<string> listaAlunos = new List<string>();
+            List<Aluno> listaAlunos2 = new List<Aluno>();
+            Aluno aluno = new Aluno();
+
+            string query = "SELECT * FROM aluno";
             
-            List<string>[] list = new List<string>[3];
-            list[0] = new List<string>();
-            list[1] = new List<string>();
-            list[2] = new List<string>();
-            list[3] = new List<string>();
             
             if (BancoDados.OpenConnection() == true)
             {
@@ -65,25 +100,27 @@ namespace AmbienteEscolar.Business.Repositorios
                 
                 while (dataReader.Read())
                 {
-                    list[0].Add(dataReader["id"] + "");
-                    list[1].Add(dataReader["nome"] + "");
-                    list[2].Add(dataReader["email"] + "");
-                    list[3].Add(dataReader["id_curso"] + "");
+                    aluno.Id = int.Parse(dataReader["id"].ToString());
+                    aluno.Nome = dataReader["nome"].ToString();
+                    aluno.Email = dataReader["email"].ToString();
+                    aluno.Id_curso = int.Parse(dataReader["id_curso"].ToString());
+
+                    listaAlunos2.Add(aluno);
                 }
                 dataReader.Close();
                 BancoDados.CloseConnection();
                 
-                return list;
+                return aluno;
             }
             else
             {
-                return list;
+                return aluno;
             }
-        }
+        }*/
 
-        public static void InserirAluno(string nome, string email, int id_acesso)
+        public static void InserirAluno(string nome, string email, int id_curso)
         {
-            string query = "INSERT INTO Pessoa (nome, sobrenome) VALUES('" + nome + "','" + email + "'," + id_acesso + ");";
+            string query = "INSERT INTO aluno (nome, email, id_curso) VALUES('" + nome + "','" + email + "'," + id_curso + ");";
             
             if (BancoDados.OpenConnection() == true)
             {

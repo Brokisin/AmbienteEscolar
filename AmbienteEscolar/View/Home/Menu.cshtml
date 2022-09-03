@@ -12,19 +12,16 @@
 
 <html>
 <head>
+    <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width" />
     <title>Cadastro de Aluno</title>
+    <link href="~/View/Shared/_Layout.cshtml" rel="logo" />
     <link href="~/models/css/reset.css" rel="stylesheet" />
     <link href="~/Models/css/menu.css" rel="stylesheet" />
     <link rel="icon" type="image/x-icon" href="~/avaicon.ico">
 </head>
 
 <body>
-    <header>
-        <div>
-            header (_layout)
-        </div>
-    </header>
     <nav>
         <div>
             <br />
@@ -32,12 +29,12 @@
                 <li class="dropdown">
                     <a>Funções</a>
                     <div class="dropdown-content">
-                        <a href="https://dfe-portal.svrs.rs.gov.br/BPE/Consulta" target="_blank">Consulta BP-E</a>
-                        <a href="https://dfe-portal.svrs.rs.gov.br/Cte/Consulta" target="_blank">Consulta CT-E</a>
+                        <a href="" target="_blank">Consulta BP-E</a>
+                        <a href="" target="_blank">Consulta CT-E</a>
                     </div>
                 </li>
             </ul>
-            <br />
+            <br/>
         </div>
     </nav>
     <br /><br /><br /><br />
@@ -75,7 +72,7 @@
             </form>
 
             @{
-                List<string> alunos = AlunoRepository.BuscarAlunos();
+                List<string> alunos = AlunoRepository.BuscarNomeAlunos();
             }
 
             <main>
@@ -86,13 +83,20 @@
                     <table>
                         @foreach (string item in alunos)
                         {
-                            <div>
+                            <br />
+                            <tr>
                                 @item
-                            </div>
+                            </tr>
                         }
                     </table>
                 </div>
             </main>
+            <br />
+            <a href="~/View/Home/Alunos.cshtml" target="_blank">Redirecionar: Alunos</a>
+            <br />
+            <a href="~/View/Home/Professores.cshtml" target="_blank">Redirecionar: Professores</a>
+            <br />
+            <a href="~/View/Home/Usuarios.cshtml" target="_blank">Redirecionar: Usuários</a>
             <br />
         </div>
     </main>

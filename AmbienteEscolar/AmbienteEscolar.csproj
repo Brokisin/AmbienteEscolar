@@ -113,9 +113,12 @@
   <ItemGroup>
     <Content Include="avaicon.ico" />
     <Content Include="login.ico" />
+    <Content Include="Models\css\alunos.css" />
     <Content Include="Models\css\layout.css" />
     <Content Include="Models\css\menu.css" />
+    <Content Include="Models\css\professores.css" />
     <Content Include="Models\css\reset.css" />
+    <Content Include="Models\css\usuarios.css" />
     <Content Include="Models\js\scripts.js" />
     <Content Include="Models\css\login.css" />
     <Content Include="Models\js\siteActions.js" />
@@ -139,6 +142,9 @@
     <None Include="packages.config" />
     <Content Include="View\Home\Menu.cshtml" />
     <Content Include="View\Shared\_Layout.cshtml" />
+    <Content Include="View\Home\Professores.cshtml" />
+    <Content Include="View\Home\Alunos.cshtml" />
+    <Content Include="View\Home\Usuarios.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

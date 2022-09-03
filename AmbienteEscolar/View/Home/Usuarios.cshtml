@@ -1,0 +1,45 @@
+﻿@using AmbienteEscolar.Business.BancoDeDados;
+@using AmbienteEscolar.Business.Repositorios;
+@using AmbienteEscolar.Business.Classes;
+
+@{
+    //Layout nulo, por enquanto (mudar para _Layout, assim que estiver pronto)
+    Layout = null;
+    BancoDados.DBConnect();
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Usuários</title>
+    <link rel="icon" type="image/x-icon" href="~/avaicon.ico">
+    <link href="~/Models/css/layout.css" rel="stylesheet" />
+</head>
+<body>
+    <div>
+        @{
+            List<string>[] logins = UsuarioRepository.BuscarLogin();
+        }
+
+        <main>
+            <div>
+                <h2>Listar Alunos:</h2>
+                <br />
+                <button>Listar</button>
+                <table>
+                    @foreach (string item[0] in logins)
+                    {
+                        <br />
+                        <tr>
+                            @item
+                        </tr>
+                    }
+                </table>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

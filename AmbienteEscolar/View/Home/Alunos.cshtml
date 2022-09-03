@@ -1,0 +1,103 @@
+﻿@using AmbienteEscolar.Business.BancoDeDados;
+@using AmbienteEscolar.Business.Repositorios;
+@using AmbienteEscolar.Business.Classes;
+
+@{
+    //Layout nulo, por enquanto (mudar para _Layout, assim que estiver pronto)
+    Layout = null;
+    BancoDados.DBConnect();
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Alunos</title>
+    <link rel="icon" type="image/x-icon" href="~/avaicon.ico">
+    <link href="~/Models/css/layout.css" rel="stylesheet" />
+</head>
+<body>
+    <div>
+        @{
+            List<string> nomeAlunos = AlunoRepository.BuscarNomeAlunos();
+        }
+
+        <main>
+            <div>
+                <h2>Listar nome dos alunos existentes:</h2>
+                <br />
+                <button>Listar</button>
+                <table>
+                    @foreach (string item in nomeAlunos)
+                    {
+                        <br />
+                        <tr>
+                            @item
+                        </tr>
+                    }
+                </table>
+            </div>
+            <div>
+                <h2>Inserir Alunos:</h2>
+                <br />
+                <label>Nome:</label>
+                <input type="text" name="nome" value="" placeholder="Nome do aluno" />
+                <br />
+                <label>E-mail:</label>
+                <input type="email" name="email" value="" placeholder="E-mail do aluno" />
+                <br />
+                <label>Selecione o curso:</label>
+                <br />
+                <input id="radioBox" type="radio" name="radiobox" formmethod="post" />
+                <span id="radiobox">System Developer</span>
+                <br />
+                <input id="radioBox" type="radio" name="radiobox" formmethod="post" />
+                <span id="radiobox">Design Patterns</span>
+                <br />
+                <input id="radioBox" type="radio" name="radiobox" formmethod="post" />
+                <span id="radiobox">Software Engineer</span>
+                <br />
+                <input id="radioBox" type="radio" name="radiobox" formmethod="post" />
+                <span id="radiobox">Agile Software Especialization</span>
+                <br />
+                <input id="radioBox" type="radio" name="radiobox" formmethod="post" />
+                <span id="radiobox">Project Manager</span>
+                <br />
+            </div>
+            <br />
+            <br />
+            <div>
+
+                @{
+                    List<string>[] alunos = AlunoRepository.ListarAlunos();
+                }
+
+                <h2>Listar Alunos:</h2>
+                <br />
+                <button>Listar</button>
+                <table>
+
+                    @foreach (string item in alunos[0])
+                    {
+
+                        
+                            @item
+                        
+                    }
+
+                    @foreach (string item in alunos[1])
+                    {
+                        
+                            @item
+                        
+                        <br>
+                    }
+
+                </table>
+                    </div>
+                </main>
+            </div>
+        </body>
+    </html>

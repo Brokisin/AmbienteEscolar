@@ -3,7 +3,7 @@
 }
 
 header {
-    background-color: rgb(179, 179, 255);
+    background-color: rgb(32 32 32);
     box-shadow: 1px 3px 5px rgba(117, 117, 117, 0.979);
     height: 110px;
     top: 0;
@@ -80,14 +80,18 @@ button {
 }
 
 .linkMenu {
-    background-color: rgb(202, 207, 255);
-    border: 1px solid rgb(238, 238, 238);
+    background-color: rgb(32 32 32);
+    border: 1px solid rgb(32 32 32);
     text-align: center;
     display: inline-block;
     padding: 10px;
     border-radius: 20px;
     margin-top: 8%;
     margin-left: 45.8%;
+}
+
+a#linkMenu{
+    color:white;
 }
 
 a:hover {
