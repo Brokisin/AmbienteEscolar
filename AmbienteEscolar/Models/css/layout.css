@@ -3,10 +3,12 @@
 }
 
 header {
+    display: flex;
     background-color: rgb(32 32 32);
     box-shadow: 1px 3px 5px rgba(117, 117, 117, 0.979);
     height: 110px;
     top: 0;
+    padding: 0 20px;
 }
 
 .login-div {
@@ -20,9 +22,23 @@ nav {
     text-align: center;
 }
 
-img{
-    height: 30px;
-    width: 30px;
+img {
+    padding-left: 20px;
+    align-self: center;
+    height: 60px;
+    width: 60px;
+    display: inline-block;
+}
+
+h1 {
+    right: 60px;
+    position: fixed;
+    text-shadow: 1px 1px 6px;
+    align-self: center;
+    padding-left: 20px;
+    color: white;
+    align-content: center;
+    display: inline-block;
 }
 
 /*==================================*/

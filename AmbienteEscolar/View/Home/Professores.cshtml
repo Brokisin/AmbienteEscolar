@@ -21,16 +21,14 @@
 <body>
     <div>
         @{
-            List<string> professores = ProfessorRepository.BuscarNomeProfessores();
+            List<string> profs = ProfessorRepository.BuscarNomeProfessores();
         }
 
         <main>
             <div>
-                <h2>Listar Professores:</h2>
-                <br />
-                <button>Listar</button>
+                <label style="font-weight: bold;">Professores:</label>
                 <table>
-                    @foreach (string item in professores)
+                    @foreach (string item in profs)
                     {
                         <br />
                         <tr>
@@ -65,6 +63,34 @@
                 <input id="radioBox" type="radio" name="radiobox" formmethod="post" />
                 <span id="radiobox">Project Manager</span>
                 <br />
+            </div>
+            <div>
+                <br />
+
+                @{
+                    List<Professor> professores = ProfessorRepository.ListarProfessores();
+                }
+
+                <label>Listar Professores:</label>
+                <br />
+                <button>Listar</button>
+                <br />
+                <table>
+                    @foreach (Professor professor in professores)
+                    {
+                        <tr>
+                            <td>
+                                @professor.Nome
+                            </td>
+                            <td>
+                                @professor.Email
+                            </td>
+                            <td>
+                                @professor.Id_curso
+                            </td>
+                        </tr>
+                    }
+                </table>
             </div>
         </main>
     </div>

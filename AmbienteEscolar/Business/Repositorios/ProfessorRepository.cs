@@ -4,6 +4,7 @@ using MySqlConnector;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Web;
 
 namespace AmbienteEscolar.Business.Repositorios
@@ -45,42 +46,42 @@ namespace AmbienteEscolar.Business.Repositorios
             return alunos;
         }
 
-
-
-        public static List<string>[] ListarProfessores()
+        public static List<Professor> ListarProfessores()
         {
-            List<string> listaProfessores = new List<string>();
+            StringBuilder sb = new StringBuilder();
 
-            string query = "SELECT * FROM professor";
+            sb.AppendLine("SELECT * FROM professor");
+            sb.AppendLine("ORDER BY id;");
 
-            List<string>[] professor = new List<string>[3];
-            professor[0] = new List<string>();
-            professor[1] = new List<string>();
-            professor[2] = new List<string>();
-            professor[3] = new List<string>();
+            List<Professor> listaProfessores = new List<Professor>();
 
             if (BancoDados.OpenConnection() == true)
             {
-                MySqlCommand cmd = new MySqlCommand(query, BancoDados.connection);
+                MySqlCommand cmd = new MySqlCommand(sb.ToString(), BancoDados.connection);
                 MySqlDataReader dataReader = cmd.ExecuteReader();
 
                 while (dataReader.Read())
                 {
-                    professor[0].Add(dataReader["id"] + "");
-                    professor[1].Add(dataReader["nome"] + "");
-                    professor[2].Add(dataReader["email"] + "");
-                    professor[3].Add(dataReader["id_curso"] + "");
+                    Professor professor = new Professor();
+
+                    professor.Id = int.Parse(dataReader["id"].ToString());
+                    professor.Nome = dataReader["nome"].ToString();
+                    professor.Email = dataReader["email"].ToString();
+                    professor.Id_curso = int.Parse(dataReader["id_curso"].ToString());
+
+                    listaProfessores.Add(professor);
                 }
                 dataReader.Close();
                 BancoDados.CloseConnection();
 
-                return professor;
+                return listaProfessores;
             }
             else
             {
-                return professor;
+                return listaProfessores;
             }
         }
+        
 
 
 

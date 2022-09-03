@@ -19,27 +19,47 @@
     <link href="~/Models/css/layout.css" rel="stylesheet" />
 </head>
 <body>
-    <div>
-        @{
-            List<string>[] logins = UsuarioRepository.BuscarLogin();
-        }
+    <main>
+        <div>
+            <br />
 
-        <main>
-            <div>
-                <h2>Listar Alunos:</h2>
-                <br />
-                <button>Listar</button>
-                <table>
-                    @foreach (string item[0] in logins)
-                    {
-                        <br />
-                        <tr>
-                            @item
-                        </tr>
-                    }
-                </table>
-            </div>
-        </main>
-    </div>
+            @{
+                List<Usuario> usuarios = UsuarioRepository.ListarUsuarios();
+            }
+
+            <label>Listar Professores:</label>
+            <br />
+            <button>Listar</button>
+            <br />
+            <table>
+                @foreach (Usuario usuario in usuarios)
+                {
+                <tr>
+                    <td>
+                        @usuario.Login
+                    </td>
+                    <td>
+                        @usuario.Senha
+                    </td>
+                    <td>
+                        @usuario.Id_professor
+                    </td>
+                    <td>
+                        @usuario.Id_aluno
+                    </td>
+                    <td>
+                        @usuario.Id_curso
+                    </td>
+                    <td>
+                        @usuario.Id_acesso
+                    </td>
+                    <td>
+                        @usuario.Ativo
+                    </td>
+                </tr>
+                }
+            </table>
+        </div>
+    </main>
 </body>
 </html>

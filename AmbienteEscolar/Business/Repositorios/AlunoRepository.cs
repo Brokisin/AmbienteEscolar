@@ -46,38 +46,39 @@ namespace AmbienteEscolar.Business.Repositorios
             return alunos;
         }
 
-        public static List<string>[] ListarAlunos()
+        public static List<Aluno> ListarAlunos()
         {
-            List<string> listaAlunos = new List<string>();
+            StringBuilder sb = new StringBuilder();
 
-            string query = "SELECT * FROM aluno";
+            sb.AppendLine("SELECT * FROM aluno");
+            sb.AppendLine("ORDER BY id;");
 
-            List<string>[] aluno = new List<string>[4];
-            aluno[0] = new List<string>();
-            aluno[1] = new List<string>();
-            aluno[2] = new List<string>();
-            aluno[3] = new List<string>();
+            List<Aluno> listaAlunos = new List<Aluno>();
 
             if (BancoDados.OpenConnection() == true)
             {
-                MySqlCommand cmd = new MySqlCommand(query, BancoDados.connection);
+                MySqlCommand cmd = new MySqlCommand(sb.ToString(), BancoDados.connection);
                 MySqlDataReader dataReader = cmd.ExecuteReader();
 
                 while (dataReader.Read())
                 {
-                    aluno[0].Add(dataReader["id"] + "");
-                    aluno[1].Add(dataReader["nome"] + "");
-                    aluno[2].Add(dataReader["email"] + "");
-                    aluno[3].Add(dataReader["id_curso"] + "");
+                    Aluno aluno = new Aluno();
+
+                    aluno.Id = int.Parse(dataReader["id"].ToString());
+                    aluno.Nome = dataReader["nome"].ToString();
+                    aluno.Email = dataReader["email"].ToString();
+                    aluno.Id_curso = int.Parse(dataReader["id_curso"].ToString());
+
+                    listaAlunos.Add(aluno);
                 }
                 dataReader.Close();
                 BancoDados.CloseConnection();
 
-                return aluno;
+                return listaAlunos;
             }
             else
             {
-                return aluno;
+                return listaAlunos;
             }
         }
 

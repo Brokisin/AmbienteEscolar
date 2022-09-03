@@ -4,6 +4,7 @@ using MySqlConnector;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Web;
 
 namespace AmbienteEscolar.Business.Repositorios
@@ -52,38 +53,43 @@ namespace AmbienteEscolar.Business.Repositorios
         }
 
 
-        public static List<string>[] ListarAlunos()
+        public static List<Usuario> ListarUsuarios()
         {
-            List<string> listaAlunos = new List<string>();
+            StringBuilder sb = new StringBuilder();
 
-            string query = "SELECT * FROM aluno";
+            sb.AppendLine("SELECT * FROM usuario");
+            sb.AppendLine("ORDER BY id;");
 
-            List<string>[] aluno = new List<string>[3];
-            aluno[0] = new List<string>();
-            aluno[1] = new List<string>();
-            aluno[2] = new List<string>();
-            aluno[3] = new List<string>();
+            List<Usuario> listaUsuarios = new List<Usuario>();
 
             if (BancoDados.OpenConnection() == true)
             {
-                MySqlCommand cmd = new MySqlCommand(query, BancoDados.connection);
+                MySqlCommand cmd = new MySqlCommand(sb.ToString(), BancoDados.connection);
                 MySqlDataReader dataReader = cmd.ExecuteReader();
 
                 while (dataReader.Read())
                 {
-                    aluno[0].Add(dataReader["id"] + "");
-                    aluno[1].Add(dataReader["nome"] + "");
-                    aluno[2].Add(dataReader["email"] + "");
-                    aluno[3].Add(dataReader["id_curso"] + "");
+                    Usuario usuario = new Usuario();
+
+                    usuario.Id = int.Parse(dataReader["id"].ToString());
+                    usuario.Login = dataReader["login"].ToString();
+                    usuario.Senha = dataReader["senha"].ToString();
+                    usuario.Id_professor = int.Parse(dataReader["id_professor"].ToString());
+                    usuario.Id_aluno = int.Parse(dataReader["id_aluno"].ToString());
+                    usuario.Id_curso = int.Parse(dataReader["id_curso"].ToString());
+                    usuario.Id_acesso = int.Parse(dataReader["id_acesso"].ToString());
+                    usuario.Ativo = int.Parse(dataReader["ativo"].ToString());
+
+                    listaUsuarios.Add(usuario);
                 }
                 dataReader.Close();
                 BancoDados.CloseConnection();
 
-                return aluno;
+                return listaUsuarios;
             }
             else
             {
-                return aluno;
+                return listaUsuarios;
             }
         }
 

@@ -71,33 +71,30 @@
             <div>
 
                 @{
-                    List<string>[] alunos = AlunoRepository.ListarAlunos();
+                    List<Aluno> alunos = AlunoRepository.ListarAlunos();
                 }
 
                 <h2>Listar Alunos:</h2>
                 <br />
                 <button>Listar</button>
                 <table>
-
-                    @foreach (string item in alunos[0])
+                    @foreach (Aluno aluno in alunos)
                     {
-
-                        
-                            @item
-                        
+                    <tr>
+                        <td>
+                            @aluno.Nome
+                        </td>
+                        <td>
+                            @aluno.Email
+                        </td>
+                        <td>
+                            @aluno.Id_curso
+                        </td>
+                    </tr>
                     }
-
-                    @foreach (string item in alunos[1])
-                    {
-                        
-                            @item
-                        
-                        <br>
-                    }
-
                 </table>
-                    </div>
-                </main>
             </div>
-        </body>
-    </html>
+        </main>
+    </div>
+</body>
+</html>
