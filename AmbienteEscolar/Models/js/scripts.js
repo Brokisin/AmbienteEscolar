@@ -5,7 +5,7 @@ function botaoInvisible() {
 
 function executarLogin() {
     botaoInvisible();
-    let usuario = document.getElementById("usuario");
+    let usuario = document.getElementById("login");
     let senha = document.getElementById("senha");
 
     let SenhaVazia = (senha.value == "" || senha.value == null);
@@ -24,7 +24,7 @@ function executarLogin() {
 
 function formularioAlerta() {
     botaoInvisible();
-    var usuario = document.getElementById("usuario");
+    var usuario = document.getElementById("login");
     var senha = document.getElementById("senha");
 
     let charsPreenchidos = (usuario.value != "" & senha.value != "");

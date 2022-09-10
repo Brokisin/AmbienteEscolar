@@ -1,0 +1,38 @@
+﻿@using AmbienteEscolar.Business.Classes
+@using AmbienteEscolar.Business.BancoDeDados
+@using AmbienteEscolar.Business.Repositorios
+
+@{
+    Layout = null;
+    
+    BancoDados.DBConnect();
+    
+    Usuario usuario = new Usuario();
+    
+    usuario.Login = Request.Form["login"];
+    usuario.Senha = Request.Form["senha"];
+
+    if (UsuarioRepository.Login(usuario.Login, usuario.Senha))
+    {
+        HttpCookie cookie = new HttpCookie("UserLogin");
+        cookie.Value = "admin";
+        DateTime dtNow = DateTime.Now;
+        // Cookie expira em uma hora.
+        TimeSpan tsMinute = new TimeSpan(0, 0, 60, 0);
+        cookie.Expires = dtNow + tsMinute;
+        Response.Cookies.Add(cookie);
+        <text>
+            <script>
+                window.location.href = "/View/Home/Menu.cshtml";
+            </script>
+        </text>
+    }
+    else
+    {
+        <text>
+            <script>
+                alert("Usuário ou Senha inválidos. Tente novamente.");
+            </script>
+        </text>
+    }
+}

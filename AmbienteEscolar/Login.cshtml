@@ -26,7 +26,7 @@
         </div>
     </header>
     <main>
-        <form id="formulario" autocomplete="off" action="~/Login.cshtml" onclick="formularioAlerta()">
+        <form method="post" id="formulario" autocomplete="off" action="~/View/Validate/ValidateLogin.cshtml" @*onclick="formularioAlerta()"*@>
             <section style="margin: 0px 300px">
                 <div class="main-box">
                     <div class="txt">
@@ -39,16 +39,18 @@
                         <ul>
                             <li>
                                 <p style="padding: 18px 0px;">Usuário</p>
-                                <label><input id="usuario" type="text" placeholder="Insira seu usuário" required maxlength="15" minlength="4"></label>
+                                <label><input id="login" name="login" type="text" placeholder="Insira seu nome" required maxlength="15" minlength="4"></label>
                             </li>
                             <li>
                                 <p style="padding: 18px 0px;">Senha</p>
-                                <label><input id="senha" type="password" placeholder="Insira sua senha" required maxlength="15" minlength="4"></label>
+                                <label><input id="senha" name="senha" type="password" placeholder="Insira sua senha" required maxlength="15" minlength="4"></label>
                             </li>
                         </ul>
-                        <div class="button">
-                            <button onclick="executarLogin()" type="submit">Logar</button>
-                        </div>
+                        <input type="submit" value="Logar" />
+                        <br /><br />
+                        @*<div class="button">
+                                <button onclick="executarLogin()" type="submit">Logar</button>
+                            </div>*@
                     </div>
                     <div style="border-bottom: 1px solid rgb(190, 190, 190); padding-top: 22px;"></div>
                 </div>

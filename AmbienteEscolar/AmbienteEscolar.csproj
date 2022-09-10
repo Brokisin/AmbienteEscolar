@@ -120,15 +120,18 @@
     <Content Include="Models\css\professores.css" />
     <Content Include="Models\css\reset.css" />
     <Content Include="Models\css\usuarios.css" />
+    <Content Include="Models\js\logoffAction.js" />
     <Content Include="Models\js\scripts.js" />
     <Content Include="Models\css\login.css" />
     <Content Include="Models\js\siteActions.js" />
+    <Content Include="View\Validate\notFound.ico" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Business\BancoDeDados\BancoDados.cs" />
     <Compile Include="Business\Classes\Aluno.cs" />
     <Compile Include="Business\Classes\Banco.cs" />
+    <Compile Include="Business\Classes\Curso.cs" />
     <Compile Include="Business\Classes\Enum\Ativo.cs" />
     <Compile Include="Business\Classes\Enum\NivelAcesso.cs" />
     <Compile Include="Business\Classes\Professor.cs" />
@@ -146,6 +149,7 @@
     <Content Include="View\Home\Professores.cshtml" />
     <Content Include="View\Home\Alunos.cshtml" />
     <Content Include="View\Home\Usuarios.cshtml" />
+    <Content Include="View\Validate\ValidateLogin.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

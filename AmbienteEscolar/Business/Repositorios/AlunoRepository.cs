@@ -82,43 +82,6 @@ namespace AmbienteEscolar.Business.Repositorios
             }
         }
 
-
-
-
-        /*public static List<string>[] ListarAlunos()
-        {
-            List<string> listaAlunos = new List<string>();
-            List<Aluno> listaAlunos2 = new List<Aluno>();
-            Aluno aluno = new Aluno();
-
-            string query = "SELECT * FROM aluno";
-            
-            
-            if (BancoDados.OpenConnection() == true)
-            {
-                MySqlCommand cmd = new MySqlCommand(query, BancoDados.connection);
-                MySqlDataReader dataReader = cmd.ExecuteReader();
-                
-                while (dataReader.Read())
-                {
-                    aluno.Id = int.Parse(dataReader["id"].ToString());
-                    aluno.Nome = dataReader["nome"].ToString();
-                    aluno.Email = dataReader["email"].ToString();
-                    aluno.Id_curso = int.Parse(dataReader["id_curso"].ToString());
-
-                    listaAlunos2.Add(aluno);
-                }
-                dataReader.Close();
-                BancoDados.CloseConnection();
-                
-                return aluno;
-            }
-            else
-            {
-                return aluno;
-            }
-        }*/
-
         public static void InserirAluno(string nome, string email, int id_curso)
         {
             string query = "INSERT INTO aluno (nome, email, id_curso) VALUES('" + nome + "','" + email + "'," + id_curso + ");";

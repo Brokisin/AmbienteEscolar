@@ -52,7 +52,6 @@ namespace AmbienteEscolar.Business.Repositorios
             return login;
         }
 
-
         public static List<Usuario> ListarUsuarios()
         {
             StringBuilder sb = new StringBuilder();
@@ -93,5 +92,36 @@ namespace AmbienteEscolar.Business.Repositorios
             }
         }
 
+        public static bool Login(string login, string senha)
+        {
+            string query = "SELECT Count(*) FROM usuario WHERE login='" + login + "' AND senha='" + senha + "';";
+
+
+            if (BancoDados.OpenConnection() == true)
+            {
+                MySqlCommand cmd = new MySqlCommand(query, BancoDados.connection);
+                try
+                {
+                    int count = int.Parse(cmd.ExecuteScalar() + "");
+                    BancoDados.CloseConnection();
+                    
+                    if (count > 0)
+                    {
+                        return true;
+                    }
+                    return false;
+                }
+                catch (MySqlException ex)
+                {
+                    Console.WriteLine("Algo deu errado. Tente novamente.");
+                    Console.WriteLine(ex.Message);
+                    return false;
+                }
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 }
