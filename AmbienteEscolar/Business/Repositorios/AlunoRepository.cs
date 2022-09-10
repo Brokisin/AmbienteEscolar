@@ -46,6 +46,38 @@ namespace AmbienteEscolar.Business.Repositorios
             return alunos;
         }
 
+        public static List<Aluno> ListarNomeAlunos()
+        {
+            StringBuilder sb = new StringBuilder();
+
+            sb.AppendLine("SELECT nome FROM aluno");
+            sb.AppendLine("ORDER BY id;");
+
+            List<Aluno> listaAlunos = new List<Aluno>();
+
+            if (BancoDados.OpenConnection() == true)
+            {
+                MySqlCommand cmd = new MySqlCommand(sb.ToString(), BancoDados.connection);
+                MySqlDataReader dataReader = cmd.ExecuteReader();
+
+                while (dataReader.Read())
+                {
+                    Aluno aluno = new Aluno();
+                    
+                    aluno.Nome = dataReader["nome"].ToString();
+                    listaAlunos.Add(aluno);
+                }
+                dataReader.Close();
+                BancoDados.CloseConnection();
+
+                return listaAlunos;
+            }
+            else
+            {
+                return listaAlunos;
+            }
+        }
+
         public static List<Aluno> ListarAlunos()
         {
             StringBuilder sb = new StringBuilder();

@@ -21,7 +21,7 @@
 <body>
     <div>
         @{
-            List<string> nomeAlunos = AlunoRepository.BuscarNomeAlunos();
+            List<Aluno> nomeAlunos = AlunoRepository.ListarNomeAlunos();
         }
 
         <main>
@@ -30,15 +30,20 @@
                 <br />
                 <button>Listar</button>
                 <table>
-                    @foreach (string item in nomeAlunos)
+                    @foreach (Aluno infoAluno in nomeAlunos)
                     {
                         <br />
                         <tr>
-                            @item
+                            @infoAluno.Nome
                         </tr>
                     }
                 </table>
             </div>
+
+            @{ 
+
+            }
+
             <div>
                 <h2>Inserir Alunos:</h2>
                 <br />
@@ -48,22 +53,19 @@
                 <label>E-mail:</label>
                 <input type="email" name="email" value="" placeholder="E-mail do aluno" />
                 <br />
+
+                @{
+                    List<Curso> cursos = CursoRepository.ListarCursos();
+                }
+
                 <label>Selecione o curso:</label>
                 <br />
-                <input id="radioBox" type="radio" name="radiobox" formmethod="post" />
-                <span id="radiobox">System Developer</span>
-                <br />
-                <input id="radioBox" type="radio" name="radiobox" formmethod="post" />
-                <span id="radiobox">Design Patterns</span>
-                <br />
-                <input id="radioBox" type="radio" name="radiobox" formmethod="post" />
-                <span id="radiobox">Software Engineer</span>
-                <br />
-                <input id="radioBox" type="radio" name="radiobox" formmethod="post" />
-                <span id="radiobox">Agile Software Especialization</span>
-                <br />
-                <input id="radioBox" type="radio" name="radiobox" formmethod="post" />
-                <span id="radiobox">Project Manager</span>
+                <select>
+                    @foreach (Curso curso in cursos)
+                    {
+                        <option value="@curso.Id">@curso.Descricao</option>
+                    }
+                </select>
                 <br />
             </div>
             <br />

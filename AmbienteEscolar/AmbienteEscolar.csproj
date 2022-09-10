@@ -137,6 +137,7 @@
     <Compile Include="Business\Classes\Professor.cs" />
     <Compile Include="Business\Classes\Usuario.cs" />
     <Compile Include="Business\Repositorios\AlunoRepository.cs" />
+    <Compile Include="Business\Repositorios\CursoRepository.cs" />
     <Compile Include="Business\Repositorios\ProfessorRepository.cs" />
     <Compile Include="Business\Repositorios\UsuarioRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
