@@ -141,6 +141,7 @@
     <Compile Include="Business\Repositorios\ProfessorRepository.cs" />
     <Compile Include="Business\Repositorios\UsuarioRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WebController\AlunoController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Login.cshtml" />
