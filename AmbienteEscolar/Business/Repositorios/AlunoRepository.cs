@@ -16,9 +16,9 @@ namespace AmbienteEscolar.Business.Repositorios
         public static List<String> BuscarNomeAlunos()
         {
             List<string> alunos = new List<string>();
-            
+
             string query = "SELECT nome FROM aluno ORDER BY id;";
-            
+
             try
             {
                 if (BancoDados.OpenConnection() == true)
@@ -63,7 +63,7 @@ namespace AmbienteEscolar.Business.Repositorios
                 while (dataReader.Read())
                 {
                     Aluno aluno = new Aluno();
-                    
+
                     aluno.Nome = dataReader["nome"].ToString();
                     listaAlunos.Add(aluno);
                 }
@@ -114,18 +114,23 @@ namespace AmbienteEscolar.Business.Repositorios
             }
         }
 
-        public static void InserirAluno(string nome, string email, int id_curso)
+        public static bool InserirAluno(string nome, string email, int id_curso)
         {
             string query = "INSERT INTO aluno (nome, email, id_curso) VALUES('" + nome + "','" + email + "'," + id_curso + ");";
-            
+
             if (BancoDados.OpenConnection() == true)
             {
                 MySqlConnection connection = new MySqlConnection();
                 MySqlCommand cmd = new MySqlCommand(query, BancoDados.connection);
-                
+
                 cmd.ExecuteNonQuery();
-                
+
                 BancoDados.CloseConnection();
+                return true;
+            }
+            else
+            {
+                return false;
             }
         }
     }

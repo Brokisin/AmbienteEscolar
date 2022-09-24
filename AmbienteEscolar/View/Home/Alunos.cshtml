@@ -6,6 +6,11 @@
     //Layout nulo, por enquanto (mudar para _Layout, assim que estiver pronto)
     Layout = null;
     BancoDados.DBConnect();
+
+    Aluno a = new Aluno();
+    List<Curso> cursos = CursoRepository.ListarCursos();
+    List<Aluno> nomeAlunos = AlunoRepository.ListarNomeAlunos();
+    List<Aluno> alunos = AlunoRepository.ListarAlunos();
 }
 
 <!DOCTYPE html>
@@ -20,10 +25,6 @@
 </head>
 <body>
     <div>
-        @{
-            List<Aluno> nomeAlunos = AlunoRepository.ListarNomeAlunos();
-        }
-
         <main>
             <div>
                 <h2>Listar nome dos alunos existentes:</h2>
@@ -39,49 +40,31 @@
                     }
                 </table>
             </div>
-
-            @{
-                string nome = "";
-                string email = "";
-                int id_curso = 0;
-                //AlunoRepository.InserirAluno(nome, email, id_curso);
-
-                <div>
-                    <form action="/" method="post" onsubmit="">
-                        <h2>Cadastrar Alunos:</h2>
-                        <br />
-                        <label>Nome:</label>
-                        <input type="text" name="nome" @*value="@nome"*@ placeholder="Nome do aluno" />
-                        <br />
-                        <label>E-mail:</label>
-                        <input type="email" name="email" @*value="@email"*@ placeholder="E-mail do aluno" />
-                        <br />
-
-                        @{
-                            List<Curso> cursos = CursoRepository.ListarCursos();
+            <div>
+                <form action="~/WebBusiness/AlunoBusiness/AlunoInsert.cshtml" method="post">
+                    <h2>Cadastrar Alunos:</h2>
+                    <br />
+                    <label>Nome:</label>
+                    <input id="nome" type="text" name="nome" value="@a.Nome" placeholder="Nome do aluno" />
+                    <br />
+                    <label>E-mail:</label>
+                    <input id="email" type="email" name="email" value="@a.Email" placeholder="E-mail do aluno" />
+                    <br />
+                    <label>Selecione o curso:</label>
+                    <br />
+                    <select id="idCursoId" name="idCursoId">
+                        @foreach (Curso curso in cursos)
+                        {
+                            <option value="@curso.Id">@curso.Descricao</option>
                         }
-
-                        <label>Selecione o curso:</label>
-                        <br />
-                        <select>
-                            @foreach (Curso curso in cursos)
-                            {
-                                <option id="idCursoId" value="@curso.Id">@curso.Descricao</option>
-                            }
-                        </select>
-                        <br />
-                        <input type="submit" value="Inserir" />
-                    </form>
-                </div>
-            }
+                    </select>
+                    <br />
+                    <input type="submit" value="Inserir" />
+                </form>
+            </div>
             <br />
             <br />
             <div>
-
-                @{
-                    List<Aluno> alunos = AlunoRepository.ListarAlunos();
-                }
-
                 <h2>Listar Alunos:</h2>
                 <br />
                 <button>Listar</button>
@@ -89,7 +72,7 @@
                     <label>Nome</label>
                     <label>Email</label>
                     <label>Id do Curso</label>
-                    <table>
+                    <table onclick="informacoesAlunos()">
                         @foreach (Aluno aluno in alunos)
                         {
                             <tr>

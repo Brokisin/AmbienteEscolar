@@ -1,0 +1,53 @@
+﻿@using AmbienteEscolar.Business.Classes
+@using AmbienteEscolar.Business.BancoDeDados
+@using AmbienteEscolar.Business.Repositorios
+
+@{
+    Layout = null;
+    BancoDados.DBConnect();
+    Curso curso = new Curso();
+    Aluno aluno = new Aluno();
+
+    aluno.Nome = Request.Form["nome"];
+    aluno.Email = Request.Form["email"];
+    CursoRepository.ListarCursos();
+    curso.Id = int.Parse(Request.Form["idCursoId"]);
+    aluno.Id_curso = curso.Id;
+
+    bool nomePreenchido = aluno.Nome != "";
+    bool emailPreenchido = aluno.Email != "";
+    bool idPreenchido = aluno.Id_curso != 1;
+
+    bool camposPreenchidos = nomePreenchido && emailPreenchido && idPreenchido;
+
+    if (camposPreenchidos)
+    {
+        if (AlunoRepository.InserirAluno(aluno.Nome, aluno.Email, aluno.Id_curso))
+        {
+            <text>
+                <script>
+                    alert("Aluno inserido com sucesso.");
+                    window.location.href = "/View/Home/Alunos.cshtml";
+                </script>
+            </text>
+        }
+        else
+        {
+            <text>
+                <script>
+                    alert("Ocorreu um erro ao inserir aluno, tente novamente mais tarde.");
+                    window.location.href = "/View/Home/Alunos.cshtml";
+                </script>
+            </text>
+        }
+    }
+    else
+    {
+        <text>
+            <script>
+                alert("Falha ao inserir aluno.");
+                window.location.href = "/View/Home/Alunos.cshtml";
+            </script>
+        </text>
+    }
+}
