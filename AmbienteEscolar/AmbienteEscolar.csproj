@@ -160,9 +160,9 @@
     <Content Include="WebBusiness\AlunoBusiness\AlunoInsert.cshtml" />
     <Content Include="WebBusiness\CursoBusiness\CursoSelect.cshtml" />
     <Content Include="WebBusiness\AlunoBusiness\AlunoInfo.cshtml" />
+    <Content Include="WebBusiness\ProfessorBusiness\ProfessorInsert.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="WebBusiness\ProfessorBusiness\" />
     <Folder Include="WebBusiness\UsuarioBusiness\" />
   </ItemGroup>
   <PropertyGroup>

@@ -17,8 +17,8 @@ namespace AmbienteEscolar.Business.Repositorios
         {
             StringBuilder sb = new StringBuilder();
 
-            sb.AppendLine("SELECT * FROM professor");
-            sb.AppendLine("ORDER BY id;");
+            sb.AppendLine("SELECT p.id, p.nome, p.email, p.id_curso, c.descricao, c.turno FROM professor p");
+            sb.AppendLine("INNER JOIN curso c ON p.id_curso = c.id;");
 
             List<Professor> listaProfessores = new List<Professor>();
 
@@ -29,12 +29,16 @@ namespace AmbienteEscolar.Business.Repositorios
 
                 while (dataReader.Read())
                 {
+                    Curso curso = new Curso();
                     Professor professor = new Professor();
 
                     professor.Id = int.Parse(dataReader["id"].ToString());
                     professor.Nome = dataReader["nome"].ToString();
                     professor.Email = dataReader["email"].ToString();
-                    professor.Id_curso = int.Parse(dataReader["id_curso"].ToString());
+                    curso.Id = int.Parse(dataReader["id_curso"].ToString());
+                    curso.Descricao = dataReader["descricao"].ToString();
+                    curso.Turno = dataReader["turno"].ToString();
+                    professor.Curso = curso;
 
                     listaProfessores.Add(professor);
                 }
@@ -46,6 +50,26 @@ namespace AmbienteEscolar.Business.Repositorios
             else
             {
                 return listaProfessores;
+            }
+        }
+
+        public static bool InserirProfessor(string nome, string email, int id_curso)
+        {
+            string query = "INSERT INTO professor (nome, email, id_curso) VALUES('" + nome + "','" + email + "'," + id_curso + ");";
+
+            if (BancoDados.OpenConnection() == true)
+            {
+                MySqlConnection connection = new MySqlConnection();
+                MySqlCommand cmd = new MySqlCommand(query, BancoDados.connection);
+
+                cmd.ExecuteNonQuery();
+
+                BancoDados.CloseConnection();
+                return true;
+            }
+            else
+            {
+                return false;
             }
         }
     }

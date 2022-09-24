@@ -1,2 +1,16 @@
 ﻿body {
 }
+
+.list-main-div {
+    display: inline-block;
+    box-shadow: 0px 1px 7px black;
+}
+.list-header {
+    border: 1px solid grey;
+    padding: 5px 5px;
+    font-size: 18px;
+}
+.list-table {
+    border: 1px solid grey;
+    border-top: none;
+}

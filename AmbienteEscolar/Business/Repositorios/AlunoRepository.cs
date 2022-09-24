@@ -82,8 +82,8 @@ namespace AmbienteEscolar.Business.Repositorios
         {
             StringBuilder sb = new StringBuilder();
 
-            sb.AppendLine("SELECT * FROM aluno");
-            sb.AppendLine("ORDER BY id;");
+            sb.AppendLine("SELECT a.id, a.nome, a.email, a.id_curso, c.descricao, c.turno FROM aluno a ");
+            sb.AppendLine("INNER JOIN curso c ON a.id_curso = c.id;");
 
             List<Aluno> listaAlunos = new List<Aluno>();
 
@@ -94,12 +94,16 @@ namespace AmbienteEscolar.Business.Repositorios
 
                 while (dataReader.Read())
                 {
+                    Curso curso = new Curso();
                     Aluno aluno = new Aluno();
 
                     aluno.Id = int.Parse(dataReader["id"].ToString());
                     aluno.Nome = dataReader["nome"].ToString();
                     aluno.Email = dataReader["email"].ToString();
-                    aluno.Id_curso = int.Parse(dataReader["id_curso"].ToString());
+                    curso.Id = int.Parse(dataReader["id_curso"].ToString());
+                    curso.Descricao = dataReader["descricao"].ToString();
+                    curso.Turno = dataReader["turno"].ToString();
+                    aluno.Curso = curso;
 
                     listaAlunos.Add(aluno);
                 }

@@ -12,17 +12,17 @@
     aluno.Email = Request.Form["email"];
     CursoRepository.ListarCursos();
     curso.Id = int.Parse(Request.Form["idCursoId"]);
-    aluno.Id_curso = curso.Id;
+    aluno.Curso = curso;
 
     bool nomePreenchido = aluno.Nome != "";
     bool emailPreenchido = aluno.Email != "";
-    bool idPreenchido = aluno.Id_curso != 1;
+    bool idPreenchido = aluno.Curso.Id != 0;
 
     bool camposPreenchidos = nomePreenchido && emailPreenchido && idPreenchido;
 
     if (camposPreenchidos)
     {
-        if (AlunoRepository.InserirAluno(aluno.Nome, aluno.Email, aluno.Id_curso))
+        if (AlunoRepository.InserirAluno(aluno.Nome, aluno.Email, aluno.Curso.Id))
         {
             <text>
                 <script>
