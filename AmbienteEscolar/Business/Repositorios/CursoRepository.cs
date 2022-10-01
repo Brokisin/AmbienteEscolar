@@ -28,10 +28,13 @@ namespace AmbienteEscolar.Business.Repositorios
                 while (dataReader.Read())
                 {
                     Curso curso = new Curso();
+                    Turno turno = new Turno();
 
                     curso.Id = int.Parse(dataReader["id"].ToString());
                     curso.Descricao = dataReader["descricao"].ToString();
-                    curso.Turno = dataReader["turno"].ToString();
+                    turno.Id = int.Parse(dataReader["turno_id"].ToString());
+                    turno.Descricao = dataReader["turno_descricao"].ToString();
+                    curso.Turno = turno;
 
                     listaCursos.Add(curso);
                 }
@@ -66,7 +69,7 @@ namespace AmbienteEscolar.Business.Repositorios
 
                     curso.Id = int.Parse(dataReader["id"].ToString());
                     curso.Descricao = dataReader["descricao"].ToString();
-                    curso.Turno = dataReader["turno"].ToString();
+                    //curso.Id_turno = int.Parse(dataReader["turno"].ToString());
 
                     listaCursos.Add(curso);
                 }

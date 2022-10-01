@@ -8,6 +8,7 @@
     BancoDados.DBConnect();
 
     Aluno a = new Aluno();
+    Turno t = new Turno();
     List<Curso> cursos = CursoRepository.ListarCursos();
     List<Aluno> nomeAlunos = AlunoRepository.ListarNomeAlunos();
     List<Aluno> alunos = AlunoRepository.ListarAlunos();
@@ -76,9 +77,10 @@
                 <h2>Alunos:</h2>
                 <div class="list-main-div">
                     <div class="list-header">
-                        <label onclick="">Nome</label>
+                        <label>Nome</label>
                         <label>Email</label>
                         <label>Curso</label>
+                        <label>Turno</label>
                     </div>
                     <div class="list-table">
                         <table onclick="informacoesAlunos()">
@@ -93,6 +95,9 @@
                                     </td>
                                     <td>
                                         @aluno.Curso.Descricao
+                                    </td>
+                                    <td>
+                                        @*@aluno.Curso.Turno.Descricao*@
                                     </td>
                                 </tr>
                             }

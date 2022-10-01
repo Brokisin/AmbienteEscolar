@@ -44,8 +44,6 @@
                         }
                     </select>
                     <br />
-                    @*<input id="new" type="button" value="Novo" />
-            <input id="cancel" type="button" value="Cancelar" />*@
                     <input id="insert" type="submit" value="Gravar" />
                 </form>
                 <button id="new" onclick="New()">Novo</button>
@@ -74,6 +72,9 @@
                                     </td>
                                     <td>
                                         @professor.Curso.Descricao
+                                    </td>
+                                    <td>
+                                        @professor.Curso.Turno.Descricao
                                     </td>
                                 </tr>
                             }
