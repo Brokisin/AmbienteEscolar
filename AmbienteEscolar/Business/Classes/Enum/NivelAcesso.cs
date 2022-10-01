@@ -5,10 +5,9 @@ using System.Web;
 
 namespace AmbienteEscolar.Business.Classes.Enum
 {
-    public enum NivelAcesso
+    public class NivelAcesso
     {
-        Aluno = 1,
-        Moderador = 2,
-        Administrador = 3
+        public int Id { get; set; }
+        public string Descricao { get; set; }
     }
 }

@@ -67,11 +67,14 @@ input#insert {
         border: 1px solid #1c1c1c;
         background-color: white;
     }
-    input:disabled{
-    }
-
-table {
-    border-spacing: 4px;
+button {
+    cursor: pointer;
+    font-size: 15px;
+    padding: 3px 5px;
+    border: 1px solid #1c1c1c;
+    margin: 6px 3px 6px 0px;
+    color: white;
+    background-color: #1c1c1c;
 }
 /*==================================*/
 .dropdown {

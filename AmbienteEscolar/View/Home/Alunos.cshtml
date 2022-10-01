@@ -11,6 +11,8 @@
     List<Curso> cursos = CursoRepository.ListarCursos();
     List<Aluno> nomeAlunos = AlunoRepository.ListarNomeAlunos();
     List<Aluno> alunos = AlunoRepository.ListarAlunos();
+    List<Aluno> alunosNome = AlunoRepository.ListarAlunosPorNome();
+    List<Aluno> alunosEmail = AlunoRepository.ListarAlunosPorEmail();
 }
 
 <!DOCTYPE html>
@@ -65,10 +67,10 @@
                         }
                     </select>
                     <br />
-                    <input id="new" type="button" value="Novo" onclick="New()"/>
-                    <input id="cancel" type="button" value="Cancelar" onclick="Cancelar()" />
-                    <input id="insert" type="submit" value="Gravar"/>
+                    <input id="insert" type="submit" value="Gravar" disabled />
                 </form>
+                <button id="new" onclick="New()">Novo</button>
+                <button id="cancel" onclick="Cancelar()">Cancelar</button>
             </div>
             <div>
                 <h2>Alunos:</h2>
