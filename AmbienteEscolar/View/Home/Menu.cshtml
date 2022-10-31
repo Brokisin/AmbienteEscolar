@@ -20,7 +20,8 @@
 <!DOCTYPE html>
 
 <html>
-@if (logged)
+<!--change to logged-->
+@if (true)
 {
     <head>
         <meta charset="utf-8" />
@@ -32,98 +33,67 @@
         <link href="~/View/Validate/ValidateLogin.cshtml" rel="profile" />
         <link rel="icon" type="image/x-icon" href="~/avaicon.ico">
     </head>
+
     <body>
 
-        <script>
-            alert("Bem Vindo!");
-        </script>
-        
-        <nav>
-            <div>
-                <br />
+        @*<script>
+                alert("Bem Vindo!");
+            </script>*@
+        <div>
+            <div class="header">
+                <h2>AVA - Ambiente Escolar</h2>
+                <p>Seja bem-vindo!</p>
+            </div>
+            <div class="cvSDgbcvD">
                 <ul>
+                    <li><a class="active" href="#home">Home</a></li>
+                    <li><a href="#news">Matrículas</a></li>
                     <li class="dropdown">
-                        <a>Funções</a>
+                        <a>Cadastro</a>
                         <div class="dropdown-content">
-                            <a href="" target="_blank">Consulta BP-E</a>
-                            <a href="" target="_blank">Consulta CT-E</a>
+                            <a href="#">Alunos</a>
+                            <a href="#">Professores</a>
+                        </div>
+                    </li>
+                    <li><a href="#contact">Suporte</a></li>
+                    <li class="dropdown">
+                        <a>Eu</a>
+                        <div class="dropdown-content">
+                            <a href="#">Logoff</a>
                         </div>
                     </li>
                 </ul>
-                <br />
             </div>
-        </nav>
-        <br /><br />
-              <span>Usuário logado: @cookie.Value.ToString()</span>
-        <br /><br />
-        <main>
-            <div>
-                <br />
-                <form action="/" method="post">
-                    <h2>Informações sobre o aluno para matrícula:</h2>
-                    <br />
-                    <label>Nome:</label>
-                    <input id="nome" type="text" name="nome" placeholder="Insira seu nome aqui" formmethod="post" />
-                    <br />
-                    <label>E-mail:</label>
-                    <input id="email" type="email" name="email" placeholder="Insira seu nome aqui" formmethod="post" />
-                    <br />
-                    <button onclick="limparCampos()">Cancelar</button>
-                    <br />
-                    <label>Selecione o curso:</label>
-                    <br />
-                    <input id="radioBox" type="radio" name="radiobox" formmethod="post" />
-                    <span id="radiobox">System Developer</span>
-                    <br />
-                    <input id="radioBox" type="radio" name="radiobox" formmethod="post" />
-                    <span id="radiobox">Design Patterns</span>
-                    <br />
-                    <input id="radioBox" type="radio" name="radiobox" formmethod="post" />
-                    <span id="radiobox">Software Engineer</span>
-                    <br />
-                    <input id="radioBox" type="radio" name="radiobox" formmethod="post" />
-                    <span id="radiobox">Agile Software Especialization</span>
-                    <br />
-                    <input id="radioBox" type="radio" name="radiobox" formmethod="post" />
-                    <span id="radiobox">Project Manager</span>
-                    <br />
-                </form>
-
-                @{
-                    List<string> alunos = AlunoRepository.BuscarNomeAlunos();
-                }
-
-                <main>
-                    <div>
-                        <h2>Listar Alunos:</h2>
-                        <br />
-                        <button>Listar</button>
-                        <table>
-                            @foreach (string item in alunos)
-                            {
-                                <br />
-                                <tr>
-                                    @item
-                                </tr>
-                            }
-                        </table>
-                    </div>
-                </main>
-                <br />
-                <a href="~/View/Home/Alunos.cshtml" target="_blank">Redirecionar: Alunos</a>
-                <br />
-                <a href="~/View/Home/Professores.cshtml" target="_blank">Redirecionar: Professores</a>
-                <br />
-                <a href="~/View/Home/Usuarios.cshtml" target="_blank">Redirecionar: Usuários</a>
-                <br />
+        </div>
+        <main class="div-mainCCVCD">
+            <div class="w3-content">
+                <img class="mySlides" src="https://w0.peakpx.com/wallpaper/31/750/HD-wallpaper-cup-coffee-books-pen-laptop.jpg">
+                <img class="mySlides" src="https://w0.peakpx.com/wallpaper/896/435/HD-wallpaper-coffee-book-glasses-drink-cup-table.jpg">
             </div>
+            <div class="m-MainCnt">
+                <h2>Sobre o AVA:</h2>
+                <p>
+                    Uma forma de atrair a atenção e demonstrar confiabilidade é mostrar os consumidores satisfeitos. Caso tenha na cartela
+                    de clientes empresas conhecidas do público, você pode solicitar a elas autorização para divulgá-las na carta.
+                    Além disso, é possível pedir para que alguns consumidores concedam uma pequena avaliação sobre o seu negócio. Não é preciso
+                    que seja algo muito elaborado — um parágrafo já é o suficiente para passar uma mensagem positiva sobre a sua empresa.
+                </p>
+                <br />
+                <p>
+                    O currículo do profissional e dos sócios não é obrigatório em uma carta de apresentação de empresa para prestação de serviços,
+                    a menos que as pessoas envolvidas sejam um dos pontos mais fortes do negócio.
+                    Por exemplo, caso um dos empreendedores seja uma personalidade do segmento, adicionar um breve perfil ao documento poderá enriquecê-lo.
+                    Do contrário, a informação poderá passar despercebida.
+                </p>
+            </div>
+
+            <br />
+            <button onclick="LogOff()">Sair</button>
+            <br />
         </main>
-        <br />
-        <button onclick="LogOff()">Sair</button>
-        <br />
         <footer>
-            <div>
-                footer
+            <div style="margin-top: 13px;">
+                <p>2022 AVA &#169; - Todos os direitos reservados.</p>
             </div>
         </footer>
     </body>
@@ -143,8 +113,6 @@ else
 </html>
 
 <script>
-    let
-
 </script>
 
 <script src="~/Models/js/logoffAction.js"></script>

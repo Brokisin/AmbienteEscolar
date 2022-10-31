@@ -1,83 +1,114 @@
 ﻿body {
-    background-color: rgb(236, 236, 236);
-}
-/*
-input {
-    border-radius: 10px;
-    border: 1px solid rgba(128, 128, 128, 0.651);
-    height: 22px;
+    background-color: #b7b7b7;
+    font-size: 22px;
 }
 
-    input::placeholder {
-        padding-left: 5px;
-    }
-
-    input#radioBox{
-        display: inline-block;
-    }
-
-.button {
-    padding-left: 20px;
-    padding-top: 20px;
+h2{
+    font-size: 30px;
+    margin: 15px 0;
 }
 
-/*button {
-    cursor: pointer;
+.head-me{
+    /*position: absolute;
+    right: 0;*/
+}
+
+.cvSDgbcvD {
+    background-color: #222222;
+    width: 100%;
+    height: 50px;
+}
+
+.header {
+    padding: 60px 30px;
+    background-color: #3d72af;
     color: white;
-    background-color: rgb(67, 171, 255);
-    border: 0.5px solid rgb(69, 171, 255);
-    border-radius: 12px;
-    width: 20%;
-    height: 30px;
-}*/
+    text-align: center;
+    font-size: 30px;
+}
 
-/*span{
-    display: inline-block;
-}*/
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    background-color: #202020;
+    top: 0;
+}
 
+li {
+    float: left;
+}
+
+    li a {
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+    }
+
+        li a:hover {
+            background-color: #3d72af;
+        }
+
+.active {
+    background-color: #3e3e3e;
+}
+
+footer {
+    position: fixed;
+    display: flex;
+    width: 100%;
+    height: 5%;
+    text-align: center;
+    background-color: #202020;
+    color: white;
+    bottom: 0;
+    justify-content: center;
+}
+
+.div-mainCCVCD{
+    padding: 20px 40px;
+}
+
+.mySlides {
+    display: none;
+    width: 100%;
+    border-radius: 10px;
+}
+
+.w3-content{
+    padding: 0 150px;
+}
+
+.m-MainCnt{
+    padding: 20px 0;
+}
 /*===================*/
-
 .dropdown {
-    cursor: pointer;
     position: relative;
-    width: max-content;
+    display: inline-block;
 }
 
 .dropdown-content {
-    cursor: pointer;
+    font-size: 20px;
     display: none;
     position: absolute;
-    background-color: #f1f1f1;
-    min-width: 160px;
-    overflow: auto;
+    background-color: #f9f9f9;
+    min-width: 80px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
+    text-align-last: start;
 }
 
     .dropdown-content a {
-        cursor: pointer;
         color: black;
-        padding: 12px 16px;
-        text-decoration: none;
-        display: block;
-        background-color: #ededed;
     }
 
         .dropdown-content a:hover {
-            cursor: pointer;
-            color: black;
-            padding: 12px 16px;
-            text-decoration: none;
-            display: block;
-            background-color: #cbcbcb;
+            background-color: lightgray;
         }
 
 .dropdown:hover .dropdown-content {
-    cursor: pointer;
     display: block;
-    will-change: transform;
-    top: 0px;
-    left: 0px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    transform: translate3d(0px, 50px, 10px);
 }
