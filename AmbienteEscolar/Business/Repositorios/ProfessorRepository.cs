@@ -17,8 +17,8 @@ namespace AmbienteEscolar.Business.Repositorios
         {
             StringBuilder sb = new StringBuilder();
 
-            sb.AppendLine("SELECT p.id, p.nome, p.email, p.id_curso, c.descricao, c.turno FROM professor p");
-            sb.AppendLine("INNER JOIN curso c ON p.id_curso = c.id;");
+            sb.AppendLine("SELECT p.id, p.nome, p.email, p.id_curso, c.descricao, c.id_turno, t.descricao FROM professor p");
+            sb.AppendLine("INNER JOIN curso c ON p.id_curso = c.id INNER JOIN turno t ON t.id = c.id_turno;");
 
             List<Professor> listaProfessores = new List<Professor>();
 
@@ -31,13 +31,19 @@ namespace AmbienteEscolar.Business.Repositorios
                 {
                     Curso curso = new Curso();
                     Professor professor = new Professor();
+                    Turno turno = new Turno();
 
                     professor.Id = int.Parse(dataReader["id"].ToString());
                     professor.Nome = dataReader["nome"].ToString();
                     professor.Email = dataReader["email"].ToString();
+
                     curso.Id = int.Parse(dataReader["id_curso"].ToString());
                     curso.Descricao = dataReader["descricao"].ToString();
-                    curso.Turno = dataReader["turno"].ToString();
+
+                    turno.Id = int.Parse(dataReader["id"].ToString());
+                    turno.Descricao = dataReader["descricao"].ToString();
+
+                    curso.Turno = turno;
                     professor.Curso = curso;
 
                     listaProfessores.Add(professor);

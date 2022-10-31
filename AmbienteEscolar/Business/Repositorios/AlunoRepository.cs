@@ -12,40 +12,7 @@ namespace AmbienteEscolar.Business.Repositorios
     public class AlunoRepository
     {
         Banco banco = new Banco();
-
-        public static List<String> BuscarNomeAlunos()
-        {
-            List<string> alunos = new List<string>();
-
-            string query = "SELECT nome FROM aluno ORDER BY id;";
-
-            try
-            {
-                if (BancoDados.OpenConnection() == true)
-                {
-                    MySqlCommand command = new MySqlCommand(query, BancoDados.connection);
-                    MySqlDataReader reader = command.ExecuteReader();
-
-                    if (reader.HasRows)
-                    {
-                        while (reader.Read())
-                        {
-                            alunos.Add(reader[0] + "");
-                        }
-                        reader.Close();
-                        BancoDados.CloseConnection();
-                        return alunos;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-
-            return alunos;
-        }
-
+        
         public static List<Aluno> ListarNomeAlunos()
         {
             StringBuilder sb = new StringBuilder();
@@ -82,8 +49,94 @@ namespace AmbienteEscolar.Business.Repositorios
         {
             StringBuilder sb = new StringBuilder();
 
+            sb.AppendLine("SELECT a.id, a.nome, a.email, a.id_curso, c.descricao, c.id_turno, t.turno_descricao FROM aluno a ");
+            sb.AppendLine("INNER JOIN curso c ON a.id_curso = c.id INNER JOIN turno t ON t.turno_id = c.id_turno;");
+
+            List<Aluno> listaAlunos = new List<Aluno>();
+
+            if (BancoDados.OpenConnection() == true)
+            {
+                MySqlCommand cmd = new MySqlCommand(sb.ToString(), BancoDados.connection);
+                MySqlDataReader dataReader = cmd.ExecuteReader();
+
+                while (dataReader.Read())
+                {
+                    Curso curso = new Curso();
+                    Aluno aluno = new Aluno();
+                    Turno turno = new Turno();
+
+                    aluno.Id = int.Parse(dataReader["id"].ToString());
+                    aluno.Nome = dataReader["nome"].ToString();
+                    aluno.Email = dataReader["email"].ToString();
+
+                    curso.Id = int.Parse(dataReader["id_curso"].ToString());
+                    curso.Descricao = dataReader["descricao"].ToString();
+                    
+                    turno.Id = int.Parse(dataReader["turno_id"].ToString());
+                    turno.Descricao = dataReader["turno_descricao"].ToString();
+
+                    curso.Turno = turno;
+                    aluno.Curso = curso;
+
+                    listaAlunos.Add(aluno);
+                }
+                dataReader.Close();
+                BancoDados.CloseConnection();
+
+                return listaAlunos;
+            }
+            else
+            {
+                return listaAlunos;
+            }
+        }
+
+        public static List<Aluno> ListarAlunosPorNome()
+        {
+            StringBuilder sb = new StringBuilder();
+
             sb.AppendLine("SELECT a.id, a.nome, a.email, a.id_curso, c.descricao, c.turno FROM aluno a ");
-            sb.AppendLine("INNER JOIN curso c ON a.id_curso = c.id;");
+            sb.AppendLine("INNER JOIN curso c ON a.id_curso = c.id ORDER BY a.nome DESC;");
+
+            List<Aluno> listaAlunos = new List<Aluno>();
+
+            if (BancoDados.OpenConnection() == true)
+            {
+                MySqlCommand cmd = new MySqlCommand(sb.ToString(), BancoDados.connection);
+                MySqlDataReader dataReader = cmd.ExecuteReader();
+
+                while (dataReader.Read())
+                {
+                    Curso curso = new Curso();
+                    Aluno aluno = new Aluno();
+
+                    aluno.Id = int.Parse(dataReader["id"].ToString());
+                    aluno.Nome = dataReader["nome"].ToString();
+                    aluno.Email = dataReader["email"].ToString();
+                    curso.Id = int.Parse(dataReader["id_curso"].ToString());
+                    curso.Descricao = dataReader["descricao"].ToString();
+                    curso.Turno = dataReader["turno"].ToString();
+                    aluno.Curso = curso;
+
+                    listaAlunos.Add(aluno);
+                }
+                dataReader.Close();
+                BancoDados.CloseConnection();
+
+                return listaAlunos;
+            }
+            else
+            {
+                return listaAlunos;
+            }
+        }
+
+        public static List<Aluno> ListarAlunosPorEmail()
+        {
+            StringBuilder sb = new StringBuilder();
+
+            sb.AppendLine("SELECT a.id, a.nome, a.email, a.id_curso, c.descricao, c.turno FROM aluno a ");
+            sb.AppendLine("INNER JOIN curso c ON a.id_curso = c.id ORDER BY a.email DESC;");
 
             List<Aluno> listaAlunos = new List<Aluno>();
 

@@ -135,10 +135,15 @@
     <Compile Include="Business\Classes\Enum\Ativo.cs" />
     <Compile Include="Business\Classes\Enum\NivelAcesso.cs" />
     <Compile Include="Business\Classes\Professor.cs" />
+    <Compile Include="Business\Classes\Sala.cs" />
+    <Compile Include="Business\Classes\Turma.cs" />
+    <Compile Include="Business\Classes\Turno.cs" />
     <Compile Include="Business\Classes\Usuario.cs" />
     <Compile Include="Business\Repositorios\AlunoRepository.cs" />
     <Compile Include="Business\Repositorios\CursoRepository.cs" />
     <Compile Include="Business\Repositorios\ProfessorRepository.cs" />
+    <Compile Include="Business\Repositorios\SalaRepository.cs" />
+    <Compile Include="Business\Repositorios\TurnoRepository.cs" />
     <Compile Include="Business\Repositorios\UsuarioRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

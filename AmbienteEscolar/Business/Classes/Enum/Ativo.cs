@@ -5,9 +5,9 @@ using System.Web;
 
 namespace AmbienteEscolar.Business.Classes.Enum
 {
-    public enum Ativo
+    public class Ativo
     {
-        Sim = 1,
-        Nao = 2
+        public int Id { get; set; }
+        public string Descricao { get; set; }
     }
 }

@@ -21,7 +21,7 @@ namespace AmbienteEscolar.Business.BancoDeDados
         {
             Banco banco = new Banco();
 
-            banco.HostMySql = "10.200.119.241";
+            banco.HostMySql = "10.200.116.71";
             banco.DataBaseMySql = "AmbienteEscolarAVA";
             banco.UsernameMySql = "admin";
             banco.PasswordMySql = "senai";
