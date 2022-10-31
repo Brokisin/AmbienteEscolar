@@ -112,8 +112,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="avaicon.ico" />
-    <Content Include="login.ico" />
+    <Content Include="Button-Blank-Blue-icon.ico" />
     <Content Include="Models\css\alunos.css" />
     <Content Include="Models\css\layout.css" />
     <Content Include="Models\css\menu.css" />
@@ -124,6 +123,7 @@
     <Content Include="Models\js\logoffAction.js" />
     <Content Include="Models\js\scripts.js" />
     <Content Include="Models\css\login.css" />
+    <Content Include="User-blue-icon.ico" />
     <Content Include="View\Validate\notFound.ico" />
     <Content Include="Web.config" />
   </ItemGroup>

@@ -23,92 +23,193 @@
 <!--change to logged-->
 @if (true)
 {
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width" />
-        <title>Cadastro de Aluno</title>
-        <link href="~/View/Shared/_Layout.cshtml" rel="logo" />
-        <link href="~/models/css/reset.css" rel="stylesheet" />
-        <link href="~/Models/css/menu.css" rel="stylesheet" />
-        <link href="~/View/Validate/ValidateLogin.cshtml" rel="profile" />
-        <link rel="icon" type="image/x-icon" href="~/avaicon.ico">
-    </head>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>AVA</title>
+    <link href="~/View/Shared/_Layout.cshtml" rel="logo" />
+    <link href="~/models/css/reset.css" rel="stylesheet" />
+    <link href="~/Models/css/menu.css" rel="stylesheet" />
+    <link href="~/View/Validate/ValidateLogin.cshtml" rel="profile" />
+    <link rel="icon" type="image/x-icon" href="~/Button-Blank-Blue-icon.ico">
+</head>
 
-    <body>
+<body>
 
-        @*<script>
-                alert("Bem Vindo!");
-            </script>*@
-        <div>
-            <div class="header">
-                <h2>AVA - Ambiente Escolar</h2>
-                <p>Seja bem-vindo!</p>
-            </div>
-            <div class="cvSDgbcvD">
-                <ul>
-                    <li><a class="active" href="#home">Home</a></li>
-                    <li><a href="#news">Matrículas</a></li>
-                    <li class="dropdown">
-                        <a>Cadastro</a>
-                        <div class="dropdown-content">
-                            <a href="#">Alunos</a>
-                            <a href="#">Professores</a>
-                        </div>
-                    </li>
-                    <li><a href="#contact">Suporte</a></li>
-                    <li class="dropdown">
-                        <a>Eu</a>
-                        <div class="dropdown-content">
-                            <a href="#">Logoff</a>
-                        </div>
-                    </li>
-                </ul>
-            </div>
+    @*<script>
+            alert("Bem Vindo!");
+        </script>*@
+
+    <div id="hyperHeader">
+        <div class="header">
+            <h2>AVA - Ambiente Escolar</h2>
+            <p>Seja bem-vindo!</p>
         </div>
+        <div class="cvSDgbcvD">
+            <ul>
+                <li><a class="active" onclick="MostraTelaHome()">Home</a></li>
+                <li><a onclick="MostraTelaMatriculas()">Matrículas</a></li>
+                <li class="dropdown">
+                    <a>Cadastro</a>
+                    <div class="dropdown-content">
+                        <a onclick="MostraTelaAlunos()">Alunos</a>
+                        <a onclick="MostraTelaProfs()">Professores</a>
+                    </div>
+                </li>
+                <li><a onclick="MostraTelaSuporte()">Suporte</a></li>
+                <li class="dropdown">
+                    <a>Eu</a>
+                    <div class="dropdown-content">
+                        <a onclick="LogOff()">Logoff</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!--Home Screen-->
+    <div id="home" class="d-Home">
         <main class="div-mainCCVCD">
+
+            <div class="home-title">
+                <p>HOME:</p>
+            </div>
+
             <div class="w3-content">
                 <img class="mySlides" src="https://w0.peakpx.com/wallpaper/31/750/HD-wallpaper-cup-coffee-books-pen-laptop.jpg">
                 <img class="mySlides" src="https://w0.peakpx.com/wallpaper/896/435/HD-wallpaper-coffee-book-glasses-drink-cup-table.jpg">
             </div>
             <div class="m-MainCnt">
-                <h2>Sobre o AVA:</h2>
-                <p>
-                    Uma forma de atrair a atenção e demonstrar confiabilidade é mostrar os consumidores satisfeitos. Caso tenha na cartela
-                    de clientes empresas conhecidas do público, você pode solicitar a elas autorização para divulgá-las na carta.
-                    Além disso, é possível pedir para que alguns consumidores concedam uma pequena avaliação sobre o seu negócio. Não é preciso
-                    que seja algo muito elaborado — um parágrafo já é o suficiente para passar uma mensagem positiva sobre a sua empresa.
-                </p>
-                <br />
-                <p>
-                    O currículo do profissional e dos sócios não é obrigatório em uma carta de apresentação de empresa para prestação de serviços,
-                    a menos que as pessoas envolvidas sejam um dos pontos mais fortes do negócio.
-                    Por exemplo, caso um dos empreendedores seja uma personalidade do segmento, adicionar um breve perfil ao documento poderá enriquecê-lo.
-                    Do contrário, a informação poderá passar despercebida.
-                </p>
+                <div class="m-maSCVVSS">
+                    <div class="mc-ss">
+                        <h2>Sobre o AVA:</h2>
+                        <p>
+                            Uma forma de atrair a atenção e demonstrar confiabilidade é mostrar os consumidores satisfeitos. Caso tenha na cartela
+                            de clientes empresas conhecidas do público, você pode solicitar a elas autorização para divulgá-las na carta.
+                            Além disso, é possível pedir para que alguns consumidores concedam uma pequena avaliação sobre o seu negócio. Não é preciso
+                            que seja algo muito elaborado — um parágrafo já é o suficiente para passar uma mensagem positiva sobre a sua empresa.
+                        </p>
+                    </div>
+                    <div class="mc-SSxxxf">
+                        <p>
+                            O currículo do profissional e dos sócios não é obrigatório em uma carta de apresentação de empresa para prestação de serviços,
+                            a menos que as pessoas envolvidas sejam um dos pontos mais fortes do negócio.
+                            Por exemplo, caso um dos empreendedores seja uma personalidade do segmento, adicionar um breve perfil ao documento poderá enriquecê-lo.
+                            Do contrário, a informação poderá passar despercebida.
+                        </p>
+                        <p>
+                            O currículo do profissional e dos sócios não é obrigatório em uma carta de apresentação de empresa para prestação de serviços,
+                            a menos que as pessoas envolvidas sejam um dos pontos mais fortes do negócio.
+                            Por exemplo, caso um dos empreendedores seja uma personalidade do segmento, adicionar um breve perfil ao documento poderá enriquecê-lo.
+                            Do contrário, a informação poderá passar despercebida.
+                        </p>
+                    </div>
+                    <div class="mc-SsskhCCC">
+                        <p>
+                            O currículo do profissional e dos sócios não é obrigatório em uma carta de apresentação de empresa para prestação de serviços,
+                            a menos que as pessoas envolvidas sejam um dos pontos mais fortes do negócio.
+                            Por exemplo, caso um dos empreendedores seja uma personalidade do segmento, adicionar um breve perfil ao documento poderá enriquecê-lo.
+                            Do contrário, a informação poderá passar despercebida.
+                        </p>
+                        <p>
+                            O currículo do profissional e dos sócios não é obrigatório em uma carta de apresentação de empresa para prestação de serviços,
+                            a menos que as pessoas envolvidas sejam um dos pontos mais fortes do negócio.
+                            Por exemplo, caso um dos empreendedores seja uma personalidade do segmento, adicionar um breve perfil ao documento poderá enriquecê-lo.
+                            Do contrário, a informação poderá passar despercebida.
+                        </p>
+                    </div>
+                </div>
+                <div class="m-maFGBGHD">
+                    <div class="mc-SDASX">
+                        <h2>Objetivo:</h2>
+                        <p>
+                            O currículo do profissional e dos sócios não é obrigatório em uma carta de apresentação de empresa para prestação de serviços,
+                            a menos que as pessoas envolvidas sejam um dos pontos mais fortes do negócio.
+                            Por exemplo, caso um dos empreendedores seja uma personalidade do segmento, adicionar um breve perfil ao documento poderá enriquecê-lo.
+                            Do contrário, a informação poderá passar despercebida.
+                        </p>
+                    </div>
+                    <div class="mc-dfdfsd">
+                        <img class="img-svccccc" src="https://w0.peakpx.com/wallpaper/508/719/HD-wallpaper-cup-coffee-book-inscription.jpg" />
+                    </div>
+                </div>
             </div>
 
             <br />
             <button onclick="LogOff()">Sair</button>
             <br />
         </main>
-        <footer>
-            <div style="margin-top: 13px;">
-                <p>2022 AVA &#169; - Todos os direitos reservados.</p>
-            </div>
-        </footer>
-    </body>
+    </div>
+
+    <!--Matriculas Screen-->
+    <div id="matriculas" class="d-Matriculas">
+        <div>
+            <p>matriculas</p>
+            <p>matriculas</p>
+            <p>matriculas</p>
+            <p>matriculas</p>
+            <p>matriculas</p>
+            <p>matriculas</p>
+        </div>
+    </div>
+
+    <!--Alunos Screen-->
+    <div id="alunos" class="d-Alunos">
+        <div>
+            <p>alunos</p>
+            <p>alunos</p>
+            <p>alunos</p>
+            <p>alunos</p>
+            <p>alunos</p>
+            <p>alunos</p>
+            <p>alunos</p>
+        </div>
+    </div>
+
+    <!--Professores Screen-->
+    <div id="professores" class="d-Professores">
+        <div>
+            <p>professores</p>
+            <p>professores</p>
+            <p>professores</p>
+            <p>professores</p>
+            <p>professores</p>
+            <p>professores</p>
+            <p>professores</p>
+        </div>
+    </div>
+
+    <!--Suport Screen-->
+    <div id="suporte" class="d-Suport">
+        <div>
+            <p>suporte</p>
+            <p>suporte</p>
+            <p>suporte</p>
+            <p>suporte</p>
+            <p>suporte</p>
+            <p>suporte</p>
+            <p>suporte</p>
+        </div>
+    </div>
+
+    <footer id="hyperFooter">
+        <div>
+            <p>2022 AVA &#169; - Todos os direitos reservados.</p>
+        </div>
+    </footer>
+</body>
 }
 else
 {
-    <head>
-        <link rel="icon" type="image/x-icon" href="~/View/Validate/notFound.ico">
-        <title>Not Found</title>
-    </head>
-    <body>
-        <br />
-        <img style="margin-left: 30px; display:inline-block;" src="~/View/Validate/notFound.ico" alt="notFound" />
-        <h1 style="display:inline-block; margin-left: 20px;"> Something went wrong. Return <a href="~/Login.cshtml">here</a>. </h1>
-    </body>
+<head>
+    <link rel="icon" type="image/x-icon" href="~/View/Validate/notFound.ico">
+    <title>Not Found</title>
+</head>
+<body>
+    <br />
+    <img style="margin-left: 30px; display:inline-block;" src="~/View/Validate/notFound.ico" alt="notFound" />
+    <h1 style="display:inline-block; margin-left: 20px;"> Something went wrong. Return <a href="~/Login.cshtml">here</a>. </h1>
+</body>
 }
 </html>
 

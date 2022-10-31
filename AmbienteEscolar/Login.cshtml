@@ -9,52 +9,49 @@
     <meta name="viewport" content="width=device-width" />
     <title>Login</title>
     <link href="~/Models/css/reset.css" rel="stylesheet" />
-    <link href="~/Models/css/style.css" rel="stylesheet" />
     <link href="~/Models/css/login.css" rel="stylesheet" />
-    <link rel="icon" type="image/x-icon" href="~/login.ico">
+    <link rel="icon" type="image/x-icon" href="~/User-blue-icon.ico">
 </head>
 
-<body style="font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">
+<body>
     <header>
-        <div>
-            <div class="login-div">
-                <h1 style="color: white;">Tela de Login</h1>
+        <div class="CCvs">
+            <div>
+                <h1>AVA - Login</h1>
             </div>
-            <nav>
-                <p>Preencha os campos a seguir para realizar seu login.</p>
-            </nav>
+            <div>
+                <span>Preencha os campos a seguir para realizar seu login</span>
+            </div>
         </div>
     </header>
     <main>
         <form method="post" id="formulario" autocomplete="off" action="~/View/Validate/ValidateLogin.cshtml" @*onclick="formularioAlerta()"*@>
-            <section style="margin: 0px 300px">
-                <div class="main-box">
-                    <div class="txt">
-                        <h2>Login</h2>
-                        <div style="border-bottom: 1px solid rgb(190, 190, 190); padding: 6px;">
+            <div class="main-box">
+                <div class="txt">
+                    <h2>Login</h2>
+                    <div style="border-bottom: 1px solid rgb(190, 190, 190); padding: 6px;">
 
-                        </div>
                     </div>
-                    <div class="info">
-                        <ul>
-                            <li>
-                                <p style="padding: 18px 0px;">Usuário</p>
-                                <label><input id="login" name="login" type="text" placeholder="Insira seu nome" required maxlength="15" minlength="4"></label>
-                            </li>
-                            <li>
-                                <p style="padding: 18px 0px;">Senha</p>
-                                <label><input id="senha" name="senha" type="password" placeholder="Insira sua senha" required maxlength="15" minlength="4"></label>
-                            </li>
-                        </ul>
-                        <input type="submit" value="Logar" />
-                        <br /><br />
-                        @*<div class="button">
-                                <button onclick="executarLogin()" type="submit">Logar</button>
-                            </div>*@
-                    </div>
-                    <div style="border-bottom: 1px solid rgb(190, 190, 190); padding-top: 22px;"></div>
                 </div>
-            </section>
+                <div class="info">
+                    <ul>
+                        <li>
+                            <p style="padding: 18px 0px;">Usuário</p>
+                            <label><input id="login" name="login" type="text" placeholder="Insira seu nome" required maxlength="15" minlength="4"></label>
+                        </li>
+                        <li>
+                            <p style="padding: 18px 0px;">Senha</p>
+                            <label><input id="senha" name="senha" type="password" placeholder="Insira sua senha" required maxlength="15" minlength="4"></label>
+                        </li>
+                    </ul>
+                    <input type="submit" value="Logar" />
+                    <br /><br />
+                    @*<div class="button">
+                            <button onclick="executarLogin()" type="submit">Logar</button>
+                        </div>*@
+                </div>
+                <div style="border-bottom: 1px solid rgb(190, 190, 190); padding-top: 22px;"></div>
+            </div>
         </form>
     </main>
     <div class="alertaFormulario" onclick="formularioAlerta()">

@@ -1,14 +1,28 @@
 ﻿body {
-    background-color: #b7b7b7;
+    background-color: #222222;
     font-size: 22px;
 }
 
-h2{
-    font-size: 30px;
-    margin: 15px 0;
+.d-Home, .d-Matriculas, .d-Alunos, .d-Professores, .d-Suport {
+    background-color: #dddddd;
+    margin: 0 15%;
 }
 
-.head-me{
+h2 {
+    font-size: 45px;
+    margin: 15px 0;
+    font-weight: bold;
+}
+
+.home-title {
+    border-bottom: 1px solid #626262;
+    border-top: 1px solid #626262;
+    padding: 40px 0;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.head-me {
     /*position: absolute;
     right: 0;*/
 }
@@ -20,7 +34,7 @@ h2{
 }
 
 .header {
-    padding: 60px 30px;
+    padding: 10%;
     background-color: #3d72af;
     color: white;
     text-align: center;
@@ -40,6 +54,8 @@ li {
 }
 
     li a {
+        cursor: pointer;
+        transition: all .1s ease-in;
         display: block;
         color: white;
         text-align: center;
@@ -59,15 +75,17 @@ footer {
     position: fixed;
     display: flex;
     width: 100%;
-    height: 5%;
-    text-align: center;
+    height: 7%;
     background-color: #202020;
     color: white;
     bottom: 0;
+    text-align: center;
+    align-items: center;
     justify-content: center;
 }
 
-.div-mainCCVCD{
+.div-mainCCVCD {
+    box-shadow: 5px 5px 10px black;
     padding: 20px 40px;
 }
 
@@ -75,17 +93,43 @@ footer {
     display: none;
     width: 100%;
     border-radius: 10px;
+    box-shadow: 7px 7px 12px #181818;
 }
 
 .w3-content{
-    padding: 0 150px;
+    padding: 1% 20%;
 }
 
-.m-MainCnt{
+.m-MainCnt {
+    display: flex;
     padding: 20px 0;
 }
+
+.m-maSCVVSS {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.mc-ss, .mc-SDASX, .mc-SSxxxf, .mc-dfdfsd, .mc-SsskhCCC {
+    padding: 10px 15px;
+}
+
+.m-maFGBGHD {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.img-svccccc {
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: 7px 7px 12px #181818;
+}
+
 /*===================*/
 .dropdown {
+    cursor: pointer;
     position: relative;
     display: inline-block;
 }
@@ -107,6 +151,7 @@ footer {
 
         .dropdown-content a:hover {
             background-color: lightgray;
+            transition: all .2s ease-in;
         }
 
 .dropdown:hover .dropdown-content {
