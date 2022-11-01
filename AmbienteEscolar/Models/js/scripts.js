@@ -99,3 +99,15 @@ function MostraTelaSuporte() {
     document.getElementById("professores").style.display = 'none';
     document.getElementById("alunos").style.display = 'none';
 }
+
+// SPINNER WRAPPER =================
+
+let spinnerWrapper = document.getElementById("spinnerWrapper");
+let spinnerModal = document.getElementById("spinMod");
+
+window.addEventListener('load', function () {
+    if (spinnerModal.style.display = "flex") {
+        spinnerModal.style.display = "none";
+        spinnerWrapper.style.display = "none";
+    }
+});

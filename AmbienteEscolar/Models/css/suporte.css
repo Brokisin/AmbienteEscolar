@@ -1,0 +1,58 @@
+﻿body {
+}
+
+.sup-GGHGer{
+    padding: 20px 0;
+}
+
+.sup-SSckLmf{
+    display: flex;
+}
+
+.sup-NNMdfgW {
+    display: flex;
+    flex-direction: column;
+    padding: 10px 15px 0 0;
+    border-right: 1px solid #3e3e3e;
+}
+
+.sup-NNsldkF {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 10px 0 0 15px;
+    border-left: 1px solid #3e3e3e;
+    border-top: 2px solid #335487;
+}
+
+.sup-mailIcon, .sup-phoneIcon, .sup-phoneDuty {
+    display: flex;
+    padding: 2px 0;
+}
+
+.sup-JJwLsqQ {
+    display: grid;
+    justify-content: center;
+}
+
+svg {
+    border: 1px solid #000000;
+    background-color: #000000;
+    border-radius: 12px;
+    padding: 2px;
+    margin-right: 5px;
+}
+path {
+    color: #e1e1e1;
+}
+
+.sup-JJaQsljG{
+    padding: 0 0 15px 0;
+}
+
+.sup-cttDesign-Letters {
+    padding: 0 0 10px 0;
+    color: #000000;
+    text-shadow: 1px 1px 1px #3d72af;
+    justify-self: center;
+}

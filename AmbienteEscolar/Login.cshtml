@@ -27,37 +27,27 @@
     <main>
         <form method="post" id="formulario" autocomplete="off" action="~/View/Validate/ValidateLogin.cshtml" @*onclick="formularioAlerta()"*@>
             <div class="main-box">
-                <div class="txt">
-                    <h2>Login</h2>
-                    <div style="border-bottom: 1px solid rgb(190, 190, 190); padding: 6px;">
-
-                    </div>
-                </div>
                 <div class="info">
-                    <ul>
-                        <li>
-                            <p style="padding: 18px 0px;">Usuário</p>
-                            <label><input id="login" name="login" type="text" placeholder="Insira seu nome" required maxlength="15" minlength="4"></label>
-                        </li>
-                        <li>
-                            <p style="padding: 18px 0px;">Senha</p>
-                            <label><input id="senha" name="senha" type="password" placeholder="Insira sua senha" required maxlength="15" minlength="4"></label>
-                        </li>
-                    </ul>
-                    <input type="submit" value="Logar" />
-                    <br /><br />
-                    @*<div class="button">
+                    <div class="dv-sCSA">
+                        <label class="usr">Usuário</label>
+                        <input id="login" name="login" type="text" placeholder="Insira seu nome" required maxlength="15" minlength="4">
+                    </div>
+                    <div class="dv-sCSA">
+                        <label class="usr">Senha</label>
+                        <input id="senha" name="senha" type="password" placeholder="Insira sua senha" required maxlength="15" minlength="4">
+                    </div>
+                    <input class="gdjNB" type="submit" value="Logar" />
+                    @*<div>
                             <button onclick="executarLogin()" type="submit">Logar</button>
                         </div>*@
                 </div>
-                <div style="border-bottom: 1px solid rgb(190, 190, 190); padding-top: 22px;"></div>
             </div>
         </form>
     </main>
     <div class="alertaFormulario" onclick="formularioAlerta()">
         <p id="confirmacao"></p>
     </div>
-    <div>
+    <div class="ink-butnn">
         <div class="linkMenu" id="linkMenu">
             <a id="linkMenu" href="~/View/Home/Menu.cshtml">Ir para o Menu</a>
         </div>

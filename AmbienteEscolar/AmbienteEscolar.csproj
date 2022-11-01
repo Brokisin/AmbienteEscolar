@@ -118,6 +118,7 @@
     <Content Include="Models\css\menu.css" />
     <Content Include="Models\css\professores.css" />
     <Content Include="Models\css\reset.css" />
+    <Content Include="Models\css\suporte.css" />
     <Content Include="Models\css\usuarios.css" />
     <Content Include="Models\js\alunoScripts.js" />
     <Content Include="Models\js\logoffAction.js" />

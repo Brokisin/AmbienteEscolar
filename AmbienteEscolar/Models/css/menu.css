@@ -6,13 +6,18 @@
 .d-Home, .d-Matriculas, .d-Alunos, .d-Professores, .d-Suport {
     background-color: #dddddd;
     margin: 0 15%;
+    margin-bottom: 100px;
 }
 
-h2 {
-    font-size: 45px;
-    margin: 15px 0;
-    font-weight: bold;
+.d-Matriculas, .d-Alunos, .d-Professores, .d-Suport {
+    display: none;
 }
+
+    h2 {
+        font-size: 45px;
+        margin: 15px 0;
+        font-weight: bold;
+    }
 
 .home-title {
     border-bottom: 1px solid #626262;
@@ -20,11 +25,6 @@ h2 {
     padding: 40px 0;
     font-weight: bold;
     margin-bottom: 15px;
-}
-
-.head-me {
-    /*position: absolute;
-    right: 0;*/
 }
 
 .cvSDgbcvD {
@@ -65,6 +65,7 @@ li {
 
         li a:hover {
             background-color: #3d72af;
+            text-shadow: 0px 0px 6px black;
         }
 
 .active {
@@ -152,8 +153,102 @@ footer {
         .dropdown-content a:hover {
             background-color: lightgray;
             transition: all .2s ease-in;
+            text-shadow: none;
         }
 
 .dropdown:hover .dropdown-content {
     display: block;
+}
+
+/*SPINNER=================*/
+
+.ring {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 150px;
+    height: 150px;
+    background: transparent;
+    border: 3px solid #3c3c3c;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 150px;
+    font-family: sans-serif;
+    font-size: 20px;
+    color: #297dff;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    text-shadow: 0 0 10px #f5f5f5;
+    box-shadow: 0 0 20px rgba(0,0,0,.5);
+}
+
+    .ring:before {
+        content: '';
+        position: absolute;
+        top: -3px;
+        left: -3px;
+        width: 100%;
+        height: 100%;
+        border: 3px solid transparent;
+        border-top: 3px solid #297dff;
+        border-right: 3px solid #297dff;
+        border-radius: 50%;
+        animation: animateC 2s linear infinite;
+    }
+
+span {
+    display: block;
+    position: absolute;
+    top: calc(50% - 2px);
+    left: 50%;
+    width: 50%;
+    height: 4px;
+    background: transparent;
+    transform-origin: left;
+    animation: animate 2s linear infinite;
+}
+
+    span:before {
+        content: '';
+        position: absolute;
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        background: #297dff;
+        top: -6px;
+        right: -8px;
+        box-shadow: 0 0 20px #ffffff;
+    }
+
+@keyframes animateC {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes animate {
+    0% {
+        transform: rotate(45deg);
+    }
+
+    100% {
+        transform: rotate(405deg);
+    }
+}
+
+.spinner-modal {
+    display: block;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: #000000d6;
 }

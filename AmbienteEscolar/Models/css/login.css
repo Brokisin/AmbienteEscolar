@@ -19,7 +19,7 @@ div.CCvs {
 }
 
 header {
-    background-color: #303030;
+    background-color: #242424;
     box-shadow: 0px 4px 3px black;
     height: 120px;
     top: 0;
@@ -34,22 +34,18 @@ header {
     text-align: center;
 }
 
-nav {
-    color: rgba(146, 146, 146, 0.603);
-    text-align: center;
-}
-
 /*================================================MAIN================================================*/
 
-main{
-    margin: 15% 35%;
+main {
+    display: flex;
+    margin-top: 160px;
+    justify-content: center;
 }
 
 .main-box {
     background-color: #ffffff;
-    box-shadow: 0px 5px 7px black;
+    box-shadow: 0px 5px 10px black;
     width: 100%;
-    height: 340px;
     display: flex;
     border-radius: 15px;
     flex-direction: column;
@@ -57,33 +53,43 @@ main{
 }
 
 .info {
-    padding: 10px 10px;
+    padding: 30px 40px;
 }
 
-.txt {
-    font-size: 20px;
-    padding-top: 20px;
-    text-align: center;
+.usr {
+    font-size: 22px;
+    display: block;
+    padding: 10px 0;
 }
 
-ul li {
-    padding-left: 20px;
+.dv-sCSA {
+    padding: 10px 0;
 }
 
 input {
-    border-radius: 10px;
-    border: 1px solid rgba(128, 128, 128, 0.651);
-    height: 22px;
+    border-radius: 5px;
+    border: 1px solid #3c3c3c;
+    height: 30px;
 }
 
     input::placeholder {
-        padding-left: 5px;
+        padding-left: 2px;
     }
 
-.button {
-    padding-left: 20px;
-    padding-top: 20px;
-}
+    input.gdjNB {
+        cursor: pointer;
+        transition: all .3s ease-in;
+        background-color: #3d72af;
+        border: 0;
+        padding: 0 11px;
+        margin-top: 15px;
+        color: white;
+    }
+
+        input.gdjNB:hover {
+            color: white;
+            background-color: #004ea9;
+        }
 
 button {
     cursor: pointer;
@@ -103,18 +109,20 @@ button {
 }
 
 .linkMenu {
-    background-color: rgb(32 32 32);
-    border: 1px solid rgb(32 32 32);
+    background-color: black;
+    border: 1px solid black;
     text-align: center;
-    display: inline-block;
     padding: 10px;
     border-radius: 20px;
-    margin-top: 8%;
-    margin-left: 45.8%;
 }
 
-a#linkMenu{
-    color:white;
+.ink-butnn {
+    display: flex;
+    justify-content: center;
+}
+
+a#linkMenu {
+    color: white;
 }
 
 a:hover {
@@ -129,18 +137,14 @@ a:link {
 
 /*================================================FOOTER================================================*/
 footer {
-    background-color: rgb(170, 170, 170);
+    background-color: #242424;
+    display: flex;
     position: fixed;
-    left: 0;
     bottom: 0;
     width: 100%;
     height: 70px;
     color: white;
-    text-align: center;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
 }
-
-    footer div {
-        color: black;
-        border-top: 1px solid rgb(119, 119, 119);
-        padding-top: 25px;
-    }

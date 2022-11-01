@@ -23,193 +23,269 @@
 <!--change to logged-->
 @if (true)
 {
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
-    <title>AVA</title>
-    <link href="~/View/Shared/_Layout.cshtml" rel="logo" />
-    <link href="~/models/css/reset.css" rel="stylesheet" />
-    <link href="~/Models/css/menu.css" rel="stylesheet" />
-    <link href="~/View/Validate/ValidateLogin.cshtml" rel="profile" />
-    <link rel="icon" type="image/x-icon" href="~/Button-Blank-Blue-icon.ico">
-</head>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width" />
+        <title>AVA</title>
+        <link href="~/View/Shared/_Layout.cshtml" rel="logo" />
+        <link href="~/Models/css/reset.css" rel="stylesheet" />
+        <link href="~/Models/css/menu.css" rel="stylesheet" />
+        <link href="~/Models/css/suporte.css" rel="stylesheet" />
+        <link href="~/View/Validate/ValidateLogin.cshtml" rel="profile" />
+        <link rel="icon" type="image/x-icon" href="~/Button-Blank-Blue-icon.ico">
+    </head>
 
-<body>
+    <body>
 
-    @*<script>
-            alert("Bem Vindo!");
-        </script>*@
+        @*<script>
+                alert("Bem Vindo!");
+            </script>*@
 
-    <div id="hyperHeader">
-        <div class="header">
-            <h2>AVA - Ambiente Escolar</h2>
-            <p>Seja bem-vindo!</p>
-        </div>
-        <div class="cvSDgbcvD">
-            <ul>
-                <li><a class="active" onclick="MostraTelaHome()">Home</a></li>
-                <li><a onclick="MostraTelaMatriculas()">Matrículas</a></li>
-                <li class="dropdown">
-                    <a>Cadastro</a>
-                    <div class="dropdown-content">
-                        <a onclick="MostraTelaAlunos()">Alunos</a>
-                        <a onclick="MostraTelaProfs()">Professores</a>
-                    </div>
-                </li>
-                <li><a onclick="MostraTelaSuporte()">Suporte</a></li>
-                <li class="dropdown">
-                    <a>Eu</a>
-                    <div class="dropdown-content">
-                        <a onclick="LogOff()">Logoff</a>
-                    </div>
-                </li>
-            </ul>
-        </div>
-    </div>
-
-    <!--Home Screen-->
-    <div id="home" class="d-Home">
-        <main class="div-mainCCVCD">
-
-            <div class="home-title">
-                <p>HOME:</p>
+        <div id="hyperHeader">
+            <div class="header">
+                <h2>AVA - Ambiente Escolar</h2>
+                <p>Seja bem-vindo!</p>
             </div>
-
-            <div class="w3-content">
-                <img class="mySlides" src="https://w0.peakpx.com/wallpaper/31/750/HD-wallpaper-cup-coffee-books-pen-laptop.jpg">
-                <img class="mySlides" src="https://w0.peakpx.com/wallpaper/896/435/HD-wallpaper-coffee-book-glasses-drink-cup-table.jpg">
+            <div class="cvSDgbcvD">
+                <ul>
+                    <li><a class="active" onclick="MostraTelaHome()">Home</a></li>
+                    <li><a onclick="MostraTelaMatriculas()">Matrículas</a></li>
+                    <li class="dropdown">
+                        <a>Cadastro</a>
+                        <div class="dropdown-content">
+                            <a onclick="MostraTelaAlunos()">Alunos</a>
+                            <a onclick="MostraTelaProfs()">Professores</a>
+                        </div>
+                    </li>
+                    <li><a onclick="MostraTelaSuporte()">Suporte</a></li>
+                    <li class="dropdown">
+                        <a>Eu</a>
+                        <div class="dropdown-content">
+                            <a onclick="LogOff()">Logoff</a>
+                        </div>
+                    </li>
+                </ul>
             </div>
-            <div class="m-MainCnt">
-                <div class="m-maSCVVSS">
-                    <div class="mc-ss">
-                        <h2>Sobre o AVA:</h2>
-                        <p>
-                            Uma forma de atrair a atenção e demonstrar confiabilidade é mostrar os consumidores satisfeitos. Caso tenha na cartela
-                            de clientes empresas conhecidas do público, você pode solicitar a elas autorização para divulgá-las na carta.
-                            Além disso, é possível pedir para que alguns consumidores concedam uma pequena avaliação sobre o seu negócio. Não é preciso
-                            que seja algo muito elaborado — um parágrafo já é o suficiente para passar uma mensagem positiva sobre a sua empresa.
-                        </p>
+        </div>
+
+        <!--Spinner Wrapper-->
+        <div id="spinMod" class="spinner-modal">
+            <div id="spinnerWrapper" class="ring">
+                Loading
+                <span></span>
+            </div>
+        </div>
+
+        <!--Home Screen-->
+        <div id="home" class="d-Home">
+            <main class="div-mainCCVCD">
+
+                <div class="home-title">
+                    <p>HOME:</p>
+                </div>
+
+                <div class="w3-content">
+                    <img class="mySlides" src="https://w0.peakpx.com/wallpaper/31/750/HD-wallpaper-cup-coffee-books-pen-laptop.jpg">
+                    <img class="mySlides" src="https://w0.peakpx.com/wallpaper/896/435/HD-wallpaper-coffee-book-glasses-drink-cup-table.jpg">
+                </div>
+                <div class="m-MainCnt">
+                    <div class="m-maSCVVSS">
+                        <div class="mc-ss">
+                            <h2>Sobre o AVA:</h2>
+                            <p>
+                                Uma forma de atrair a atenção e demonstrar confiabilidade é mostrar os consumidores satisfeitos. Caso tenha na cartela
+                                de clientes empresas conhecidas do público, você pode solicitar a elas autorização para divulgá-las na carta.
+                                Além disso, é possível pedir para que alguns consumidores concedam uma pequena avaliação sobre o seu negócio. Não é preciso
+                                que seja algo muito elaborado — um parágrafo já é o suficiente para passar uma mensagem positiva sobre a sua empresa.
+                            </p>
+                        </div>
+                        <div class="mc-SSxxxf">
+                            <p>
+                                O currículo do profissional e dos sócios não é obrigatório em uma carta de apresentação de empresa para prestação de serviços,
+                                a menos que as pessoas envolvidas sejam um dos pontos mais fortes do negócio.
+                                Por exemplo, caso um dos empreendedores seja uma personalidade do segmento, adicionar um breve perfil ao documento poderá enriquecê-lo.
+                                Do contrário, a informação poderá passar despercebida.
+                            </p>
+                            <p>
+                                O currículo do profissional e dos sócios não é obrigatório em uma carta de apresentação de empresa para prestação de serviços,
+                                a menos que as pessoas envolvidas sejam um dos pontos mais fortes do negócio.
+                                Por exemplo, caso um dos empreendedores seja uma personalidade do segmento, adicionar um breve perfil ao documento poderá enriquecê-lo.
+                                Do contrário, a informação poderá passar despercebida.
+                            </p>
+                        </div>
+                        <div class="mc-SsskhCCC">
+                            <p>
+                                O currículo do profissional e dos sócios não é obrigatório em uma carta de apresentação de empresa para prestação de serviços,
+                                a menos que as pessoas envolvidas sejam um dos pontos mais fortes do negócio.
+                                Por exemplo, caso um dos empreendedores seja uma personalidade do segmento, adicionar um breve perfil ao documento poderá enriquecê-lo.
+                                Do contrário, a informação poderá passar despercebida.
+                            </p>
+                            <p>
+                                O currículo do profissional e dos sócios não é obrigatório em uma carta de apresentação de empresa para prestação de serviços,
+                                a menos que as pessoas envolvidas sejam um dos pontos mais fortes do negócio.
+                                Por exemplo, caso um dos empreendedores seja uma personalidade do segmento, adicionar um breve perfil ao documento poderá enriquecê-lo.
+                                Do contrário, a informação poderá passar despercebida.
+                            </p>
+                        </div>
                     </div>
-                    <div class="mc-SSxxxf">
-                        <p>
-                            O currículo do profissional e dos sócios não é obrigatório em uma carta de apresentação de empresa para prestação de serviços,
-                            a menos que as pessoas envolvidas sejam um dos pontos mais fortes do negócio.
-                            Por exemplo, caso um dos empreendedores seja uma personalidade do segmento, adicionar um breve perfil ao documento poderá enriquecê-lo.
-                            Do contrário, a informação poderá passar despercebida.
-                        </p>
-                        <p>
-                            O currículo do profissional e dos sócios não é obrigatório em uma carta de apresentação de empresa para prestação de serviços,
-                            a menos que as pessoas envolvidas sejam um dos pontos mais fortes do negócio.
-                            Por exemplo, caso um dos empreendedores seja uma personalidade do segmento, adicionar um breve perfil ao documento poderá enriquecê-lo.
-                            Do contrário, a informação poderá passar despercebida.
-                        </p>
-                    </div>
-                    <div class="mc-SsskhCCC">
-                        <p>
-                            O currículo do profissional e dos sócios não é obrigatório em uma carta de apresentação de empresa para prestação de serviços,
-                            a menos que as pessoas envolvidas sejam um dos pontos mais fortes do negócio.
-                            Por exemplo, caso um dos empreendedores seja uma personalidade do segmento, adicionar um breve perfil ao documento poderá enriquecê-lo.
-                            Do contrário, a informação poderá passar despercebida.
-                        </p>
-                        <p>
-                            O currículo do profissional e dos sócios não é obrigatório em uma carta de apresentação de empresa para prestação de serviços,
-                            a menos que as pessoas envolvidas sejam um dos pontos mais fortes do negócio.
-                            Por exemplo, caso um dos empreendedores seja uma personalidade do segmento, adicionar um breve perfil ao documento poderá enriquecê-lo.
-                            Do contrário, a informação poderá passar despercebida.
-                        </p>
+                    <div class="m-maFGBGHD">
+                        <div class="mc-SDASX">
+                            <h2>Objetivo:</h2>
+                            <p>
+                                O currículo do profissional e dos sócios não é obrigatório em uma carta de apresentação de empresa para prestação de serviços,
+                                a menos que as pessoas envolvidas sejam um dos pontos mais fortes do negócio.
+                                Por exemplo, caso um dos empreendedores seja uma personalidade do segmento, adicionar um breve perfil ao documento poderá enriquecê-lo.
+                                Do contrário, a informação poderá passar despercebida.
+                            </p>
+                        </div>
+                        <div class="mc-dfdfsd">
+                            <img class="img-svccccc" src="https://w0.peakpx.com/wallpaper/508/719/HD-wallpaper-cup-coffee-book-inscription.jpg" />
+                        </div>
                     </div>
                 </div>
-                <div class="m-maFGBGHD">
-                    <div class="mc-SDASX">
-                        <h2>Objetivo:</h2>
+                <br /><br /><br />
+            </main>
+        </div>
+
+        <!--Matriculas Screen-->
+        <div id="matriculas" class="d-Matriculas">
+            <main class="div-mainCCVCD">
+                <div>
+                    <h2>matriculas</h2>
+                    <p>matriculas</p>
+                    <p>matriculas</p>
+                    <p>matriculas</p>
+                    <p>matriculas</p>
+                </div>
+            </main>
+        </div>
+
+        <!--Alunos Screen-->
+        <div id="alunos" class="d-Alunos">
+            <main class="div-mainCCVCD">
+                <div>
+                    <p>alunos</p>
+                    <p>alunos</p>
+                    <p>alunos</p>
+                    <p>alunos</p>
+                    <p>alunos</p>
+                    <p>alunos</p>
+                    <p>alunos</p>
+                </div>
+            </main>
+        </div>
+
+        <!--Professores Screen-->
+        <div id="professores" class="d-Professores">
+            <main class="div-mainCCVCD">
+                <div>
+                    <p>professores</p>
+                    <p>professores</p>
+                    <p>professores</p>
+                    <p>professores</p>
+                    <p>professores</p>
+                    <p>professores</p>
+                    <p>professores</p>
+                </div>
+            </main>
+        </div>
+
+        <!--Suport Screen-->
+        <div id="suporte" class="d-Suport">
+            <main class="div-mainCCVCD">
+                <div class="home-title">
+                    <p>SUPPORT:</p>
+                </div>
+
+                <div>
+                    <div class="sup-GGHGer">
+                        <h2>Suporte AVA</h2>
                         <p>
-                            O currículo do profissional e dos sócios não é obrigatório em uma carta de apresentação de empresa para prestação de serviços,
-                            a menos que as pessoas envolvidas sejam um dos pontos mais fortes do negócio.
-                            Por exemplo, caso um dos empreendedores seja uma personalidade do segmento, adicionar um breve perfil ao documento poderá enriquecê-lo.
-                            Do contrário, a informação poderá passar despercebida.
+                            Visite o site de Suporte AppleCare para obter respostas rápidas, ver tutoriais de
+                            produtos, guias práticos, manuais e artigos técnicos mais detalhados.
+                            Caso você tenha perdido ou encontrado algum produto Apple, entre em contato com a
+                            delegacia mais próxima para comunicar o fato. Você também encontra uma lista de números
+                            de série associados ao seu ID Apple e obtém informações sobre como usar o recurso Buscar no seu aparelho Apple.
                         </p>
                     </div>
-                    <div class="mc-dfdfsd">
-                        <img class="img-svccccc" src="https://w0.peakpx.com/wallpaper/508/719/HD-wallpaper-cup-coffee-book-inscription.jpg" />
+                    <div class="sup-SSckLmf">
+                        <div class="sup-NNMdfgW">
+                            <img class="img-svccccc" src="https://www.designerd.com.br/wp-content/uploads/2019/05/crm-atendimento-cliente.png" />
+                            <div>
+                                <h2>Atendimento 24h</h2>
+                                <p>
+                                    Visite o site de Suporte AppleCare para obter respostas rápidas, ver tutoriais de
+                                    produtos, guias práticos, manuais e artigos técnicos mais detalhados.
+                                    Caso você tenha perdido ou encontrado algum produto Apple, entre em contato com a
+                                    delegacia mais próxima para comunicar o fato.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="sup-NNsldkF">
+                                <div class="sup-JJaQsljG">
+                                    <p>
+                                        Visite o site de Suporte AppleCare para obter respostas rápidas, ver tutoriais de
+                                        produtos, guias práticos, manuais e artigos técnicos mais detalhados.
+                                        Caso você tenha perdido ou encontrado algum produto Apple, entre em contato com a
+                                        delegacia mais próxima para comunicar o fato.
+                                    </p>
+                                    <p>
+                                        Visite o site de Suporte AppleCare para obter respostas rápidas, ver tutoriais de
+                                        produtos, guias práticos, manuais e artigos técnicos mais detalhados.
+                                        Caso você tenha perdido ou encontrado algum produto Apple, entre em contato com a
+                                        delegacia mais próxima para comunicar o fato.
+                                    </p>
+                                </div>
+                                <div class="sup-JJwLsqQ">
+                                    <p class="sup-cttDesign-Letters">Contatos:</p>
+                                    <div class="sup-mailIcon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope-fill" viewBox="0 0 16 16">
+                                            <path d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414.05 3.555ZM0 4.697v7.104l5.803-3.558L0 4.697ZM6.761 8.83l-6.57
+                                              4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586l-1.239-.757Zm3.436-.586L16 11.801V4.697l-5.803 3.546Z" />
+                                        </svg>
+                                        <p>ava-sup@avacompany.com.br</p>
+                                    </div>
+                                    <div class="sup-phoneIcon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-headset" viewBox="0 0 16 16">
+                                            <path d="M8 1a5 5 0 0 0-5 5v1h1a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a6 6 0 1 1 12 0v6a2.5 2.5 0 0 1-2.5 2.5H9.366a1 
+                                                  1 0 0 1-.866.5h-1a1 1 0 1 1 0-2h1a1 1 0 0 1 .866.5H11.5A1.5 1.5 0 0 0 13 12h-1a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1h1V6a5 5 0 0 0-5-5z" />
+                                        </svg>
+                                        <p>51 3403-3751</p>
+                                    </div>
+                                    <div class="sup-phoneDuty">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-telephone-inbound-fill" viewBox="0 0 16 16">
+                                            <path fill-rule="evenodd" d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0
+                                                  0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 
+                                                  2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137
+                                                  .703-2.877L1.885.511zM15.854.146a.5.5 0 0 1 0 .708L11.707 5H14.5a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5v-4a.5.5 0 0 1 1 0v2.793L15.146.146a.5.5 0 0 1 .708 0z" />
+                                        </svg>
+                                        <p>51 9 8729-3948</p>
+                                    </div>
+                                </div>
+                        </div>
                     </div>
-                </div>
+                </div><br /><br /><br />
+            </main>
+        </div>
+
+        <footer id="hyperFooter">
+            <div>
+                <p>2022 AVA &#169; - Todos os direitos reservados.</p>
             </div>
-
-            <br />
-            <button onclick="LogOff()">Sair</button>
-            <br />
-        </main>
-    </div>
-
-    <!--Matriculas Screen-->
-    <div id="matriculas" class="d-Matriculas">
-        <div>
-            <p>matriculas</p>
-            <p>matriculas</p>
-            <p>matriculas</p>
-            <p>matriculas</p>
-            <p>matriculas</p>
-            <p>matriculas</p>
-        </div>
-    </div>
-
-    <!--Alunos Screen-->
-    <div id="alunos" class="d-Alunos">
-        <div>
-            <p>alunos</p>
-            <p>alunos</p>
-            <p>alunos</p>
-            <p>alunos</p>
-            <p>alunos</p>
-            <p>alunos</p>
-            <p>alunos</p>
-        </div>
-    </div>
-
-    <!--Professores Screen-->
-    <div id="professores" class="d-Professores">
-        <div>
-            <p>professores</p>
-            <p>professores</p>
-            <p>professores</p>
-            <p>professores</p>
-            <p>professores</p>
-            <p>professores</p>
-            <p>professores</p>
-        </div>
-    </div>
-
-    <!--Suport Screen-->
-    <div id="suporte" class="d-Suport">
-        <div>
-            <p>suporte</p>
-            <p>suporte</p>
-            <p>suporte</p>
-            <p>suporte</p>
-            <p>suporte</p>
-            <p>suporte</p>
-            <p>suporte</p>
-        </div>
-    </div>
-
-    <footer id="hyperFooter">
-        <div>
-            <p>2022 AVA &#169; - Todos os direitos reservados.</p>
-        </div>
-    </footer>
-</body>
+        </footer>
+    </body>
 }
 else
 {
-<head>
-    <link rel="icon" type="image/x-icon" href="~/View/Validate/notFound.ico">
-    <title>Not Found</title>
-</head>
-<body>
-    <br />
-    <img style="margin-left: 30px; display:inline-block;" src="~/View/Validate/notFound.ico" alt="notFound" />
-    <h1 style="display:inline-block; margin-left: 20px;"> Something went wrong. Return <a href="~/Login.cshtml">here</a>. </h1>
-</body>
+    <head>
+        <link rel="icon" type="image/x-icon" href="~/View/Validate/notFound.ico">
+        <title>Not Found</title>
+    </head>
+    <body>
+        <br />
+        <img style="margin-left: 30px; display:inline-block;" src="~/View/Validate/notFound.ico" alt="notFound" />
+        <h1 style="display:inline-block; margin-left: 20px;"> Something went wrong. Return <a href="~/Login.cshtml">here</a>. </h1>
+    </body>
 }
 </html>
 
