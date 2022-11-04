@@ -109,13 +109,17 @@ namespace AmbienteEscolar.Business.Repositorios
                 {
                     Curso curso = new Curso();
                     Aluno aluno = new Aluno();
+                    Turno turno = new Turno();
 
                     aluno.Id = int.Parse(dataReader["id"].ToString());
                     aluno.Nome = dataReader["nome"].ToString();
                     aluno.Email = dataReader["email"].ToString();
+
                     curso.Id = int.Parse(dataReader["id_curso"].ToString());
                     curso.Descricao = dataReader["descricao"].ToString();
-                    curso.Turno = dataReader["turno"].ToString();
+
+                    turno.Descricao = dataReader["turno"].ToString();
+                    curso.Turno = turno;
                     aluno.Curso = curso;
 
                     listaAlunos.Add(aluno);
@@ -149,13 +153,17 @@ namespace AmbienteEscolar.Business.Repositorios
                 {
                     Curso curso = new Curso();
                     Aluno aluno = new Aluno();
+                    Turno turno = new Turno();
 
                     aluno.Id = int.Parse(dataReader["id"].ToString());
                     aluno.Nome = dataReader["nome"].ToString();
                     aluno.Email = dataReader["email"].ToString();
+
                     curso.Id = int.Parse(dataReader["id_curso"].ToString());
                     curso.Descricao = dataReader["descricao"].ToString();
-                    curso.Turno = dataReader["turno"].ToString();
+
+                    turno.Descricao = dataReader["turno"].ToString();
+                    curso.Turno = turno;
                     aluno.Curso = curso;
 
                     listaAlunos.Add(aluno);

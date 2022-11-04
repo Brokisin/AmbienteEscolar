@@ -66,6 +66,7 @@ function MostraTelaHome() {
     document.getElementById("matriculas").style.display = 'none';
     document.getElementById("professores").style.display = 'none';
     document.getElementById("suporte").style.display = 'none';
+    document.getElementById("user").style.display = 'none';
 }
 
 function MostraTelaAlunos() {
@@ -74,6 +75,7 @@ function MostraTelaAlunos() {
     document.getElementById("matriculas").style.display = 'none';
     document.getElementById("professores").style.display = 'none';
     document.getElementById("suporte").style.display = 'none';
+    document.getElementById("user").style.display = 'none';
 }
 
 function MostraTelaMatriculas() {
@@ -82,6 +84,7 @@ function MostraTelaMatriculas() {
     document.getElementById("alunos").style.display = 'none';
     document.getElementById("professores").style.display = 'none';
     document.getElementById("suporte").style.display = 'none';
+    document.getElementById("user").style.display = 'none';
 }
 
 function MostraTelaProfs() {
@@ -90,6 +93,16 @@ function MostraTelaProfs() {
     document.getElementById("matriculas").style.display = 'none';
     document.getElementById("alunos").style.display = 'none';
     document.getElementById("suporte").style.display = 'none';
+    document.getElementById("user").style.display = 'none';
+}
+
+function MostraTelaUsers() {
+    document.getElementById("user").style.display = 'block';
+    document.getElementById("alunos").style.display = 'none';
+    document.getElementById("matriculas").style.display = 'none';
+    document.getElementById("professores").style.display = 'none';
+    document.getElementById("suporte").style.display = 'none';
+    document.getElementById("home").style.display = 'none';
 }
 
 function MostraTelaSuporte() {
@@ -98,6 +111,7 @@ function MostraTelaSuporte() {
     document.getElementById("matriculas").style.display = 'none';
     document.getElementById("professores").style.display = 'none';
     document.getElementById("alunos").style.display = 'none';
+    document.getElementById("user").style.display = 'none';
 }
 
 // SPINNER WRAPPER =================

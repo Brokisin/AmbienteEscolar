@@ -1,11 +1,11 @@
 ﻿body {
 }
 
-.sup-GGHGer{
+.sup-GGHGer {
     padding: 20px 0;
 }
 
-.sup-SSckLmf{
+.sup-SSckLmf {
     display: flex;
 }
 
@@ -35,18 +35,19 @@
     justify-content: center;
 }
 
-svg {
+svg.bi-envelope-fill, svg.bi-headset, svg.bi-telephone-inbound-fill {
     border: 1px solid #000000;
     background-color: #000000;
     border-radius: 12px;
     padding: 2px;
     margin-right: 5px;
 }
+
 path {
     color: #e1e1e1;
 }
 
-.sup-JJaQsljG{
+.sup-JJaQsljG {
     padding: 0 0 15px 0;
 }
 
