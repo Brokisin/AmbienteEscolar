@@ -49,8 +49,9 @@ namespace AmbienteEscolar.Business.Repositorios
         {
             StringBuilder sb = new StringBuilder();
 
-            sb.AppendLine("SELECT a.id, a.nome, a.email, a.id_curso, c.descricao, c.id_turno, t.turno_descricao FROM aluno a ");
-            sb.AppendLine("INNER JOIN curso c ON a.id_curso = c.id INNER JOIN turno t ON t.turno_id = c.id_turno;");
+            //sb.AppendLine("SELECT a.id, a.nome, a.email, a.id_curso, c.descricao, c.turno FROM aluno a ");
+            sb.AppendLine("SELECT a.id, a.nome, a.email, a.id_curso, c.descricao, c.turno FROM ambienteescolarava.aluno a ");
+            sb.AppendLine("INNER JOIN curso c ON a.id_curso = c.id;");
 
             List<Aluno> listaAlunos = new List<Aluno>();
 
@@ -63,7 +64,6 @@ namespace AmbienteEscolar.Business.Repositorios
                 {
                     Curso curso = new Curso();
                     Aluno aluno = new Aluno();
-                    Turno turno = new Turno();
 
                     aluno.Id = int.Parse(dataReader["id"].ToString());
                     aluno.Nome = dataReader["nome"].ToString();
@@ -71,11 +71,8 @@ namespace AmbienteEscolar.Business.Repositorios
 
                     curso.Id = int.Parse(dataReader["id_curso"].ToString());
                     curso.Descricao = dataReader["descricao"].ToString();
-                    
-                    turno.Id = int.Parse(dataReader["turno_id"].ToString());
-                    turno.Descricao = dataReader["turno_descricao"].ToString();
+                    curso.Turno = dataReader["turno"].ToString();
 
-                    curso.Turno = turno;
                     aluno.Curso = curso;
 
                     listaAlunos.Add(aluno);
@@ -95,7 +92,8 @@ namespace AmbienteEscolar.Business.Repositorios
         {
             StringBuilder sb = new StringBuilder();
 
-            sb.AppendLine("SELECT a.id, a.nome, a.email, a.id_curso, c.descricao, c.turno FROM aluno a ");
+            //sb.AppendLine("SELECT a.id, a.nome, a.email, a.id_curso, c.descricao, c.turno FROM aluno a");
+            sb.AppendLine("SELECT a.id, a.nome, a.email, a.id_curso, c.descricao, c.turno FROM ambienteescolarava.aluno a");
             sb.AppendLine("INNER JOIN curso c ON a.id_curso = c.id ORDER BY a.nome DESC;");
 
             List<Aluno> listaAlunos = new List<Aluno>();
@@ -109,7 +107,6 @@ namespace AmbienteEscolar.Business.Repositorios
                 {
                     Curso curso = new Curso();
                     Aluno aluno = new Aluno();
-                    Turno turno = new Turno();
 
                     aluno.Id = int.Parse(dataReader["id"].ToString());
                     aluno.Nome = dataReader["nome"].ToString();
@@ -117,9 +114,8 @@ namespace AmbienteEscolar.Business.Repositorios
 
                     curso.Id = int.Parse(dataReader["id_curso"].ToString());
                     curso.Descricao = dataReader["descricao"].ToString();
+                    curso.Turno = dataReader["turno"].ToString();
 
-                    turno.Descricao = dataReader["turno"].ToString();
-                    curso.Turno = turno;
                     aluno.Curso = curso;
 
                     listaAlunos.Add(aluno);
@@ -153,7 +149,6 @@ namespace AmbienteEscolar.Business.Repositorios
                 {
                     Curso curso = new Curso();
                     Aluno aluno = new Aluno();
-                    Turno turno = new Turno();
 
                     aluno.Id = int.Parse(dataReader["id"].ToString());
                     aluno.Nome = dataReader["nome"].ToString();
@@ -161,9 +156,8 @@ namespace AmbienteEscolar.Business.Repositorios
 
                     curso.Id = int.Parse(dataReader["id_curso"].ToString());
                     curso.Descricao = dataReader["descricao"].ToString();
+                    curso.Turno = dataReader["turno"].ToString();
 
-                    turno.Descricao = dataReader["turno"].ToString();
-                    curso.Turno = turno;
                     aluno.Curso = curso;
 
                     listaAlunos.Add(aluno);

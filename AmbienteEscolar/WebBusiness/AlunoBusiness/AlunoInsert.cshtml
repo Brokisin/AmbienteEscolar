@@ -1,7 +1,9 @@
 ﻿@using AmbienteEscolar.Business.Classes
 @using AmbienteEscolar.Business.BancoDeDados
 @using AmbienteEscolar.Business.Repositorios
-
+<script>
+    alert('cheguei');
+</script>
 @{
     Layout = null;
     BancoDados.DBConnect();
@@ -27,7 +29,7 @@
             <text>
                 <script>
                     alert("Aluno inserido com sucesso.");
-                    window.location.href = "/View/Home/Alunos.cshtml";
+                    window.location.href = "/View/Home/Alunos";
                 </script>
             </text>
         }
@@ -35,8 +37,8 @@
         {
             <text>
                 <script>
-                    alert("Ocorreu um erro ao inserir aluno, tente novamente mais tarde.");
-                    window.location.href = "/View/Home/Alunos.cshtml";
+                    alert("Ocorreu um erro ao inserir aluno, tente novamente.");
+                    window.location.href = "/View/Home/Alunos";
                 </script>
             </text>
         }
@@ -46,7 +48,7 @@
         <text>
             <script>
                 alert("Falha ao inserir aluno.");
-                window.location.href = "/View/Home/Alunos.cshtml";
+                window.location.href = "/View/Home/Alunos";
             </script>
         </text>
     }

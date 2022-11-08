@@ -1,24 +1,26 @@
 ﻿body {
 }
 
+table{
+    width: 100%;
+}
+
 .list-main-div {
     box-shadow: 0px 1px 7px black;
+    border-radius: 10px;
+    padding: 0 5px 5px 5px;
 }
 .list-header {
     font-weight: bold;
     color: #3d72af;
     text-shadow: 1px 0px 0px #000000;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
+    padding: 5px 8px 0 0px;
 }
 .list-table {
     border: 1px solid grey;
     border-top: none;
-}
-
-.alun-SSfvcbDgG {
-    display: flex;
-    justify-content: space-around;
 }
 
 .alun-MMskcDF {

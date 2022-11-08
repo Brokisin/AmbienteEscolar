@@ -9,7 +9,6 @@ namespace AmbienteEscolar.Business.Classes
     {
         public int Id { get; set; }
         public int Numero_turma { get; set; }
-        public int Id_turno { get; set; }
         public int Id_sala { get; set; }
     }
 }

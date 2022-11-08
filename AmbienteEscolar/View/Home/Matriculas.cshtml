@@ -1,14 +1,5 @@
-﻿@using AmbienteEscolar.Business.BancoDeDados;
-@using AmbienteEscolar.Business.Repositorios;
-@using AmbienteEscolar.Business.Classes;
-
-@{
-    //Layout nulo, por enquanto (mudar para _Layout, assim que estiver pronto)
+﻿@{
     Layout = null;
-    //BancoDados.DBConnect();
-    //List<Professor> professores = ProfessorRepository.ListarProfessores();
-    //List<Curso> cursos = CursoRepository.ListarCursos();
-    //Professor p = new Professor();
 }
 
 <!DOCTYPE html>
@@ -17,17 +8,18 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
-    <title>Professores</title>
-    <link href="~/View/Shared/_Layout.cshtml" rel="logo" />
+    <title>Matriculas</title>
     <link href="~/Models/css/reset.css" rel="stylesheet" />
     <link href="~/Models/css/menu.css" rel="stylesheet" />
     <link href="~/Models/css/suporte.css" rel="stylesheet" />
     <link href="~/Models/css/alunos.css" rel="stylesheet" />
     <link href="~/View/Validate/ValidateLogin.cshtml" rel="profile" />
     <link rel="icon" type="image/x-icon" href="~/Button-Blank-Blue-icon.ico">
+    <script src="~/Models/js/logoffAction.js"></script>
+    <script src="~/Models/js/siteActions.js"></script>
+    <script src="~/Models/js/scripts.js"></script>
 </head>
 <body>
-
 
     <!--Spinner Wrapper-->
     <div id="spinMod" class="spinner-modal">
@@ -76,42 +68,24 @@
         </div>
     </div>
 
-    <!--Professores Screen-->
-    <div id="professores" class="d-Professores">
+    <!--Matriculas Screen-->
+    <div id="matriculas" class="d-Matriculas">
         <main class="div-mainCCVCD">
             <div class="home-title">
-                <p>TEACHERS:</p>
+                <p>SCHOOL REGISTER:</p>
             </div>
 
             <div>
-                <form action="~/WebBusiness/ProfessorBusiness/ProfessorInsert.cshtml" method="post">
-                    <h2>Cadastro de Professores:</h2>
-                    <br />
-                    <div>
-                        <label>Nome:</label>
-                        <input id="nome" type="text" name="nome" @*value="@p.Nome"*@ placeholder="Nome do aluno" />
-                    </div>
-                    <br />
-                    <div>
-                        <label>E-mail:</label>
-                        <input id="email" type="email" name="email" @*value="@p.Email"*@ placeholder="E-mail do aluno" />
-                    </div>
-                    <br />
-                    <div>
-                        <label>Selecione o curso:</label>
-                        <br />
-                        <select id="idCursoId" name="idCursoId">
-                            @*@foreach (Curso curso in cursos)
-                                {
-                                    <option value="@curso.Id">@curso.Descricao</option>
-                                }*@
-                        </select>
-                        <br />
-                    </div>
-                    <input id="insert" type="submit" value="Gravar" />
-                </form>
-                <button id="new" onclick="New()">Novo</button>
-                <button id="cancel" onclick="Cancelar()">Cancelar</button>
+                <p>matriculas</p>
+                <p>matriculas</p>
+                <p>matriculas</p>
+                <p>matriculas</p>
+                <p>matriculas</p>
+                <p>matriculas</p>
+                <p>matriculas</p>
+                <p>matriculas</p>
+                <p>matriculas</p>
+                <p>matriculas</p>
             </div>
         </main>
     </div>
@@ -137,6 +111,3 @@
         }
     });
 </script>
-
-<script src="~/Models/js/logoffAction.js"></script>
-<script src="~/Models/js/scripts.js"></script>

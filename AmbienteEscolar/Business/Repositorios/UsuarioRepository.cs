@@ -73,7 +73,15 @@ namespace AmbienteEscolar.Business.Repositorios
                     usuario.Id = int.Parse(dataReader["id"].ToString());
                     usuario.Login = dataReader["login"].ToString();
                     usuario.Senha = dataReader["senha"].ToString();
+                    if (usuario.Id_professor == null)
+                    {
+                        usuario.Id_professor = 0;
+                    }
                     usuario.Id_professor = int.Parse(dataReader["id_professor"].ToString());
+                    if (usuario.Id_aluno == null)
+                    {
+                        usuario.Id_aluno = 0;
+                    }
                     usuario.Id_aluno = int.Parse(dataReader["id_aluno"].ToString());
                     usuario.Id_curso = int.Parse(dataReader["id_curso"].ToString());
                     usuario.Id_acesso = int.Parse(dataReader["id_acesso"].ToString());
@@ -94,8 +102,8 @@ namespace AmbienteEscolar.Business.Repositorios
 
         public static bool Login(string login, string senha)
         {
-            string query = "SELECT Count(*) FROM usuario WHERE login='" + login + "' AND senha='" + senha + "';";
-
+            //string query = "SELECT Count(*) FROM usuario WHERE login='" + login + "' AND senha='" + senha + "';";
+            string query = "SELECT count(*) FROM ambienteescolarava.usuario WHERE login='" + login + "' and senha='" + senha + "'";
 
             if (BancoDados.OpenConnection() == true)
             {

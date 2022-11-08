@@ -9,6 +9,6 @@ namespace AmbienteEscolar.Business.Classes
     {
         public int Id { get; set; }
         public string Descricao { get; set; }
-        public Turno Turno { get; set; }
+        public string Turno { get; set; }
     }
 }

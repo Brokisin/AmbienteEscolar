@@ -3,9 +3,8 @@
 @using AmbienteEscolar.Business.Classes;
 
 @{
-    //Layout nulo, por enquanto (mudar para _Layout, assim que estiver pronto)
     Layout = null;
-    BancoDados.DBConnect();
+    //BancoDados.DBConnect();
 }
 
 <!DOCTYPE html>
@@ -15,51 +14,127 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <title>Usuários</title>
-    <link rel="icon" type="image/x-icon" href="~/avaicon.ico">
-    <link href="~/Models/css/layout.css" rel="stylesheet" />
+    <link href="~/View/Shared/_Layout.cshtml" rel="logo" />
+    <link href="~/Models/css/reset.css" rel="stylesheet" />
+    <link href="~/Models/css/menu.css" rel="stylesheet" />
+    <link href="~/Models/css/suporte.css" rel="stylesheet" />
+    <link href="~/View/Validate/ValidateLogin.cshtml" rel="profile" />
+    <link rel="icon" type="image/x-icon" href="~/Button-Blank-Blue-icon.ico">
 </head>
 <body>
-    <main>
-        <div>
-            <br />
-
-            @{
-                List<Usuario> usuarios = UsuarioRepository.ListarUsuarios();
-            }
-
-            <label>Listar Professores:</label>
-            <br />
-            <button>Listar</button>
-            <br />
-            <table>
-                @foreach (Usuario usuario in usuarios)
-                {
-                <tr>
-                    <td>
-                        @usuario.Login
-                    </td>
-                    <td>
-                        @usuario.Senha
-                    </td>
-                    <td>
-                        @usuario.Id_professor
-                    </td>
-                    <td>
-                        @usuario.Id_aluno
-                    </td>
-                    <td>
-                        @usuario.Id_curso
-                    </td>
-                    <td>
-                        @usuario.Id_acesso
-                    </td>
-                    <td>
-                        @usuario.Ativo
-                    </td>
-                </tr>
-                }
-            </table>
+    <!--Spinner Wrapper-->
+    <div id="spinMod" class="spinner-modal">
+        <div id="spinnerWrapper" class="ring">
+            Loading
+            <span></span>
         </div>
-    </main>
+    </div>
+
+    <!--Main Header-->
+    <div id="hyperHeader">
+        <div class="header">
+            <h2>AVA - Ambiente Escolar</h2>
+            <p>Seja bem-vindo!</p>
+        </div>
+        <div class="cvSDgbcvD">
+            <ul>
+                <li><a class="active" href="~/View/Home/Menu">Home</a></li>
+                <li><a href="~/View/Home/Matriculas">Matrículas</a></li>
+                <li class="dropdown">
+                    <a>
+                        Cadastro
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi-caret-down-fill" viewBox="0 0 16 16">
+                            <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
+                        </svg>
+                    </a>
+                    <div class="dropdown-content">
+                        <a href="~/View/Home/Alunos">Alunos</a>
+                        <a href="~/View/Home/Professores">Professores</a>
+                        <a href="~/View/Home/Usuarios">Usuários</a>
+                    </div>
+                </li>
+                <li><a href="~/View/Ext/Sobre">Suporte</a></li>
+                <li class="dropdown">
+                    <a>
+                        Eu
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi-caret-down-fill" viewBox="0 0 16 16">
+                            <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
+                        </svg>
+                    </a>
+                    <div class="dropdown-content">
+                        <a onclick="LogOff()">Logoff</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!--Usuários Screen-->
+    <div id="user" class="d-Users">
+        <main class="div-mainCCVCD">
+            <div class="home-title">
+                <p>USERS:</p>
+            </div>
+
+            <div>
+                <br />
+                <label>Listar Professores:</label>
+                <br />
+                <button>Listar</button>
+                <br />
+                <table>
+                    @*@foreach (Usuario usuario in usuarios)
+                        {*@
+                    <tr>
+                        <td>
+                            @*@usuario.Login*@
+                        </td>
+                        <td>
+                            @*@usuario.Senha*@
+                        </td>
+                        <td>
+                            @*@usuario.Id_professor*@
+                        </td>
+                        <td>
+                            @*@usuario.Id_aluno*@
+                        </td>
+                        <td>
+                            @*@usuario.Id_curso*@
+                        </td>
+                        <td>
+                            @*@usuario.Id_acesso*@
+                        </td>
+                        <td>
+                            @*@usuario.Ativo*@
+                        </td>
+                    </tr>
+                    @*}*@
+                </table>
+            </div>
+        </main>
+    </div>
+
+    <!--Main Footer-->
+    <footer id="hyperFooter">
+        <div>
+            <p>2022 AVA &#169; - Todos os direitos reservados.</p>
+        </div>
+    </footer>
 </body>
 </html>
+<script>
+    // SPINNER WRAPPER =================
+
+    var spinnerWrapper = document.getElementById("spinnerWrapper");
+    var spinnerModal = document.getElementById("spinMod");
+
+    window.addEventListener('load', function () {
+        if (spinnerModal.style.display = "flex") {
+            spinnerModal.style.display = "none";
+            spinnerWrapper.style.display = "none";
+        }
+    });
+</script>
+
+<script src="~/Models/js/logoffAction.js"></script>
+<script src="~/Models/js/scripts.js"></script>

@@ -31,7 +31,6 @@ namespace AmbienteEscolar.Business.Repositorios
                 {
                     Curso curso = new Curso();
                     Professor professor = new Professor();
-                    Turno turno = new Turno();
 
                     professor.Id = int.Parse(dataReader["id"].ToString());
                     professor.Nome = dataReader["nome"].ToString();
@@ -39,11 +38,8 @@ namespace AmbienteEscolar.Business.Repositorios
 
                     curso.Id = int.Parse(dataReader["id_curso"].ToString());
                     curso.Descricao = dataReader["descricao"].ToString();
+                    curso.Turno = dataReader["turno"].ToString();
 
-                    turno.Id = int.Parse(dataReader["id"].ToString());
-                    turno.Descricao = dataReader["descricao"].ToString();
-
-                    curso.Turno = turno;
                     professor.Curso = curso;
 
                     listaProfessores.Add(professor);

@@ -21,10 +21,10 @@ namespace AmbienteEscolar.Business.BancoDeDados
         {
             Banco banco = new Banco();
 
-            banco.HostMySql = "10.200.116.71";
-            banco.DataBaseMySql = "AmbienteEscolarAVA";
-            banco.UsernameMySql = "admin";
-            banco.PasswordMySql = "senai";
+            banco.HostMySql = "localhost";
+            banco.DataBaseMySql = "ambienteescolarava";
+            banco.UsernameMySql = "root";
+            banco.PasswordMySql = "Amister@9958";
 
             string dataResponse;
             dataResponse = "SERVER=" + banco.HostMySql + ";" + "DATABASE=" +

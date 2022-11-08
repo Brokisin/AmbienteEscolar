@@ -5,7 +5,7 @@
 @{
     //Layout = "~/View/Shared/_Layout.cshtml";
     Layout = null;
-    BancoDados.DBConnect();
+    //BancoDados.DBConnect();
 
     //Alunos====
     //Aluno a = new Aluno();
@@ -18,8 +18,7 @@
     //List<Professor> professores = ProfessorRepository.ListarProfessores();
     //Professor p = new Professor();
 
-    //Usuários====
-    List<Usuario> usuarios = UsuarioRepository.ListarUsuarios();
+    //Usuários ====
     Usuario usuario = new Usuario();
     usuario.Login = Request.Form["login"];
 
@@ -35,7 +34,7 @@
 
 <html>
 <!--change to logged-->
-@if (true)
+@if (logged == true)
 {
     <head>
         <meta charset="utf-8" />
@@ -68,8 +67,8 @@
             </div>
             <div class="cvSDgbcvD">
                 <ul>
-                    <li><a class="active" onclick="MostraTelaHome()">Home</a></li>
-                    <li><a onclick="MostraTelaMatriculas()">Matrículas</a></li>
+                    <li><a class="active" href="~/View/Home/Menu">Home</a></li>
+                    <li><a href="~/View/Home/Matriculas">Matrículas</a></li>
                     <li class="dropdown">
                         <a>
                             Cadastro
@@ -78,12 +77,12 @@
                             </svg>
                         </a>
                         <div class="dropdown-content">
-                            <a onclick="MostraTelaAlunos()">Alunos</a>
-                            <a onclick="MostraTelaProfs()">Professores</a>
-                            <a onclick="MostraTelaUsers()">Usuários</a>
+                            <a href="~/View/Home/Alunos">Alunos</a>
+                            <a href="~/View/Home/Professores">Professores</a>
+                            <a href="~/View/Home/Usuarios">Usuários</a>
                         </div>
                     </li>
-                    <li><a onclick="MostraTelaSuporte()">Suporte</a></li>
+                    <li><a href="~/View/Ext/Sobre">Suporte</a></li>
                     <li class="dropdown">
                         <a>
                             Eu
@@ -170,277 +169,7 @@
             </main>
         </div>
 
-        <!--Matriculas Screen-->
-        <div id="matriculas" class="d-Matriculas">
-            <main class="div-mainCCVCD">
-                <div class="home-title">
-                    <p>SCHOOL REGISTER:</p>
-                </div>
-
-                <div>
-                    <p>matriculas</p>
-                    <p>matriculas</p>
-                    <p>matriculas</p>
-                    <p>matriculas</p>
-                    <p>matriculas</p>
-                    <p>matriculas</p>
-                    <p>matriculas</p>
-                    <p>matriculas</p>
-                    <p>matriculas</p>
-                    <p>matriculas</p>
-                </div>
-            </main>
-        </div>
-
-        <!--Alunos Screen-->
-        <div id="alunos" class="d-Alunos">
-            <main class="div-mainCCVCD">
-                <div class="home-title">
-                    <p>STUDENTS:</p>
-                </div>
-                <div class="alun-MMskcDF">
-                    <form action="~/WebBusiness/AlunoBusiness/AlunoInsert.cshtml" method="post">
-                        <h2>Cadastro de Alunos:</h2>
-                        <div class="alun-DDscVok">
-                            <label>Nome:</label>
-                            <input id="nome" type="text" name="nome" @*value="@a.Nome"*@ placeholder="Nome do aluno" />
-                        </div>
-                        <div class="alun-DDscVok">
-                            <label>E-mail:</label>
-                            <input id="email" type="email" name="email" @*value="@a.Email"*@ placeholder="E-mail do aluno" />
-                        </div>
-                        <div>
-                            <label>Selecione o curso:</label>
-                            <select id="idCursoId" name="idCursoId">
-                                @*@foreach (Curso curso in cursos)
-                {
-                    <option value="@curso.Id">@curso.Descricao</option>
-                }*@
-                            </select>
-                        </div>
-                        <input id="insert" type="submit" value="Gravar" disabled />
-                        <button id="new" onclick="New()">Novo</button>
-                        <button id="cancel" onclick="Cancelar()">Cancelar</button>
-                    </form>
-                    <!--Caso dê pau, colocar os Button fora do FORM-->
-                </div>
-
-                <div>
-                    <h2>Alunos:</h2>
-                    <div class="list-main-div">
-                        <div class="list-header">
-                            <label>Nome</label>
-                            <label>Email</label>
-                            <label>Curso</label>
-                            <label>Turno</label>
-                        </div>
-                        <div class="list-table">
-                            <div class="alun-SSfvcbDgG">
-                                <div>Eros</div>
-                                <div>email</div>
-                                <div>curso</div>
-                                <div>turno</div>
-                            </div>
-                            <div class="alun-SSfvcbDgG">
-                                <div>Eros</div>
-                                <div>email</div>
-                                <div>curso</div>
-                                <div>turno</div>
-                            </div>
-
-
-
-                            <!--<table>-->
-                                @*@foreach (Aluno aluno in alunos)
-                                {*@
-                                <!--<tr>
-                                    <td>-->
-                                        @*@aluno.Nome*@
-                                        <!--Eros
-                                    </td>
-                                    <td>-->
-                                        @*@aluno.Email*@
-                                        <!--teste@teste.com
-                                    </td>
-                                    <td>-->
-                                        @*@aluno.Curso.Descricao*@
-                                        <!--teste
-                                    </td>
-                                    <td>-->
-                                        @*@aluno.Curso.Turno.Descricao*@
-                                        <!--turno
-                                    </td>
-                                </tr>-->
-                                @*}*@
-                            <!--</table>-->
-                        </div>
-                    </div>
-                </div>
-            </main>
-        </div>
-
-        <!--Professores Screen-->
-        <div id="professores" class="d-Professores">
-            <main class="div-mainCCVCD">
-                <div class="home-title">
-                    <p>TEACHERS:</p>
-                </div>
-
-                <div>
-                    <form action="~/WebBusiness/ProfessorBusiness/ProfessorInsert.cshtml" method="post">
-                        <h2>Cadastro de Professores:</h2>
-                        <br />
-                        <div>
-                            <label>Nome:</label>
-                            <input id="nome" type="text" name="nome" @*value="@p.Nome"*@ placeholder="Nome do aluno" />
-                        </div>
-                        <br />
-                        <div>
-                            <label>E-mail:</label>
-                            <input id="email" type="email" name="email" @*value="@p.Email"*@ placeholder="E-mail do aluno" />
-                        </div>
-                        <br />
-                        <div>
-                            <label>Selecione o curso:</label>
-                            <br />
-                            <select id="idCursoId" name="idCursoId">
-                                @*@foreach (Curso curso in cursos)
-                                {
-                                    <option value="@curso.Id">@curso.Descricao</option>
-                                }*@
-                            </select>
-                            <br />
-                        </div>
-                        <input id="insert" type="submit" value="Gravar" />
-                    </form>
-                    <button id="new" onclick="New()">Novo</button>
-                    <button id="cancel" onclick="Cancelar()">Cancelar</button>
-                </div>
-            </main>
-        </div>
-
-        <!--Usuários Screen-->
-        <div id="user" class="d-Users">
-            <main class="div-mainCCVCD">
-                <div class="home-title">
-                    <p>USERS:</p>
-                </div>
-
-                <div>
-                    <br />
-                    <label>Listar Professores:</label>
-                    <br />
-                    <button>Listar</button>
-                    <br />
-                    <table>
-                        @*@foreach (Usuario usuario in usuarios)
-                        {*@
-                            <tr>
-                                <td>
-                                    @*@usuario.Login*@
-                                </td>
-                                <td>
-                                    @*@usuario.Senha*@
-                                </td>
-                                <td>
-                                    @*@usuario.Id_professor*@
-                                </td>
-                                <td>
-                                    @*@usuario.Id_aluno*@
-                                </td>
-                                <td>
-                                    @*@usuario.Id_curso*@
-                                </td>
-                                <td>
-                                    @*@usuario.Id_acesso*@
-                                </td>
-                                <td>
-                                    @*@usuario.Ativo*@
-                                </td>
-                            </tr>
-                        @*}*@
-                    </table>
-                </div>
-            </main>
-        </div>
-
-        <!--Suport Screen-->
-        <div id="suporte" class="d-Suport">
-            <main class="div-mainCCVCD">
-                <div class="home-title">
-                    <p>SUPPORT:</p>
-                </div>
-
-                <div>
-                    <div class="sup-GGHGer">
-                        <h2>Suporte AVA</h2>
-                        <p>
-                            Visite o site de Suporte AppleCare para obter respostas rápidas, ver tutoriais de
-                            produtos, guias práticos, manuais e artigos técnicos mais detalhados.
-                            Caso você tenha perdido ou encontrado algum produto Apple, entre em contato com a
-                            delegacia mais próxima para comunicar o fato. Você também encontra uma lista de números
-                            de série associados ao seu ID Apple e obtém informações sobre como usar o recurso Buscar no seu aparelho Apple.
-                        </p>
-                    </div>
-                    <div class="sup-SSckLmf">
-                        <div class="sup-NNMdfgW">
-                            <img class="img-svccccc" src="https://www.designerd.com.br/wp-content/uploads/2019/05/crm-atendimento-cliente.png" />
-                            <div>
-                                <h2>Atendimento 24h</h2>
-                                <p>
-                                    Visite o site de Suporte AppleCare para obter respostas rápidas, ver tutoriais de
-                                    produtos, guias práticos, manuais e artigos técnicos mais detalhados.
-                                    Caso você tenha perdido ou encontrado algum produto Apple, entre em contato com a
-                                    delegacia mais próxima para comunicar o fato.
-                                </p>
-                            </div>
-                        </div>
-                        <div class="sup-NNsldkF">
-                            <div class="sup-JJaQsljG">
-                                <p>
-                                    Visite o site de Suporte AppleCare para obter respostas rápidas, ver tutoriais de
-                                    produtos, guias práticos, manuais e artigos técnicos mais detalhados.
-                                    Caso você tenha perdido ou encontrado algum produto Apple, entre em contato com a
-                                    delegacia mais próxima para comunicar o fato.
-                                </p>
-                                <p>
-                                    Visite o site de Suporte AppleCare para obter respostas rápidas, ver tutoriais de
-                                    produtos, guias práticos, manuais e artigos técnicos mais detalhados.
-                                    Caso você tenha perdido ou encontrado algum produto Apple, entre em contato com a
-                                    delegacia mais próxima para comunicar o fato.
-                                </p>
-                            </div>
-                            <div class="sup-JJwLsqQ">
-                                <p class="sup-cttDesign-Letters">Contatos:</p>
-                                <div class="sup-mailIcon">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi-envelope-fill" viewBox="0 0 16 16">
-                                        <path d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414.05 3.555ZM0 4.697v7.104l5.803-3.558L0 4.697ZM6.761 8.83l-6.57
-                                              4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586l-1.239-.757Zm3.436-.586L16 11.801V4.697l-5.803 3.546Z" />
-                                    </svg>
-                                    <p>ava-sup@avacompany.com.br</p>
-                                </div>
-                                <div class="sup-phoneIcon">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi-headset" viewBox="0 0 16 16">
-                                        <path d="M8 1a5 5 0 0 0-5 5v1h1a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a6 6 0 1 1 12 0v6a2.5 2.5 0 0 1-2.5 2.5H9.366a1
-                                                  1 0 0 1-.866.5h-1a1 1 0 1 1 0-2h1a1 1 0 0 1 .866.5H11.5A1.5 1.5 0 0 0 13 12h-1a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1h1V6a5 5 0 0 0-5-5z" />
-                                    </svg>
-                                    <p>51 3403-3751</p>
-                                </div>
-                                <div class="sup-phoneDuty">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi-telephone-inbound-fill" viewBox="0 0 16 16">
-                                        <path fill-rule="evenodd" d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0
-                                                  0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163
-                                                  2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137
-                                                  .703-2.877L1.885.511zM15.854.146a.5.5 0 0 1 0 .708L11.707 5H14.5a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5v-4a.5.5 0 0 1 1 0v2.793L15.146.146a.5.5 0 0 1 .708 0z" />
-                                    </svg>
-                                    <p>51 9 8729-3948</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div><br /><br /><br />
-            </main>
-        </div>
+        
 
         <!--Main Footer-->
         <footer id="hyperFooter">
@@ -463,9 +192,6 @@ else
     </body>
 }
 </html>
-
-<script>
-</script>
 
 <script src="~/Models/js/logoffAction.js"></script>
 <script src="~/Models/js/siteActions.js"></script>

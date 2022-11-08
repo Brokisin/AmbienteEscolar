@@ -16,7 +16,7 @@ function executarLogin() {
     if (IsNullOrEmpty) {
         document.getElementById("confirmacao").innerHTML = "Usuário ou senha inválidos.";
     }
-    
+
     return alert("Bem-vindo, " + usuario.value + "!");
 
     document.getElementById("linkMenu").style.visibility = "visible";
@@ -116,8 +116,8 @@ function MostraTelaSuporte() {
 
 // SPINNER WRAPPER =================
 
-let spinnerWrapper = document.getElementById("spinnerWrapper");
-let spinnerModal = document.getElementById("spinMod");
+var spinnerWrapper = document.getElementById("spinnerWrapper");
+var spinnerModal = document.getElementById("spinMod");
 
 window.addEventListener('load', function () {
     if (spinnerModal.style.display = "flex") {
@@ -125,3 +125,22 @@ window.addEventListener('load', function () {
         spinnerWrapper.style.display = "none";
     }
 });
+
+//============
+
+function infoAlunos() {
+    let tabela = document.getElementById("table");
+
+    for (var i = 1; i < tabela.rows.length; i++) {
+        tabela.rows[i].onclick = function () {
+            document.getElementById("update").disabled = false;
+
+            document.getElementById("funcaoId").value = this.cells[0].innerHTML;
+
+            validacaoCheck = this.cells[1].innerHTML == "true" ? true : false;
+            document.getElementById("funcaoAtivo").checked = validacaoCheck;
+
+            document.getElementById("funcaoDescricao").value = this.cells[2].innerHTML;
+        };
+    }
+}

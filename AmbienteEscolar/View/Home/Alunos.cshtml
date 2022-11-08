@@ -8,7 +8,6 @@
     BancoDados.DBConnect();
 
     Aluno a = new Aluno();
-    Turno t = new Turno();
     List<Curso> cursos = CursoRepository.ListarCursos();
     List<Aluno> nomeAlunos = AlunoRepository.ListarNomeAlunos();
     List<Aluno> alunos = AlunoRepository.ListarAlunos();
@@ -23,91 +22,160 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <title>Alunos</title>
-    <link rel="icon" type="image/x-icon" href="~/avaicon.ico">
-    <link href="~/Models/css/layout.css" rel="stylesheet" />
+    <link href="~/View/Shared/_Layout.cshtml" rel="logo" />
+    <link href="~/Models/css/reset.css" rel="stylesheet" />
+    <link href="~/Models/css/menu.css" rel="stylesheet" />
+    <link href="~/Models/css/suporte.css" rel="stylesheet" />
     <link href="~/Models/css/alunos.css" rel="stylesheet" />
+    <link href="~/View/Validate/ValidateLogin.cshtml" rel="profile" />
+    <link rel="icon" type="image/x-icon" href="~/Button-Blank-Blue-icon.ico">
 </head>
 <body>
-    <div>
-        <main>
-            <div>
-                <h2>Alunos por Nome:</h2>
-                <div class="list-main-div">
-                    <div class="list-header">
-                        <label>Nome</label>
+    <!--Spinner Wrapper-->
+    <div id="spinMod" class="spinner-modal">
+        <div id="spinnerWrapper" class="ring">
+            Loading
+            <span></span>
+        </div>
+    </div>
+
+    <!--Main Header-->
+    <div id="hyperHeader">
+        <div class="header">
+            <h2>AVA - Ambiente Escolar</h2>
+            <p>Seja bem-vindo!</p>
+        </div>
+        <div class="cvSDgbcvD">
+            <ul>
+                <li><a class="active" href="~/View/Home/Menu">Home</a></li>
+                <li><a href="~/View/Home/Matriculas">Matrículas</a></li>
+                <li class="dropdown">
+                    <a>
+                        Cadastro
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi-caret-down-fill" viewBox="0 0 16 16">
+                            <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
+                        </svg>
+                    </a>
+                    <div class="dropdown-content">
+                        <a href="~/View/Home/Alunos">Alunos</a>
+                        <a href="~/View/Home/Professores">Professores</a>
+                        <a href="~/View/Home/Usuarios">Usuários</a>
                     </div>
-                    <div class="list-table">
-                        <table>
-                            @foreach (Aluno infoAluno in nomeAlunos)
-                            {
-                                <tr>
-                                    <td>
-                                        @infoAluno.Nome
-                                    </td>
-                                </tr>
-                            }
-                        </table>
+                </li>
+                <li><a href="~/View/Ext/Sobre">Suporte</a></li>
+                <li class="dropdown">
+                    <a>
+                        Eu
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi-caret-down-fill" viewBox="0 0 16 16">
+                            <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
+                        </svg>
+                    </a>
+                    <div class="dropdown-content">
+                        <a onclick="LogOff()">Logoff</a>
                     </div>
-                </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!--Alunos Screen-->
+    <div id="alunos" class="d-Alunos">
+        <main class="div-mainCCVCD">
+            <div class="home-title">
+                <p>STUDENTS:</p>
             </div>
-            <div>
+            <div class="alun-MMskcDF">
                 <form action="~/WebBusiness/AlunoBusiness/AlunoInsert.cshtml" method="post">
                     <h2>Cadastro de Alunos:</h2>
-                    <label>Nome:</label>
-                    <input id="nome" type="text" name="nome" value="@a.Nome" placeholder="Nome do aluno" />
-                    <br />
-                    <label>E-mail:</label>
-                    <input id="email" type="email" name="email" value="@a.Email" placeholder="E-mail do aluno" />
-                    <br />
-                    <label>Selecione o curso:</label>
-                    <br />
-                    <select id="idCursoId" name="idCursoId">
-                        @foreach (Curso curso in cursos)
-                        {
-                            <option value="@curso.Id">@curso.Descricao</option>
-                        }
-                    </select>
-                    <br />
-                    <input id="insert" type="submit" value="Gravar" disabled />
+                    <div class="alun-DDscVok">
+                        <label>Nome:</label>
+                        <input id="nome" type="text" name="nome" value="@a.Nome" placeholder="Nome do aluno" disabled />
+                    </div>
+                    <div class="alun-DDscVok">
+                        <label>E-mail:</label>
+                        <input id="email" type="email" name="email" value="@a.Email" placeholder="E-mail do aluno" disabled />
+                    </div>
+                    <div>
+                        <label>Selecione o curso:</label>
+                        <select id="idCursoId" name="idCursoId" disabled>
+                            @foreach (Curso curso in cursos)
+                            {
+                                <option value="@curso.Id">@curso.Descricao</option>
+                            }
+                        </select>
+                    </div>
+                    <input id="insert" type="submit" value="Gravar" />
                 </form>
-                <button id="new" onclick="New()">Novo</button>
-                <button id="cancel" onclick="Cancelar()">Cancelar</button>
+                <div style="padding-top: 6px;">
+                    <button id="new" onclick="New()">Novo</button>
+                    <button id="update" onclick="Update()" disabled></button>
+                    <button id="cancel" onclick="Cancelar()">Cancelar</button>
+                </div>
             </div>
+
             <div>
                 <h2>Alunos:</h2>
                 <div class="list-main-div">
-                    <div class="list-header">
-                        <label>Nome</label>
-                        <label>Email</label>
-                        <label>Curso</label>
-                        <label>Turno</label>
-                    </div>
-                    <div class="list-table">
-                        <table onclick="informacoesAlunos()">
-                            @foreach (Aluno aluno in alunos)
-                            {
-                                <tr>
-                                    <td>
-                                        @aluno.Nome
-                                    </td>
-                                    <td>
-                                        @aluno.Email
-                                    </td>
-                                    <td>
-                                        @aluno.Curso.Descricao
-                                    </td>
-                                    <td>
-                                        @*@aluno.Curso.Turno.Descricao*@
-                                    </td>
-                                </tr>
-                            }
-                        </table>
-                    </div>
+                    <table id="table" onclick="infoAlunos()">
+                        <tr>
+                            <th>
+                                Nome
+                            </th>
+                            <th>
+                                Email
+                            </th>
+                            <th>
+                                Curso
+                            </th>
+                            <th>
+                                Turno
+                            </th>
+                        </tr>
+                        @foreach (Aluno aluno in alunos)
+                        {
+                            <tr>
+                                <td>
+                                    @aluno.Nome
+                                </td>
+                                <td>
+                                    @aluno.Email
+                                </td>
+                                <td>
+                                    @aluno.Curso.Descricao
+                                </td>
+                                <td>
+                                    @aluno.Curso.Turno
+                                </td>
+                            </tr>
+                        }
+                    </table>
                 </div>
             </div>
         </main>
     </div>
+
+    <!--Main Footer-->
+    <footer id="hyperFooter">
+        <div>
+            <p>2022 AVA &#169; - Todos os direitos reservados.</p>
+        </div>
+    </footer>
 </body>
 </html>
+<script>
+    // SPINNER WRAPPER =================
 
+    var spinnerWrapper = document.getElementById("spinnerWrapper");
+    var spinnerModal = document.getElementById("spinMod");
+
+    window.addEventListener('load', function () {
+        if (spinnerModal.style.display = "flex") {
+            spinnerModal.style.display = "none";
+            spinnerWrapper.style.display = "none";
+        }
+    });
+</script>
+
+<script src="~/Models/js/logoffAction.js"></script>
+<script src="~/Models/js/scripts.js"></script>
 <script src="~/Models/js/alunoScripts.js"></script>

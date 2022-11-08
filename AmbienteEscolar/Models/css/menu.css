@@ -9,10 +9,6 @@
     margin-bottom: 100px;
 }
 
-.d-Matriculas, .d-Alunos, .d-Professores, .d-Suport, .d-Users {
-    display: none;
-}
-
 h2 {
     font-size: 45px;
     margin: 15px 0;
@@ -144,7 +140,8 @@ footer {
     box-shadow: 7px 7px 12px #181818;
 }
 
-button {
+button, input#insert {
+    cursor: pointer;
     padding: 5px;
     font-weight: bold;
     color: white;

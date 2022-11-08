@@ -19,17 +19,13 @@ function bloquearCampos() {
 function Cancelar() {
     bloquearCampos();
     limparCampos();
-
-    let buttonNew = document.getElementById("insert");
-    buttonNew.setAttribute("type", "button");
-    buttonNew.disabled = true;
 }
 
 function New() {
     liberarCampos();
     limparCampos();
 
-    let buttonNew = document.getElementById("insert");
-    buttonNew.setAttribute("type", "submit");
-    buttonNew.disabled = false;    
+    //let buttonNew = document.getElementById("insert");
+    //buttonNew.setAttribute("type", "submit");
+    //buttonNew.disabled = false;    
 }

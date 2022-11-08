@@ -25,7 +25,7 @@
         </div>
     </header>
     <main>
-        <form method="post" id="formulario" autocomplete="off" action="~/View/Validate/ValidateLogin.cshtml" @*onclick="formularioAlerta()"*@>
+        <form method="post" id="formulario" autocomplete="off" action="~/View/Validate/ValidateLogin.cshtml">
             <div class="main-box">
                 <div class="info">
                     <div class="dv-sCSA">
@@ -37,23 +37,17 @@
                         <input id="senha" name="senha" type="password" placeholder="Insira sua senha" required maxlength="15" minlength="4">
                     </div>
                     <input class="gdjNB" type="submit" value="Logar" />
-                    @*<div>
-                            <button onclick="executarLogin()" type="submit">Logar</button>
-                        </div>*@
                 </div>
             </div>
         </form>
     </main>
-    <div class="alertaFormulario" onclick="formularioAlerta()">
-        <p id="confirmacao"></p>
-    </div>
-    <div class="ink-butnn">
-        <div class="linkMenu" id="linkMenu">
-            <a id="linkMenu" href="~/View/Home/Menu.cshtml">Ir para o Menu</a>
+    <div class="ink-butnn" hidden>
+        <div class="linkMenu" id="linkMenu" hidden>
+            <a id="linkMenu" href="~/View/Home/Menu.cshtml" hidden>Ir para o Menu</a>
         </div>
     </div>
     <div>
-        <a href="~/View/Home/Menu.cshtml">redirect</a>
+        <a href="~/View/Home/Menu.cshtml" hidden>redirect</a>
     </div>
     <footer>
         <div>
