@@ -95,7 +95,7 @@
                         <label>E-mail:</label>
                         <input id="email" type="email" name="email" value="@a.Email" placeholder="E-mail do aluno" disabled />
                     </div>
-                    <div>
+                    <div class="alun-DDscVok">
                         <label>Selecione o curso:</label>
                         <select id="idCursoId" name="idCursoId" disabled>
                             @foreach (Curso curso in cursos)
@@ -106,16 +106,16 @@
                     </div>
                     <input id="insert" type="submit" value="Gravar" />
                 </form>
-                <div style="padding-top: 6px;">
+                <div class="alun-BtnsBBdSv">
                     <button id="new" onclick="New()">Novo</button>
-                    <button id="update" onclick="Update()" disabled></button>
+                    <button id="update" onclick="Update()" disabled>Alterar</button>
                     <button id="cancel" onclick="Cancelar()">Cancelar</button>
                 </div>
             </div>
 
-            <div>
+            <div class="div-mainCCVCD">
                 <h2>Alunos:</h2>
-                <div class="list-main-div">
+                <div>
                     <table id="table" onclick="infoAlunos()">
                         <tr>
                             <th>

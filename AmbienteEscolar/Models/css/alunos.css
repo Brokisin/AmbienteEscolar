@@ -31,6 +31,11 @@ table{
     box-shadow: 2px 2px 5px black;
 }
 
-.alun-DDscVok{
+.alun-DDscVok {
     display: flex;
+    padding: 5px 0;
+}
+
+.alun-BtnsBBdSv {
+    padding-top: 6px;
 }

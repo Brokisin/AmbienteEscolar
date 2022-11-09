@@ -14,3 +14,20 @@
     border: 1px solid grey;
     border-top: none;
 }
+
+.prof-MMkcEwS {
+    padding: 10px;
+    border: 2px solid white;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 2px 2px 5px black;
+}
+
+.prof-CvnMrfG {
+    display: flex;
+    padding: 5px 0;
+}
+
+.prof-BtnCLokkTg {
+    padding-top: 6px;
+}
