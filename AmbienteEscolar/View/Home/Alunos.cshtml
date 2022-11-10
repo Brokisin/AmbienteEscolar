@@ -8,6 +8,7 @@
     BancoDados.DBConnect();
 
     Aluno a = new Aluno();
+    Curso c = new Curso();
     List<Curso> cursos = CursoRepository.ListarCursos();
     List<Aluno> nomeAlunos = AlunoRepository.ListarNomeAlunos();
     List<Aluno> alunos = AlunoRepository.ListarAlunos();
@@ -85,8 +86,10 @@
                 <p>STUDENTS:</p>
             </div>
             <div class="alun-MMskcDF">
+                <h2>Cadastro de Alunos:</h2>
                 <form action="~/WebBusiness/AlunoBusiness/AlunoInsert.cshtml" method="post">
-                    <h2>Cadastro de Alunos:</h2>
+                    <label>Id:</label>
+                    <input id="id" type="number" name="id" value="@a.Id" />
                     <div class="alun-DDscVok">
                         <label>Nome:</label>
                         <input id="nome" type="text" name="nome" value="@a.Nome" placeholder="Nome do aluno" disabled />
@@ -97,7 +100,7 @@
                     </div>
                     <div class="alun-DDscVok">
                         <label>Selecione o curso:</label>
-                        <select id="idCursoId" name="idCursoId" disabled>
+                        <select id="idCursoId" title="@c.Descricao" disabled>
                             @foreach (Curso curso in cursos)
                             {
                                 <option value="@curso.Id">@curso.Descricao</option>
@@ -113,43 +116,37 @@
                 </div>
             </div>
 
-            <div class="div-mainCCVCD">
+            <div class="alun-MMskcDF">
                 <h2>Alunos:</h2>
-                <div>
-                    <table id="table" onclick="infoAlunos()">
+                <table id="table" onclick="infoAlunos()">
+                    <tr>
+                        <th >
+                            Id
+                        </th>
+                        <th>
+                            Nome
+                        </th>
+                        <th>
+                            Email
+                        </th>
+                        <th>
+                            Curso
+                        </th>
+                        <th>
+                            Turno
+                        </th>
+                    </tr>
+                    @foreach (Aluno aluno in alunos)
+                    {
                         <tr>
-                            <th>
-                                Nome
-                            </th>
-                            <th>
-                                Email
-                            </th>
-                            <th>
-                                Curso
-                            </th>
-                            <th>
-                                Turno
-                            </th>
+                            <td>@aluno.Id</td>
+                            <td>@aluno.Nome</td>
+                            <td>@aluno.Email</td>
+                            <td id="naosei">@aluno.Curso.Descricao</td>
+                            <td>@aluno.Curso.Turno</td>
                         </tr>
-                        @foreach (Aluno aluno in alunos)
-                        {
-                            <tr>
-                                <td>
-                                    @aluno.Nome
-                                </td>
-                                <td>
-                                    @aluno.Email
-                                </td>
-                                <td>
-                                    @aluno.Curso.Descricao
-                                </td>
-                                <td>
-                                    @aluno.Curso.Turno
-                                </td>
-                            </tr>
-                        }
-                    </table>
-                </div>
+                    }
+                </table>
             </div>
         </main>
     </div>

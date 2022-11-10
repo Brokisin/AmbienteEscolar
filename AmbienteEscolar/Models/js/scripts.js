@@ -60,59 +60,7 @@ function carousel() {
 
 //=======================
 
-function MostraTelaHome() {
-    document.getElementById("home").style.display = 'block';
-    document.getElementById("alunos").style.display = 'none';
-    document.getElementById("matriculas").style.display = 'none';
-    document.getElementById("professores").style.display = 'none';
-    document.getElementById("suporte").style.display = 'none';
-    document.getElementById("user").style.display = 'none';
-}
 
-function MostraTelaAlunos() {
-    document.getElementById("alunos").style.display = 'block';
-    document.getElementById("home").style.display = 'none';
-    document.getElementById("matriculas").style.display = 'none';
-    document.getElementById("professores").style.display = 'none';
-    document.getElementById("suporte").style.display = 'none';
-    document.getElementById("user").style.display = 'none';
-}
-
-function MostraTelaMatriculas() {
-    document.getElementById("matriculas").style.display = 'block';
-    document.getElementById("home").style.display = 'none';
-    document.getElementById("alunos").style.display = 'none';
-    document.getElementById("professores").style.display = 'none';
-    document.getElementById("suporte").style.display = 'none';
-    document.getElementById("user").style.display = 'none';
-}
-
-function MostraTelaProfs() {
-    document.getElementById("professores").style.display = 'block';
-    document.getElementById("home").style.display = 'none';
-    document.getElementById("matriculas").style.display = 'none';
-    document.getElementById("alunos").style.display = 'none';
-    document.getElementById("suporte").style.display = 'none';
-    document.getElementById("user").style.display = 'none';
-}
-
-function MostraTelaUsers() {
-    document.getElementById("user").style.display = 'block';
-    document.getElementById("alunos").style.display = 'none';
-    document.getElementById("matriculas").style.display = 'none';
-    document.getElementById("professores").style.display = 'none';
-    document.getElementById("suporte").style.display = 'none';
-    document.getElementById("home").style.display = 'none';
-}
-
-function MostraTelaSuporte() {
-    document.getElementById("suporte").style.display = 'block';
-    document.getElementById("home").style.display = 'none';
-    document.getElementById("matriculas").style.display = 'none';
-    document.getElementById("professores").style.display = 'none';
-    document.getElementById("alunos").style.display = 'none';
-    document.getElementById("user").style.display = 'none';
-}
 
 // SPINNER WRAPPER =================
 

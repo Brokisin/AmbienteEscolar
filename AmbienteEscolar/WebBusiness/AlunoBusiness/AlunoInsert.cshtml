@@ -10,12 +10,14 @@
     Curso curso = new Curso();
     Aluno aluno = new Aluno();
 
+    aluno.Id = int.Parse(Request.Form["id"]);
     aluno.Nome = Request.Form["nome"];
     aluno.Email = Request.Form["email"];
     CursoRepository.ListarCursos();
     curso.Id = int.Parse(Request.Form["idCursoId"]);
     aluno.Curso = curso;
 
+    bool idIsNull = aluno.Id == int.Parse("") || aluno.Id == 0;
     bool nomePreenchido = aluno.Nome != "";
     bool emailPreenchido = aluno.Email != "";
     bool idPreenchido = aluno.Curso.Id != 0;
@@ -24,23 +26,47 @@
 
     if (camposPreenchidos)
     {
-        if (AlunoRepository.InserirAluno(aluno.Nome, aluno.Email, aluno.Curso.Id))
+        if (idIsNull)
         {
-            <text>
-                <script>
-                    alert("Aluno inserido com sucesso.");
-                    window.location.href = "/View/Home/Alunos";
-                </script>
-            </text>
+            if (AlunoRepository.InserirAluno(aluno.Nome, aluno.Email, aluno.Curso.Id))
+            {
+                <text>
+                    <script>
+                        alert("Aluno inserido com sucesso.");
+                        window.location.href = "/View/Home/Alunos";
+                    </script>
+                </text>
+            }
+            else
+            {
+                <text>
+                    <script>
+                        alert("Ocorreu um erro ao inserir aluno, tente novamente.");
+                        window.location.href = "/View/Home/Alunos";
+                    </script>
+                </text>
+            }
         }
         else
         {
-            <text>
-                <script>
-                    alert("Ocorreu um erro ao inserir aluno, tente novamente.");
-                    window.location.href = "/View/Home/Alunos";
-                </script>
-            </text>
+            if (AlunoRepository.AtualizarAluno(aluno.Id, aluno.Nome, aluno.Email, aluno.Curso.Id))
+            {
+                <text>
+                    <script>
+                        alert("Aluno ALTERADO com sucesso.");
+                        window.location.href = "/View/Home/Alunos";
+                    </script>
+                </text>
+            }
+            else
+            {
+                <text>
+                    <script>
+                        alert("Ocorreu um erro ao ALTERAR, tente novamente.");
+                        window.location.href = "/View/Home/Alunos";
+                    </script>
+                </text>
+            }
         }
     }
     else

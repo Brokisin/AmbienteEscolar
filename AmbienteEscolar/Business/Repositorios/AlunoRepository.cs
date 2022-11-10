@@ -179,8 +179,32 @@ namespace AmbienteEscolar.Business.Repositorios
 
             if (BancoDados.OpenConnection() == true)
             {
-                MySqlConnection connection = new MySqlConnection();
                 MySqlCommand cmd = new MySqlCommand(query, BancoDados.connection);
+
+                cmd.ExecuteNonQuery();
+
+                BancoDados.CloseConnection();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public static bool AtualizarAluno(int id, string nome, string email, int id_curso)
+        {
+            StringBuilder sb = new StringBuilder();
+
+            sb.AppendLine("UPDATE aluno SET");
+            sb.AppendLine("nome='" + nome + "',");
+            sb.AppendLine("email='" + email + "',");
+            sb.AppendLine("id_curso='" + id_curso + "'");
+            sb.AppendLine("WHERE id='" + id + "'");
+
+            if (BancoDados.OpenConnection() == true)
+            {
+                MySqlCommand cmd = new MySqlCommand(sb.ToString(), BancoDados.connection);
 
                 cmd.ExecuteNonQuery();
 
