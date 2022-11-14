@@ -17,7 +17,7 @@ namespace AmbienteEscolar.Business.Repositorios
 
             //sb.AppendLine("SELECT * FROM curso");
             sb.AppendLine("SELECT * FROM ambienteescolarava.curso"); //mysql
-            sb.AppendLine("ORDER BY id;");
+            sb.AppendLine("ORDER BY descricao;");
 
             List<Curso> listaCursos = new List<Curso>();
 
@@ -80,6 +80,41 @@ namespace AmbienteEscolar.Business.Repositorios
             else
             {
                 return listaCursos;
+            }
+        }
+
+        public static int ListarCursosDescricao(string descricao)
+        {
+            StringBuilder sb = new StringBuilder();
+
+            //sb.AppendLine("SELECT * FROM curso");
+            sb.AppendLine("SELECT * FROM ambienteescolarava.curso"); //mysql
+            sb.AppendLine("WHERE descricao like '%" + descricao + "%' ORDER BY descricao;");
+            
+            Curso curso = new Curso();
+            List<Curso> listaCursos = new List<Curso>();
+
+            if (BancoDados.OpenConnection() == true)
+            {
+                MySqlCommand cmd = new MySqlCommand(sb.ToString(), BancoDados.connection);
+                MySqlDataReader dataReader = cmd.ExecuteReader();
+
+                while (dataReader.Read())
+                {
+                    curso.Id = int.Parse(dataReader["id"].ToString());
+                    curso.Descricao = "";
+                    curso.Turno = "";
+
+                    listaCursos.Add(curso);
+                }
+                dataReader.Close();
+                BancoDados.CloseConnection();
+
+                return curso.Id;
+            }
+            else
+            {
+                return curso.Id;
             }
         }
 

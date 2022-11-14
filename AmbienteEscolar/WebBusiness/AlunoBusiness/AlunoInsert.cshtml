@@ -1,34 +1,31 @@
 ﻿@using AmbienteEscolar.Business.Classes
 @using AmbienteEscolar.Business.BancoDeDados
 @using AmbienteEscolar.Business.Repositorios
-<script>
-    alert('cheguei');
-</script>
 @{
     Layout = null;
     BancoDados.DBConnect();
     Curso curso = new Curso();
     Aluno aluno = new Aluno();
 
-    aluno.Id = int.Parse(Request.Form["id"]);
+    //aluno.Id = int.Parse(Request.Form["idAluno"]);
     aluno.Nome = Request.Form["nome"];
     aluno.Email = Request.Form["email"];
-    CursoRepository.ListarCursos();
-    curso.Id = int.Parse(Request.Form["idCursoId"]);
-    aluno.Curso = curso;
+    string descricaoCurso = Request.Form["idCursoId"];
+    int idCurso = CursoRepository.ListarCursosDescricao(descricaoCurso);
 
-    bool idIsNull = aluno.Id == int.Parse("") || aluno.Id == 0;
+    //bool idIsNull = (aluno.Id == 0 && aluno.Id == int.Parse(""));
     bool nomePreenchido = aluno.Nome != "";
     bool emailPreenchido = aluno.Email != "";
-    bool idPreenchido = aluno.Curso.Id != 0;
+    bool idPreenchido = idCurso != 0;
+    //bool idPreenchido = aluno.Curso.Id != 0;
 
     bool camposPreenchidos = nomePreenchido && emailPreenchido && idPreenchido;
 
     if (camposPreenchidos)
     {
-        if (idIsNull)
+        if (true)
         {
-            if (AlunoRepository.InserirAluno(aluno.Nome, aluno.Email, aluno.Curso.Id))
+            if (AlunoRepository.InserirAluno(aluno.Nome, aluno.Email, idCurso))
             {
                 <text>
                     <script>

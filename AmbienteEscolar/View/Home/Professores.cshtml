@@ -88,15 +88,19 @@
                     <div>
                         <div class="prof-CvnMrfG">
                             <label>Nome:</label>
-                            <input id="nome" type="text" name="nome" value="@p.Nome" placeholder="Nome do professor" />
+                            <input id="idProf" type="text" name="idProf" value="@p.Id" placeholder="Id" disabled />
+                        </div>
+                        <div class="prof-CvnMrfG">
+                            <label>Nome:</label>
+                            <input id="nomeProf" type="text" name="nome" value="@p.Nome" placeholder="Nome do professor" disabled/>
                         </div>
                         <div class="prof-CvnMrfG">
                             <label>E-mail:</label>
-                            <input id="email" type="email" name="email" value="@p.Email" placeholder="E-mail do professor" />
+                            <input id="emailProf" type="email" name="email" value="@p.Email" placeholder="E-mail do professor" disabled/>
                         </div>
                         <div class="prof-CvnMrfG">
                             <label>Selecione o curso:</label>
-                            <select id="idCursoId" name="idCursoId">
+                            <select id="idCursoId" name="idCursoId" disabled>
                                 @foreach (Curso curso in cursos)
                                 {
                                     <option value="@curso.Id">@curso.Descricao</option>
@@ -104,13 +108,46 @@
                             </select>
                         </div>
                     </div>
-                    <input id="insert" type="submit" value="Gravar" />
+                    <input id="insert" type="submit" value="Gravar" disabled/>
                 </form>
                 <div class="prof-BtnCLokkTg">
-                    <button id="new" onclick="New()">Novo</button>
-                    <button id="update" onclick="Update()" disabled>Alterar</button>
-                    <button id="cancel" onclick="Cancelar()">Cancelar</button>
+                    <button id="new" onclick="NewP()">Novo</button>
+                    <button id="update" onclick="UpdateP()" disabled>Alterar</button>
+                    <button id="cancel" onclick="CancelarP()">Cancelar</button>
                 </div>
+
+            </div>
+            <div class="prof-MMkcEwS">
+                <h2>Alunos:</h2>
+                <table id="table" onclick="profInfo()">
+                    <tr>
+                        <th hidden>
+                            Id
+                        </th>
+                        <th>
+                            Nome
+                        </th>
+                        <th>
+                            Email
+                        </th>
+                        <th>
+                            Curso
+                        </th>
+                        <th>
+                            Turno
+                        </th>
+                    </tr>
+                    @foreach (Professor prof in professores)
+                    {
+                        <tr>
+                            <td hidden>@prof.Id</td>
+                            <td>@prof.Nome</td>
+                            <td>@prof.Email</td>
+                            <td>@prof.Curso.Descricao</td>
+                            <td>@prof.Curso.Turno</td>
+                        </tr>
+                    }
+                </table>
             </div>
         </main>
     </div>
@@ -138,4 +175,5 @@
 </script>
 
 <script src="~/Models/js/logoffAction.js"></script>
+<script src="~/Models/js/alunoScripts.js"></script>
 <script src="~/Models/js/scripts.js"></script>

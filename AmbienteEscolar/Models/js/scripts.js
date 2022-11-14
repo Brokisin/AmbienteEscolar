@@ -22,25 +22,6 @@ function executarLogin() {
     document.getElementById("linkMenu").style.visibility = "visible";
 }
 
-function formularioAlerta() {
-    botaoInvisible();
-    var usuario = document.getElementById("login");
-    var senha = document.getElementById("senha");
-
-    let charsPreenchidos = (usuario.value != "" & senha.value != "");
-
-    if (charsPreenchidos) {
-        document.getElementById("confirmacao").innerHTML = "Logue.";
-    } else {
-        document.getElementById("confirmacao").innerHTML = "Preencha todos os campos.";
-    }
-}
-
-function limparCampos() {
-    document.getElementById("nome").value = "";
-    document.getElementById("email").value = "";
-}
-
 //==========
 
 var myIndex = 0;
@@ -75,20 +56,3 @@ window.addEventListener('load', function () {
 });
 
 //============
-
-function infoAlunos() {
-    let tabela = document.getElementById("table");
-
-    for (var i = 1; i < tabela.rows.length; i++) {
-        tabela.rows[i].onclick = function () {
-            document.getElementById("update").disabled = false;
-
-            document.getElementById("funcaoId").value = this.cells[0].innerHTML;
-
-            validacaoCheck = this.cells[1].innerHTML == "true" ? true : false;
-            document.getElementById("funcaoAtivo").checked = validacaoCheck;
-
-            document.getElementById("funcaoDescricao").value = this.cells[2].innerHTML;
-        };
-    }
-}
