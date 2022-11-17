@@ -1,102 +1,131 @@
-﻿@{
+﻿@using AmbienteEscolar.Business.BancoDeDados;
+@using AmbienteEscolar.Business.Repositorios;
+@using AmbienteEscolar.Business.Classes;
+
+@{
     Layout = null;
+    BancoDados.DBConnect();
+    Usuario usuario = new Usuario();
+    usuario.Login = Request.Form["login"];
+
+    Boolean logged = false;
+    HttpCookie cookie = Request.Cookies["UserLogin"];
+    if (cookie != null)
+    {
+        logged = true;
+    }
 }
 
 <!DOCTYPE html>
 
 <html>
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
-    <title>Matriculas</title>
-    <link href="~/Models/css/reset.css" rel="stylesheet" />
-    <link href="~/Models/css/menu.css" rel="stylesheet" />
-    <link href="~/Models/css/suporte.css" rel="stylesheet" />
-    <link href="~/Models/css/alunos.css" rel="stylesheet" />
-    <link href="~/View/Validate/ValidateLogin.cshtml" rel="profile" />
-    <link rel="icon" type="image/x-icon" href="~/Button-Blank-Blue-icon.ico">
-    <script src="~/Models/js/logoffAction.js"></script>
-    <script src="~/Models/js/siteActions.js"></script>
-    <script src="~/Models/js/scripts.js"></script>
-</head>
-<body>
+@if (logged == true)
+{
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width" />
+        <title>Matriculas</title>
+        <link href="~/Models/css/reset.css" rel="stylesheet" />
+        <link href="~/Models/css/menu.css" rel="stylesheet" />
+        <link href="~/Models/css/suporte.css" rel="stylesheet" />
+        <link href="~/Models/css/alunos.css" rel="stylesheet" />
+        <link href="~/View/Validate/ValidateLogin.cshtml" rel="profile" />
+        <link rel="icon" type="image/x-icon" href="~/Button-Blank-Blue-icon.ico">
+        <script src="~/Models/js/logoffAction.js"></script>
+        <script src="~/Models/js/siteActions.js"></script>
+        <script src="~/Models/js/scripts.js"></script>
+    </head>
+    <body>
 
-    <!--Spinner Wrapper-->
-    <div id="spinMod" class="spinner-modal">
-        <div id="spinnerWrapper" class="ring">
-            Loading
-            <span></span>
-        </div>
-    </div>
-
-    <!--Main Header-->
-    <div id="hyperHeader">
-        <div class="header">
-            <h2>AVA - Ambiente Escolar</h2>
-            <p>Seja bem-vindo!</p>
-        </div>
-        <div class="cvSDgbcvD">
-            <ul>
-                <li><a class="active" href="~/View/Home/Menu">Home</a></li>
-                <li><a href="~/View/Home/Matriculas">Matrículas</a></li>
-                <li class="dropdown">
-                    <a>
-                        Cadastro
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi-caret-down-fill" viewBox="0 0 16 16">
-                            <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
-                        </svg>
-                    </a>
-                    <div class="dropdown-content">
-                        <a href="~/View/Home/Alunos">Alunos</a>
-                        <a href="~/View/Home/Professores">Professores</a>
-                        <a href="~/View/Home/Usuarios">Usuários</a>
-                    </div>
-                </li>
-                <li><a href="~/View/Ext/Sobre">Suporte</a></li>
-                <li class="dropdown">
-                    <a>
-                        Eu
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi-caret-down-fill" viewBox="0 0 16 16">
-                            <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
-                        </svg>
-                    </a>
-                    <div class="dropdown-content">
-                        <a onclick="LogOff()">Logoff</a>
-                    </div>
-                </li>
-            </ul>
-        </div>
-    </div>
-
-    <!--Matriculas Screen-->
-    <div id="matriculas" class="d-Matriculas">
-        <main class="div-mainCCVCD">
-            <div class="home-title">
-                <p>SCHOOL REGISTER:</p>
+        <!--Spinner Wrapper-->
+        <div id="spinMod" class="spinner-modal">
+            <div id="spinnerWrapper" class="ring">
+                Loading
+                <span></span>
             </div>
+        </div>
 
+        <!--Main Header-->
+        <div id="hyperHeader">
+            <div class="header">
+                <h2>AVA - Ambiente Escolar</h2>
+                <p>Seja bem-vindo!</p>
+            </div>
+            <div class="cvSDgbcvD">
+                <ul>
+                    <li><a class="active" href="~/View/Home/Menu">Home</a></li>
+                    <li><a href="~/View/Home/Matriculas">Matrículas</a></li>
+                    <li class="dropdown">
+                        <a>
+                            Cadastro
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi-caret-down-fill" viewBox="0 0 16 16">
+                                <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
+                            </svg>
+                        </a>
+                        <div class="dropdown-content">
+                            <a href="~/View/Home/Alunos">Alunos</a>
+                            <a href="~/View/Home/Professores">Professores</a>
+                            <a href="~/View/Home/Usuarios">Usuários</a>
+                        </div>
+                    </li>
+                    <li><a href="~/View/Ext/Sobre">Suporte</a></li>
+                    <li class="dropdown">
+                        <a>
+                            Eu
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi-caret-down-fill" viewBox="0 0 16 16">
+                                <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
+                            </svg>
+                        </a>
+                        <div class="dropdown-content">
+                            <a onclick="LogOff()">Logoff</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!--Matriculas Screen-->
+        <div id="matriculas" class="d-Matriculas">
+            <main class="div-mainCCVCD">
+                <div class="home-title">
+                    <p>SCHOOL REGISTER:</p>
+                </div>
+
+                <div>
+                    <p>matriculas</p>
+                    <p>matriculas</p>
+                    <p>matriculas</p>
+                    <p>matriculas</p>
+                    <p>matriculas</p>
+                    <p>matriculas</p>
+                    <p>matriculas</p>
+                    <p>matriculas</p>
+                    <p>matriculas</p>
+                    <p>matriculas</p>
+                </div>
+            </main>
+        </div>
+
+        <!--Main Footer-->
+        <footer id="hyperFooter">
             <div>
-                <p>matriculas</p>
-                <p>matriculas</p>
-                <p>matriculas</p>
-                <p>matriculas</p>
-                <p>matriculas</p>
-                <p>matriculas</p>
-                <p>matriculas</p>
-                <p>matriculas</p>
-                <p>matriculas</p>
-                <p>matriculas</p>
+                <p>2022 AVA &#169; - Todos os direitos reservados.</p>
             </div>
-        </main>
-    </div>
-
-    <!--Main Footer-->
-    <footer id="hyperFooter">
-        <div>
-            <p>2022 AVA &#169; - Todos os direitos reservados.</p>
-        </div>
-    </footer>
-</body>
+        </footer>
+    </body>
+}
+else
+{
+    <head>
+        <link rel="icon" type="image/x-icon" href="~/View/Validate/notFound.ico">
+        <title>Not Found</title>
+    </head>
+    <body>
+        <br />
+        <img style="margin-left: 30px; display:inline-block;" src="~/View/Validate/notFound.ico" alt="notFound" />
+        <h1 style="display:inline-block; margin-left: 20px;"> Something went wrong. Return <a href="~/Login.cshtml">here</a>. </h1>
+    </body>
+}
 </html>
 <script>
     // SPINNER WRAPPER =================

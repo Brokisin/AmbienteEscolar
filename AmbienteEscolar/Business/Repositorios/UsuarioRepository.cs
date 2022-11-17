@@ -1,5 +1,6 @@
 ﻿using AmbienteEscolar.Business.BancoDeDados;
 using AmbienteEscolar.Business.Classes;
+using AmbienteEscolar.Business.Classes.Enum;
 using MySqlConnector;
 using System;
 using System.Collections.Generic;
@@ -56,8 +57,8 @@ namespace AmbienteEscolar.Business.Repositorios
         {
             StringBuilder sb = new StringBuilder();
 
-            sb.AppendLine("SELECT * FROM usuario");
-            sb.AppendLine("ORDER BY id;");
+            sb.AppendLine("SELECT a.id, a.login, a.senha, a.id_acesso, n.descricao FROM ambienteescolarava.usuario a ");
+            sb.AppendLine("INNER JOIN nivelacesso n ON a.id_acesso = n.id ORDER BY id;");
 
             List<Usuario> listaUsuarios = new List<Usuario>();
 
@@ -69,23 +70,18 @@ namespace AmbienteEscolar.Business.Repositorios
                 while (dataReader.Read())
                 {
                     Usuario usuario = new Usuario();
+                    NivelAcesso na = new NivelAcesso();
 
                     usuario.Id = int.Parse(dataReader["id"].ToString());
                     usuario.Login = dataReader["login"].ToString();
                     usuario.Senha = dataReader["senha"].ToString();
-                    if (usuario.Id_professor == null)
-                    {
-                        usuario.Id_professor = 0;
-                    }
-                    usuario.Id_professor = int.Parse(dataReader["id_professor"].ToString());
-                    if (usuario.Id_aluno == null)
-                    {
-                        usuario.Id_aluno = 0;
-                    }
-                    usuario.Id_aluno = int.Parse(dataReader["id_aluno"].ToString());
-                    usuario.Id_curso = int.Parse(dataReader["id_curso"].ToString());
-                    usuario.Id_acesso = int.Parse(dataReader["id_acesso"].ToString());
-                    usuario.Ativo = int.Parse(dataReader["ativo"].ToString());
+
+                    usuario.Id_professor = 0;
+                    usuario.Id_aluno = 0;
+
+                    na.Id = int.Parse(dataReader["id_acesso"].ToString());
+                    na.Descricao = dataReader["descricao"].ToString();
+                    usuario.NivelAcesso = na;
 
                     listaUsuarios.Add(usuario);
                 }

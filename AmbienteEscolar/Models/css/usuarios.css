@@ -1,2 +1,23 @@
-﻿body {
+﻿tr th {
+    font-size: 28px;
+    color: #0064ff;
+    border-top: 1px solid #bdbdbd;
+    border-bottom: 1px solid #bdbdbd;
+    padding: 5px 0;
+    text-shadow: -1px 1px 1px black;
+    text-align: start;
+}
+
+tr td {
+    border-bottom: 1px solid #bdbdbd;
+    padding: 5px 0;
+}
+
+.user-MMsFghR {
+    padding: 10px;
+    border: 2px solid white;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 2px 2px 5px black;
+    margin: 20px 0px;
 }

@@ -8,37 +8,62 @@
     Curso curso = new Curso();
     Professor professor = new Professor();
 
+    professor.Id = int.Parse(Request.Form["idProf"]);
     professor.Nome = Request.Form["nome"];
     professor.Email = Request.Form["email"];
-    CursoRepository.ListarCursos();
-    curso.Id = int.Parse(Request.Form["idCursoId"]);
-    professor.Curso = curso;
+    string descricaoCurso = Request.Form["idCursoId"];
+    int idCurso = CursoRepository.ListarCursosDescricao(descricaoCurso);
 
+    bool idIsNull = professor.Id == 0;
     bool nomePreenchido = professor.Nome != "";
     bool emailPreenchido = professor.Email != "";
-    bool idPreenchido = professor.Curso.Id != 0;
+    bool idPreenchido = idCurso != 0;
 
     bool camposPreenchidos = nomePreenchido && emailPreenchido && idPreenchido;
 
     if (camposPreenchidos)
     {
-        if (ProfessorRepository.InserirProfessor(professor.Nome, professor.Email, professor.Curso.Id))
+        if (idIsNull)
         {
-            <text>
-                <script>
-                    alert("Professor inserido com sucesso.");
-                    window.location.href = "/View/Home/Professores";
-                </script>
-            </text>
+            if (ProfessorRepository.InserirProfessor(professor.Nome, professor.Email, idCurso))
+            {
+                <text>
+                    <script>
+                        alert("Professor inserido com sucesso.");
+                        window.location.href = "/View/Home/Professores";
+                    </script>
+                </text>
+            }
+            else
+            {
+                <text>
+                    <script>
+                        alert("Ocorreu um erro ao inserir professor, tente novamente mais tarde.");
+                        window.location.href = "/View/Home/Professores";
+                    </script>
+                </text>
+            }
         }
         else
         {
-            <text>
-                <script>
-                    alert("Ocorreu um erro ao inserir professor, tente novamente mais tarde.");
-                    window.location.href = "/View/Home/Professores";
-                </script>
-            </text>
+            if (ProfessorRepository.AtualizarProfessor(professor.Id, professor.Nome, professor.Email, idCurso))
+            {
+                <text>
+                    <script>
+                        alert("Professor alterado com sucesso.");
+                        window.location.href = "/View/Home/Professores";
+                    </script>
+                </text>
+            }
+            else
+            {
+                <text>
+                    <script>
+                        alert("Ocorreu um erro ao alterar, tente novamente.");
+                        window.location.href = "/View/Home/Professores";
+                    </script>
+                </text>
+            }
         }
     }
     else

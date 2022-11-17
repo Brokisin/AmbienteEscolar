@@ -141,6 +141,7 @@
     <Compile Include="Business\Classes\Usuario.cs" />
     <Compile Include="Business\Repositorios\AlunoRepository.cs" />
     <Compile Include="Business\Repositorios\CursoRepository.cs" />
+    <Compile Include="Business\Repositorios\NivelAcessoRepository.cs" />
     <Compile Include="Business\Repositorios\ProfessorRepository.cs" />
     <Compile Include="Business\Repositorios\SalaRepository.cs" />
     <Compile Include="Business\Repositorios\UsuarioRepository.cs" />
@@ -165,12 +166,10 @@
     </None>
     <Content Include="WebBusiness\AlunoBusiness\AlunoInsert.cshtml" />
     <Content Include="WebBusiness\CursoBusiness\CursoSelect.cshtml" />
-    <Content Include="WebBusiness\AlunoBusiness\AlunoInfo.cshtml" />
     <Content Include="WebBusiness\ProfessorBusiness\ProfessorInsert.cshtml" />
+    <Content Include="WebBusiness\UsuarioBusiness\UsuarioInsert.cshtml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="WebBusiness\UsuarioBusiness\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

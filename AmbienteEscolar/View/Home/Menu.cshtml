@@ -5,20 +5,7 @@
 @{
     //Layout = "~/View/Shared/_Layout.cshtml";
     Layout = null;
-    //BancoDados.DBConnect();
-
-    //Alunos====
-    //Aluno a = new Aluno();
-    //List<Curso> cursos = CursoRepository.ListarCursos();
-    //List<Aluno> nomeAlunos = AlunoRepository.ListarNomeAlunos();
-    //List<Aluno> alunos = AlunoRepository.ListarAlunos();
-    //List<Aluno> alunosEmail = AlunoRepository.ListarAlunosPorEmail();
-
-    //Professores====
-    //List<Professor> professores = ProfessorRepository.ListarProfessores();
-    //Professor p = new Professor();
-
-    //Usuários ====
+    BancoDados.DBConnect();
     Usuario usuario = new Usuario();
     usuario.Login = Request.Form["login"];
 

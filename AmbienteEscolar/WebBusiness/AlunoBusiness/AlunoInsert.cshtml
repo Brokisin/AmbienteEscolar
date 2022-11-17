@@ -7,23 +7,22 @@
     Curso curso = new Curso();
     Aluno aluno = new Aluno();
 
-    //aluno.Id = int.Parse(Request.Form["idAluno"]);
+    aluno.Id = int.Parse(Request.Form["idAluno"]);
     aluno.Nome = Request.Form["nome"];
     aluno.Email = Request.Form["email"];
     string descricaoCurso = Request.Form["idCursoId"];
     int idCurso = CursoRepository.ListarCursosDescricao(descricaoCurso);
 
-    //bool idIsNull = (aluno.Id == 0 && aluno.Id == int.Parse(""));
+    bool idIsNull = aluno.Id == 0;
     bool nomePreenchido = aluno.Nome != "";
     bool emailPreenchido = aluno.Email != "";
     bool idPreenchido = idCurso != 0;
-    //bool idPreenchido = aluno.Curso.Id != 0;
 
     bool camposPreenchidos = nomePreenchido && emailPreenchido && idPreenchido;
 
     if (camposPreenchidos)
     {
-        if (true)
+        if (idIsNull)
         {
             if (AlunoRepository.InserirAluno(aluno.Nome, aluno.Email, idCurso))
             {
@@ -46,11 +45,11 @@
         }
         else
         {
-            if (AlunoRepository.AtualizarAluno(aluno.Id, aluno.Nome, aluno.Email, aluno.Curso.Id))
+            if (AlunoRepository.AtualizarAluno(aluno.Id, aluno.Nome, aluno.Email, idCurso))
             {
                 <text>
                     <script>
-                        alert("Aluno ALTERADO com sucesso.");
+                        alert("Aluno alterado com sucesso.");
                         window.location.href = "/View/Home/Alunos";
                     </script>
                 </text>
@@ -59,7 +58,7 @@
             {
                 <text>
                     <script>
-                        alert("Ocorreu um erro ao ALTERAR, tente novamente.");
+                        alert("Ocorreu um erro ao alterar, tente novamente.");
                         window.location.href = "/View/Home/Alunos";
                     </script>
                 </text>

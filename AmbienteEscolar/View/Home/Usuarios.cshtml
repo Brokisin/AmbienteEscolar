@@ -1,126 +1,222 @@
 ﻿@using AmbienteEscolar.Business.BancoDeDados;
 @using AmbienteEscolar.Business.Repositorios;
 @using AmbienteEscolar.Business.Classes;
+@using AmbienteEscolar.Business.Classes.Enum;
 
 @{
     Layout = null;
-    //BancoDados.DBConnect();
+    BancoDados.DBConnect();
+    Usuario u = new Usuario();
+    NivelAcesso na = new NivelAcesso();
+    List<NivelAcesso> nivelAcesso = NivelAcessoRepository.ListarAcesso();
+    List<Usuario> usuarios = UsuarioRepository.ListarUsuarios();
+
+    Usuario usuario = new Usuario();
+    usuario.Login = Request.Form["login"];
+
+    Boolean logged = false;
+    HttpCookie cookie = Request.Cookies["UserLogin"];
+    if (cookie != null)
+    {
+        logged = true;
+    }
 }
 
 <!DOCTYPE html>
 
 <html>
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
-    <title>Usuários</title>
-    <link href="~/View/Shared/_Layout.cshtml" rel="logo" />
-    <link href="~/Models/css/reset.css" rel="stylesheet" />
-    <link href="~/Models/css/menu.css" rel="stylesheet" />
-    <link href="~/Models/css/suporte.css" rel="stylesheet" />
-    <link href="~/View/Validate/ValidateLogin.cshtml" rel="profile" />
-    <link rel="icon" type="image/x-icon" href="~/Button-Blank-Blue-icon.ico">
-</head>
-<body>
-    <!--Spinner Wrapper-->
-    <div id="spinMod" class="spinner-modal">
-        <div id="spinnerWrapper" class="ring">
-            Loading
-            <span></span>
-        </div>
-    </div>
-
-    <!--Main Header-->
-    <div id="hyperHeader">
-        <div class="header">
-            <h2>AVA - Ambiente Escolar</h2>
-            <p>Seja bem-vindo!</p>
-        </div>
-        <div class="cvSDgbcvD">
-            <ul>
-                <li><a class="active" href="~/View/Home/Menu">Home</a></li>
-                <li><a href="~/View/Home/Matriculas">Matrículas</a></li>
-                <li class="dropdown">
-                    <a>
-                        Cadastro
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi-caret-down-fill" viewBox="0 0 16 16">
-                            <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
-                        </svg>
-                    </a>
-                    <div class="dropdown-content">
-                        <a href="~/View/Home/Alunos">Alunos</a>
-                        <a href="~/View/Home/Professores">Professores</a>
-                        <a href="~/View/Home/Usuarios">Usuários</a>
-                    </div>
-                </li>
-                <li><a href="~/View/Ext/Sobre">Suporte</a></li>
-                <li class="dropdown">
-                    <a>
-                        Eu
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi-caret-down-fill" viewBox="0 0 16 16">
-                            <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
-                        </svg>
-                    </a>
-                    <div class="dropdown-content">
-                        <a onclick="LogOff()">Logoff</a>
-                    </div>
-                </li>
-            </ul>
-        </div>
-    </div>
-
-    <!--Usuários Screen-->
-    <div id="user" class="d-Users">
-        <main class="div-mainCCVCD">
-            <div class="home-title">
-                <p>USERS:</p>
+@if (logged == true)
+{
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width" />
+        <title>Usuários</title>
+        <link href="~/View/Shared/_Layout.cshtml" rel="logo" />
+        <link href="~/Models/css/reset.css" rel="stylesheet" />
+        <link href="~/Models/css/menu.css" rel="stylesheet" />
+        <link href="~/Models/css/suporte.css" rel="stylesheet" />
+        <link href="~/Models/css/usuarios.css" rel="stylesheet" />
+        <link href="~/View/Validate/ValidateLogin.cshtml" rel="profile" />
+        <link rel="icon" type="image/x-icon" href="~/Button-Blank-Blue-icon.ico">
+    </head>
+    <body>
+        <!--Spinner Wrapper-->
+        <div id="spinMod" class="spinner-modal">
+            <div id="spinnerWrapper" class="ring">
+                Loading
+                <span></span>
             </div>
+        </div>
 
+        <!--Main Header-->
+        <div id="hyperHeader">
+            <div class="header">
+                <h2>AVA - Ambiente Escolar</h2>
+                <p>Seja bem-vindo!</p>
+            </div>
+            <div class="cvSDgbcvD">
+                <ul>
+                    <li><a class="active" href="~/View/Home/Menu">Home</a></li>
+                    <li><a href="~/View/Home/Matriculas">Matrículas</a></li>
+                    <li class="dropdown">
+                        <a>
+                            Cadastro
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi-caret-down-fill" viewBox="0 0 16 16">
+                                <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
+                            </svg>
+                        </a>
+                        <div class="dropdown-content">
+                            <a href="~/View/Home/Alunos">Alunos</a>
+                            <a href="~/View/Home/Professores">Professores</a>
+                            <a href="~/View/Home/Usuarios">Usuários</a>
+                        </div>
+                    </li>
+                    <li><a href="~/View/Ext/Sobre">Suporte</a></li>
+                    <li class="dropdown">
+                        <a>
+                            Eu
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi-caret-down-fill" viewBox="0 0 16 16">
+                                <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
+                            </svg>
+                        </a>
+                        <div class="dropdown-content">
+                            <a onclick="LogOff()">Logoff</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!--Usuários Screen-->
+        <div id="user" class="d-Users">
+            <main class="div-mainCCVCD">
+                <div class="home-title">
+                    <p>USERS:</p>
+                </div>
+                <div class="user-MMsFghR">
+                    <h2>Cadastro de Usuários:</h2>
+                    <form action="~/WebBusiness/UsuarioBusiness/UsuarioInsert.cshtml" method="post">
+                        <div class="alun-DDscVok" hidden>
+                            <label hidden>Id:</label>
+                            <input id="idUsuario" type="text" name="idUsuario" value="@u.Id" hidden />
+                        </div>
+                        <div class="alun-DDscVok">
+                            <label>Login:</label>
+                            <input id="loginUsuario" type="text" name="loginUsuario" value="@u.Login" placeholder="Login" disabled />
+                        </div>
+                        <div class="alun-DDscVok">
+                            <label>Senha:</label>
+                            <input id="senhaUsuario" type="password" name="senhaUsuario" value="@u.Senha" placeholder="Senha" disabled />
+                        </div>
+                        <div class="alun-DDscVok">
+                            <label>Nivel de Acesso:</label>
+                            <select id="idAcesso" name="idAcesso" disabled>
+                                @foreach (NivelAcesso nivel in nivelAcesso)
+                                {
+                                    <option>@nivel.Descricao</option>
+                                }
+                            </select>
+                        </div>
+                        <input id="insert" type="submit" value="Gravar" disabled />
+                    </form>
+                    <div class="alun-BtnsBBdSv">
+                        <button id="new" onclick="NewU()">Novo</button>
+                        <button id="update" onclick="UpdateU()" disabled>Alterar</button>
+                        <button id="cancel" onclick="CancelarU()">Cancelar</button>
+                    </div>
+                    <button onclick="getElement()">getElementId</button>
+                    <button onclick="testeGravar()">Gravar - Teste</button>
+                </div>
+
+                <div class="user-MMsFghR">
+                    <h2>Usuários:</h2>
+                    <table id="table" onclick="userInfo()">
+                        <tr>
+                            <th onclick="sortTable(1)">
+                                Login<span id="carretNome">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down" viewBox="0 0 16 16">
+                                        <path d="M3.204 5h9.592L8 10.481 3.204 5zm-.753.659 4.796 5.48a1 1 0 0 0 1.506 0l4.796-5.48c.566-.647.106-1.659-.753-1.659H3.204a1 1 0 0 0-.753 1.659z" />
+                                    </svg>
+                                </span>
+                                <span id="carretNameEnabled">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
+                                        <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
+                                    </svg>
+                                </span>
+                            </th>
+                            <th onclick="sortTable(2)">
+                                Senha<span id="carretEmail">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down" viewBox="0 0 16 16">
+                                        <path d="M3.204 5h9.592L8 10.481 3.204 5zm-.753.659 4.796 5.48a1 1 0 0 0 1.506 0l4.796-5.48c.566-.647.106-1.659-.753-1.659H3.204a1 1 0 0 0-.753 1.659z" />
+                                    </svg>
+                                </span>
+                                <span id="carretEmailEnabled">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
+                                        <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
+                                    </svg>
+                                </span>
+                            </th>
+                            <th onclick="sortTable(3)">
+                                ID Acesso<span id="carretCurso">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down" viewBox="0 0 16 16">
+                                        <path d="M3.204 5h9.592L8 10.481 3.204 5zm-.753.659 4.796 5.48a1 1 0 0 0 1.506 0l4.796-5.48c.566-.647.106-1.659-.753-1.659H3.204a1 1 0 0 0-.753 1.659z" />
+                                    </svg>
+                                </span>
+                                <span id="carretCursoEnabled">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
+                                        <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
+                                    </svg>
+                                </span>
+                            </th>
+                            <th onclick="sortTable(5)">
+                                Acesso<span id="carretTurno">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down" viewBox="0 0 16 16">
+                                        <path d="M3.204 5h9.592L8 10.481 3.204 5zm-.753.659 4.796 5.48a1 1 0 0 0 1.506 0l4.796-5.48c.566-.647.106-1.659-.753-1.659H3.204a1 1 0 0 0-.753 1.659z" />
+                                    </svg>
+                                </span>
+                                <span id="carretTurnoEnabled">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
+                                        <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
+                                    </svg>
+                                </span>
+                            </th>
+                        </tr>
+                        @foreach (Usuario user in usuarios)
+                        {
+                            <tr>
+                                <td hidden>@user.Id</td>
+                                <td>@user.Login</td>
+                                <td>········</td>
+                                <td hidden>@user.Senha</td>
+                                <td>@user.NivelAcesso.Id</td>
+                                <td>@user.NivelAcesso.Descricao</td>
+                            </tr>
+                        }
+                    </table>
+                </div>
+            </main>
+        </div>
+
+        <!--Main Footer-->
+        <footer id="hyperFooter">
             <div>
-                <br />
-                <label>Listar Professores:</label>
-                <br />
-                <button>Listar</button>
-                <br />
-                <table>
-                    @*@foreach (Usuario usuario in usuarios)
-                        {*@
-                    <tr>
-                        <td>
-                            @*@usuario.Login*@
-                        </td>
-                        <td>
-                            @*@usuario.Senha*@
-                        </td>
-                        <td>
-                            @*@usuario.Id_professor*@
-                        </td>
-                        <td>
-                            @*@usuario.Id_aluno*@
-                        </td>
-                        <td>
-                            @*@usuario.Id_curso*@
-                        </td>
-                        <td>
-                            @*@usuario.Id_acesso*@
-                        </td>
-                        <td>
-                            @*@usuario.Ativo*@
-                        </td>
-                    </tr>
-                    @*}*@
-                </table>
+                <p>2022 AVA &#169; - Todos os direitos reservados.</p>
             </div>
-        </main>
-    </div>
-
-    <!--Main Footer-->
-    <footer id="hyperFooter">
-        <div>
-            <p>2022 AVA &#169; - Todos os direitos reservados.</p>
-        </div>
-    </footer>
-</body>
+        </footer>
+    </body>
+}
+else
+{
+    <head>
+        <link rel="icon" type="image/x-icon" href="~/View/Validate/notFound.ico">
+        <title>Not Found</title>
+    </head>
+    <body>
+        <br />
+        <img style="margin-left: 30px; display:inline-block;" src="~/View/Validate/notFound.ico" alt="notFound" />
+        <h1 style="display:inline-block; margin-left: 20px;"> Something went wrong. Return <a href="~/Login.cshtml">here</a>. </h1>
+    </body>
+}
 </html>
 <script>
     // SPINNER WRAPPER =================
@@ -136,5 +232,6 @@
     });
 </script>
 
+<script src="~/Models/js/alunoScripts.js"></script>
 <script src="~/Models/js/logoffAction.js"></script>
 <script src="~/Models/js/scripts.js"></script>

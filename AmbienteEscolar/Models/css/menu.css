@@ -142,7 +142,7 @@ footer {
     box-shadow: 7px 7px 12px #181818;
 }
 
-button, input#insert {
+button, input#insert, input#delete {
     cursor: pointer;
     padding: 5px;
     font-weight: bold;
@@ -154,13 +154,13 @@ button, input#insert {
     transition: all .1s ease-in;
 }
 
-    button:enabled:hover, input#insert:enabled:hover {
+    button:enabled:hover, input#insert:enabled:hover, input#delete:enabled:hover {
         background: #245aad;
         border-color: #245aad;
         border-radius: 6px;
     }
 
-    button:disabled, input#insert:disabled {
+    button:disabled, input#insert:disabled, input#delete:disabled {
         cursor: default;
         background: #62a0ff;
         border-color: #62a0ff;
@@ -241,7 +241,7 @@ input#nome, input#email, select#idCursoId{
         animation: animateC 2s linear infinite;
     }
 
-span {
+span#spanSpinner {
     display: block;
     position: absolute;
     top: calc(50% - 2px);
@@ -253,7 +253,7 @@ span {
     animation: animate 2s linear infinite;
 }
 
-    span:before {
+    span#spanSpinner:before {
         content: '';
         position: absolute;
         width: 16px;
@@ -295,4 +295,26 @@ span {
     height: 100%;
     overflow: auto;
     background-color: #000000d6;
+}
+
+/*carrets ===================*/
+
+#carretNameEnabled, #carretUpName {
+    display: none;
+}
+
+#carretEmailEnabled, #carretUpEmail {
+    display: none;
+}
+
+#carretCursoEnabled, #carretUpCurso {
+    display: none;
+}
+
+#carretTurnoEnabled, #carretUpTurno {
+    display: none;
+}
+
+th span svg {
+    cursor: pointer;
 }

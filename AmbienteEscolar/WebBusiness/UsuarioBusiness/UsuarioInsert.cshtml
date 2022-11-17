@@ -1,0 +1,78 @@
+﻿@using AmbienteEscolar.Business.Classes
+@using AmbienteEscolar.Business.BancoDeDados
+@using AmbienteEscolar.Business.Repositorios
+
+@{
+    Layout = null;
+    BancoDados.DBConnect();
+    Curso curso = new Curso();
+    Usuario user = new Usuario();
+
+    user.Id = int.Parse(Request.Form["idUsuario"]);
+    user.Login = Request.Form["loginUsuario"];
+    user.Senha = Request.Form["email"];
+    string descricaoAcesso = Request.Form["idCursoId"];
+    int idNivelAcesso = NivelAcessoRepository.ListarAcessosDescricao(descricaoAcesso);
+
+    bool idIsNull = user.Id == 0;
+    bool nomePreenchido = user.Login != "";
+    bool emailPreenchido = user.Senha != "";
+    bool idPreenchido = idNivelAcesso != 0;
+
+    bool camposPreenchidos = nomePreenchido && emailPreenchido && idPreenchido;
+
+    if (camposPreenchidos)
+    {
+        if (idIsNull)
+        {
+            if (ProfessorRepository.InserirProfessor(user.Login, user.Senha, idNivelAcesso))
+            {
+                <text>
+                    <script>
+                        alert("Usuário inserido com sucesso.");
+                        window.location.href = "/View/Home/Usuarios";
+                    </script>
+                </text>
+            }
+            else
+            {
+                <text>
+                    <script>
+                        alert("Ocorreu um erro ao inserir usuário, tente novamente mais tarde.");
+                        window.location.href = "/View/Home/Usuarios";
+                    </script>
+                </text>
+            }
+        }
+        else
+        {
+            if (ProfessorRepository.AtualizarProfessor(user.Id, user.Login, user.Senha, idNivelAcesso))
+            {
+                <text>
+                    <script>
+                        alert("Usuário alterado com sucesso.");
+                        window.location.href = "/View/Home/Usuarios";
+                    </script>
+                </text>
+            }
+            else
+            {
+                <text>
+                    <script>
+                        alert("Ocorreu um erro ao alterar, tente novamente.");
+                        window.location.href = "/View/Home/Usuarios";
+                    </script>
+                </text>
+            }
+        }
+    }
+    else
+    {
+        <text>
+            <script>
+                alert("Falha ao inserir usuário.");
+                window.location.href = "/View/Home/Usuarios";
+            </script>
+        </text>
+    }
+}
