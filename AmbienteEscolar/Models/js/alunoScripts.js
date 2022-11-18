@@ -18,7 +18,6 @@ function liberarCampos() {
     document.getElementById("email").disabled = false;
     document.getElementById("idCursoId").disabled = false;
     document.getElementById("insert").disabled = false;
-    //
 }
 
 function bloquearCampos() {
@@ -168,6 +167,11 @@ function limparCamposP() {
     document.getElementById("nomeProf").value = "";
     document.getElementById("emailProf").value = "";
     document.getElementById("idCursoId").value = "";
+    //
+    document.getElementById("idProfessorDelete").value = 0;
+    document.getElementById("nomeProfessorDelete").value = "";
+    document.getElementById("emailProfessorDelete").value = "";
+    document.getElementById("idCursoProfessorDelete").value = "";
 }
 
 function liberarCamposP() {
@@ -188,6 +192,7 @@ function CancelarP() {
     limparCamposP();
     document.getElementById("update").disabled = true;
     document.getElementById("insert").disabled = true;
+    document.getElementById("delete").disabled = true;
 }
 
 function NewP() {
@@ -205,12 +210,20 @@ function profInfo() {
     for (var i = 1; i < tabela.rows.length; i++) {
         tabela.rows[i].onclick = function () {
             document.getElementById("update").disabled = false;
+            document.getElementById("delete").disabled = false;
             bloquearCamposP();
 
             document.getElementById("idProf").value = this.cells[0].innerHTML;
             document.getElementById("nomeProf").value = this.cells[1].innerHTML;
             document.getElementById("emailProf").value = this.cells[2].innerHTML;
             document.getElementById("idCursoId").value = this.cells[3].innerHTML;
+
+            //para o Delete
+
+            document.getElementById("idProfessorDelete").value = this.cells[0].innerHTML;
+            document.getElementById("nomeProfessorDelete").value = this.cells[1].innerHTML;
+            document.getElementById("emailProfessorDelete").value = this.cells[2].innerHTML;
+            document.getElementById("idCursoProfessorDelete").value = this.cells[3].innerHTML;
         };
     }
 }
@@ -222,6 +235,11 @@ function limparCamposU() {
     document.getElementById("loginUsuario").value = "";
     document.getElementById("senhaUsuario").value = "";
     document.getElementById("idAcesso").value = "";
+    //
+    document.getElementById("idUsuarioDelete").value = 0;
+    document.getElementById("loginUsuarioDelete").value = "";
+    document.getElementById("senhaUsuarioDelete").value = "";
+    document.getElementById("idNivelAcessoUsuarioDelete").value = "";
 }
 
 function liberarCamposU() {
@@ -259,12 +277,73 @@ function userInfo() {
     for (var i = 1; i < tabela.rows.length; i++) {
         tabela.rows[i].onclick = function () {
             document.getElementById("update").disabled = false;
-            bloquearCamposP();
+            document.getElementById("delete").disabled = false;
 
             document.getElementById("idUsuario").value = this.cells[0].innerHTML;
             document.getElementById("loginUsuario").value = this.cells[1].innerHTML;
             document.getElementById("senhaUsuario").value = this.cells[3].innerHTML;
             document.getElementById("idAcesso").value = this.cells[5].innerHTML;
+
+            //para o Delete
+
+            document.getElementById("idUsuarioDelete").value = this.cells[0].innerHTML;
+            document.getElementById("loginUsuarioDelete").value = this.cells[1].innerHTML;
+            document.getElementById("senhaUsuarioDelete").value = this.cells[3].innerHTML;
+            document.getElementById("idNivelAcessoUsuarioDelete").value = this.cells[5].innerHTML;
         };
+    }
+}
+
+function sortTableUser(n) {
+
+    if (n == 1) {
+        document.getElementById('carretNome').style.display = "none";
+        document.getElementById('carretNameEnabled').style.display = "inline";
+        document.getElementById('carretEmail').style.display = "inline";
+        document.getElementById('carretEmailEnabled').style.display = "none";
+        document.getElementById('carretCurso').style.display = "inline";
+        document.getElementById('carretCursoEnabled').style.display = "none";
+    } else if (n == 5) {
+        document.getElementById('carretCurso').style.display = "none";
+        document.getElementById('carretCursoEnabled').style.display = "inline";
+        document.getElementById('carretNome').style.display = "inline";
+        document.getElementById('carretNameEnabled').style.display = "none";
+        document.getElementById('carretEmail').style.display = "inline";
+        document.getElementById('carretEmailEnabled').style.display = "none";
+    }
+
+    var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+    table = document.getElementById("table");
+    switching = true;
+    dir = "asc";
+    while (switching) {
+        switching = false;
+        rows = table.rows;
+        for (i = 1; i < (rows.length - 1); i++) {
+            shouldSwitch = false;
+            x = rows[i].getElementsByTagName("TD")[n];
+            y = rows[i + 1].getElementsByTagName("TD")[n];
+            if (dir == "asc") {
+                if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                    shouldSwitch = true;
+                    break;
+                }
+            } else if (dir == "desc") {
+                if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+                    shouldSwitch = true;
+                    break;
+                }
+            }
+        }
+        if (shouldSwitch) {
+            rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+            switching = true;
+            switchcount++;
+        } else {
+            if (switchcount == 0 && dir == "asc") {
+                dir = "desc";
+                switching = true;
+            }
+        }
     }
 }

@@ -1,0 +1,66 @@
+﻿@using AmbienteEscolar.Business.Classes
+@using AmbienteEscolar.Business.BancoDeDados
+@using AmbienteEscolar.Business.Repositorios
+
+@{
+    Layout = null;
+    BancoDados.DBConnect();
+    Curso curso = new Curso();
+    Professor prof = new Professor();
+
+    prof.Id = int.Parse(Request.Form["idProfessorDelete"]);
+    prof.Nome = Request.Form["nomeProfessorDelete"];
+    prof.Email = Request.Form["emailProfessorDelete"];
+    string descricaoCurso = Request.Form["idCursoProfessorDelete"];
+    int idCurso = CursoRepository.ListarCursosDescricao(descricaoCurso);
+
+    bool idIsNotNull = prof.Id != 0;
+    bool nomePreenchido = prof.Nome != "";
+    bool emailPreenchido = prof.Email != "";
+    bool idPreenchido = idCurso != 0;
+
+    bool camposPreenchidos = nomePreenchido && emailPreenchido && idPreenchido;
+
+    if (camposPreenchidos)
+    {
+        if (idIsNotNull)
+        {
+            if (ProfessorRepository.DeletarProfessor(prof.Id))
+            {
+                <text>
+                    <script>
+                        alert("Professor deletado com sucesso.");
+                        window.location.href = "/View/Home/Professores";
+                    </script>
+                </text>
+            }
+            else
+            {
+                <text>
+                    <script>
+                        alert("Ocorreu um erro ao deletar professor, tente novamente.");
+                        window.location.href = "/View/Home/Professores";
+                    </script>
+                </text>
+            }
+        }
+        else
+        {
+            <text>
+                <script>
+                    alert("Não foi possível encontrar o professor.");
+                    window.location.href = "/View/Home/Professores";
+                </script>
+            </text>
+        }
+    }
+    else
+    {
+        <text>
+            <script>
+                alert("Falha ao deletar.");
+                window.location.href = "/View/Home/Professores";
+            </script>
+        </text>
+    }
+}

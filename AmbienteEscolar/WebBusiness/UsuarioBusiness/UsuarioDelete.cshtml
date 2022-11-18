@@ -1,0 +1,67 @@
+﻿@using AmbienteEscolar.Business.Classes
+@using AmbienteEscolar.Business.Classes.Enum
+@using AmbienteEscolar.Business.BancoDeDados
+@using AmbienteEscolar.Business.Repositorios
+
+@{
+    Layout = null;
+    BancoDados.DBConnect();
+    NivelAcesso nivelA = new NivelAcesso();
+    Usuario user = new Usuario();
+
+    user.Id = int.Parse(Request.Form["idUsuarioDelete"]);
+    user.Login = Request.Form["loginUsuarioDelete"];
+    user.Senha = Request.Form["senhaUsuarioDelete"];
+    string descricaoNivelAcesso = Request.Form["idNivelAcessoUsuarioDelete"];
+    int idNivelAcesso = NivelAcessoRepository.ListarAcessosDescricao(descricaoNivelAcesso);
+
+    bool idIsNotNull = user.Id != 0;
+    bool nomePreenchido = user.Login != "";
+    bool emailPreenchido = user.Senha != "";
+    bool idPreenchido = idNivelAcesso != 0;
+
+    bool camposPreenchidos = nomePreenchido && emailPreenchido && idPreenchido;
+
+    if (camposPreenchidos)
+    {
+        if (idIsNotNull)
+        {
+            if (UsuarioRepository.DeletarUsuario(user.Id))
+            {
+                <text>
+                    <script>
+                        alert("Usuário deletado com sucesso.");
+                        window.location.href = "/View/Home/Usuarios";
+                    </script>
+                </text>
+            }
+            else
+            {
+                <text>
+                    <script>
+                        alert("Ocorreu um erro ao deletar usuário, tente novamente.");
+                        window.location.href = "/View/Home/Usuarios";
+                    </script>
+                </text>
+            }
+        }
+        else
+        {
+            <text>
+                <script>
+                    alert("Não foi possível encontrar o usuário.");
+                    window.location.href = "/View/Home/Usuarios";
+                </script>
+            </text>
+        }
+    }
+    else
+    {
+        <text>
+            <script>
+                alert("Falha ao deletar.");
+                window.location.href = "/View/Home/Usuarios";
+            </script>
+        </text>
+    }
+}

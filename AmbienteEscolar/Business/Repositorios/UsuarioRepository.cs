@@ -127,5 +127,71 @@ namespace AmbienteEscolar.Business.Repositorios
                 return false;
             }
         }
+
+        public static bool InserirUsuario(string login, string senha, int idAcesso)
+        {
+            string query = "INSERT INTO usuario (login, senha, id_acesso, ativo) VALUES('" + login + "','" + senha + "'," + idAcesso + ", 1);";
+
+            if (BancoDados.OpenConnection() == true)
+            {
+                MySqlConnection connection = new MySqlConnection();
+                MySqlCommand cmd = new MySqlCommand(query, BancoDados.connection);
+
+                cmd.ExecuteNonQuery();
+
+                BancoDados.CloseConnection();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public static bool AtualizarUsuario(int id, string login, string senha, int idAcesso)
+        {
+            StringBuilder sb = new StringBuilder();
+
+            sb.AppendLine("UPDATE usuario SET");
+            sb.AppendLine("login='" + login + "',");
+            sb.AppendLine("senha='" + senha + "',");
+            sb.AppendLine("id_acesso='" + idAcesso + "'");
+            sb.AppendLine("WHERE id='" + id + "'");
+
+            if (BancoDados.OpenConnection() == true)
+            {
+                MySqlCommand cmd = new MySqlCommand(sb.ToString(), BancoDados.connection);
+
+                cmd.ExecuteNonQuery();
+
+                BancoDados.CloseConnection();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public static bool DeletarUsuario(int id)
+        {
+            StringBuilder sb = new StringBuilder();
+
+            sb.AppendLine("DELETE FROM usuario WHERE id=" + id + "");
+
+            if (BancoDados.OpenConnection() == true)
+            {
+                MySqlCommand cmd = new MySqlCommand(sb.ToString(), BancoDados.connection);
+
+                cmd.ExecuteNonQuery();
+
+                BancoDados.CloseConnection();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 }

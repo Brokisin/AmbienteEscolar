@@ -99,7 +99,7 @@
                         <div>
                             <div class="prof-CvnMrfG" hidden>
                                 <label hidden>Id:</label>
-                                <input id="idProf" type="text" name="idProf" value="@p.Id" placeholder="Id" hidden/>
+                                <input id="idProf" type="text" name="idProf" value="@p.Id" placeholder="Id" hidden />
                             </div>
                             <div class="prof-CvnMrfG">
                                 <label>Nome:</label>
@@ -121,13 +121,26 @@
                         </div>
                         <input id="insert" type="submit" value="Gravar" disabled />
                     </form>
-                    <div class="prof-BtnCLokkTg">
-                        <button id="new" onclick="NewP()">Novo</button>
-                        <button id="update" onclick="UpdateP()" disabled>Alterar</button>
-                        <button id="cancel" onclick="CancelarP()">Cancelar</button>
-                        <button id="delete" onclick="DeleteP()" disabled></button>
-                    </div>
+                    <div style="display: flex; align-items: center;">
+                        <div class="prof-BtnCLokkTg">
+                            <button id="new" onclick="NewP()">Novo</button>
+                            <button id="update" onclick="UpdateP()" disabled>Alterar</button>
+                            <button id="cancel" onclick="CancelarP()">Cancelar</button>
+                        </div>
+                        <form action="~/WebBusiness/ProfessorBusiness/ProfessorDelete.cshtml" method="post" style="padding: 6px 0 0 6px;">
+                            <input id="idProfessorDelete" type="text" name="idProfessorDelete" value="@p.Id" hidden />
+                            <input id="nomeProfessorDelete" type="text" name="nomeProfessorDelete" value="@p.Nome" placeholder="Nome do aluno" hidden />
+                            <input id="emailProfessorDelete" type="email" name="emailProfessorDelete" value="@p.Email" placeholder="E-mail do aluno" hidden />
+                            <select id="idCursoProfessorDelete" name="idCursoProfessorDelete" hidden>
+                                @foreach (Curso curso in cursos)
+                                {
+                                    <option>@curso.Descricao</option>
+                                }
+                            </select>
 
+                            <input id="delete" type="submit" value="Deletar" disabled />
+                        </form>
+                    </div>
                 </div>
                 <div class="prof-MMkcEwS">
                     <h2>Professores:</h2>

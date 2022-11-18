@@ -99,5 +99,26 @@ namespace AmbienteEscolar.Business.Repositorios
                 return false;
             }
         }
+
+        public static bool DeletarProfessor(int id)
+        {
+            StringBuilder sb = new StringBuilder();
+
+            sb.AppendLine("DELETE FROM professor WHERE id=" + id + "");
+
+            if (BancoDados.OpenConnection() == true)
+            {
+                MySqlCommand cmd = new MySqlCommand(sb.ToString(), BancoDados.connection);
+
+                cmd.ExecuteNonQuery();
+
+                BancoDados.CloseConnection();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 }
