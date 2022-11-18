@@ -1,0 +1,66 @@
+﻿@using AmbienteEscolar.Business.Classes
+@using AmbienteEscolar.Business.BancoDeDados
+@using AmbienteEscolar.Business.Repositorios
+
+@{
+    Layout = null;
+    BancoDados.DBConnect();
+    Curso curso = new Curso();
+    Aluno aluno = new Aluno();
+
+    aluno.Id = int.Parse(Request.Form["idAlunoDelete"]);
+    aluno.Nome = Request.Form["nomeAlunoDelete"];
+    aluno.Email = Request.Form["emailAlunoDelete"];
+    string descricaoCurso = Request.Form["idCursoAlunoDelete"];
+    int idCurso = CursoRepository.ListarCursosDescricao(descricaoCurso);
+
+    bool idIsNotNull = aluno.Id != 0;
+    bool nomePreenchido = aluno.Nome != "";
+    bool emailPreenchido = aluno.Email != "";
+    bool idPreenchido = idCurso != 0;
+
+    bool camposPreenchidos = nomePreenchido && emailPreenchido && idPreenchido;
+
+    if (camposPreenchidos)
+    {
+        if (idIsNotNull)
+        {
+            if (AlunoRepository.DeletarAluno(aluno.Id))
+            {
+                <text>
+                    <script>
+                        alert("Aluno deletado com sucesso.");
+                        window.location.href = "/View/Home/Alunos";
+                    </script>
+                </text>
+            }
+            else
+            {
+                <text>
+                    <script>
+                        alert("Ocorreu um erro ao deletar aluno, tente novamente.");
+                        window.location.href = "/View/Home/Alunos";
+                    </script>
+                </text>
+            }
+        }
+        else
+        {
+            <text>
+                <script>
+                    alert("Não foi possível encontrar o aluno.");
+                    window.location.href = "/View/Home/Alunos";
+                </script>
+            </text>
+        }
+    }
+    else
+    {
+        <text>
+            <script>
+                alert("Falha ao deletar.");
+                window.location.href = "/View/Home/Alunos";
+            </script>
+        </text>
+    }
+}

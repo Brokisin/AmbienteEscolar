@@ -6,6 +6,11 @@ function limparCampos() {
     document.getElementById("nome").value = "";
     document.getElementById("email").value = "";
     document.getElementById("idCursoId").value = "";
+    //
+    document.getElementById("idAlunoDelete").value = 0;
+    document.getElementById("nomeAlunoDelete").value = "";
+    document.getElementById("emailAlunoDelete").value = "";
+    document.getElementById("idCursoAlunoDelete").value = "";
 }
 
 function liberarCampos() {
@@ -13,6 +18,7 @@ function liberarCampos() {
     document.getElementById("email").disabled = false;
     document.getElementById("idCursoId").disabled = false;
     document.getElementById("insert").disabled = false;
+    //
 }
 
 function bloquearCampos() {
@@ -26,6 +32,7 @@ function Cancelar() {
     limparCampos();
     document.getElementById("update").disabled = true;
     document.getElementById("insert").disabled = true;
+    document.getElementById("delete").disabled = true;
 }
 
 function New() {
@@ -37,21 +44,25 @@ function Update() {
     liberarCampos();
 }
 
-function Delete() {
-
-}
-
 function infoAlunos() {
     let tabela = document.getElementById("table");
 
     for (var i = 1; i < tabela.rows.length; i++) {
         tabela.rows[i].onclick = function () {
             document.getElementById("update").disabled = false;
+            document.getElementById("delete").disabled = false;
 
             document.getElementById("idAluno").value = this.cells[0].innerHTML;
             document.getElementById("nome").value = this.cells[1].innerHTML;
             document.getElementById("email").value = this.cells[2].innerHTML;
             document.getElementById('idCursoId').value = this.cells[3].innerHTML;
+
+            //para o Delete
+
+            document.getElementById("idAlunoDelete").value = this.cells[0].innerHTML;
+            document.getElementById("nomeAlunoDelete").value = this.cells[1].innerHTML;
+            document.getElementById("emailAlunoDelete").value = this.cells[2].innerHTML;
+            document.getElementById("idCursoAlunoDelete").value = this.cells[3].innerHTML;
         };
     }
 }

@@ -124,12 +124,18 @@
                             <button id="update" onclick="Update()" disabled>Alterar</button>
                             <button id="cancel" onclick="Cancelar()">Cancelar</button>
                         </div>
-                        <form action="/" method="post" style="padding-top: 6px;">
-                            <input id="idAluno" type="text" name="idAluno" value="@a.Id" hidden />
-                            <input id="nome" type="text" name="nome" value="@a.Nome" placeholder="Nome do aluno" hidden />
-                            <input id="email" type="email" name="email" value="@a.Email" placeholder="E-mail do aluno" hidden />
+                        <form action="~/WebBusiness/AlunoBusiness/AlunoDelete.cshtml" method="post" style="padding: 6px 0 0 6px;">
+                            <input id="idAlunoDelete" type="text" name="idAlunoDelete" value="@a.Id" hidden />
+                            <input id="nomeAlunoDelete" type="text" name="nomeAlunoDelete" value="@a.Nome" placeholder="Nome do aluno" hidden />
+                            <input id="emailAlunoDelete" type="email" name="emailAlunoDelete" value="@a.Email" placeholder="E-mail do aluno" hidden />
+                            <select id="idCursoAlunoDelete" name="idCursoAlunoDelete" hidden>
+                                @foreach (Curso curso in cursos)
+                                {
+                                    <option>@curso.Descricao</option>
+                                }
+                            </select>
 
-                            <input id="delete" type="submit" value="Deletar" disabled/>
+                            <input id="delete" type="submit" value="Deletar" disabled />
                         </form>
                     </div>
                 </div>
