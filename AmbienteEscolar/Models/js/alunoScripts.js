@@ -62,6 +62,13 @@ function infoAlunos() {
             document.getElementById("nomeAlunoDelete").value = this.cells[1].innerHTML;
             document.getElementById("emailAlunoDelete").value = this.cells[2].innerHTML;
             document.getElementById("idCursoAlunoDelete").value = this.cells[3].innerHTML;
+
+            //para o Generate
+
+            document.getElementById("idAlunoGenerate").value = this.cells[0].innerHTML;
+            document.getElementById("nomeAlunoGenerate").value = this.cells[1].innerHTML;
+            document.getElementById("emailAlunoGenerate").value = this.cells[2].innerHTML;
+            document.getElementById("idCursoAlunoGenerate").value = this.cells[3].innerHTML;
         };
     }
 }
@@ -346,4 +353,9 @@ function sortTableUser(n) {
             }
         }
     }
+}
+
+function myfunction() {
+    var b = document.getElementById('selectAlunoMatricula');
+    alert("Valor: ", b.value);
 }

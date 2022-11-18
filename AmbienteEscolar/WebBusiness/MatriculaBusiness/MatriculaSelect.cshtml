@@ -1,0 +1,63 @@
+﻿@using AmbienteEscolar.Business.Classes
+@using AmbienteEscolar.Business.BancoDeDados
+@using AmbienteEscolar.Business.Repositorios
+@{
+    Layout = null;
+    BancoDados.DBConnect();
+
+    Aluno aluno = new Aluno();
+    aluno.Id = int.Parse(Request.Form["selectAlunoMatricula"]);
+    //aluno.Id = 1;
+    List<Matricula> listaMatriculas = MatriculaRepository.ListarMatriculas(aluno.Id);
+
+    Curso curso = new Curso();
+    Matricula matr = new Matricula();
+
+    bool idIsNotNull = aluno.Id != 0;
+    bool listaPreenchida = listaMatriculas != null;
+
+    bool itensPreenchidos = idIsNotNull && listaPreenchida;
+
+    if (itensPreenchidos)
+    {
+        <text>
+            <html xmlns="http://www.w3.org/1999/xhtml">
+            <head>
+                <title>Visualização da Matrícula</title>
+                <meta charset="utf-8" />
+                <meta name="viewport" content="width=device-width" />
+            </head>
+            <body>
+                <div>Matrícula:</div>
+                @foreach (Matricula m in listaMatriculas)
+                {
+                    <div>
+                        <div>@m.Id</div>
+                        <div>@m.Numero_matricula</div>
+                        <div>@m.Aluno.Nome</div>
+                        <div>@m.Aluno.Email</div>
+                        <div>@m.Aluno.Curso.Descricao</div>
+                        <div>@m.Aluno.Curso.Turno</div>
+                    </div>
+                }
+
+                <button onclick="redirecionarTelaMatricula()">Voltar</button>
+            </body>
+        </html>
+            <script>
+                function redirecionarTelaMatricula() {
+                    window.location.href = "/View/Home/Matriculas";
+                }
+            </script>
+        </text>
+    }
+    else
+    {
+        <text>
+            <script>
+                alert("Falha ao visualizar matrícula.");
+                window.location.href = "/View/Home/Matriculas";
+            </script>
+        </text>
+    }
+}

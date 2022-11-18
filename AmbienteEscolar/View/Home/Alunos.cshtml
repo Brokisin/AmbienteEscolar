@@ -137,6 +137,20 @@
 
                             <input id="delete" type="submit" value="Deletar" disabled />
                         </form>
+
+                        <form action="~/WebBusiness/MatriculaBusiness/MatriculaSelectScripts.cshtml" method="post" style="padding: 6px 0 0 6px;">
+                            <input id="idAlunoGenerate" type="text" name="idAlunoGenerate" value="@a.Id" hidden />
+                            <input id="nomeAlunoGenerate" type="text" name="nomeAlunoGenerate" value="@a.Nome" placeholder="Nome do aluno" hidden />
+                            <input id="emailAlunoGenerate" type="email" name="emailAlunoGenerate" value="@a.Email" placeholder="E-mail do aluno" hidden />
+                            <select id="idCursoAlunoGenerate" name="idCursoAlunoGenerate" hidden>
+                                @foreach (Curso curso in cursos)
+                                {
+                                    <option>@curso.Descricao</option>
+                                }
+                            </select>
+
+                            <input id="generate" type="submit" value="Gerar Matrícula" />
+                        </form>
                     </div>
                 </div>
 

@@ -5,6 +5,8 @@
 @{
     Layout = null;
     BancoDados.DBConnect();
+    List<Aluno> alunos = AlunoRepository.ListarAlunos();
+
     Usuario usuario = new Usuario();
     usuario.Login = Request.Form["login"];
 
@@ -92,16 +94,17 @@
                 </div>
 
                 <div>
-                    <p>matriculas</p>
-                    <p>matriculas</p>
-                    <p>matriculas</p>
-                    <p>matriculas</p>
-                    <p>matriculas</p>
-                    <p>matriculas</p>
-                    <p>matriculas</p>
-                    <p>matriculas</p>
-                    <p>matriculas</p>
-                    <p>matriculas</p>
+                    <div>Visualizar Matrícula: </div>
+                    <form action="~/WebBusiness/MatriculaBusiness/MatriculaSelect.cshtml" method="post">
+                        <select id="selectAlunoMatricula" name="selectAlunoMatricula">
+                            @foreach (Aluno al in alunos)
+                            {
+                                <option value="@al.Id">@al.Nome</option>
+                            }
+                        </select>
+                        <input id="selectMatricula" type="submit" value="Visualizar" />
+                    </form>
+                    <button onclick="myfunction()">teste</button>
                 </div>
             </main>
         </div>
@@ -139,4 +142,6 @@ else
             spinnerWrapper.style.display = "none";
         }
     });
+
 </script>
+

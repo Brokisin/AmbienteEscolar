@@ -7,13 +7,13 @@
     Curso curso = new Curso();
     Aluno aluno = new Aluno();
 
-    aluno.Id = int.Parse(Request.Form["idAluno"]);
-    aluno.Nome = Request.Form["nome"];
-    aluno.Email = Request.Form["email"];
-    string descricaoCurso = Request.Form["idCursoId"];
+    aluno.Id = int.Parse(Request.Form["idAlunoGenerate"]);
+    aluno.Nome = Request.Form["nomeAlunoGenerate"];
+    aluno.Email = Request.Form["emailAlunoGenerate"];
+    string descricaoCurso = Request.Form["idCursoAlunoGenerate"];
     int idCurso = CursoRepository.ListarCursosDescricao(descricaoCurso);
 
-    bool idIsNull = aluno.Id == 0;
+    bool idIsNotNull = aluno.Id != 0;
     bool nomePreenchido = aluno.Nome != "";
     bool emailPreenchido = aluno.Email != "";
     bool idPreenchido = idCurso != 0;
@@ -22,9 +22,9 @@
 
     if (camposPreenchidos)
     {
-        if (idIsNull)
+        if (idIsNotNull)
         {
-            if (AlunoRepository.InserirAluno(aluno.Nome, aluno.Email, idCurso))
+            if (MatriculaRepository.InserirMatricula(aluno.Id))
             {
                 <text>
                     <script>
@@ -45,25 +45,12 @@
         }
         else
         {
-            if (AlunoRepository.AtualizarAluno(aluno.Id, aluno.Nome, aluno.Email, idCurso))
-            {
-                @MatriculaRepository.InserirMatricula(aluno.Id);
-                <text>
-                    <script>
-                        alert("Aluno alterado com sucesso.");
-                        window.location.href = "/View/Home/Alunos";
-                    </script>
-                </text>
-            }
-            else
-            {
-                <text>
-                    <script>
-                        alert("Ocorreu um erro ao alterar, tente novamente.");
-                        window.location.href = "/View/Home/Alunos";
-                    </script>
-                </text>
-            }
+            <text>
+                <script>
+                    alert("Ocorreu um erro ao alterar, tente novamente.");
+                    window.location.href = "/View/Home/Alunos";
+                </script>
+            </text>
         }
     }
     else

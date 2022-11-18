@@ -135,12 +135,14 @@
     <Compile Include="Business\Classes\Curso.cs" />
     <Compile Include="Business\Classes\Enum\Ativo.cs" />
     <Compile Include="Business\Classes\Enum\NivelAcesso.cs" />
+    <Compile Include="Business\Classes\Matricula.cs" />
     <Compile Include="Business\Classes\Professor.cs" />
     <Compile Include="Business\Classes\Sala.cs" />
     <Compile Include="Business\Classes\Turma.cs" />
     <Compile Include="Business\Classes\Usuario.cs" />
     <Compile Include="Business\Repositorios\AlunoRepository.cs" />
     <Compile Include="Business\Repositorios\CursoRepository.cs" />
+    <Compile Include="Business\Repositorios\MatriculaRepository.cs" />
     <Compile Include="Business\Repositorios\NivelAcessoRepository.cs" />
     <Compile Include="Business\Repositorios\ProfessorRepository.cs" />
     <Compile Include="Business\Repositorios\SalaRepository.cs" />
@@ -170,10 +172,10 @@
     <Content Include="WebBusiness\AlunoBusiness\AlunoDelete.cshtml" />
     <Content Include="WebBusiness\ProfessorBusiness\ProfessorDelete.cshtml" />
     <Content Include="WebBusiness\UsuarioBusiness\UsuarioDelete.cshtml" />
+    <Content Include="WebBusiness\MatriculaBusiness\MatriculaSelect.cshtml" />
+    <Content Include="WebBusiness\MatriculaBusiness\MatriculaSelectScripts.cshtml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="WebBusiness\CursoBusiness\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
