@@ -31,6 +31,7 @@
         <link href="~/Models/css/menu.css" rel="stylesheet" />
         <link href="~/Models/css/suporte.css" rel="stylesheet" />
         <link href="~/Models/css/alunos.css" rel="stylesheet" />
+        <link href="~/Models/css/matriculas.css" rel="stylesheet" />
         <link href="~/View/Validate/ValidateLogin.cshtml" rel="profile" />
         <link rel="icon" type="image/x-icon" href="~/Button-Blank-Blue-icon.ico">
         <script src="~/Models/js/logoffAction.js"></script>
@@ -93,8 +94,8 @@
                     <p>SCHOOL REGISTER:</p>
                 </div>
 
-                <div>
-                    <div>Visualizar Matrícula: </div>
+                <div class="mat-SWlfTy">
+                    <div class="mat-JJsWevg">Visualizar Matrícula: </div>
                     <form action="~/WebBusiness/MatriculaBusiness/MatriculaSelect.cshtml" method="post">
                         <select id="selectAlunoMatricula" name="selectAlunoMatricula">
                             @foreach (Aluno al in alunos)
@@ -104,7 +105,6 @@
                         </select>
                         <input id="selectMatricula" type="submit" value="Visualizar" />
                     </form>
-                    <button onclick="myfunction()">teste</button>
                 </div>
             </main>
         </div>

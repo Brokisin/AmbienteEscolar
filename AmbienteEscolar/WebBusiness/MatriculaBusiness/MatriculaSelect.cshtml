@@ -7,7 +7,6 @@
 
     Aluno aluno = new Aluno();
     aluno.Id = int.Parse(Request.Form["selectAlunoMatricula"]);
-    //aluno.Id = 1;
     List<Matricula> listaMatriculas = MatriculaRepository.ListarMatriculas(aluno.Id);
 
     Curso curso = new Curso();
@@ -26,29 +25,88 @@
                 <title>Visualização da Matrícula</title>
                 <meta charset="utf-8" />
                 <meta name="viewport" content="width=device-width" />
+                <link href="~/Models/css/matriculas.css" rel="stylesheet" />
+                <link rel="icon" type="image/x-icon" href="~/Button-Blank-Blue-icon.ico">
             </head>
             <body>
-                <div>Matrícula:</div>
-                @foreach (Matricula m in listaMatriculas)
-                {
-                    <div>
-                        <div>@m.Id</div>
-                        <div>@m.Numero_matricula</div>
-                        <div>@m.Aluno.Nome</div>
-                        <div>@m.Aluno.Email</div>
-                        <div>@m.Aluno.Curso.Descricao</div>
-                        <div>@m.Aluno.Curso.Turno</div>
-                    </div>
-                }
+                <main class="posmat-Main">
+                    <div class="posmat-gJKs">
+                        <div class="posmat-mat">Matrícula:</div>
+                        @foreach (Matricula m in listaMatriculas)
+                        {
+                            <div>
+                                <div class="posmat-VVggDD">
+                                    <p class="p-PP">Identificador:</p>
+                                    <div>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-record-fill" viewBox="0 0 16 16">
+                                            <path fill-rule="evenodd" d="M8 13A5 5 0 1 0 8 3a5 5 0 0 0 0 10z" />
+                                        </svg>
+                                        - @m.Id
+                                    </div>
+                                </div>
+                                <div class="posmat-VVggDD">
+                                    <p class="p-PP">Número matrícula:</p>
+                                    <div>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-zip-fill" viewBox="0 0 16 16">
+                                            <path d="M5.5 9.438V8.5h1v.938a1 1 0 0 0 .03.243l.4 1.598-.93.62-.93-.62.4-1.598a1 1 0 0 0 .03-.243z" />
+                                            <path d="M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0zM9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1zm-4-.5V2h-1V1H6v1h1v1H6v1h1v1H6v1h1v1H5.5V6h-1V5h1V4h-1V3h1zm0 4.5h1a1 1 0 0 1 1 1v.938l.4 1.599a1 1 0 0 1-.416 1.074l-.93.62a1 1 0 0 1-1.109 0l-.93-.62a1 1 0 0 1-.415-1.074l.4-1.599V8.5a1 1 0 0 1 1-1z" />
+                                        </svg>
+                                        - @m.Numero_matricula
+                                    </div>
+                                </div>
+                                <div class="posmat-VVggDD">
+                                    <p class="p-PP">Nome:</p>
+                                    <div>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-bounding-box" viewBox="0 0 16 16">
+                                            <path d="M1.5 1a.5.5 0 0 0-.5.5v3a.5.5 0 0 1-1 0v-3A1.5 1.5 0 0 1 1.5 0h3a.5.5 0 0 1 0 1h-3zM11 .5a.5.5 0 0 1 .5-.5h3A1.5 1.5 0 0 1 16 1.5v3a.5.5 0 0 1-1 0v-3a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 1-.5-.5zM.5 11a.5.5 0 0 1 .5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 1 0 1h-3A1.5 1.5 0 0 1 0 14.5v-3a.5.5 0 0 1 .5-.5zm15 0a.5.5 0 0 1 .5.5v3a1.5 1.5 0 0 1-1.5 1.5h-3a.5.5 0 0 1 0-1h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 1 .5-.5z" />
+                                            <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm8-9a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+                                        </svg>
+                                        - @m.Aluno.Nome
+                                    </div>
+                                </div>
+                                <div class="posmat-VVggDD">
+                                    <p class="p-PP">E-mail:</p>
+                                    <div>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope-fill" viewBox="0 0 16 16">
+                                            <path d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414.05 3.555ZM0 4.697v7.104l5.803-3.558L0 4.697ZM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586l-1.239-.757Zm3.436-.586L16 11.801V4.697l-5.803 3.546Z" />
+                                        </svg>
+                                        - @m.Aluno.Email
+                                    </div>
+                                </div>
+                                <div class="posmat-VVggDD">
+                                    <p class="p-PP">Curso:</p>
+                                    <div>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-journal-bookmark-fill" viewBox="0 0 16 16">
+                                            <path fill-rule="evenodd" d="M6 1h6v7a.5.5 0 0 1-.757.429L9 7.083 6.757 8.43A.5.5 0 0 1 6 8V1z" />
+                                            <path d="M3 0h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-1h1v1a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v1H1V2a2 2 0 0 1 2-2z" />
+                                            <path d="M1 5v-.5a.5.5 0 0 1 1 0V5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0V8h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0v.5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1z" />
+                                        </svg>
+                                        - @m.Aluno.Curso.Descricao
+                                    </div>
+                                </div>
+                                <div class="posmat-VVggDD">
+                                    <p class="p-PP">Turno:</p>
+                                    <div>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bookmarks" viewBox="0 0 16 16">
+                                            <path d="M2 4a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v11.5a.5.5 0 0 1-.777.416L7 13.101l-4.223 2.815A.5.5 0 0 1 2 15.5V4zm2-1a1 1 0 0 0-1 1v10.566l3.723-2.482a.5.5 0 0 1 .554 0L11 14.566V4a1 1 0 0 0-1-1H4z" />
+                                            <path d="M4.268 1H12a1 1 0 0 1 1 1v11.768l.223.148A.5.5 0 0 0 14 13.5V2a2 2 0 0 0-2-2H6a2 2 0 0 0-1.732 1z" />
+                                        </svg>
+                                        - @m.Aluno.Curso.Turno
+                                    </div>
+                                </div>
+                            </div>
+                        }
 
-                <button onclick="redirecionarTelaMatricula()">Voltar</button>
+                        <button class="butSSSVFSD" onclick="redirecionarTelaMatricula()">Voltar</button>
+                    </div>
+                </main>
             </body>
         </html>
-            <script>
-                function redirecionarTelaMatricula() {
-                    window.location.href = "/View/Home/Matriculas";
-                }
-            </script>
+        <script>
+            function redirecionarTelaMatricula() {
+                window.location.href = "/View/Home/Matriculas";
+            }
+        </script>
         </text>
     }
     else

@@ -1,0 +1,77 @@
+﻿body {
+    background-color: #525252;
+    font-size: 20px;
+}
+
+.mat-SWlfTy {
+    padding: 10px;
+    border: 2px solid white;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 2px 2px 5px black;
+    margin: 20px 0px;
+}
+
+.mat-JJsWevg {
+    padding: 15px 0;
+    font-size: 28px;
+}
+
+select#selectAlunoMatricula {
+    padding: 3px;
+    border: 1px solid #999999;
+    font-size: 15px;
+    border-radius: 8px;
+    box-shadow: 0px 1px 2px #000000;
+    margin: 0 15px 0 0;
+}
+
+.posmat-Main {
+    display: flex;
+    justify-content: center;
+    margin-top: 90px;
+}
+
+.posmat-gJKs {
+    background-color: white;
+    width: 33%;
+    padding: 1.2%;
+    border-radius: 20px;
+    box-shadow: 0px 5px 20px black;
+}
+
+.posmat-mat {
+    font-size: 35px;
+    text-align: center;
+    text-shadow: 0px 1px 3px #3f51b5;
+}
+
+.posmat-VVggDD {
+    border: 1px solid #c9c9c9;
+    border-radius: 10px;
+    padding: 10px 5px;
+    box-shadow: 4px 0px 0px #000000;
+}
+
+.p-PP {
+    margin: 6px 0;
+    font-size: 23px;
+    color: #001bb1;
+    text-shadow: 1px 1px 2px #898787;
+}
+
+.butSSSVFSD {
+    margin-top: 15px;
+    border: 1px solid #3f51b5;
+    background-color: #6565f9;
+    font-size: 15px;
+    color: white;
+    padding: 5px 18px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all .1s ease-in;
+}
+
+    .butSSSVFSD:hover {
+        background-color: #3f51b5;
+    }

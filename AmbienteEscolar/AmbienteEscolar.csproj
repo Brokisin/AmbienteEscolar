@@ -115,6 +115,7 @@
     <Content Include="Button-Blank-Blue-icon.ico" />
     <Content Include="Models\css\alunos.css" />
     <Content Include="Models\css\layout.css" />
+    <Content Include="Models\css\matriculas.css" />
     <Content Include="Models\css\menu.css" />
     <Content Include="Models\css\professores.css" />
     <Content Include="Models\css\reset.css" />

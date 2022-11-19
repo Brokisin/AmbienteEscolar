@@ -142,7 +142,7 @@ footer {
     box-shadow: 7px 7px 12px #181818;
 }
 
-button, input#insert, input#delete {
+button, input#insert, input#delete, input#selectMatricula {
     cursor: pointer;
     padding: 5px;
     font-weight: bold;
@@ -154,13 +154,13 @@ button, input#insert, input#delete {
     transition: all .1s ease-in;
 }
 
-    button:enabled:hover, input#insert:enabled:hover, input#delete:enabled:hover {
+    button:enabled:hover, input#insert:enabled:hover, input#delete:enabled:hover, input#selectMatricula:enabled:hover {
         background: #245aad;
         border-color: #245aad;
         border-radius: 6px;
     }
 
-    button:disabled, input#insert:disabled, input#delete:disabled {
+    button:disabled, input#insert:disabled, input#delete:disabled, input#selectMatricula:disabled {
         cursor: default;
         background: #62a0ff;
         border-color: #62a0ff;
@@ -169,6 +169,10 @@ button, input#insert, input#delete {
 
 input#nome, input#email, select#idCursoId{
     margin-left: 10px;
+}
+
+.m-MAJkOwE {
+    border-top: 1px solid black;
 }
 
 /*===================*/
