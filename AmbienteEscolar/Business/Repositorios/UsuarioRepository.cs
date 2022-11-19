@@ -57,7 +57,7 @@ namespace AmbienteEscolar.Business.Repositorios
         {
             StringBuilder sb = new StringBuilder();
 
-            sb.AppendLine("SELECT a.id, a.login, a.senha, a.id_acesso, n.descricao FROM ambienteescolarava.usuario a ");
+            sb.AppendLine("SELECT a.id, a.login, a.senha, a.id_acesso, n.descricao FROM usuario a ");
             sb.AppendLine("INNER JOIN nivelacesso n ON a.id_acesso = n.id ORDER BY id;");
 
             List<Usuario> listaUsuarios = new List<Usuario>();
@@ -99,7 +99,7 @@ namespace AmbienteEscolar.Business.Repositorios
         public static bool Login(string login, string senha)
         {
             //string query = "SELECT Count(*) FROM usuario WHERE login='" + login + "' AND senha='" + senha + "';";
-            string query = "SELECT count(*) FROM ambienteescolarava.usuario WHERE login='" + login + "' and senha='" + senha + "'";
+            string query = "SELECT count(*) FROM usuario WHERE login='" + login + "' and senha='" + senha + "'";
 
             if (BancoDados.OpenConnection() == true)
             {

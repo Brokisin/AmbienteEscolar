@@ -18,7 +18,7 @@ namespace AmbienteEscolar.Business.Repositorios
             StringBuilder sb = new StringBuilder();
 
             //sb.AppendLine("SELECT a.id, a.nome, a.email, a.id_curso, c.descricao, c.turno FROM aluno a ");
-            sb.AppendLine("SELECT a.id, a.nome, a.email, a.id_curso, c.descricao, c.turno FROM ambienteescolarava.aluno a ");
+            sb.AppendLine("SELECT a.id, a.nome, a.email, a.id_curso, c.descricao, c.turno FROM aluno a ");
             sb.AppendLine("INNER JOIN curso c ON a.id_curso = c.id;");
 
             List<Aluno> listaAlunos = new List<Aluno>();

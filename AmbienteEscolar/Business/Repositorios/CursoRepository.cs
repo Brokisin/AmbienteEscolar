@@ -16,7 +16,7 @@ namespace AmbienteEscolar.Business.Repositorios
             StringBuilder sb = new StringBuilder();
 
             //sb.AppendLine("SELECT * FROM curso");
-            sb.AppendLine("SELECT * FROM ambienteescolarava.curso"); //mysql
+            sb.AppendLine("SELECT * FROM curso"); //mysql
             sb.AppendLine("ORDER BY descricao;");
 
             List<Curso> listaCursos = new List<Curso>();
@@ -52,7 +52,7 @@ namespace AmbienteEscolar.Business.Repositorios
             StringBuilder sb = new StringBuilder();
 
             //sb.AppendLine("SELECT descricao FROM curso");
-            sb.AppendLine("SELECT descricao FROM ambienteescolarava.curso"); //mysql
+            sb.AppendLine("SELECT descricao FROM curso"); //mysql
             sb.AppendLine("ORDER BY id;");
 
             List<Curso> listaCursos = new List<Curso>();
@@ -88,7 +88,7 @@ namespace AmbienteEscolar.Business.Repositorios
             StringBuilder sb = new StringBuilder();
 
             //sb.AppendLine("SELECT * FROM curso");
-            sb.AppendLine("SELECT * FROM ambienteescolarava.curso"); //mysql
+            sb.AppendLine("SELECT * FROM curso"); //mysql
             sb.AppendLine("WHERE descricao like '%" + descricao + "%' ORDER BY descricao;");
             
             Curso curso = new Curso();
@@ -121,7 +121,7 @@ namespace AmbienteEscolar.Business.Repositorios
         public static void InserirCurso(string descricao, string turno)
         {
             //string query = "INSERT INTO curso (descricao, turno) VALUES('" + descricao + "','" + turno + "');"; //php
-            string query = "INSERT INTO ambienteescolarava.curso (descricao, turno) VALUES('" + descricao + "', '" + turno + "');"; //mysql
+            string query = "INSERT INTO curso (descricao, turno) VALUES('" + descricao + "', '" + turno + "');"; //mysql
 
             if (BancoDados.OpenConnection() == true)
             {
@@ -137,7 +137,7 @@ namespace AmbienteEscolar.Business.Repositorios
         public static void DeletarCurso(int id)
         {
             //string query = "DELETE FROM curso WHERE id=" + id + "";
-            string query = "DELETE FROM ambienteescolarava.cursos WHERE id=" + id + ""; //mysql
+            string query = "DELETE FROM cursos WHERE id=" + id + ""; //mysql
 
             if (BancoDados.OpenConnection() == true)
             {
