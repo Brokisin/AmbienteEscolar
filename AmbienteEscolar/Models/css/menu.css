@@ -142,7 +142,7 @@ footer {
     box-shadow: 7px 7px 12px #181818;
 }
 
-button, input#insert, input#delete, input#selectMatricula {
+button, input#insert, input#delete, input#selectMatricula, input#generate {
     cursor: pointer;
     padding: 5px;
     font-weight: bold;
@@ -154,13 +154,13 @@ button, input#insert, input#delete, input#selectMatricula {
     transition: all .1s ease-in;
 }
 
-    button:enabled:hover, input#insert:enabled:hover, input#delete:enabled:hover, input#selectMatricula:enabled:hover {
+    button:enabled:hover, input#insert:enabled:hover, input#delete:enabled:hover, input#selectMatricula:enabled:hover, input#generate:enabled:hover {
         background: #245aad;
         border-color: #245aad;
         border-radius: 6px;
     }
 
-    button:disabled, input#insert:disabled, input#delete:disabled, input#selectMatricula:disabled {
+    button:disabled, input#insert:disabled, input#delete:disabled, input#selectMatricula:disabled, input#generate:disabled {
         cursor: default;
         background: #62a0ff;
         border-color: #62a0ff;
