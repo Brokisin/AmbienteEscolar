@@ -58,7 +58,7 @@ namespace AmbienteEscolar.Business.Repositorios
             StringBuilder sb = new StringBuilder();
 
             sb.AppendLine("SELECT a.id, a.login, a.senha, a.id_acesso, n.descricao FROM usuario a ");
-            sb.AppendLine("INNER JOIN nivelacesso n ON a.id_acesso = n.id ORDER BY id;");
+            sb.AppendLine("INNER JOIN nivelAcesso n ON a.id_acesso = n.id ORDER BY id;");
 
             List<Usuario> listaUsuarios = new List<Usuario>();
 

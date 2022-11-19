@@ -10,7 +10,7 @@
 .sup-NNMdfgW {
     display: flex;
     flex-direction: column;
-    padding: 10px 15px 0 0;
+    padding: 10px 15px 20px 0;
     border-right: 1px solid #3e3e3e;
 }
 
@@ -31,6 +31,7 @@
 .sup-JJwLsqQ {
     display: grid;
     justify-content: center;
+    padding: 0 0 20px 0;
 }
 
 svg.bi-envelope-fill, svg.bi-headset, svg.bi-telephone-inbound-fill {
@@ -54,4 +55,31 @@ path {
     color: #000000;
     text-shadow: 1px 1px 1px #3d72af;
     justify-self: center;
+}
+
+.sup-BDGD {
+    padding: 50px 0;
+    border-top: 3px solid #3e3e3e;
+}
+
+.sup-CCvsW {
+    display: flex;
+    align-items: center;
+    padding: 10px 0;
+}
+
+a#docuRef {
+    color: #2e7bcb;
+    transition: all .2s ease-in;
+}
+    a#docuRef:hover {
+        color: #007dff;
+        font-size: 22.3px;
+        text-shadow: 1px 1px 3px #dedede;
+    }
+
+.sup-JKHJHTF {
+    padding-right: 15px;
+    font-size: 27px;
+    font-weight: bold;
 }
