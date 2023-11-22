@@ -28,7 +28,7 @@ namespace AmbienteEscolar.Business.Repositorios
             {
                 if (BancoDados.OpenConnection() == true)
                 {
-                    MySqlCommand command = new MySqlCommand(query, BancoDados.connection);
+                    MySqlCommand command = new MySqlCommand(query, BancoDados.Connection);
                     MySqlDataReader dataReader = command.ExecuteReader();
 
                     if (dataReader.HasRows)
@@ -64,7 +64,7 @@ namespace AmbienteEscolar.Business.Repositorios
 
             if (BancoDados.OpenConnection() == true)
             {
-                MySqlCommand cmd = new MySqlCommand(sb.ToString(), BancoDados.connection);
+                MySqlCommand cmd = new MySqlCommand(sb.ToString(), BancoDados.Connection);
                 MySqlDataReader dataReader = cmd.ExecuteReader();
 
                 while (dataReader.Read())
@@ -103,7 +103,7 @@ namespace AmbienteEscolar.Business.Repositorios
 
             if (BancoDados.OpenConnection() == true)
             {
-                MySqlCommand cmd = new MySqlCommand(query, BancoDados.connection);
+                MySqlCommand cmd = new MySqlCommand(query, BancoDados.Connection);
                 try
                 {
                     int count = int.Parse(cmd.ExecuteScalar() + "");
@@ -135,7 +135,7 @@ namespace AmbienteEscolar.Business.Repositorios
             if (BancoDados.OpenConnection() == true)
             {
                 MySqlConnection connection = new MySqlConnection();
-                MySqlCommand cmd = new MySqlCommand(query, BancoDados.connection);
+                MySqlCommand cmd = new MySqlCommand(query, BancoDados.Connection);
 
                 cmd.ExecuteNonQuery();
 
@@ -160,7 +160,7 @@ namespace AmbienteEscolar.Business.Repositorios
 
             if (BancoDados.OpenConnection() == true)
             {
-                MySqlCommand cmd = new MySqlCommand(sb.ToString(), BancoDados.connection);
+                MySqlCommand cmd = new MySqlCommand(sb.ToString(), BancoDados.Connection);
 
                 cmd.ExecuteNonQuery();
 
@@ -181,7 +181,7 @@ namespace AmbienteEscolar.Business.Repositorios
 
             if (BancoDados.OpenConnection() == true)
             {
-                MySqlCommand cmd = new MySqlCommand(sb.ToString(), BancoDados.connection);
+                MySqlCommand cmd = new MySqlCommand(sb.ToString(), BancoDados.Connection);
 
                 cmd.ExecuteNonQuery();
 

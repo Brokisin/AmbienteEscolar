@@ -1,0 +1,181 @@
+﻿@using AmbienteEscolar.Business.BancoDeDados;
+@using AmbienteEscolar.Business.Repositorios;
+@using AmbienteEscolar.Business.Classes;
+
+@{
+    //Layout nulo, por enquanto (mudar para _Layout, assim que estiver pronto)
+    Layout = null;
+    BancoDados.DBConnect();
+    Usuario usuario = new Usuario();
+    AmbienteEscolar.Business.Others.Enumerations en = new AmbienteEscolar.Business.Others.Enumerations();
+    Dictionary<int, List<Disciplina>> DisciplinasPorModulo = DisciplinaRepository.RetornaDisciplinas();
+    bool contemDisciplinas = DisciplinasPorModulo.Count > 0;
+    usuario.Login = Request.Form["login"];
+
+    Boolean logged = false;
+    HttpCookie cookie = Request.Cookies["UserLogin"];
+    if (cookie != null)
+    {
+        logged = true;
+    }
+}
+
+<!DOCTYPE html>
+
+<html>
+@*@if (logged == true)
+    {*@
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Professores</title>
+    <link href="~/View/Shared/_Layout.cshtml" rel="logo" />
+    <link href="~/Models/css/reset.css" rel="stylesheet" />
+    <link href="~/Models/css/menu.css" rel="stylesheet" />
+    <link href="~/Models/css/professores.css" rel="stylesheet" />
+    <link href="~/View/Validate/ValidateLogin.cshtml" rel="profile" />
+    <link rel="icon" type="image/x-icon" href="~/Button-Blank-Blue-icon.ico">
+</head>
+<body>
+
+
+    <!--Spinner Wrapper-->
+    <div id="spinMod" class="spinner-modal">
+        <div id="spinnerWrapper" class="ring">
+            Loading
+            <span></span>
+        </div>
+    </div>
+
+    <!--Main Header-->
+    <div id="hyperHeader">
+        <div class="header">
+            <h2>AVA - Ambiente Escolar</h2>
+            <p>Seja bem-vindo!</p>
+        </div>
+        <div class="cvSDgbcvD">
+            <ul>
+                <li><a class="active" href="~/View/Home/Menu">Home</a></li>
+                <li><a href="~/View/Home/Matriculas">Matrículas</a></li>
+                <li class="dropdown">
+                    <a>
+                        Cadastro
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi-caret-down-fill" viewBox="0 0 16 16">
+                            <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
+                        </svg>
+                    </a>
+                    <div class="dropdown-content">
+                        <a href="~/View/Home/Alunos">Alunos</a>
+                        <a href="~/View/Home/Professores">Professores</a>
+                        <a href="~/View/Home/Usuarios">Usuários</a>
+                    </div>
+                </li>
+                <li><a href="~/View/Ext/Sobre">Suporte</a></li>
+                <li class="dropdown">
+                    <a>
+                        Eu
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi-caret-down-fill" viewBox="0 0 16 16">
+                            <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
+                        </svg>
+                    </a>
+                    <div class="dropdown-content">
+                        <a onclick="LogOff()">Logoff</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!--Professores Screen-->
+    <div class="container-table">
+        <div class="table100 ver1 m-b-110">
+            @if (contemDisciplinas)
+            {
+                foreach (var modulo in DisciplinasPorModulo)
+                {
+                    <div class="table100-head">
+                        <table>
+                            <thead>
+                                <tr class="row100 head">
+                                    <th class="ver-main cell100 column1"><span>Módulo </span>@modulo.Key<span>: @en.ReturnDescriptionModulo(modulo.Key)</span></th>
+                            </thead>
+                        </table>
+                    </div>
+                    <div class="table100-head">
+                        <table>
+                            <thead>
+                                <tr class="row100 head">
+                                    <th class="cell100 column1">Disciplina</th>
+                                    <th class="cell100 column2">Requisitos</th>
+                                    <th class="cell100 column3">Situação</th>
+                                    <th class="cell100 column4">Carga Horária</th>
+                                    <th class="cell100 column5">Nota</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                    foreach (var disciplina in modulo.Value)
+                    {
+                        <div class="table100-body">
+                            <table>
+                                <tbody>
+                                    <tr class="row100 body">
+                                        <td class="cell100 column1">@disciplina.NomeDisciplina</td>
+                                        <td class="cell100 column2">@disciplina.Requisitos</td>
+                                        <td class="cell100 column3">@disciplina.Situacao</td>
+                                        <td class="cell100 column4">@disciplina.CargaHoraria</td>
+                                        <td class="cell100 column5">@disciplina.Nota</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    }
+                }
+            }
+            else
+            {
+                <div>
+                    <span>Ops! Histórico indisponível no momento.</span>
+                </div>
+            }
+        </div>
+    </div>
+
+    <!--Main Footer-->
+    <footer id="hyperFooter">
+        <div>
+            <p>2022 AVA &#169; - Todos os direitos reservados.</p>
+        </div>
+    </footer>
+</body>
+@*}
+    else
+    {
+        <head>
+            <link rel="icon" type="image/x-icon" href="~/View/Validate/notFound.ico">
+            <title>Not Found</title>
+        </head>
+        <body>
+            <br />
+            <img style="margin-left: 30px; display:inline-block;" src="~/View/Validate/notFound.ico" alt="notFound" />
+            <h1 style="display:inline-block; margin-left: 20px;"> Something went wrong. Return <a href="~/Login.cshtml">here</a>. </h1>
+        </body>
+    }*@
+</html>
+<script>
+    // SPINNER WRAPPER =================
+
+    var spinnerWrapper = document.getElementById("spinnerWrapper");
+    var spinnerModal = document.getElementById("spinMod");
+
+    window.addEventListener('load', function () {
+        if (spinnerModal.style.display = "flex") {
+            spinnerModal.style.display = "none";
+            spinnerWrapper.style.display = "none";
+        }
+    });
+</script>
+
+<script src="~/Models/js/logoffAction.js"></script>
+<script src="~/Models/js/alunoScripts.js"></script>
+<script src="~/Models/js/scripts.js"></script>
