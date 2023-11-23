@@ -110,9 +110,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Button-Blank-Blue-icon.ico" />
-    <Content Include="Dggggggggsdfcv.jpg" />
-    <Content Include="H47HVU2CB5DPNBV6Z353AKPXQ4.jpeg" />
-    <Content Include="hhjlhgafgrgnvg.jpg" />
+    <Content Include="books.jpg" />
+    <Content Include="caroussel_open_book.jpeg" />
+    <Content Include="book_coffee.jpg" />
     <Content Include="Models\css\alunos.css" />
     <Content Include="Models\css\layout.css" />
     <Content Include="Models\css\matriculas.css" />
