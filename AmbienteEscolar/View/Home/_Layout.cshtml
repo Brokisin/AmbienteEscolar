@@ -11,3 +11,16 @@
     <link rel="stylesheet" href="~/css/defaultStyle.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/menuLateral.css" asp-append-version="true" />
 </head>
+
+<div class="container">
+    <main role="main" class="main-container">
+        @RenderSection("SemMenu", required: false)
+        @if (!IsSectionDefined("SemMenu"))
+        {
+            <div class="containerMenu">
+                @RenderPage("Shared/SideBarMenu.cshtml", "SideBarMenu")
+            </div>
+        }
+        @RenderBody()
+    </main>
+</div>

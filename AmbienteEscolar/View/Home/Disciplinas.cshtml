@@ -4,7 +4,7 @@
 
 @{
     //Layout nulo, por enquanto (mudar para _Layout, assim que estiver pronto)
-    Layout = null;
+    Layout = "_Layout.cshtml";
     BancoDados.DBConnect();
     Usuario usuario = new Usuario();
     AmbienteEscolar.Business.Others.Enumerations en = new AmbienteEscolar.Business.Others.Enumerations();
@@ -28,26 +28,20 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
-    <title>Professores</title>
+    <title>Disciplinas</title>
     <link href="~/View/Shared/_Layout.cshtml" rel="logo" />
     <link href="~/Models/css/reset.css" rel="stylesheet" />
     <link href="~/Models/css/menu.css" rel="stylesheet" />
     <link href="~/View/Validate/ValidateLogin.cshtml" rel="profile" />
     <link rel="icon" type="image/x-icon" href="~/Button-Blank-Blue-icon.ico">
-    <link rel="stylesheet" href="~/css/login/login.css">
+    <link href="~/Models/css/menu_lateral.css" rel="stylesheet" />
+    <link href="~/Models/css/disciplinas.css" rel="stylesheet" />
+    <link href="~/Models/css/layout_scnd.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
 </head>
 <body>
 
-
-    <!--Spinner Wrapper-->
-    <div id="spinMod" class="spinner-modal">
-        <div id="spinnerWrapper" class="ring">
-            Loading
-            <span></span>
-        </div>
-    </div>
-
-    <!--Professores Screen-->
+    <!--DISCIPLINAS-->
     <div class="container-table">
         <div class="table100 ver1 m-b-110">
             @if (contemDisciplinas)
@@ -102,12 +96,13 @@
         </div>
     </div>
 
-    <!--Main Footer-->
-    <footer id="hyperFooter">
-        <div>
-            <p>2022 AVA &#169; - Todos os direitos reservados.</p>
+    <!--Spinner Wrapper-->
+    <div id="spinMod" class="spinner-modal">
+        <div id="spinnerWrapper" class="ring">
+            Loading
+            <span></span>
         </div>
-    </footer>
+    </div>
 </body>
 @*}
     else

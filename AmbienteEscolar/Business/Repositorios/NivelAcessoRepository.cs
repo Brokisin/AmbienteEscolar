@@ -16,8 +16,7 @@ namespace AmbienteEscolar.Business.Repositorios
         {
             StringBuilder sb = new StringBuilder();
 
-            //sb.AppendLine("SELECT id, descricao FROM nivelacesso ORDER BY id;");
-            sb.AppendLine("SELECT id, descricao FROM nivelAcesso ORDER BY id;");
+            sb.AppendLine("SELECT id, descricao FROM nivel_acesso ORDER BY id;");
 
             List<NivelAcesso> listaNivelAcesso = new List<NivelAcesso>();
 
@@ -50,8 +49,7 @@ namespace AmbienteEscolar.Business.Repositorios
         {
             StringBuilder sb = new StringBuilder();
 
-            //sb.AppendLine("SELECT * FROM curso");
-            sb.AppendLine("SELECT * FROM nivelAcesso"); //mysql
+            sb.AppendLine("SELECT * FROM nivel_acesso");
             sb.AppendLine("WHERE descricao like '%" + descricao + "%' ORDER BY descricao;");
 
             NivelAcesso na = new NivelAcesso();

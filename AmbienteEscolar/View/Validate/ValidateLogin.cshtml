@@ -9,7 +9,7 @@
     
     Usuario usuario = new Usuario();
     
-    usuario.Login = Request.Form["login"];
+    usuario.Login = Request.Form["logininput"];
     usuario.Senha = Request.Form["senha"];
 
     if (UsuarioRepository.Login(usuario.Login, usuario.Senha))

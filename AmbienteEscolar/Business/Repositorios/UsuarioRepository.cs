@@ -98,7 +98,6 @@ namespace AmbienteEscolar.Business.Repositorios
 
         public static bool Login(string login, string senha)
         {
-            //string query = "SELECT Count(*) FROM usuario WHERE login='" + login + "' AND senha='" + senha + "';";
             string query = "SELECT count(*) FROM usuario WHERE login='" + login + "' and senha='" + senha + "'";
 
             if (BancoDados.OpenConnection() == true)
