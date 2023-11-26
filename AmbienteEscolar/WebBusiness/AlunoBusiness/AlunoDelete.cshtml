@@ -5,28 +5,16 @@
 @{
     Layout = null;
     BancoDados.DBConnect();
-    Curso curso = new Curso();
     Aluno aluno = new Aluno();
 
-    aluno.Id = int.Parse(Request.Form["idAlunoDelete"]);
-    aluno.Nome = Request.Form["nomeAlunoDelete"];
-    aluno.Email = Request.Form["emailAlunoDelete"];
-    string descricaoCurso = Request.Form["idCursoAlunoDelete"];
-    int idCurso = CursoRepository.ListarCursosDescricao(descricaoCurso);
+    aluno.Id = int.Parse(Request.Form["idDelete"]);
+    aluno.Matricula = int.Parse(Request.Form["matriculaDelete"]);
 
-    bool idIsNotNull = aluno.Id != 0;
-    bool nomePreenchido = aluno.Nome != "";
-    bool emailPreenchido = aluno.Email != "";
-    bool idPreenchido = idCurso != 0;
-
-    bool camposPreenchidos = nomePreenchido && emailPreenchido && idPreenchido;
-
-    if (camposPreenchidos)
-    {
-        if (idIsNotNull)
+        if (aluno.Id != 0)
         {
             if (AlunoRepository.DeletarAluno(aluno.Id))
             {
+                @UsuarioRepository.DeletarUsuarioPorLogin(aluno.Matricula);
                 <text>
                     <script>
                         alert("Aluno deletado com sucesso.");
@@ -53,14 +41,4 @@
                 </script>
             </text>
         }
-    }
-    else
-    {
-        <text>
-            <script>
-                alert("Falha ao deletar.");
-                window.location.href = "/View/Home/Alunos";
-            </script>
-        </text>
-    }
 }

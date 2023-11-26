@@ -4,28 +4,27 @@
 @{
     Layout = null;
     BancoDados.DBConnect();
-    Curso curso = new Curso();
     Aluno aluno = new Aluno();
 
-    aluno.Id = int.Parse(Request.Form["idAluno"]);
+    aluno.Id = int.Parse(Request.Form["id"]);
     aluno.Nome = Request.Form["nome"];
+    aluno.Matricula = int.Parse(Request.Form["matricula"]);
+    aluno.Cpf = Request.Form["cpf"];
+    aluno.Telefone = Request.Form["telefone"];
     aluno.Email = Request.Form["email"];
-    string descricaoCurso = Request.Form["idCursoId"];
-    int idCurso = CursoRepository.ListarCursosDescricao(descricaoCurso);
 
-    bool idIsNull = aluno.Id == 0;
     bool nomePreenchido = aluno.Nome != "";
     bool emailPreenchido = aluno.Email != "";
-    bool idPreenchido = idCurso != 0;
 
-    bool camposPreenchidos = nomePreenchido && emailPreenchido && idPreenchido;
+    bool camposPreenchidos = nomePreenchido && emailPreenchido;
 
     if (camposPreenchidos)
     {
-        if (idIsNull)
+        if (aluno.Id == 0)
         {
-            if (AlunoRepository.InserirAluno(aluno.Nome, aluno.Email, idCurso))
+            if (AlunoRepository.InserirAluno(aluno.Nome, aluno.Matricula, aluno.Cpf, aluno.Telefone, aluno.Email))
             {
+                @UsuarioRepository.InserirUsuario(aluno.Matricula.ToString(), aluno.Cpf, 4);
                 <text>
                     <script>
                         alert("Aluno inserido com sucesso.");
@@ -45,9 +44,8 @@
         }
         else
         {
-            if (AlunoRepository.AtualizarAluno(aluno.Id, aluno.Nome, aluno.Email, idCurso))
+            if (AlunoRepository.AtualizarAluno(aluno.Id, aluno.Nome, aluno.Matricula, aluno.Cpf, aluno.Telefone, aluno.Email))
             {
-                @MatriculaRepository.InserirMatricula(aluno.Id);
                 <text>
                     <script>
                         alert("Aluno alterado com sucesso.");

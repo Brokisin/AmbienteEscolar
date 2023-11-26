@@ -3,22 +3,22 @@
 @using AmbienteEscolar.Business.Repositorios
 
 @{
-    Layout = null;
-    
     BancoDados.DBConnect();
-    
+
     Usuario usuario = new Usuario();
-    
-    usuario.Login = Request.Form["logininput"];
+
+    usuario.Login = Request.Form["login"];
     usuario.Senha = Request.Form["senha"];
+
 
     if (UsuarioRepository.Login(usuario.Login, usuario.Senha))
     {
         HttpCookie cookie = new HttpCookie("UserLogin");
-        cookie.Value = "admin";
+        Sessao sessao = UsuarioRepository.BuscarSessao(usuario.Login);
+        cookie.Value = $"{sessao.Nome},{sessao.Matricula},{sessao.Registro},{sessao.NivelAcesso.Id},{sessao.NivelAcesso.Descricao}";
         DateTime dtNow = DateTime.Now;
         // Cookie expira em uma hora.
-        TimeSpan tsMinute = new TimeSpan(0, 0, 60, 0);
+        TimeSpan tsMinute = new TimeSpan(0, 1, 0, 0);
         cookie.Expires = dtNow + tsMinute;
         Response.Cookies.Add(cookie);
         <text>

@@ -9,11 +9,11 @@
     NivelAcesso na = new NivelAcesso();
     Usuario user = new Usuario();
 
-    user.Id = int.Parse(Request.Form["idUsuario"]);
-    user.Login = Request.Form["loginUsuario"];
-    user.Senha = Request.Form["senhaUsuario"];
-    string descricaoAcesso = Request.Form["idAcesso"];
-    int idNivelAcesso = NivelAcessoRepository.ListarAcessosDescricao(descricaoAcesso);
+    user.Login = Request.Form["loginUser"];
+    user.Senha = Request.Form["senhaUser"];
+    user.Id = int.Parse(Request.Form["idUser"]);
+    int acesso = int.Parse(Request.Form["permissionUser"]);
+    int idNivelAcesso = NivelAcessoRepository.ListarAcessosDescricao(acesso);
 
     bool idIsNull = user.Id == 0;
     bool nomePreenchido = user.Login != "";

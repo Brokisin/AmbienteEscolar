@@ -45,12 +45,12 @@ namespace AmbienteEscolar.Business.Repositorios
             }
         }
 
-        public static int ListarAcessosDescricao(string descricao)
+        public static int ListarAcessosDescricao(int id)
         {
             StringBuilder sb = new StringBuilder();
 
-            sb.AppendLine("SELECT * FROM nivel_acesso");
-            sb.AppendLine("WHERE descricao like '%" + descricao + "%' ORDER BY descricao;");
+            sb.AppendLine("SELECT id, descricao FROM nivel_acesso");
+            sb.AppendLine("WHERE id='" + id + "' ORDER BY descricao;");
 
             NivelAcesso na = new NivelAcesso();
             List<NivelAcesso> listaAcessos = new List<NivelAcesso>();
@@ -63,7 +63,7 @@ namespace AmbienteEscolar.Business.Repositorios
                 while (dataReader.Read())
                 {
                     na.Id = int.Parse(dataReader["id"].ToString());
-                    na.Descricao = "";
+                    na.Descricao = dataReader["descricao"].ToString();
 
                     listaAcessos.Add(na);
                 }

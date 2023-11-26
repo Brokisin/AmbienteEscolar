@@ -9,21 +9,10 @@
     NivelAcesso nivelA = new NivelAcesso();
     Usuario user = new Usuario();
 
-    user.Id = int.Parse(Request.Form["idUsuarioDelete"]);
-    user.Login = Request.Form["loginUsuarioDelete"];
-    user.Senha = Request.Form["senhaUsuarioDelete"];
-    string descricaoNivelAcesso = Request.Form["idNivelAcessoUsuarioDelete"];
-    int idNivelAcesso = NivelAcessoRepository.ListarAcessosDescricao(descricaoNivelAcesso);
+    user.Id = int.Parse(Request.Form["idUserDelete"]);
 
     bool idIsNotNull = user.Id != 0;
-    bool nomePreenchido = user.Login != "";
-    bool emailPreenchido = user.Senha != "";
-    bool idPreenchido = idNivelAcesso != 0;
 
-    bool camposPreenchidos = nomePreenchido && emailPreenchido && idPreenchido;
-
-    if (camposPreenchidos)
-    {
         if (idIsNotNull)
         {
             if (UsuarioRepository.DeletarUsuario(user.Id))
@@ -54,14 +43,4 @@
                 </script>
             </text>
         }
-    }
-    else
-    {
-        <text>
-            <script>
-                alert("Falha ao deletar.");
-                window.location.href = "/View/Home/Usuarios";
-            </script>
-        </text>
-    }
 }

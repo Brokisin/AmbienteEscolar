@@ -1,4 +1,8 @@
-﻿<!DOCTYPE html>
+﻿@using AmbienteEscolar.Business.Classes
+
+@{
+    Sessao sessao = Sessao.Current();
+}
 
 <head>
     <meta charset="utf-8">
@@ -12,15 +16,29 @@
     <link rel="stylesheet" href="~/css/menuLateral.css" asp-append-version="true" />
 </head>
 
-<div class="container">
-    <main role="main" class="main-container">
-        @RenderSection("SemMenu", required: false)
-        @if (!IsSectionDefined("SemMenu"))
-        {
+
+@if (sessao.Nome == null || sessao.NivelAcesso == null)
+{
+    {
+        Layout = null;
+    }
+        @RenderPage("Shared/NotFound.cshtml", "NotFound")
+    <div style="visibility: hidden">
+        @RenderBody()
+    </div>
+}
+else
+{
+    <div class="container">
+        <main role="main" class="main-container">
+            @RenderSection("SemMenu", required: false)
+            @if (!IsSectionDefined("SemMenu"))
+            {
             <div class="containerMenu">
                 @RenderPage("Shared/SideBarMenu.cshtml", "SideBarMenu")
             </div>
-        }
-        @RenderBody()
-    </main>
-</div>
+            }
+            @RenderBody()
+        </main>
+    </div>
+}

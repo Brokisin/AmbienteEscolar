@@ -1,4 +1,12 @@
-﻿<script src="~/Models/js/logoffAction.js"></script>
+﻿@using AmbienteEscolar.Business.Classes;
+
+@{
+    Sessao sessao = Sessao.Current();
+
+    string matriculaOuRegistro = string.IsNullOrEmpty(sessao.Matricula.ToString()) ? sessao.Registro : sessao.Matricula.ToString();
+}
+
+<script src="~/Models/js/logoffAction.js"></script>
 <script src="~/Models/js/scripts.js"></script>
 
 <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
@@ -29,7 +37,7 @@
     <hr style="color: white;">
     <ul class="nav nav-pills flex-column mb-auto">
         <li class="nav-item">
-            <a href="~/View/Home/Menu.cshtml" class="nav-link active" aria-current="page">
+            <a href="~/View/Home/Menu.cshtml" class="nav-link active" aria-current="page" style="background-color: #208fff;">
                 <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#home"></use></svg>
                 Home
             </a>
@@ -40,12 +48,15 @@
                 Notas
             </a>
         </li>
-        <li>
-            <a href="~/View/Home/Matriculas.cshtml" class="nav-link text-white">
-                <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#notas"></use></svg>
-                Matrícula
-            </a>
-        </li>
+        @if (sessao.NivelAcesso.Id != 3)
+        {
+            <li>
+                <a href="~/View/Home/Matriculas.cshtml" class="nav-link text-white">
+                    <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#notas"></use></svg>
+                    Matrícula
+                </a>
+            </li>
+        }
         <li>
             <a href="~/View/Home/Disciplinas.cshtml" class="nav-link text-white">
                 <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#notas"></use></svg>
@@ -58,36 +69,35 @@
                 Histórico
             </a>
         </li>
-        <li>
-            <a href="~/View/Home/Usuarios.cshtml" class="nav-link text-white">
-                <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#products"></use></svg>
-                Usuários
-            </a>
-        </li>
-        <li>
-            <a href="~/View/Home/Professores.cshtml" class="nav-link text-white">
-                <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#products"></use></svg>
-                Professores
-            </a>
-        </li>
-        <li>
-            <a href="~/View/Home/Alunos.cshtml" class="nav-link text-white">
-                <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#products"></use></svg>
-                Alunos
-            </a>
-        </li>
+        @if (sessao.NivelAcesso.Id != 4)
+        {
+            <li>
+                <a href="~/View/Home/Usuarios.cshtml" class="nav-link text-white">
+                    <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#products"></use></svg>
+                    Usuários
+                </a>
+            </li>
+            <li>
+                <a href="~/View/Home/Professores.cshtml" class="nav-link text-white">
+                    <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#products"></use></svg>
+                    Professores
+                </a>
+            </li>
+            <li>
+                <a href="~/View/Home/Alunos.cshtml" class="nav-link text-white">
+                    <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#products"></use></svg>
+                    Alunos
+                </a>
+            </li>
+        }
     </ul>
     <hr style="color: white;">
     <div class="dropdown">
         <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
             <img src="https://trello.com/1/cards/6542920a5e1ffe2547f3f201/attachments/65609b3b22e1e9525dc786f1/download/anonymous_avatar.webp" alt="" width="32" height="32" class="rounded-circle me-2">
-            <strong>Eros</strong>
+            <strong>@sessao.Nome - @matriculaOuRegistro</strong>
         </a>
         <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
-            <li><a class="dropdown-item" href="#">New project...</a></li>
-            <li><a class="dropdown-item" href="#">Settings</a></li>
-            <li><a class="dropdown-item" href="#">Profile</a></li>
-            <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" onclick="LogOff()">Sign out</a></li>
         </ul>
     </div>

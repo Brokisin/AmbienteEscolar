@@ -4,6 +4,7 @@ using MySqlConnector;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Web;
 
@@ -15,44 +16,45 @@ namespace AmbienteEscolar.Business.Repositorios
 
         public static List<Professor> ListarProfessores()
         {
-            StringBuilder sb = new StringBuilder();
+            //StringBuilder sb = new StringBuilder();
 
-            sb.AppendLine("SELECT p.id, p.nome, p.email, p.id_curso, c.descricao, c.turno FROM professor p");
-            sb.AppendLine("INNER JOIN curso c ON p.id_curso = c.id;");
+            //sb.AppendLine("SELECT p.id, p.nome, p.email, p.id_curso, c.descricao, c.turno FROM professor p");
+            //sb.AppendLine("INNER JOIN curso c ON p.id_curso = c.id;");
 
-            List<Professor> listaProfessores = new List<Professor>();
+            //List<Professor> listaProfessores = new List<Professor>();
 
-            if (BancoDados.OpenConnection() == true)
-            {
-                MySqlCommand cmd = new MySqlCommand(sb.ToString(), BancoDados.Connection);
-                MySqlDataReader dataReader = cmd.ExecuteReader();
+            //if (BancoDados.OpenConnection() == true)
+            //{
+            //    MySqlCommand cmd = new MySqlCommand(sb.ToString(), BancoDados.Connection);
+            //    MySqlDataReader dataReader = cmd.ExecuteReader();
 
-                while (dataReader.Read())
-                {
-                    Curso curso = new Curso();
-                    Professor professor = new Professor();
+            //    while (dataReader.Read())
+            //    {
+            //        Curso curso = new Curso();
+            //        Professor professor = new Professor();
 
-                    professor.Id = int.Parse(dataReader["id"].ToString());
-                    professor.Nome = dataReader["nome"].ToString();
-                    professor.Email = dataReader["email"].ToString();
+            //        professor.Id = int.Parse(dataReader["id"].ToString());
+            //        professor.Nome = dataReader["nome"].ToString();
+            //        professor.Email = dataReader["email"].ToString();
 
-                    curso.Id = int.Parse(dataReader["id_curso"].ToString());
-                    curso.Descricao = dataReader["descricao"].ToString();
-                    curso.Turno = dataReader["turno"].ToString();
+            //        curso.Id = int.Parse(dataReader["id_curso"].ToString());
+            //        curso.Descricao = dataReader["descricao"].ToString();
+            //        curso.Turno = dataReader["turno"].ToString();
 
-                    professor.Curso = curso;
+            //        professor.Curso = curso;
 
-                    listaProfessores.Add(professor);
-                }
-                dataReader.Close();
-                BancoDados.CloseConnection();
+            //        listaProfessores.Add(professor);
+            //    }
+            //    dataReader.Close();
+            //    BancoDados.CloseConnection();
 
-                return listaProfessores;
-            }
-            else
-            {
-                return listaProfessores;
-            }
+            //    return listaProfessores;
+            //}
+            //else
+            //{
+            //    return listaProfessores;
+            //}
+            return new List<Professor>();
         }
 
         public static bool InserirProfessor(string nome, string email, int id_curso)
