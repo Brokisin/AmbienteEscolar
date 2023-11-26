@@ -14,7 +14,7 @@
         {
             if (AlunoRepository.DeletarAluno(aluno.Id))
             {
-                @UsuarioRepository.DeletarUsuarioPorLogin(aluno.Matricula);
+                @UsuarioRepository.DeletarUsuarioPorLogin(aluno.Matricula.ToString());
                 <text>
                     <script>
                         alert("Aluno deletado com sucesso.");

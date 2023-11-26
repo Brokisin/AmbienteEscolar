@@ -1,183 +1,190 @@
 ﻿@using AmbienteEscolar.Business.BancoDeDados;
 @using AmbienteEscolar.Business.Repositorios;
 @using AmbienteEscolar.Business.Classes;
+@using AmbienteEscolar.Business.Classes.Enum;
 
 @{
-    //Layout nulo, por enquanto (mudar para _Layout, assim que estiver pronto)
-    Layout = null;
+    Layout = "_Layout.cshtml";
     BancoDados.DBConnect();
     List<Professor> professores = ProfessorRepository.ListarProfessores();
-    List<Curso> cursos = CursoRepository.ListarCursos();
-    Professor p = new Professor();
-    Usuario usuario = new Usuario();
-    usuario.Login = Request.Form["login"];
-
-    Boolean logged = false;
-    HttpCookie cookie = Request.Cookies["UserLogin"];
-    if (cookie != null)
-    {
-        logged = true;
-    }
 }
 
-<!DOCTYPE html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
-    <title>Professores</title>
+    <title>Usuários</title>
     <link href="~/View/Shared/_Layout.cshtml" rel="logo" />
     <link href="~/Models/css/reset.css" rel="stylesheet" />
-    <link href="~/Models/css/menu.css" rel="stylesheet" />
-    <link href="~/Models/css/professores.css" rel="stylesheet" />
     <link href="~/View/Validate/ValidateLogin.cshtml" rel="profile" />
     <link rel="icon" type="image/x-icon" href="~/Button-Blank-Blue-icon.ico">
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Models/css/menu_lateral.css" rel="stylesheet" />
+    <link href="~/Models/css/menu.css" rel="stylesheet" />
+    <link href="~/Models/css/layout_scnd.css" rel="stylesheet" />
 </head>
-
-<html>
 <body>
-    @if (logged == true)
-    {
-        <div id="professores" class="d-Professores">
-            <main class="div-mainCCVCD">
-                <div class="home-title">
-                    <p>TEACHERS:</p>
-                </div>
-
-                <div class="prof-MMkcEwS">
-                    <form action="~/WebBusiness/ProfessorBusiness/ProfessorInsert.cshtml" method="post">
-                        <h2>Cadastro de Professores:</h2>
-                        <div>
-                            <div class="prof-CvnMrfG" hidden>
-                                <label hidden>Id:</label>
-                                <input id="idProf" type="text" name="idProf" value="@p.Id" placeholder="Id" hidden />
-                            </div>
-                            <div class="prof-CvnMrfG">
-                                <label>Nome:</label>
-                                <input id="nomeProf" type="text" name="nome" value="@p.Nome" placeholder="Nome do professor" disabled />
-                            </div>
-                            <div class="prof-CvnMrfG">
-                                <label>E-mail:</label>
-                                <input id="emailProf" type="email" name="email" value="@p.Email" placeholder="E-mail do professor" disabled />
-                            </div>
-                            <div class="prof-CvnMrfG">
-                                <label>Selecione o curso:</label>
-                                <select id="idCursoId" name="idCursoId" disabled>
-                                    @foreach (Curso curso in cursos)
-                                    {
-                                        <option>@curso.Descricao</option>
-                                    }
-                                </select>
-                            </div>
-                        </div>
-                        <input id="insert" type="submit" value="Gravar" disabled />
-                    </form>
-                    <div style="display: flex; align-items: center;">
-                        <div class="prof-BtnCLokkTg">
-                            <button id="new" onclick="NewP()">Novo</button>
-                            <button id="update" onclick="UpdateP()" disabled>Alterar</button>
-                            <button id="cancel" onclick="CancelarP()">Cancelar</button>
-                        </div>
-                        <form action="~/WebBusiness/ProfessorBusiness/ProfessorDelete.cshtml" method="post" style="padding: 6px 0 0 6px;">
-                            <input id="idProfessorDelete" type="text" name="idProfessorDelete" value="@p.Id" hidden />
-                            <input id="nomeProfessorDelete" type="text" name="nomeProfessorDelete" value="@p.Nome" placeholder="Nome do aluno" hidden />
-                            <input id="emailProfessorDelete" type="email" name="emailProfessorDelete" value="@p.Email" placeholder="E-mail do aluno" hidden />
-                            <select id="idCursoProfessorDelete" name="idCursoProfessorDelete" hidden>
-                                @foreach (Curso curso in cursos)
+    <div class="container-lg container-default">
+        <div class="dft-header-title">
+            <h1>Professores</h1>
+        </div>
+        <div id="container-table" class="class-list">
+            <button class="btn btn-add-item" type="button" onclick="abrirModal(0, '', '', '', '')">Adicionar Professor</button>
+            <div class="table100 ver5 m-b-110">
+                <div class="table100-head">
+                    <table>
+                        <thead>
+                            <tr class="row100 head">
+                                @if (professores.Count > 0)
                                 {
-                                    <option>@curso.Descricao</option>
+                                    <th class="cell100 column1">Id</th>
+                                    <th class="cell100 column2">Nome</th>
+                                    <th class="cell100 column4">Registro</th>
+                                    <th class="cell100 column3">Cpf</th>
+                                    <th class="cell100 column5">Email</th>
                                 }
-                            </select>
-
-                            <input id="delete" type="submit" value="Deletar" disabled />
-                        </form>
-                    </div>
-                </div>
-                <div class="prof-MMkcEwS">
-                    <h2>Professores:</h2>
-                    <table id="table" onclick="profInfo()">
-                        <tr>
-                            <th onclick="sortTable(1)">
-                                Nome<span id="carretNome">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down" viewBox="0 0 16 16">
-                                        <path d="M3.204 5h9.592L8 10.481 3.204 5zm-.753.659 4.796 5.48a1 1 0 0 0 1.506 0l4.796-5.48c.566-.647.106-1.659-.753-1.659H3.204a1 1 0 0 0-.753 1.659z" />
-                                    </svg>
-                                </span>
-                                <span id="carretNameEnabled">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
-                                        <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
-                                    </svg>
-                                </span>
-                            </th>
-                            <th onclick="sortTable(2)">
-                                Email<span id="carretEmail">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down" viewBox="0 0 16 16">
-                                        <path d="M3.204 5h9.592L8 10.481 3.204 5zm-.753.659 4.796 5.48a1 1 0 0 0 1.506 0l4.796-5.48c.566-.647.106-1.659-.753-1.659H3.204a1 1 0 0 0-.753 1.659z" />
-                                    </svg>
-                                </span>
-                                <span id="carretEmailEnabled">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
-                                        <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
-                                    </svg>
-                                </span>
-                            </th>
-                            <th onclick="sortTable(3)">
-                                Curso<span id="carretCurso">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down" viewBox="0 0 16 16">
-                                        <path d="M3.204 5h9.592L8 10.481 3.204 5zm-.753.659 4.796 5.48a1 1 0 0 0 1.506 0l4.796-5.48c.566-.647.106-1.659-.753-1.659H3.204a1 1 0 0 0-.753 1.659z" />
-                                    </svg>
-                                </span>
-                                <span id="carretCursoEnabled">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
-                                        <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
-                                    </svg>
-                                </span>
-                            </th>
-                            <th onclick="sortTable(5)">
-                                Turno<span id="carretTurno">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down" viewBox="0 0 16 16">
-                                        <path d="M3.204 5h9.592L8 10.481 3.204 5zm-.753.659 4.796 5.48a1 1 0 0 0 1.506 0l4.796-5.48c.566-.647.106-1.659-.753-1.659H3.204a1 1 0 0 0-.753 1.659z" />
-                                    </svg>
-                                </span>
-                                <span id="carretTurnoEnabled">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
-                                        <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
-                                    </svg>
-                                </span>
-                            </th>
-                        </tr>
-                        @foreach (Professor prof in professores)
-                        {
-                            <tr>
-                                <td hidden>@prof.Id</td>
-                                <td>@prof.Nome</td>
-                                <td>@prof.Email</td>
-                                <td>@prof.Curso.Descricao</td>
-                                <td hidden>@prof.Curso.Id</td>
-                                <td>@prof.Curso.Turno</td>
+                                else
+                                {
+                                    <th class="cell100 column2"></th>
+                                }
+                                <th class="cell100 column5"></th>
                             </tr>
-                        }
+                        </thead>
                     </table>
                 </div>
-            </main>
-        </div>
 
-        <!--Spinner Wrapper-->
-        <div id="spinMod" class="spinner-modal">
-            <div id="spinnerWrapper" class="ring">
-                Loading
-                <span></span>
+                @if (professores.Count > 0)
+                {
+                    foreach (var us in professores)
+                    {
+                        <div class="table100-body">
+                            <table>
+                                <tbody>
+                                    <tr class="row100 body">
+                                        <td class="cell100 column1">@us.Id</td>
+                                        <td class="cell100 column2">@us.Nome</td>
+                                        <td class="cell100 column4">@us.Registro</td>
+                                        <td class="cell100 column3">@us.Cpf</td>
+                                        <td class="cell100 column5">@us.Email</td>
+                                        <td><button class="btn" onclick="abrirModal(@us.Id, '@us.Nome', '@us.Cpf', @us.Registro, '@us.Email')">Alterar</button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    }
+                }
+                else
+                {
+                    <div>
+                        <p>Sem usuários cadastrados no momento</p>
+                    </div>
+                }
             </div>
         </div>
-    }
-    else
-    {
-        <br />
-        <img style="margin-left: 30px; display:inline-block;" src="~/View/Validate/notFound.ico" alt="notFound" />
-        <h1 style="display:inline-block; margin-left: 20px;"> Something went wrong. Return <a href="~/Login.cshtml">here</a>. </h1>
-    }
+
+        <div id="alterarUsuarioModal" class="modal">
+            <div class="modal-content">
+                <!-- Conteúdo do modal -->
+                <span class="close" onclick="fecharModal()">&times;</span>
+                <div id="informacoesUsuario"></div>
+            </div>
+        </div>
+
+        <div id="deleteUsuarioModal" class="modal">
+            <div class="modal-content delete">
+                <!-- Conteúdo do modal -->
+                <span class="close" onclick="fecharModalDelete()">&times;</span>
+                <div id="informacoesUsuarioDelete"></div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!--Spinner Wrapper-->
+    <div id="spinMod" class="spinner-modal">
+        <div id="spinnerWrapper" class="ring">
+            Loading
+            <span></span>
+        </div>
+    </div>
 </body>
-</html>
+
+
+
 <script>
+
+    function abritModalDelete(id, registro) {
+        var modal = `<div class="formbold-main-wrapper">
+        <div class="formbold-form-wrapper">
+            <span>Tem certeza que deseja excluir o aluno?</span>
+            <form action="/WebBusiness/ProfessorBusiness/ProfessorDelete.cshtml" method="post">
+                <input name="idDelete" id="idDelete" value="${id}" hidden>
+                <input name="registroDelete" id="registroDelete" value="${registro}" hidden>
+                <input class="formbold-btn" value="Sim" type="submit">
+            </form>
+            <button style="margin-left: 115px; margin-top: -52px;" class="formbold-btn" onclick="fecharModalDelete()">Não</button>
+        </div>
+        </div>`;
+        document.getElementById("informacoesUsuarioDelete").innerHTML = modal;
+        document.getElementById("deleteUsuarioModal").style.display = "block";
+    }
+
+    // Função para abrir o modal e exibir informações do usuário
+    function abrirModal(id, nome, cpf, registro, email) {
+        var formModal = `<div class="formbold-main-wrapper">
+    <div class="formbold-form-wrapper">
+        <form action="/WebBusiness/ProfessorBusiness/ProfessorInsert.cshtml" method="post">
+
+            <div class="formbold-mb-3">
+                <label class="formbold-form-label">
+                    Identificador
+                </label>
+                <input id="id" type="text" name="id" class="formbold-form-input" value="${id}">
+            </div>
+
+            <div class="formbold-input-flex">
+                <div>
+                    <label class="formbold-form-label"> Nome </label>
+                    <input type="text" name="nome" id="nome" class="formbold-form-input" value="${nome}">
+                </div>
+                <div>
+                    <label class="formbold-form-label"> Cpf </label>
+                    <input type="text" name="cpf" id="cpf" class="formbold-form-input" value="${cpf}">
+                </div>
+            </div>
+
+            <div class="formbold-input-flex">
+                <div>
+                    <label class="formbold-form-label"> Registro </label>
+                    <input type="text" name="registro" id="registro" class="formbold-form-input" value="${registro}">
+                </div>
+                <div>
+                    <label class="formbold-form-label"> E-mail </label>
+                    <input id="email" type="text" name="email" class="formbold-form-input" value="${email}">
+                </div>
+            </div>
+
+            <input type="submit" class="formbold-btn" value="Salvar">
+        </form>
+        <button style="margin-left: 115px; margin-top: -52px;" class="formbold-btn" onclick="abritModalDelete(${id}, ${registro})" ${id == 0 ? /hidden/ : /'/}>Deletar</button>
+    </div>
+</div>`;
+
+        document.getElementById("informacoesUsuario").innerHTML = formModal;
+        document.getElementById("alterarUsuarioModal").style.display = "block";
+    }
+
+
+
+    // Função para fechar o modal
+    function fecharModal() {
+        document.getElementById("alterarUsuarioModal").style.display = "none";
+    }
+
+    function fecharModalDelete() {
+        document.getElementById("deleteUsuarioModal").style.display = "none";
+    }
+
     // SPINNER WRAPPER =================
 
     var spinnerWrapper = document.getElementById("spinnerWrapper");
@@ -189,8 +196,11 @@
             spinnerWrapper.style.display = "none";
         }
     });
+
+
+
 </script>
 
-<script src="~/Models/js/logoffAction.js"></script>
 <script src="~/Models/js/alunoScripts.js"></script>
+<script src="~/Models/js/logoffAction.js"></script>
 <script src="~/Models/js/scripts.js"></script>

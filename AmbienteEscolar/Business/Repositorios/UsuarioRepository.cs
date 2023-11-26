@@ -289,7 +289,7 @@ namespace AmbienteEscolar.Business.Repositorios
             finally { BancoDados.CloseConnection(); }
         }
 
-        public static bool DeletarUsuarioPorLogin(int login)
+        public static bool DeletarUsuarioPorLogin(string login)
         {
             StringBuilder sb = new StringBuilder();
             sb.AppendLine("DELETE FROM usuario WHERE login='" + login + "'");
