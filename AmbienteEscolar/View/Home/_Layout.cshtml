@@ -8,12 +8,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width" />
     <link rel="stylesheet" href="avaicon.ico">
-    <link href="~/Models/css/layout.css" rel="stylesheet" />
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/ls_ava_web.styles.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/defaultStyle.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/css/menuLateral.css" asp-append-version="true" />
 </head>
 
 
@@ -42,3 +38,24 @@ else
         </main>
     </div>
 }
+
+<script>
+    window.addEventListener('load', function () {
+        debugger;
+        var cookie = getCookie('UserLogin');
+        if (cookie == null) {
+            window.location.href = "/View/Home/Shared/NotFound.cshtml";
+        }
+    });
+
+    function getCookie(cookieName) {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = cookies[i].trim();
+            if (cookie.indexOf(cookieName + '=') === 0) {
+                return cookie.substring(cookieName.length + 1);
+            }
+        }
+        return null;
+    }
+</script>
