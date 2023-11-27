@@ -270,8 +270,22 @@
                     Para continuar navegando no portal, realize o login novamente
                     clicando no botão abaixo.
                 </p>
-                <button class="btn green" onclick="window.location.href = '/Login.cshtml'" style="background-color: #1291e3; color: white;">Login</button>
+                <button class="btn btn-expired" onclick="window.location.href = '/Login.cshtml'" >Login</button>
             </div>
         </div>
     </div>
 </main>
+
+<style>
+    .btn-expired {
+        background-color: #1291e3;
+        color: white;
+        width: 25%;
+        border-radius: 25px;
+    }
+        .btn-expired:hover {
+            background-color: black;
+            color: white;
+            transition: ease-in 0.2s;
+        }
+</style>

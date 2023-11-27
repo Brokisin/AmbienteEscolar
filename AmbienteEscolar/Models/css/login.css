@@ -15,7 +15,7 @@ body {
     background-color: var(--background-color);
     border-radius: 10px;
     width: 300px;
-    height: 420px;
+    height: 435px;
     margin: 200px auto;
     padding: 20px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
@@ -67,19 +67,26 @@ a {
 
 .button-lg-session {
     width: 80%;
-    border: 1px solid var(--input-border-color);
+    border: 1px solid transparent;
     border-radius: 5px;
-    background-color: #0084fb;
+    background-color: #1291e3;
     padding: 5px;
     color: white;
     margin-top: 10px;
     margin-bottom: 20px;
 }
 
+    .button-lg-session:hover, .a-button-lg:hover {
+        background-color: black;
+        color: white;
+        transition: ease-in 0.2s;
+    }
+
 .a-button-lg {
     text-decoration: none;
-    color: #757587;
+    background-color: #ffd700;
+    color: black;
     padding: 5px 23px;
     border-radius: 5px;
-    border: 1px solid #0084fb;
+    border: 1px solid transparent;
 }
