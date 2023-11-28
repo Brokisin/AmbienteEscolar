@@ -72,8 +72,21 @@ button.accept-policy {
     margin: 0% 10%;
 }
 
-/*MODAL*/
+.slct-matricula {
+    background-color: #f3f3f3;
+    border: none;
+    border-radius: 5px;
+    margin-right: 20px;
+}
 
+.frm-matricula {
+    display: flex;
+    flex-direction: column;
+    height: 100px;
+    justify-content: space-between;
+}
+
+/*MODAL*/
 /* Estilos do modal, ajuste conforme necessário */
 .modal {
     display: none;

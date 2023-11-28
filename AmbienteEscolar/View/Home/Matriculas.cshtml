@@ -5,6 +5,7 @@
 @{
     Layout = "_Layout.cshtml";
     Sessao sessao = Sessao.Current();
+    List<Aluno> listaAlunos = AlunoRepository.ListarAlunos();
 }
 
 <title>Matricula</title>
@@ -15,29 +16,49 @@
 
 <div class="container-lg container-default">
     <div class="dft-header-title">
-        <h1>Alunos</h1>
+        <h1>Matriculas</h1>
     </div>
     <div id="container-table" class="class-list">
-        @if (false@*sessao.NivelAcesso.Id == 1*@)
-{
-<div>
-    <div>
-        <span>Selecione uma matricula e clique no botão para visualizá-la</span>
-        @* lista de matriculas *@
-    </div>
-    <button onclick="">Matricula</button>
-</div>
-}
-else
-{
+        @if (sessao.NivelAcesso.Id == 1)
+        {
+            <div>
+                <form action="/WebBusiness/MatriculaBusiness/MatriculaSelect.cshtml" method="post" class="frm-matricula">
+                    <span>Selecione uma matricula e clique no botão para visualizá-la.</span>
+                    <div style="display: flex;">
+                        <select name="numeroMatricula" class="slct-matricula">
+                            <option disabled>Selecione a matricula</option>
+                            @foreach (var item in listaAlunos)
+                            {
+                                <option value="@item.Matricula">@item.Matricula</option>
+                            }
+                        </select>
+                        <button class="btn btn-add-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
+                                <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5"></path>
+                                <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"></path>
+                            </svg>
+                            Visualizar
+                        </button>
+                    </div>
+                </form>
+            </div>
+        }
+        else
+        {
 
-<div>
-    <form action="/WebBusiness/MatriculaBusiness/MatriculaSelect.cshtml" method="post">
-        <span>Clique para visualizar sua matricula</span>
-        <button onclick="">Matricula</button>
-    </form>
-</div>
-}
+            <div>
+                <form action="/WebBusiness/MatriculaBusiness/MatriculaSelect.cshtml" method="post" class="frm-matricula">
+                    <span>Clique para visualizar seu atestado de matricula.</span>
+                    <button class="btn btn-add-item">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
+                            <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5"></path>
+                            <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"></path>
+                        </svg>
+                        Visualizar
+                    </button>
+                </form>
+            </div>
+        }
     </div>
 </div>
 

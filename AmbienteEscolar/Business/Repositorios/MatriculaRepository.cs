@@ -1,5 +1,6 @@
 ﻿using AmbienteEscolar.Business.BancoDeDados;
 using AmbienteEscolar.Business.Classes;
+using IronPdf;
 using MySqlConnector;
 using System;
 using System.Collections.Generic;
@@ -85,6 +86,15 @@ namespace AmbienteEscolar.Business.Repositorios
             {
                 return false;
             }
+        }
+
+        public static void GerarPDF()
+        {
+            ChromePdfRenderer Renderer = new ChromePdfRenderer();
+            var pdf = Renderer.RenderHtmlAsPdf("Hello IronPdf");
+            var OutputPath = "DemoIronPdf.pdf";
+            pdf.SaveAs(OutputPath);
+            System.Diagnostics.Process.Start(OutputPath);
         }
     }
 }

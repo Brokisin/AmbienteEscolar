@@ -1,6 +1,7 @@
 ﻿using AmbienteEscolar.Business.BancoDeDados;
 using AmbienteEscolar.Business.Classes;
 using MySqlConnector;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -43,6 +44,40 @@ namespace AmbienteEscolar.Business.Repositorios
             else
             {
                 return listaAlunos;
+            }
+        }
+
+        public static Aluno BuscarAlunoPorMatricula(int matricula)
+        {
+            Aluno aluno = new Aluno();
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine($"SELECT id, nome, cpf, matricula, telefone, email FROM aluno WHERE matricula='{matricula}'");
+            try
+            {
+                if (BancoDados.OpenConnection() == true)
+                {
+                    MySqlCommand cmd = new MySqlCommand(sb.ToString(), BancoDados.Connection);
+                    MySqlDataReader dataReader = cmd.ExecuteReader();
+
+                    while (dataReader.Read())
+                    {
+                        aluno.Id = int.Parse(dataReader["id"].ToString());
+                        aluno.Nome = dataReader["nome"].ToString();
+                        aluno.Cpf = dataReader["cpf"].ToString();
+                        aluno.Matricula = int.Parse(dataReader["matricula"].ToString());
+                        aluno.Telefone = dataReader["telefone"].ToString();
+                        aluno.Email = dataReader["email"].ToString();
+                    }
+                    dataReader.Close();
+                    BancoDados.CloseConnection();
+
+                    return aluno;
+                }
+                else { return aluno; }
+            }
+            catch (Exception e)
+            {
+                return aluno = null;
             }
         }
 
