@@ -3,39 +3,43 @@
 @using AmbienteEscolar.Business.Classes;
 
 @{
-    Layout = "_Layout.cshml";
+    Layout = "_Layout.cshtml";
     Sessao sessao = Sessao.Current();
 }
+
+<title>Matricula</title>
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<link href="~/Models/css/menu_lateral.css" rel="stylesheet" />
+<link href="~/Models/css/menu.css" rel="stylesheet" />
+<link href="~/Models/css/layout_scnd.css" rel="stylesheet" />
 
 <div class="container-lg container-default">
     <div class="dft-header-title">
         <h1>Alunos</h1>
     </div>
     <div id="container-table" class="class-list">
-        @if (false @*sessao.NivelAcesso.Id == 1*@)
-        {
-            <div>
-                <div>
-                    <span>Selecione uma matricula e clique no botão para visualizá-la</span>
-                    @* lista de matriculas *@
-                </div>
-                <button onclick="">Matricula</button>
-            </div>
-        }
-        else
-        {
+        @if (false@*sessao.NivelAcesso.Id == 1*@)
+{
+<div>
+    <div>
+        <span>Selecione uma matricula e clique no botão para visualizá-la</span>
+        @* lista de matriculas *@
+    </div>
+    <button onclick="">Matricula</button>
+</div>
+}
+else
+{
 
-            <div>
-                <form action="/WebBusiness/MatriculaBusiness/MatriculaSelect.cshtml" method="post">
-                    <span>Clique para visualizar sua matricula</span>
-                    <button onclick="">Matricula</button>
-                </form>
-            </div>
-        }
+<div>
+    <form action="/WebBusiness/MatriculaBusiness/MatriculaSelect.cshtml" method="post">
+        <span>Clique para visualizar sua matricula</span>
+        <button onclick="">Matricula</button>
+    </form>
+</div>
+}
     </div>
 </div>
-
-
 
 <!--Spinner Wrapper-->
 <div id="spinMod" class="spinner-modal">
@@ -44,3 +48,18 @@
         <span></span>
     </div>
 </div>
+
+<script>
+
+    // SPINNER WRAPPER =================
+
+    var spinnerWrapper = document.getElementById("spinnerWrapper");
+    var spinnerModal = document.getElementById("spinMod");
+
+    window.addEventListener('load', function () {
+        if (spinnerModal.style.display = "flex") {
+            spinnerModal.style.display = "none";
+            spinnerWrapper.style.display = "none";
+        }
+    });
+</script>
