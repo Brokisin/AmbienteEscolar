@@ -20,109 +20,106 @@
     }
 }
 
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
-    <title>Usuários</title>
-    <link href="~/View/Shared/_Layout.cshtml" rel="logo" />
-    <link href="~/Models/css/reset.css" rel="stylesheet" />
-    <link href="~/View/Validate/ValidateLogin.cshtml" rel="profile" />
-    <link rel="icon" type="image/x-icon" href="~/Button-Blank-Blue-icon.ico">
-    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
-    <link href="~/Models/css/menu_lateral.css" rel="stylesheet" />
-    <link href="~/Models/css/menu.css" rel="stylesheet" />
-    <link href="~/Models/css/layout_scnd.css" rel="stylesheet" />
-</head>
-<body>
-    <div class="container-lg container-default">
-        <div class="dft-header-title">
-            <h1>Alunos</h1>
-        </div>
-        <div id="container-table" class="class-list">
-            <button class="btn btn-add-item" type="button" onclick="abrirModal(0, '', '', '', '', '')">Adicionar Aluno</button>
-            <div class="table100 ver5 m-b-110">
-                <div class="table100-head">
-                    <table>
-                        <thead>
-                            <tr class="row100 head">
-                                @if (alunos.Count > 0)
-                                {
-                                    <th class="cell100 column1">Id</th>
-                                    <th class="cell100 column2">Nome</th>
-                                    <th class="cell100 column2">Cpf</th>
-                                    <th class="cell100 column2">Matricula</th>
-                                    <th class="cell100 column2">Telefone</th>
-                                    <th class="cell100 column2">Email</th>
-                                }
-                                else
-                                {
-                                    <th class="cell100 column2"></th>
-                                }
-                                <th class="cell100 column1">
-                                    <svg width="16" height="16" class="bi bi-box-arrow-in-down-left"><use xlink:href="#table-alter">></use></svg>
-                                </th>
-                            </tr>
-                        </thead>
-                    </table>
-                </div>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width" />
+<title>Usuários</title>
+<link href="~/View/Shared/_Layout.cshtml" rel="logo" />
+<link href="~/Models/css/reset.css" rel="stylesheet" />
+<link href="~/View/Validate/ValidateLogin.cshtml" rel="profile" />
+<link rel="icon" type="image/x-icon" href="~/Button-Blank-Blue-icon.ico">
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<link href="~/Models/css/menu_lateral.css" rel="stylesheet" />
+<link href="~/Models/css/menu.css" rel="stylesheet" />
+<link href="~/Models/css/layout_scnd.css" rel="stylesheet" />
 
-                @if (alunos.Count > 0)
+<div class="container-lg container-default">
+    <div class="dft-header-title">
+        <h1>Alunos</h1>
+    </div>
+    <div id="container-table" class="class-list">
+        <button class="btn btn-add-item" type="button" onclick="abrirModal(0, '', '', '', '', '')">Adicionar Aluno</button>
+        <div class="table100 ver5 m-b-110">
+            <div class="table100-head">
+                <table>
+                    <thead>
+                        <tr class="row100 head">
+                            @if (alunos.Count > 0)
+                            {
+                                <th class="cell100 column1">Id</th>
+                                <th class="cell100 column2">Nome</th>
+                                <th class="cell100 column2">Cpf</th>
+                                <th class="cell100 column2">Matricula</th>
+                                <th class="cell100 column2">Telefone</th>
+                                <th class="cell100 column2">Email</th>
+                            }
+                            else
+                            {
+                                <th class="cell100 column2"></th>
+                            }
+                            <th class="cell100 column1">
+                                <svg width="16" height="16" class="bi bi-box-arrow-in-down-left"><use xlink:href="#table-alter">></use></svg>
+                            </th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+
+            @if (alunos.Count > 0)
+            {
+                foreach (var us in alunos)
                 {
-                    foreach (var us in alunos)
-                    {
-                        <div class="table100-body">
-                            <table>
-                                <tbody>
-                                    <tr class="row100 body">
-                                        <td class="cell100 column1">@us.Id</td>
-                                        <td class="cell100 column2">@us.Nome</td>
-                                        <td class="cell100 column2">@us.Cpf</td>
-                                        <td class="cell100 column2">@us.Matricula</td>
-                                        <td class="cell100 column2">@us.Telefone</td>
-                                        <td class="cell100 column2">@us.Email</td>
-                                        <td><button class="btn" onclick="abrirModal(@us.Id, '@us.Nome', '@us.Cpf', @us.Matricula, '@us.Telefone', '@us.Email')">Alterar</button></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    }
-                }
-                else
-                {
-                    <div>
-                        <p>Sem usuários cadastrados no momento</p>
+                    <div class="table100-body">
+                        <table>
+                            <tbody>
+                                <tr class="row100 body">
+                                    <td class="cell100 column1">@us.Id</td>
+                                    <td class="cell100 column2">@us.Nome</td>
+                                    <td class="cell100 column2">@us.Cpf</td>
+                                    <td class="cell100 column2">@us.Matricula</td>
+                                    <td class="cell100 column2">@us.Telefone</td>
+                                    <td class="cell100 column2">@us.Email</td>
+                                    <td><button class="btn" onclick="abrirModal(@us.Id, '@us.Nome', '@us.Cpf', @us.Matricula, '@us.Telefone', '@us.Email')">Alterar</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 }
-            </div>
-        </div>
-
-        <div id="alterarUsuarioModal" class="modal">
-            <div class="modal-content">
-                <!-- Conteúdo do modal -->
-                <span class="close" onclick="fecharModal()">&times;</span>
-                <div id="informacoesUsuario"></div>
-            </div>
-        </div>
-
-        <div id="deleteUsuarioModal" class="modal">
-            <div class="modal-content delete">
-                <!-- Conteúdo do modal -->
-                <span class="close" onclick="fecharModalDelete()">&times;</span>
-                <div id="informacoesUsuarioDelete"></div>
-            </div>
+            }
+            else
+            {
+                <div>
+                    <p>Sem usuários cadastrados no momento</p>
+                </div>
+            }
         </div>
     </div>
 
-
-
-    <!--Spinner Wrapper-->
-    <div id="spinMod" class="spinner-modal">
-        <div id="spinnerWrapper" class="ring">
-            Loading
-            <span></span>
+    <div id="alterarUsuarioModal" class="modal">
+        <div class="modal-content">
+            <!-- Conteúdo do modal -->
+            <span class="close" onclick="fecharModal()">&times;</span>
+            <div id="informacoesUsuario"></div>
         </div>
     </div>
-</body>
+
+    <div id="deleteUsuarioModal" class="modal">
+        <div class="modal-content delete">
+            <!-- Conteúdo do modal -->
+            <span class="close" onclick="fecharModalDelete()">&times;</span>
+            <div id="informacoesUsuarioDelete"></div>
+        </div>
+    </div>
+</div>
+
+
+
+<!--Spinner Wrapper-->
+<div id="spinMod" class="spinner-modal">
+    <div id="spinnerWrapper" class="ring">
+        Loading
+        <span></span>
+    </div>
+</div>
 
 
 

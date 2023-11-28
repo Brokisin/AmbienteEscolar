@@ -20,88 +20,85 @@
     }
 }
 
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
-    <title>Disciplinas</title>
-    <link href="~/View/Shared/_Layout.cshtml" rel="logo" />
-    <link href="~/Models/css/reset.css" rel="stylesheet" />
-    <link href="~/Models/css/menu.css" rel="stylesheet" />
-    <link href="~/View/Validate/ValidateLogin.cshtml" rel="profile" />
-    <link rel="icon" type="image/x-icon" href="~/Button-Blank-Blue-icon.ico">
-    <link href="~/Models/css/menu_lateral.css" rel="stylesheet" />
-    <link href="~/Models/css/disciplinas.css" rel="stylesheet" />
-    <link href="~/Models/css/layout_scnd.css" rel="stylesheet" />
-    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
-</head>
-<body>
-    <div class="container-lg container-default">
-        <div class="dft-header-title">
-            <h1>Disciplinas</h1>
-        </div>
-        <div class="container-table">
-            <div class="table100 ver1 m-b-110">
-                @if (contemDisciplinas)
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width" />
+<title>Disciplinas</title>
+<link href="~/View/Shared/_Layout.cshtml" rel="logo" />
+<link href="~/Models/css/reset.css" rel="stylesheet" />
+<link href="~/Models/css/menu.css" rel="stylesheet" />
+<link href="~/View/Validate/ValidateLogin.cshtml" rel="profile" />
+<link rel="icon" type="image/x-icon" href="~/Button-Blank-Blue-icon.ico">
+<link href="~/Models/css/menu_lateral.css" rel="stylesheet" />
+<link href="~/Models/css/disciplinas.css" rel="stylesheet" />
+<link href="~/Models/css/layout_scnd.css" rel="stylesheet" />
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+
+<div class="container-lg container-default">
+    <div class="dft-header-title">
+        <h1>Disciplinas</h1>
+    </div>
+    <div class="container-table">
+        <div class="table100 ver1 m-b-110">
+            @if (contemDisciplinas)
+            {
+                foreach (var modulo in DisciplinasPorModulo)
                 {
-                    foreach (var modulo in DisciplinasPorModulo)
+                    <div class="table100-head">
+                        <table>
+                            <thead>
+                                <tr class="row100 head">
+                                    <th class="ver-main cell100 column1"><span>Módulo </span>@modulo.Key<span>: @en.ReturnDescriptionModulo(modulo.Key)</span></th>
+                            </thead>
+                        </table>
+                    </div>
+                    <div class="table100-head">
+                        <table>
+                            <thead>
+                                <tr class="row100 head">
+                                    <th class="cell100 column1">Disciplina</th>
+                                    <th class="cell100 column2">Requisitos</th>
+                                    <th class="cell100 column3">Situação</th>
+                                    <th class="cell100 column4">Carga Horária</th>
+                                    <th class="cell100 column5">Nota</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                    foreach (var disciplina in modulo.Value)
                     {
-                        <div class="table100-head">
+                        <div class="table100-body">
                             <table>
-                                <thead>
-                                    <tr class="row100 head">
-                                        <th class="ver-main cell100 column1"><span>Módulo </span>@modulo.Key<span>: @en.ReturnDescriptionModulo(modulo.Key)</span></th>
-                                </thead>
-                            </table>
-                        </div>
-                        <div class="table100-head">
-                            <table>
-                                <thead>
-                                    <tr class="row100 head">
-                                        <th class="cell100 column1">Disciplina</th>
-                                        <th class="cell100 column2">Requisitos</th>
-                                        <th class="cell100 column3">Situação</th>
-                                        <th class="cell100 column4">Carga Horária</th>
-                                        <th class="cell100 column5">Nota</th>
+                                <tbody>
+                                    <tr class="row100 body">
+                                        <td class="cell100 column1">@disciplina.NomeDisciplina</td>
+                                        <td class="cell100 column2">@disciplina.Requisitos</td>
+                                        <td class="cell100 column3">@disciplina.Situacao</td>
+                                        <td class="cell100 column4">@disciplina.CargaHoraria</td>
+                                        <td class="cell100 column5">@disciplina.Nota</td>
                                     </tr>
-                                </thead>
+                                </tbody>
                             </table>
                         </div>
-                        foreach (var disciplina in modulo.Value)
-                        {
-                            <div class="table100-body">
-                                <table>
-                                    <tbody>
-                                        <tr class="row100 body">
-                                            <td class="cell100 column1">@disciplina.NomeDisciplina</td>
-                                            <td class="cell100 column2">@disciplina.Requisitos</td>
-                                            <td class="cell100 column3">@disciplina.Situacao</td>
-                                            <td class="cell100 column4">@disciplina.CargaHoraria</td>
-                                            <td class="cell100 column5">@disciplina.Nota</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        }
                     }
                 }
-                else
-                {
-                    <div>
-                        <span>Ops! Histórico indisponível no momento.</span>
-                    </div>
-                }
-            </div>
+            }
+            else
+            {
+                <div>
+                    <span>Ops! Histórico indisponível no momento.</span>
+                </div>
+            }
         </div>
     </div>
+</div>
 
-    <!--Spinner Wrapper-->
-    <div id="spinMod" class="spinner-modal">
-        <div id="spinnerWrapper" class="ring">
-            Loading
-            <span></span>
-        </div>
+<!--Spinner Wrapper-->
+<div id="spinMod" class="spinner-modal">
+    <div id="spinnerWrapper" class="ring">
+        Loading
+        <span></span>
     </div>
-</body>
+</div>
 
 <script>
     // SPINNER WRAPPER =================

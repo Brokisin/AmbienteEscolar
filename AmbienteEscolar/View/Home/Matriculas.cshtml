@@ -4,80 +4,43 @@
 
 @{
     Layout = "_Layout.cshml";
-    BancoDados.DBConnect();
-    List<Aluno> alunos = AlunoRepository.ListarAlunos();
-
-    Usuario usuario = new Usuario();
-    usuario.Login = Request.Form["login"];
-
-    Boolean logged = false;
-    HttpCookie cookie = Request.Cookies["UserLogin"];
-    if (cookie != null)
-    {
-        logged = true;
-    }
+    Sessao sessao = Sessao.Current();
 }
 
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
-    <title>Matriculas</title>
-    <link href="~/Models/css/reset.css" rel="stylesheet" />
-    <link href="~/Models/css/menu.css" rel="stylesheet" />
-    <link href="~/Models/css/matriculas.css" rel="stylesheet" />
-    <link href="~/View/Validate/ValidateLogin.cshtml" rel="profile" />
-    <link href="~/Models/css/menu_lateral.css" rel="stylesheet" />
-    <link href="~/Models/css/layout_scnd.css" rel="stylesheet" />
-    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
-    <link rel="icon" type="image/x-icon" href="~/Button-Blank-Blue-icon.ico">
-    <script src="~/Models/js/logoffAction.js"></script>
-    <script src="~/Models/js/siteActions.js"></script>
-    <script src="~/Models/js/scripts.js"></script>
-</head>
-    <body>
-
-        <!--Spinner Wrapper-->
-        <div id="spinMod" class="spinner-modal">
-            <div id="spinnerWrapper" class="ring">
-                Loading
-                <span></span>
+<div class="container-lg container-default">
+    <div class="dft-header-title">
+        <h1>Alunos</h1>
+    </div>
+    <div id="container-table" class="class-list">
+        @if (false @*sessao.NivelAcesso.Id == 1*@)
+        {
+            <div>
+                <div>
+                    <span>Selecione uma matricula e clique no botão para visualizá-la</span>
+                    @* lista de matriculas *@
+                </div>
+                <button onclick="">Matricula</button>
             </div>
-        </div>
-
-        <!--Matriculas Screen-->
-        <div id="matriculas" class="d-Matriculas">
-            <main class="div-mainCCVCD">
-                <div class="home-title">
-                    <p>SCHOOL REGISTER:</p>
-                </div>
-
-                <div class="mat-SWlfTy">
-                    <div class="mat-JJsWevg">Visualizar Matrícula: </div>
-                    <form action="~/WebBusiness/MatriculaBusiness/MatriculaSelect.cshtml" method="post">
-                        <select id="selectAlunoMatricula" name="selectAlunoMatricula">
-                            @foreach (Aluno al in alunos)
-                            {
-                                <option value="@al.Id">@al.Nome</option>
-                            }
-                        </select>
-                        <input id="selectMatricula" type="submit" value="Visualizar" />
-                    </form>
-                </div>
-            </main>
-        </div>
-    </body>
-<script>
-    // SPINNER WRAPPER =================
-
-    var spinnerWrapper = document.getElementById("spinnerWrapper");
-    var spinnerModal = document.getElementById("spinMod");
-
-    window.addEventListener('load', function () {
-        if (spinnerModal.style.display = "flex") {
-            spinnerModal.style.display = "none";
-            spinnerWrapper.style.display = "none";
         }
-    });
+        else
+        {
 
-</script>
+            <div>
+                <form action="/WebBusiness/MatriculaBusiness/MatriculaSelect.cshtml" method="post">
+                    <span>Clique para visualizar sua matricula</span>
+                    <button onclick="">Matricula</button>
+                </form>
+            </div>
+        }
+    </div>
+</div>
 
+
+
+<!--Spinner Wrapper-->
+<div id="spinMod" class="spinner-modal">
+    <div id="spinnerWrapper" class="ring">
+        Loading
+        <span></span>
+    </div>
+</div>

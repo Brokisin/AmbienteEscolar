@@ -4,40 +4,42 @@
     Sessao sessao = Sessao.Current();
 }
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width" />
-    <link rel="stylesheet" href="avaicon.ico">
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/defaultStyle.css" asp-append-version="true" />
-</head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width" />
+<link rel="stylesheet" href="avaicon.ico">
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+<link rel="stylesheet" href="~/css/defaultStyle.css" asp-append-version="true" />
+<script src="~/Models/js/logoffAction.js"></script>
+<script src="~/Models/js/alunoScripts.js"></script>
+<script src="~/Models/js/scripts.js"></script>
 
-
-@if (sessao.Nome == null || sessao.NivelAcesso == null)
-{
+<body>
+    @if (sessao.Nome == null || sessao.NivelAcesso == null)
     {
-        Layout = null;
-    }
+        {
+            Layout = null;
+        }
         @RenderPage("Shared/NotFound.cshtml", "NotFound")
-    <div style="visibility: hidden">
-        @RenderBody()
-    </div>
-}
-else
-{
-    <div class="container">
-        <main role="main" class="main-container">
-            @RenderSection("SemMenu", required: false)
-            @if (!IsSectionDefined("SemMenu"))
-            {
-            <div class="containerMenu">
-                @RenderPage("Shared/SideBarMenu.cshtml", "SideBarMenu")
-            </div>
-            }
+        <div style="visibility: hidden">
             @RenderBody()
-        </main>
-    </div>
-}
+        </div>
+    }
+    else
+    {
+        <div class="container">
+            <main role="main" class="main-container">
+                @RenderSection("SemMenu", required: false)
+                @if (!IsSectionDefined("SemMenu"))
+                {
+                    <div class="containerMenu">
+                        @RenderPage("Shared/SideBarMenu.cshtml", "SideBarMenu")
+                    </div>
+                }
+                @RenderBody()
+            </main>
+        </div>
+    }
+</body>
 
 <script>
     window.addEventListener('load', function () {
