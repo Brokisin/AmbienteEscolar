@@ -212,7 +212,7 @@
     <Content Include="View\Home\Usuarios.cshtml" />
     <Content Include="View\Validate\ValidateLogin.cshtml" />
     <Content Include="View\Home\Matriculas.cshtml" />
-    <Content Include="View\Ext\Sobre.cshtml" />
+    <Content Include="View\Home\Sobre.cshtml" />
     <Content Include="View\Home\Disciplinas.cshtml" />
     <Content Include="Scripts\bootstrap.min.js.map" />
     <Content Include="Scripts\bootstrap.js.map" />
