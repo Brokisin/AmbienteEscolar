@@ -223,6 +223,7 @@
     <Content Include="View\Home\_Layout.cshtml" />
     <Content Include="View\Home\Shared\SideBarMenu.cshtml" />
     <Content Include="View\Home\Shared\NotFound.cshtml" />
+    <Content Include="View\Home\Notas.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

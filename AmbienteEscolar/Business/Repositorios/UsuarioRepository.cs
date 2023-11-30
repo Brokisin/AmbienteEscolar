@@ -14,43 +14,34 @@ namespace AmbienteEscolar.Business.Repositorios
     {
         Banco banco = new Banco();
 
-        public static List<String>[] BuscarLogin()
+        public static Usuario BuscarLogin(string loginUser)
         {
-            List<string> listaLogin = new List<string>();
+            string query = $"SELECT a.id, a.login, a.senha, a.id_nivel_acesso, n.descricao FROM usuario a " +
+                $"INNER JOIN nivel_acesso n ON a.id_nivel_acesso = n.id WHERE login='{loginUser}' ORDER BY n.id;";
 
-            string query = "SELECT login, senha FROM usuario;";
-
-            List<string>[] login = new List<string>[1];
-            login[0] = new List<string>();
-            login[1] = new List<string>();
-
+            Usuario login = new Usuario();
+            login.NivelAcesso = new NivelAcesso();
             try
             {
-                if (BancoDados.OpenConnection() == true)
+                BancoDados.OpenConnection();
+                MySqlCommand cmd = new MySqlCommand(query, BancoDados.Connection);
+                MySqlDataReader dataReader = cmd.ExecuteReader();
+                if (dataReader.HasRows)
                 {
-                    MySqlCommand command = new MySqlCommand(query, BancoDados.Connection);
-                    MySqlDataReader dataReader = command.ExecuteReader();
-
-                    if (dataReader.HasRows)
+                    while (dataReader.Read())
                     {
-                        while (dataReader.Read())
-                        {
-                            login[0].Add(dataReader["nome"] + "");
-                            login[1].Add(dataReader["senha"] + "");
-                        }
-                        dataReader.Close();
-                        BancoDados.CloseConnection();
-
-                        return login;
+                        login.Login = dataReader["login"].ToString();
+                        login.Senha = dataReader["senha"].ToString();
+                        login.NivelAcesso.Id = int.Parse(dataReader["id_nivel_acesso"].ToString());
                     }
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
+                    dataReader.Close();
+                    BancoDados.CloseConnection();
 
-            return login;
+                    return login;
+                }
+                else { return login = null; }
+            }
+            catch (Exception) { return login = null; }
         }
 
         public static List<Usuario> ListarUsuarios()

@@ -9,18 +9,41 @@
 
     usuario.Login = Request.Form["login"];
     usuario.Senha = Request.Form["senha"];
+    if (string.IsNullOrEmpty(usuario.Login) || string.IsNullOrEmpty(usuario.Senha))
+    {
+        <text>
+            <script>
+                window.location.href = "/Login";
+                alert("Preencha todos os campos para prosseguir.");
+            </script>
+        </text>
+    }
 
 
     if (UsuarioRepository.Login(usuario.Login, usuario.Senha))
     {
+
         HttpCookie cookie = new HttpCookie("UserLogin");
         Sessao sessao = UsuarioRepository.BuscarSessao(usuario.Login);
-        cookie.Value = $"{sessao.Nome},{sessao.Matricula},{sessao.Registro},{sessao.NivelAcesso.Id},{sessao.NivelAcesso.Descricao}";
-        DateTime dtNow = DateTime.Now;
-        // Cookie expira em uma hora.
-        TimeSpan tsMinute = new TimeSpan(0, 1, 0, 0);
-        cookie.Expires = dtNow + tsMinute;
-        Response.Cookies.Add(cookie);
+        if (sessao == null)
+        {
+            Usuario user = UsuarioRepository.BuscarLogin(usuario.Login);
+            cookie.Value = $"Coordenacao,001,{user.Login},{user.NivelAcesso.Id},{user.NivelAcesso.Descricao}";
+            DateTime dtNow = DateTime.Now;
+            // Cookie expira em uma hora.
+            TimeSpan tsMinute = new TimeSpan(0, 1, 0, 0);
+            cookie.Expires = dtNow + tsMinute;
+            Response.Cookies.Add(cookie);
+        }
+        else
+        {
+            cookie.Value = $"{sessao.Nome},{sessao.Matricula},{sessao.Registro},{sessao.NivelAcesso.Id},{sessao.NivelAcesso.Descricao}";
+            DateTime dtNow = DateTime.Now;
+            // Cookie expira em uma hora.
+            TimeSpan tsMinute = new TimeSpan(0, 1, 0, 0);
+            cookie.Expires = dtNow + tsMinute;
+            Response.Cookies.Add(cookie);
+        }
         <text>
             <script>
                 window.location.href = "/View/Home/Menu";
