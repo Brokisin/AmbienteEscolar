@@ -12,93 +12,50 @@
     List<Aluno> alunos = AlunoRepository.ListarAlunos();
 }
 
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
-    <title>Usuários</title>
-    <link href="~/View/Shared/_Layout.cshtml" rel="logo" />
-    <link href="~/Models/css/reset.css" rel="stylesheet" />
-    <link href="~/View/Validate/ValidateLogin.cshtml" rel="profile" />
-    <link rel="icon" type="image/x-icon" href="~/Button-Blank-Blue-icon.ico">
-    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
-    <link href="~/Models/css/menu_lateral.css" rel="stylesheet" />
-    <link href="~/Models/css/menu.css" rel="stylesheet" />
-    <link href="~/Models/css/layout_scnd.css" rel="stylesheet" />
-</head>
-<body>
-    <div class="container-lg container-default">
-        <div class="dft-header-title">
-            <h1>Usuários</h1>
-        </div>
-        <div id="container-table" class="class-list">
-            <button class="btn btn-add-item" type="button" onclick="abrirModal(0, '', '', '')">Adicionar Usuário</button>
-            <div class="table100 ver5 m-b-110">
-                <div class="table100-head">
-                    <select>
-                        <option value="value" disabled>Selecione o aluno</option>
-                        @foreach (var item in alunos)
-                        {
-                            <option value="@item.Matricula">@item.Nome</option>
-                        }
-                    </select>
-                </div>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width" />
+<title>Usuários</title>
+<link href="~/View/Shared/_Layout.cshtml" rel="logo" />
+<link href="~/Models/css/reset.css" rel="stylesheet" />
+<link href="~/View/Validate/ValidateLogin.cshtml" rel="profile" />
+<link rel="icon" type="image/x-icon" href="~/Button-Blank-Blue-icon.ico">
 
-                @if (alunos.Count > 0)
-                {
-                    foreach (var us in alunos)
-                    {
-                        <div class="table100-body">
-                            <table>
-                                <tbody>
-                                    <tr class="row100 body">
-                                        <td class="cell100 column1">@us.Id</td>
-                                        <td class="cell100 column2">@us.Login</td>
-                                        <td class="cell100 column3" style="display: none">@us.Senha</td>
-                                        <td class="cell100 column3">•••••••••</td>
-                                        <td class="cell100 column4">@us.NivelAcesso.Descricao</td>
-                                        <td><button class="btn" onclick="abrirModal(@us.Id, '@us.Login', '@us.Senha', '@us.NivelAcesso.Id')">Alterar</button></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    }
-                }
-                else
-                {
-                    <div>
-                        <p>Sem usuários cadastrados no momento</p>
-                    </div>
-                }
-            </div>
-        </div>
-
-        <div id="alterarUsuarioModal" class="modal">
-            <div class="modal-content">
-                <!-- Conteúdo do modal -->
-                <span class="close" onclick="fecharModal()">&times;</span>
-                <div id="informacoesUsuario"></div>
-            </div>
-        </div>
-
-        <div id="deleteUsuarioModal" class="modal">
-            <div class="modal-content delete">
-                <!-- Conteúdo do modal -->
-                <span class="close" onclick="fecharModalDelete()">&times;</span>
-                <div id="informacoesUsuarioDelete"></div>
-            </div>
+<div class="container-lg container-default">
+    <div class="dft-header-title">
+        <h1>Usuários</h1>
+    </div>
+    <div id="container-table" class="class-list">
+        <button class="btn btn-add-item" type="button" onclick="abrirModal(0, '', '', '')">Adicionar Usuário</button>
+        <div class="table100 ver5 m-b-110">
         </div>
     </div>
 
-
-
-    <!--Spinner Wrapper-->
-    <div id="spinMod" class="spinner-modal">
-        <div id="spinnerWrapper" class="ring">
-            Loading
-            <span></span>
+    <div id="alterarUsuarioModal" class="modal">
+        <div class="modal-content">
+            <!-- Conteúdo do modal -->
+            <span class="close" onclick="fecharModal()">&times;</span>
+            <div id="informacoesUsuario"></div>
         </div>
     </div>
-</body>
+
+    <div id="deleteUsuarioModal" class="modal">
+        <div class="modal-content delete">
+            <!-- Conteúdo do modal -->
+            <span class="close" onclick="fecharModalDelete()">&times;</span>
+            <div id="informacoesUsuarioDelete"></div>
+        </div>
+    </div>
+</div>
+
+
+
+<!--Spinner Wrapper-->
+<div id="spinMod" class="spinner-modal">
+    <div id="spinnerWrapper" class="ring">
+        Loading
+        <span></span>
+    </div>
+</div>
 
 
 
@@ -234,7 +191,3 @@
 
 
 </script>
-
-<script src="~/Models/js/alunoScripts.js"></script>
-<script src="~/Models/js/logoffAction.js"></script>
-<script src="~/Models/js/scripts.js"></script>

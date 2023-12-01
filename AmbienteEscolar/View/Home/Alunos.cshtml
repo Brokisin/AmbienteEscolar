@@ -8,16 +8,6 @@
     BancoDados.DBConnect();
     Usuario u = new Usuario();
     List<Aluno> alunos = AlunoRepository.ListarAlunos();
-
-    Usuario usuario = new Usuario();
-    usuario.Login = Request.Form["login"];
-
-    Boolean logged = false;
-    HttpCookie cookie = Request.Cookies["UserLogin"];
-    if (cookie != null)
-    {
-        logged = true;
-    }
 }
 
 <meta charset="utf-8" />
@@ -219,7 +209,3 @@
 
 
 </script>
-
-<script src="~/Models/js/alunoScripts.js"></script>
-<script src="~/Models/js/logoffAction.js"></script>
-<script src="~/Models/js/scripts.js"></script>

@@ -10,14 +10,6 @@
     AmbienteEscolar.Business.Others.Enumerations en = new AmbienteEscolar.Business.Others.Enumerations();
     Dictionary<int, List<Disciplina>> DisciplinasPorModulo = DisciplinaRepository.RetornaDisciplinas();
     bool contemDisciplinas = DisciplinasPorModulo.Count > 0;
-    usuario.Login = Request.Form["login"];
-
-    Boolean logged = false;
-    HttpCookie cookie = Request.Cookies["UserLogin"];
-    if (cookie != null)
-    {
-        logged = true;
-    }
 }
 
 <meta charset="utf-8" />
@@ -113,7 +105,3 @@
         }
     });
 </script>
-
-<script src="~/Models/js/logoffAction.js"></script>
-<script src="~/Models/js/alunoScripts.js"></script>
-<script src="~/Models/js/scripts.js"></script>
