@@ -8,7 +8,8 @@ a.navbar-brand {
 }
 
 a {
-    color: #0077cc;
+    color: #208fff;
+    text-decoration: none;
 }
 
 .dft-header-title {
@@ -64,6 +65,23 @@ button.accept-policy {
 
 .btn-add-item {
     background-color: #f3f3f3;
+}
+
+
+.faq-item {
+    padding: 20px 10px;
+    background-color: #f7f7f7;
+    border-radius: 10px;
+    margin: 10px 0px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.card-help {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 /*============*/
