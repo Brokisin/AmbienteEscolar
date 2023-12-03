@@ -15,6 +15,20 @@ namespace AmbienteEscolar.Business.Repositorios
             _dbContext = dbContext;
         }
 
+        public static bool InserirNota(string nota, int id)
+        {
+            string query = $"UPDATE disciplinas SET nota={nota} WHERE id_disciplina={id};";
+
+            if (BancoDados.OpenConnection() == true)
+            {
+                MySqlCommand cmd = new MySqlCommand(query, BancoDados.Connection);
+                cmd.ExecuteNonQuery();
+                BancoDados.CloseConnection();
+                return true;
+            }
+            else { return false; }
+        }
+
         public static Dictionary<int, List<Disciplina>> RetornaDisciplinas()
         {
             Aluno aluno = new Aluno();
@@ -25,38 +39,69 @@ namespace AmbienteEscolar.Business.Repositorios
                 BancoDados.OpenConnection();
                 MySqlCommand cmd = new MySqlCommand(sql, BancoDados.Connection);
                 MySqlDataReader dataReader = cmd.ExecuteReader();
-                
-                    aluno.DisciplinasPorModulo = new Dictionary<int, List<Disciplina>>();
 
-                    while (dataReader.Read())
+                aluno.DisciplinasPorModulo = new Dictionary<int, List<Disciplina>>();
+
+                while (dataReader.Read())
+                {
+                    Modulo modulo = new Modulo
                     {
-                        Modulo modulo = new Modulo
-                        {
-                            Id = (int)dataReader["id_mdl_disc"],
-                            Nome = dataReader["nome_modulo"].ToString()
-                        };
+                        Id = (int)dataReader["id_mdl_disc"],
+                        Nome = dataReader["nome_modulo"].ToString()
+                    };
 
-                        Disciplina disciplina = new Disciplina();
-                        disciplina.Id = int.TryParse(dataReader["id_disciplina"].ToString(), out int id) ? id : 0;
-                        disciplina.IdModulo = int.TryParse(dataReader["id_modulo"].ToString(), out int idmodulo) ? idmodulo : 0;
-                        disciplina.NomeDisciplina = dataReader["nome_disciplina"].ToString() ?? string.Empty;
-                        disciplina.Requisitos = dataReader["requisitos"].ToString() ?? string.Empty;
-                        disciplina.Situacao = dataReader["situacao"].ToString() ?? string.Empty;
-                        disciplina.CargaHoraria = int.TryParse(dataReader["carga_horaria"].ToString(), out int cargaHoraria) ? cargaHoraria : 0;
-                        disciplina.Nota = float.TryParse(dataReader["nota"].ToString(), out float nota) ? nota : 0;
+                    Disciplina disciplina = new Disciplina();
+                    disciplina.Id = int.TryParse(dataReader["id_disciplina"].ToString(), out int id) ? id : 0;
+                    disciplina.IdModulo = int.TryParse(dataReader["id_modulo"].ToString(), out int idmodulo) ? idmodulo : 0;
+                    disciplina.NomeDisciplina = dataReader["nome_disciplina"].ToString() ?? string.Empty;
+                    disciplina.Requisitos = dataReader["requisitos"].ToString() ?? string.Empty;
+                    disciplina.Situacao = dataReader["situacao"].ToString() ?? string.Empty;
+                    disciplina.CargaHoraria = int.TryParse(dataReader["carga_horaria"].ToString(), out int cargaHoraria) ? cargaHoraria : 0;
+                    disciplina.Nota = float.TryParse(dataReader["nota"].ToString(), out float nota) ? nota : 0;
 
-                        int idModulo = modulo.Id;
+                    int idModulo = modulo.Id;
 
-                        if (!aluno.DisciplinasPorModulo.ContainsKey(idModulo))
-                        {
-                            aluno.DisciplinasPorModulo[idModulo] = new List<Disciplina>();
-                        }
-
-                        aluno.DisciplinasPorModulo[idModulo].Add(disciplina);
+                    if (!aluno.DisciplinasPorModulo.ContainsKey(idModulo))
+                    {
+                        aluno.DisciplinasPorModulo[idModulo] = new List<Disciplina>();
                     }
-                    dataReader.Close();
-                
+
+                    aluno.DisciplinasPorModulo[idModulo].Add(disciplina);
+                }
+                dataReader.Close();
+
                 return aluno.DisciplinasPorModulo;
+            }
+            catch (Exception e) { throw new Exception(e.Message); }
+            finally { BancoDados.CloseConnection(); }
+        }
+
+        public static List<Disciplina> BuscarDisciplinasAluno(int idAluno)
+        {
+            Aluno aluno = new Aluno();
+            string sql = $"SELECT D.id_disciplina, D.id_modulo, D.nome_disciplina, D.requisitos, D.situacao, D.carga_horaria, D.nota, D.id_aluno" +
+                $" FROM disciplinas D WHERE id_aluno={idAluno}";
+
+            try
+            {
+                BancoDados.OpenConnection();
+                MySqlCommand cmd = new MySqlCommand(sql, BancoDados.Connection);
+                MySqlDataReader dataReader = cmd.ExecuteReader();
+
+                aluno.ListaDisciplinas = new List<Disciplina>();
+                while (dataReader.Read())
+                {
+                    Disciplina disciplina = new Disciplina();
+                    disciplina.Id = int.TryParse(dataReader["id_disciplina"].ToString(), out int id) ? id : 0;
+                    disciplina.IdModulo = int.TryParse(dataReader["id_modulo"].ToString(), out int idmodulo) ? idmodulo : 0;
+                    disciplina.NomeDisciplina = dataReader["nome_disciplina"].ToString() ?? string.Empty;
+                    disciplina.Requisitos = dataReader["requisitos"].ToString() ?? string.Empty;
+                    disciplina.Situacao = dataReader["situacao"].ToString() ?? string.Empty;
+                    disciplina.CargaHoraria = int.TryParse(dataReader["carga_horaria"].ToString(), out int cargaHoraria) ? cargaHoraria : 0;
+                    disciplina.Nota = float.TryParse(dataReader["nota"].ToString(), out float nota) ? nota : 0;
+                    aluno.ListaDisciplinas.Add(disciplina);
+                }
+                return aluno.ListaDisciplinas;
             }
             catch (Exception e) { throw new Exception(e.Message); }
             finally { BancoDados.CloseConnection(); }

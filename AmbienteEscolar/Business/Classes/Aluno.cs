@@ -15,5 +15,6 @@ namespace AmbienteEscolar.Business.Classes
         public string Email { get; set; }
         public Curso Curso { get; set; }
         public Dictionary<int, List<Disciplina>> DisciplinasPorModulo;
+        public List<Disciplina> ListaDisciplinas { get; set; }
     }
 }

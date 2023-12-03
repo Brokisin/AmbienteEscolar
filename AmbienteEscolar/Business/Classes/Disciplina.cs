@@ -9,5 +9,6 @@
         public string Situacao { get; set; }
         public int? CargaHoraria { get; set; }
         public float? Nota { get; set; }
+        public int? Id_aluno { get; set; }
     }
 }

@@ -3,10 +3,8 @@
 @using AmbienteEscolar.Business.Classes;
 
 @{
-    //Layout nulo, por enquanto (mudar para _Layout, assim que estiver pronto)
     Layout = "_Layout.cshtml";
     BancoDados.DBConnect();
-    Usuario usuario = new Usuario();
     AmbienteEscolar.Business.Others.Enumerations en = new AmbienteEscolar.Business.Others.Enumerations();
     Dictionary<int, List<Disciplina>> DisciplinasPorModulo = DisciplinaRepository.RetornaDisciplinas();
     bool contemDisciplinas = DisciplinasPorModulo.Count > 0;
