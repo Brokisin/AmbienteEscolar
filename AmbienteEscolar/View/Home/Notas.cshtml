@@ -1,0 +1,281 @@
+﻿@using AmbienteEscolar.Business.BancoDeDados;
+@using AmbienteEscolar.Business.Repositorios;
+@using AmbienteEscolar.Business.Classes;
+@using AmbienteEscolar.Business.Classes.Enum;
+@using Microsoft.AspNetCore.Mvc;
+@using System.Web.Mvc;
+
+@{
+    Layout = "_Layout.cshtml";
+    BancoDados.DBConnect();
+    Usuario u = new Usuario();
+    List<Aluno> alunos = AlunoRepository.ListarAlunos();
+    AmbienteEscolar.Business.Others.Enumerations en = new AmbienteEscolar.Business.Others.Enumerations();
+    Dictionary<int, List<Disciplina>> DisciplinasPorModulo = DisciplinaRepository.RetornaDisciplinas();
+    bool contemDisciplinas = DisciplinasPorModulo.Count > 0;
+    List<Disciplina> disciplinasAluno = DisciplinaRepository.BuscarDisciplinasAluno(1);
+    List<Disciplina> disciplinasAluno2 = DisciplinaRepository.BuscarDisciplinasAluno(3);
+    Sessao sessao = Sessao.Current();
+}
+
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width" />
+<title>Usuários</title>
+<link href="~/View/Shared/_Layout.cshtml" rel="logo" />
+<link href="~/Models/css/reset.css" rel="stylesheet" />
+<link href="~/View/Validate/ValidateLogin.cshtml" rel="profile" />
+<link rel="icon" type="image/x-icon" href="~/Button-Blank-Blue-icon.ico">
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<link href="~/Models/css/menu_lateral.css" rel="stylesheet" />
+<link href="~/Models/css/menu.css" rel="stylesheet" />
+<link href="~/Models/css/layout_scnd.css" rel="stylesheet" />
+
+<div class="container-lg container-default">
+    <div class="dft-header-title">
+        <h1>Notas</h1>
+    </div>
+
+    <div id="container-table" class="class-list">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+            @if (sessao.NivelAcesso.Id != (int)EnumNivelAcesso.Aluno)
+            {
+                <span style="font-size: 18px;">Selecione o aluno que deseja visualizar as notas.</span>
+                <select id="alunoSelector" class="formbold-form-input" style="width: 20%;">
+                    <option disabled selected>Selecione o aluno</option>
+                    <option value="eros">Eros Karsburg</option>
+                    <option value="dimitri">Dimitri Leibruk</option>
+                </select>
+            }
+            else
+            {
+                <span style="font-size: 18px;">As notas serão lançadas aqui.</span>
+            }
+        </div>
+
+        @if (sessao.NivelAcesso.Id == (int)EnumNivelAcesso.Aluno)
+        {
+            <div id="eros" class="table100 ver5 m-b-110">
+                @if (contemDisciplinas)
+                {
+                    <div class="table100-head">
+                        <table>
+                            <thead>
+                                <tr class="row100 head">
+                                    <th class="cell100 column1">Disciplina</th>
+                                    <th class="cell100 column2">Situação</th>
+                                    <th class="cell100 column3">Carga Horária</th>
+                                    <th class="cell100 column4">Nota</th>
+                                    <th class="cell100 column5"></th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                    foreach (var disciplina in disciplinasAluno)
+                    {
+                        string validaNota = disciplina.Nota == 0 ? "Não lançada" : disciplina.Nota.ToString();
+                        <div class="table100-body">
+                            <table>
+                                <tbody>
+                                    <tr class="row100 body">
+                                        <td class="cell100 column1">@disciplina.NomeDisciplina</td>
+                                        <td class="cell100 column2">Cursando</td>
+                                        <td class="cell100 column3">@disciplina.CargaHoraria</td>
+                                        <td class="cell100 column4">@validaNota</td>
+                                        <td>
+                                            @if (sessao.NivelAcesso.Id != (int)EnumNivelAcesso.Aluno)
+                                            {
+                                                <button class="btn" onclick="abrirModal(@disciplina.Id, '@disciplina.NomeDisciplina', @disciplina.Nota)">Alterar</button>
+                                            }
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    }
+                }
+                else
+                {
+                    <div>
+                        <span>Não há disciplinas para esse aluno</span>
+                    </div>
+                }
+            </div>
+        }
+
+        <div id="eros" class="table100 ver5 m-b-110" hidden>
+            @if (contemDisciplinas)
+            {
+                <div class="table100-head">
+                    <table>
+                        <thead>
+                            <tr class="row100 head">
+                                <th class="cell100 column1">Disciplina</th>
+                                <th class="cell100 column2">Situação</th>
+                                <th class="cell100 column3">Carga Horária</th>
+                                <th class="cell100 column4">Nota</th>
+                                <th class="cell100 column5"></th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+                foreach (var disciplina in disciplinasAluno)
+                {
+                    string validaNota = disciplina.Nota == 0 ? "Não lançada" : disciplina.Nota.ToString();
+                    <div class="table100-body">
+                        <table>
+                            <tbody>
+                                <tr class="row100 body">
+                                    <td class="cell100 column1">@disciplina.NomeDisciplina</td>
+                                    <td class="cell100 column2">Cursando</td>
+                                    <td class="cell100 column3">@disciplina.CargaHoraria</td>
+                                    <td class="cell100 column4">@validaNota</td>
+                                    <td>
+                                        @if (sessao.NivelAcesso.Id != (int)EnumNivelAcesso.Aluno)
+                                        {
+                                            <button class="btn" onclick="abrirModal(@disciplina.Id, '@disciplina.NomeDisciplina', @disciplina.Nota)">Alterar</button>
+                                        }
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                }
+            }
+            else
+            {
+                <div>
+                    <span>Não há disciplinas para esse aluno</span>
+                </div>
+            }
+        </div>
+
+        <div id="dimitri" class="table100 ver5 m-b-110" hidden>
+            @if (contemDisciplinas)
+            {
+                <div class="table100-head">
+                    <table>
+                        <thead>
+                            <tr class="row100 head">
+                                <th class="cell100 column1">Disciplina</th>
+                                <th class="cell100 column2">Situação</th>
+                                <th class="cell100 column3">Carga Horária</th>
+                                <th class="cell100 column4">Nota</th>
+                                <th class="cell100 column5"></th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+                foreach (var disciplina in disciplinasAluno2)
+                {
+                    string validaNota = disciplina.Nota == 0 ? "Não lançada" : disciplina.Nota.ToString();
+                    <div class="table100-body">
+                        <table>
+                            <tbody>
+                                <tr class="row100 body">
+                                    <td class="cell100 column1">@disciplina.NomeDisciplina</td>
+                                    <td class="cell100 column2">Cursando</td>
+                                    <td class="cell100 column3">@disciplina.CargaHoraria</td>
+                                    <td class="cell100 column4">@validaNota</td>
+                                    <td><button class="btn" onclick="abrirModal(@disciplina.Id, '@disciplina.NomeDisciplina', @disciplina.Nota)">Alterar</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                }
+            }
+            else
+            {
+                <div>
+                    <span>Não há disciplinas para esse aluno</span>
+                </div>
+            }
+        </div>
+    </div>
+
+    <div id="alterarUsuarioModal" class="modal">
+        <div class="modal-content">
+            <!-- Conteúdo do modal -->
+            <span class="close" onclick="fecharModal()">&times;</span>
+            <div id="informacoesUsuario"></div>
+        </div>
+    </div>
+</div>
+
+
+
+<!--Spinner Wrapper-->
+<div id="spinMod" class="spinner-modal">
+    <div id="spinnerWrapper" class="ring">
+        Loading
+        <span></span>
+    </div>
+</div>
+
+
+<script>
+    document.getElementById('alunoSelector').addEventListener('change', function () {
+        // Oculta todas as divs
+        var divs = document.querySelectorAll('.table100.ver5.m-b-110');
+        divs.forEach(function (div) {
+            div.setAttribute('hidden', true);
+        });
+
+        var selectedOption = this.value;
+        var selectedDiv = document.getElementById(selectedOption);
+        if (selectedDiv) {
+            selectedDiv.removeAttribute('hidden');
+        }
+    });
+
+</script>
+
+
+<script>
+
+    // Função para abrir o modal e exibir informações do usuário
+    function abrirModal(id, disciplina, nota) {
+        var formModal = `<div class="formbold-main-wrapper">
+            <div class="formbold-form-wrapper">
+                <form action="/WebBusiness/NotaBusiness/NotaInsert.cshtml" method="post">
+                    <div class="formbold-mb-3" hidden>
+                        <label class="formbold-form-label">
+                            Identificador
+                        </label>
+                        <input id="id" type="text" name="id" class="formbold-form-input" value="${id}">
+                    </div>
+                    <div class="formbold-mb-3">
+                        <label class="formbold-form-label">
+                            Disciplina:
+                        </label>
+                        <label><b> ${disciplina} </b></label>
+                    </div>
+                    <label class="formbold-form-label"> Nota: </label>
+                    <input type="text" name="nota" id="nota" class="formbold-form-input" value="${nota}">
+                    <input type="submit" class="formbold-btn" value="Salvar">
+                </form>
+            </div>
+            </div>`;
+
+
+        document.getElementById("informacoesUsuario").innerHTML = formModal;
+        document.getElementById("alterarUsuarioModal").style.display = "block";
+    }
+
+    // Função para fechar o modal
+    function fecharModal() {
+        document.getElementById("alterarUsuarioModal").style.display = "none";
+    }
+
+    // SPINNER WRAPPER =================
+
+    var spinnerWrapper = document.getElementById("spinnerWrapper");
+    var spinnerModal = document.getElementById("spinMod");
+
+    window.addEventListener('load', function () {
+        if (spinnerModal.style.display = "flex") {
+            spinnerModal.style.display = "none";
+            spinnerWrapper.style.display = "none";
+        }
+    });
+
+</script>

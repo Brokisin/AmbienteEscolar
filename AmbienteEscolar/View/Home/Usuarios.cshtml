@@ -4,223 +4,232 @@
 @using AmbienteEscolar.Business.Classes.Enum;
 
 @{
-    Layout = null;
+    Layout = "_Layout.cshtml";
     BancoDados.DBConnect();
     Usuario u = new Usuario();
     NivelAcesso na = new NivelAcesso();
     List<NivelAcesso> nivelAcesso = NivelAcessoRepository.ListarAcesso();
     List<Usuario> usuarios = UsuarioRepository.ListarUsuarios();
-
-    Usuario usuario = new Usuario();
-    usuario.Login = Request.Form["login"];
-
-    Boolean logged = false;
-    HttpCookie cookie = Request.Cookies["UserLogin"];
-    if (cookie != null)
-    {
-        logged = true;
-    }
+    Sessao sessao = Sessao.Current();
 }
 
-<!DOCTYPE html>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width" />
+<title>Usuários</title>
+<link href="~/View/Shared/_Layout.cshtml" rel="logo" />
+<link href="~/Models/css/reset.css" rel="stylesheet" />
+<link href="~/View/Validate/ValidateLogin.cshtml" rel="profile" />
+<link rel="icon" type="image/x-icon" href="~/Button-Blank-Blue-icon.ico">
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<link href="~/Models/css/menu_lateral.css" rel="stylesheet" />
+<link href="~/Models/css/menu.css" rel="stylesheet" />
+<link href="~/Models/css/layout_scnd.css" rel="stylesheet" />
 
-<html>
-@if (logged == true)
-{
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width" />
-        <title>Usuários</title>
-        <link href="~/View/Shared/_Layout.cshtml" rel="logo" />
-        <link href="~/Models/css/reset.css" rel="stylesheet" />
-        <link href="~/Models/css/menu.css" rel="stylesheet" />
-        <link href="~/Models/css/suporte.css" rel="stylesheet" />
-        <link href="~/Models/css/alunos.css" rel="stylesheet" />
-        <link href="~/Models/css/usuarios.css" rel="stylesheet" />
-        <link href="~/View/Validate/ValidateLogin.cshtml" rel="profile" />
-        <link rel="icon" type="image/x-icon" href="~/Button-Blank-Blue-icon.ico">
-    </head>
-    <body>
-        <!--Spinner Wrapper-->
-        <div id="spinMod" class="spinner-modal">
-            <div id="spinnerWrapper" class="ring">
-                Loading
-                <span></span>
-            </div>
-        </div>
-
-        <!--Main Header-->
-        <div id="hyperHeader">
-            <div class="header">
-                <h2>AVA - Ambiente Escolar</h2>
-                <p>Seja bem-vindo!</p>
-            </div>
-            <div class="cvSDgbcvD">
-                <ul>
-                    <li><a class="active" href="~/View/Home/Menu">Home</a></li>
-                    <li><a href="~/View/Home/Matriculas">Matrículas</a></li>
-                    <li class="dropdown">
-                        <a>
-                            Cadastro
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi-caret-down-fill" viewBox="0 0 16 16">
-                                <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
-                            </svg>
-                        </a>
-                        <div class="dropdown-content">
-                            <a href="~/View/Home/Alunos">Alunos</a>
-                            <a href="~/View/Home/Professores">Professores</a>
-                            <a href="~/View/Home/Usuarios">Usuários</a>
-                        </div>
-                    </li>
-                    <li><a href="~/View/Ext/Sobre">Suporte</a></li>
-                    <li class="dropdown">
-                        <a>
-                            Eu
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi-caret-down-fill" viewBox="0 0 16 16">
-                                <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
-                            </svg>
-                        </a>
-                        <div class="dropdown-content">
-                            <a onclick="LogOff()">Logoff</a>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </div>
-
-        <!--Usuários Screen-->
-        <div id="user" class="d-Users">
-            <main class="div-mainCCVCD">
-                <div class="home-title">
-                    <p>USERS:</p>
-                </div>
-                <div class="user-MMsFghR">
-                    <h2>Cadastro de Usuários:</h2>
-                    <form action="~/WebBusiness/UsuarioBusiness/UsuarioInsert.cshtml" method="post">
-                        <div class="alun-DDscVok" hidden>
-                            <label hidden>Id:</label>
-                            <input id="idUsuario" type="text" name="idUsuario" value="@u.Id" hidden/>
-                        </div>
-                        <div class="alun-DDscVok">
-                            <label>Login:</label>
-                            <input id="loginUsuario" type="text" name="loginUsuario" value="@u.Login" placeholder="Login" required minlength="4" disabled />
-                        </div>
-                        <div class="alun-DDscVok">
-                            <label>Senha:</label>
-                            <input id="senhaUsuario" type="password" name="senhaUsuario" value="@u.Senha" placeholder="Senha" required minlength="4" disabled />
-                        </div>
-                        <div class="alun-DDscVok">
-                            <label>Nivel de Acesso:</label>
-                            <select id="idAcesso" name="idAcesso" disabled>
-                                @foreach (NivelAcesso nivel in nivelAcesso)
-                                {
-                                    <option>@nivel.Descricao</option>
-                                }
-                            </select>
-                        </div>
-                        <input id="insert" type="submit" value="Gravar" disabled />
-                    </form>
-                    <div style="display: flex; align-items: center;">
-                        <div class="alun-BtnsBBdSv">
-                            <button id="new" onclick="NewU()">Novo</button>
-                            <button id="update" onclick="UpdateU()" disabled>Alterar</button>
-                            <button id="cancel" onclick="CancelarU()">Cancelar</button>
-                        </div>
-                        <form action="~/WebBusiness/UsuarioBusiness/UsuarioDelete.cshtml" method="post" style="padding: 6px 0 0 6px;">
-                            <input id="idUsuarioDelete" type="text" name="idUsuarioDelete" value="@u.Id" hidden />
-                            <input id="loginUsuarioDelete" type="text" name="loginUsuarioDelete" value="@u.Login" placeholder="Nome do aluno" hidden/>
-                            <input id="senhaUsuarioDelete" type="password" name="senhaUsuarioDelete" value="@u.Senha" placeholder="E-mail do aluno" hidden/>
-                            <select id="idNivelAcessoUsuarioDelete" name="idNivelAcessoUsuarioDelete" hidden>
-                                @foreach (NivelAcesso nivel in nivelAcesso)
-                                {
-                                    <option>@nivel.Descricao</option>
-                                }
-                            </select>
-
-                            <input id="delete" type="submit" value="Deletar" disabled />
-                        </form>
-                    </div>
-                </div>
-
-                <div class="user-MMsFghR">
-                    <h2>Usuários:</h2>
-                    <table id="table" onclick="userInfo()">
-                        <tr>
-                            <th onclick="sortTableUser(1)">
-                                Login<span id="carretNome">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down" viewBox="0 0 16 16">
-                                        <path d="M3.204 5h9.592L8 10.481 3.204 5zm-.753.659 4.796 5.48a1 1 0 0 0 1.506 0l4.796-5.48c.566-.647.106-1.659-.753-1.659H3.204a1 1 0 0 0-.753 1.659z" />
-                                    </svg>
-                                </span>
-                                <span id="carretNameEnabled">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
-                                        <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
-                                    </svg>
-                                </span>
-                            </th>
-                            <th>
-                                Senha<span id="carretEmail">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down" viewBox="0 0 16 16">
-                                        <path d="M3.204 5h9.592L8 10.481 3.204 5zm-.753.659 4.796 5.48a1 1 0 0 0 1.506 0l4.796-5.48c.566-.647.106-1.659-.753-1.659H3.204a1 1 0 0 0-.753 1.659z" />
-                                    </svg>
-                                </span>
-                                <span id="carretEmailEnabled">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
-                                        <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
-                                    </svg>
-                                </span>
-                            </th>
-                            <th onclick="sortTableUser(5)">
-                                Acesso<span id="carretCurso">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down" viewBox="0 0 16 16">
-                                        <path d="M3.204 5h9.592L8 10.481 3.204 5zm-.753.659 4.796 5.48a1 1 0 0 0 1.506 0l4.796-5.48c.566-.647.106-1.659-.753-1.659H3.204a1 1 0 0 0-.753 1.659z" />
-                                    </svg>
-                                </span>
-                                <span id="carretCursoEnabled">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
-                                        <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
-                                    </svg>
-                                </span>
-                            </th>
+<div class="container-lg container-default">
+    <div class="dft-header-title">
+        <h1>Usuários</h1>
+    </div>
+    <div id="container-table" class="class-list">
+        @if (sessao.NivelAcesso.Id == (int)EnumNivelAcesso.Administrador)
+        {
+            <button class="btn btn-add-item" type="button" onclick="abrirModal(0, '', '', '')">Adicionar Usuário</button>
+        }
+        <div class="table100 ver5 m-b-110">
+            <div class="table100-head">
+                <table>
+                    <thead>
+                        <tr class="row100 head">
+                            @if (usuarios.Count > 0)
+                            {
+                                <th class="cell100 column1">Id</th>
+                                <th class="cell100 column2">Login</th>
+                                <th class="cell100 column3">Senha</th>
+                                <th class="cell100 column4">Nivel de Acesso</th>
+                            }
+                            else
+                            {
+                                <th class="cell100 column5"></th>
+                            }
+                            <th class="cell100 column5"></th>
                         </tr>
-                        @foreach (Usuario user in usuarios)
-                        {
-                            <tr>
-                                <td hidden>@user.Id</td>
-                                <td>@user.Login</td>
-                                <td>········</td>
-                                <td hidden>@user.Senha</td>
-                                <td hidden>@user.NivelAcesso.Id</td>
-                                <td>@user.NivelAcesso.Descricao</td>
-                            </tr>
-                        }
-                    </table>
-                </div>
-            </main>
-        </div>
-
-        <!--Main Footer-->
-        <footer id="hyperFooter">
-            <div>
-                <p>2022 AVA &#169; - Todos os direitos reservados.</p>
+                    </thead>
+                </table>
             </div>
-        </footer>
-    </body>
-}
-else
-{
-    <head>
-        <link rel="icon" type="image/x-icon" href="~/View/Validate/notFound.ico">
-        <title>Not Found</title>
-    </head>
-    <body>
-        <br />
-        <img style="margin-left: 30px; display:inline-block;" src="~/View/Validate/notFound.ico" alt="notFound" />
-        <h1 style="display:inline-block; margin-left: 20px;"> Something went wrong. Return <a href="~/Login.cshtml">here</a>. </h1>
-    </body>
-}
-</html>
+
+            @if (usuarios.Count > 0)
+            {
+                foreach (var us in usuarios)
+                {
+                    <div class="table100-body">
+                        <table>
+                            <tbody>
+                                <tr class="row100 body">
+                                    <td class="cell100 column1">@us.Id</td>
+                                    <td class="cell100 column2">@us.Login</td>
+                                    <td class="cell100 column3" style="display: none">@us.Senha</td>
+                                    <td class="cell100 column3">•••••••••</td>
+                                    <td class="cell100 column4">@us.NivelAcesso.Descricao</td>
+                                    <td><button class="btn" onclick="abrirModal(@us.Id, '@us.Login', '@us.Senha', '@us.NivelAcesso.Id')">Alterar</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                }
+            }
+            else
+            {
+                <div>
+                    <p>Sem usuários cadastrados no momento</p>
+                </div>
+            }
+        </div>
+    </div>
+
+    <div id="alterarUsuarioModal" class="modal">
+        <div class="modal-content">
+            <!-- Conteúdo do modal -->
+            <span class="close" onclick="fecharModal()">&times;</span>
+            <div id="informacoesUsuario"></div>
+        </div>
+    </div>
+
+    <div id="deleteUsuarioModal" class="modal">
+        <div class="modal-content delete">
+            <!-- Conteúdo do modal -->
+            <span class="close" onclick="fecharModalDelete()">&times;</span>
+            <div id="informacoesUsuarioDelete"></div>
+        </div>
+    </div>
+</div>
+
+
+
+<!--Spinner Wrapper-->
+<div id="spinMod" class="spinner-modal">
+    <div id="spinnerWrapper" class="ring">
+        Loading
+        <span></span>
+    </div>
+</div>
+
+
 <script>
+
+    function abritModalDelete(id) {
+        var modal = `<div class="formbold-main-wrapper">
+        <div class="formbold-form-wrapper">
+            <span>Tem certeza que deseja excluir o usuário?</span>
+            <form action="/WebBusiness/UsuarioBusiness/UsuarioDelete.cshtml" method="post">
+                <input name="idUserDelete" id="idUserDelete" value="${id}" hidden>
+                <input class="formbold-btn" value="Sim" type="submit">
+            </form>
+            <button style="margin-left: 115px; margin-top: -52px;" class="formbold-btn" onclick="fecharModalDelete()">Não</button>
+        </div>
+        </div>`;
+        document.getElementById("informacoesUsuarioDelete").innerHTML = modal;
+        document.getElementById("deleteUsuarioModal").style.display = "block";
+    }
+
+    // Função para abrir o modal e exibir informações do usuário
+    function abrirModal(id, login, senha, nivelAcesso) {
+        var formModal = `<div class="formbold-main-wrapper">
+    <div class="formbold-form-wrapper">
+        <form action="/WebBusiness/UsuarioBusiness/UsuarioInsert.cshtml" method="post">
+
+            <div class="formbold-mb-3">
+                <label class="formbold-form-label">
+                    Identificador
+                </label>
+                <input id="idUser" type="text" name="idUser" class="formbold-form-input" value="${id}">
+            </div>
+
+            <div class="formbold-input-flex">
+                <div>
+                    <label class="formbold-form-label"> Login </label>
+                    <input type="text" name="loginUser" id="loginUser" class="formbold-form-input" value="${login}">
+                </div>
+                <div>
+                    <label class="formbold-form-label"> Senha </label>
+                    <input type="password" name="senhaUser" id="senhaUser" class="formbold-form-input" value="${senha}">
+                </div>
+            </div>
+
+            <div class="formbold-mb-3" id="permission">
+                <label class="formbold-form-label">
+                    Permissão
+                </label>
+                <select class="formbold-form-input" name="permissionUser">
+                    <option value="1">Administrador</option>
+                    <option value="3">Professor</option>
+                    <option value="4">Aluno</option>
+                </select>
+            </div>
+
+            <input type="submit" class="formbold-btn" value="Salvar">
+        </form>
+        <button style="margin-left: 115px; margin-top: -52px;" class="formbold-btn" onclick="abritModalDelete(${id})" ${id == 0 ? /hidden/ : /'/}>Deletar</button>
+    </div>
+</div>`;
+
+        var permission = `<div class="formbold-mb-3" id="permission">
+                              <label class="formbold-form-label">
+                                  Permissão
+                              </label>
+                              <select class="formbold-form-input" name="permissionUser">
+                                  <option value="1">Administrador</option>
+                                  <option value="3">Professor</option>
+                                  <option value="4">Aluno</option>
+                              </select>
+                          </div>`;
+
+        document.getElementById("informacoesUsuario").innerHTML = formModal;
+        if (nivelAcesso == 1) {
+            document.getElementById("permission").innerHTML = permission;
+        }
+        else if (nivelAcesso == 3) {
+            permission = `<div class="formbold-mb-3" id="permission">
+                              <label class="formbold-form-label">
+                                  Permissão
+                              </label>
+                              <select class="formbold-form-input" name="permissionUser">
+                                  <option value="3">Professor</option>
+                                  <option value="4">Aluno</option>
+                                  <option value="1">Administrador</option>
+                              </select>
+                          </div>`;
+            document.getElementById("permission").innerHTML = permission;
+        }
+        else if (nivelAcesso == 4) {
+            permission = `<div class="formbold-mb-3" id="permission">
+                              <label class="formbold-form-label">
+                                  Permissão
+                              </label>
+                              <select class="formbold-form-input" name="permissionUser">
+                                  <option value="4">Aluno</option>
+                                  <option value="3">Professor</option>
+                                  <option value="1">Administrador</option>
+                              </select>
+                          </div>`;
+            document.getElementById("permission").innerHTML = permission;
+        }
+
+        document.getElementById("alterarUsuarioModal").style.display = "block";
+    }
+
+
+
+
+
+
+    // Função para fechar o modal
+    function fecharModal() {
+        document.getElementById("alterarUsuarioModal").style.display = "none";
+    }
+
+    function fecharModalDelete() {
+        document.getElementById("deleteUsuarioModal").style.display = "none";
+    }
+
     // SPINNER WRAPPER =================
 
     var spinnerWrapper = document.getElementById("spinnerWrapper");
@@ -232,8 +241,7 @@ else
             spinnerWrapper.style.display = "none";
         }
     });
-</script>
 
-<script src="~/Models/js/alunoScripts.js"></script>
-<script src="~/Models/js/logoffAction.js"></script>
-<script src="~/Models/js/scripts.js"></script>
+
+
+</script>

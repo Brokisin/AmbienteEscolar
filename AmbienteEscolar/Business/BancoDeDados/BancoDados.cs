@@ -1,62 +1,35 @@
-﻿using AmbienteEscolar.Business.Classes;
-using MySqlConnector;
+﻿using MySqlConnector;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace AmbienteEscolar.Business.BancoDeDados
 {
     public class BancoDados
     {
-        public static MySqlConnection connection;
-        Banco banco = new Banco();
+        public static MySqlConnection Connection;
 
-        public static void DBConnect()
-        {
-            Initialize();
-        }
+        public static void DBConnect() => Initialize();
 
         public static void Initialize()
         {
-            Banco banco = new Banco();
-
-            banco.HostMySql = "10.200.118.79";
-            banco.DataBaseMySql = "AmbienteEscolarAVA";
-            banco.UsernameMySql = "admin";
-            banco.PasswordMySql = "senai";
-
-            string dataResponse;
-            dataResponse = "SERVER=" + banco.HostMySql + ";" + "DATABASE=" +
-            banco.DataBaseMySql + ";" + "UID=" + banco.UsernameMySql + ";" + "PASSWORD=" + banco.PasswordMySql + ";";
-
+            string dataResponse = $"server=localhost;user id=root;password=Amister@9958;persist security info=False;database=ava_db;AllowUserVariables=True;";
+            //string dataResponse = $"server=192.168.0.164;user id=eros;password=102030;persist security info=False;database=ava_db;AllowUserVariables=True;";
             try
             {
-                connection = new MySqlConnection();
-                connection.ConnectionString = dataResponse;
-                //connection.Open();
+                Connection = new MySqlConnection();
+                Connection.ConnectionString = dataResponse;
             }
-            catch (MySqlException ex)
-            {
-                Console.WriteLine(ex.Message);
-                Console.WriteLine(ex.StackTrace);
-                throw;
-            }
+            catch (MySqlException ex) { throw new Exception($"{ex.Message} \n {ex.StackTrace}"); }
         }
-        
+
         public static bool OpenConnection()
         {
-            try
-            {
-                connection.Open();
-                return true;
-            }
+            try { Connection.Open(); return true; }
             catch (MySqlException ex)
             {
                 switch (ex.Number)
                 {
                     case 0:
-                        Console.WriteLine("Cannot connect to server.  Contact administrator");
+                        Console.WriteLine("Cannot connect to server. Contact administrator");
                         break;
 
                     case 1045:
@@ -70,17 +43,8 @@ namespace AmbienteEscolar.Business.BancoDeDados
 
         public static bool CloseConnection()
         {
-            try
-            {
-                connection.Close();
-                return true;
-            }
-            catch (MySqlException ex)
-            {
-                Console.WriteLine(ex.Message);
-                Console.WriteLine(ex.StackTrace);
-                return false;
-            }
+            try { Connection.Close(); return true; }
+            catch (MySqlException ex) { throw new Exception($"{ex.Message} \n {ex.StackTrace}"); }
         }
     }
 }

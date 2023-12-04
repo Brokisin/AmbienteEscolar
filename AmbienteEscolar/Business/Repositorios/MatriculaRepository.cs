@@ -1,5 +1,6 @@
 ﻿using AmbienteEscolar.Business.BancoDeDados;
 using AmbienteEscolar.Business.Classes;
+using IronPdf;
 using MySqlConnector;
 using System;
 using System.Collections.Generic;
@@ -23,7 +24,7 @@ namespace AmbienteEscolar.Business.Repositorios
 
             if (BancoDados.OpenConnection() == true)
             {
-                MySqlCommand cmd = new MySqlCommand(sb.ToString(), BancoDados.connection);
+                MySqlCommand cmd = new MySqlCommand(sb.ToString(), BancoDados.Connection);
                 MySqlDataReader dataReader = cmd.ExecuteReader();
 
                 while (dataReader.Read())
@@ -74,7 +75,7 @@ namespace AmbienteEscolar.Business.Repositorios
             if (BancoDados.OpenConnection() == true)
             {
                 MySqlConnection connection = new MySqlConnection();
-                MySqlCommand cmd = new MySqlCommand(query, BancoDados.connection);
+                MySqlCommand cmd = new MySqlCommand(query, BancoDados.Connection);
 
                 cmd.ExecuteNonQuery();
 
@@ -85,6 +86,15 @@ namespace AmbienteEscolar.Business.Repositorios
             {
                 return false;
             }
+        }
+
+        public static void GerarPDF()
+        {
+            ChromePdfRenderer Renderer = new ChromePdfRenderer();
+            var pdf = Renderer.RenderHtmlAsPdf("Hello IronPdf");
+            var OutputPath = "DemoIronPdf.pdf";
+            pdf.SaveAs(OutputPath);
+            System.Diagnostics.Process.Start(OutputPath);
         }
     }
 }

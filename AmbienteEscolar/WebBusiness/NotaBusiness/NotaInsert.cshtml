@@ -1,0 +1,43 @@
+﻿@using AmbienteEscolar.Business.Classes
+@using AmbienteEscolar.Business.BancoDeDados
+@using AmbienteEscolar.Business.Repositorios
+@{
+    Layout = null;
+    BancoDados.DBConnect();
+
+    int id = int.Parse(Request.Form["id"]);
+    string nota = Request.Form["nota"];
+
+    bool notaPreenchida = nota != "";
+
+    if (notaPreenchida)
+    {
+        if (DisciplinaRepository.InserirNota(nota, id))
+        {
+            <text>
+                <script>
+                    alert("Nota inserida com sucesso.");
+                    window.location.href = "/View/Home/Notas";
+                </script>
+            </text>
+        }
+        else
+        {
+            <text>
+                <script>
+                    alert("Ocorreu um erro ao inserir nota, tente novamente.");
+                    window.location.href = "/View/Home/Notas";
+                </script>
+            </text>
+        }
+    }
+    else
+    {
+        <text>
+            <script>
+                alert("Falha ao inserir nota.");
+                window.location.href = "/View/Home/Notas";
+            </script>
+        </text>
+    }
+}

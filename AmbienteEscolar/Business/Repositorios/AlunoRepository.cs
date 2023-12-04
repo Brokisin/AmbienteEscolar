@@ -1,11 +1,9 @@
-﻿using AmbienteEscolar.Business.Classes;
+﻿using AmbienteEscolar.Business.BancoDeDados;
+using AmbienteEscolar.Business.Classes;
 using MySqlConnector;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Web;
-using AmbienteEscolar.Business.BancoDeDados;
 
 namespace AmbienteEscolar.Business.Repositorios
 {
@@ -17,32 +15,25 @@ namespace AmbienteEscolar.Business.Repositorios
         {
             StringBuilder sb = new StringBuilder();
 
-            //sb.AppendLine("SELECT a.id, a.nome, a.email, a.id_curso, c.descricao, c.turno FROM aluno a ");
-            sb.AppendLine("SELECT a.id, a.nome, a.email, a.id_curso, c.descricao, c.turno FROM aluno a ");
-            sb.AppendLine("INNER JOIN curso c ON a.id_curso = c.id;");
+            sb.AppendLine("SELECT id, nome, cpf, matricula, telefone, email FROM aluno");
 
             List<Aluno> listaAlunos = new List<Aluno>();
 
             if (BancoDados.OpenConnection() == true)
             {
-                MySqlCommand cmd = new MySqlCommand(sb.ToString(), BancoDados.connection);
+                MySqlCommand cmd = new MySqlCommand(sb.ToString(), BancoDados.Connection);
                 MySqlDataReader dataReader = cmd.ExecuteReader();
 
                 while (dataReader.Read())
                 {
-                    Curso curso = new Curso();
                     Aluno aluno = new Aluno();
 
                     aluno.Id = int.Parse(dataReader["id"].ToString());
                     aluno.Nome = dataReader["nome"].ToString();
+                    aluno.Cpf = dataReader["cpf"].ToString();
+                    aluno.Matricula = int.Parse(dataReader["matricula"].ToString());
+                    aluno.Telefone = dataReader["telefone"].ToString();
                     aluno.Email = dataReader["email"].ToString();
-
-                    curso.Id = int.Parse(dataReader["id_curso"].ToString());
-                    curso.Descricao = dataReader["descricao"].ToString();
-                    curso.Turno = dataReader["turno"].ToString();
-
-                    aluno.Curso = curso;
-
                     listaAlunos.Add(aluno);
                 }
                 dataReader.Close();
@@ -56,13 +47,47 @@ namespace AmbienteEscolar.Business.Repositorios
             }
         }
 
-        public static bool InserirAluno(string nome, string email, int id_curso)
+        public static Aluno BuscarAlunoPorMatricula(int matricula)
         {
-            string query = "INSERT INTO aluno (nome, email, id_curso) VALUES('" + nome + "','" + email + "'," + id_curso + ");";
+            Aluno aluno = new Aluno();
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine($"SELECT id, nome, cpf, matricula, telefone, email FROM aluno WHERE matricula='{matricula}'");
+            try
+            {
+                if (BancoDados.OpenConnection() == true)
+                {
+                    MySqlCommand cmd = new MySqlCommand(sb.ToString(), BancoDados.Connection);
+                    MySqlDataReader dataReader = cmd.ExecuteReader();
+
+                    while (dataReader.Read())
+                    {
+                        aluno.Id = int.Parse(dataReader["id"].ToString());
+                        aluno.Nome = dataReader["nome"].ToString();
+                        aluno.Cpf = dataReader["cpf"].ToString();
+                        aluno.Matricula = int.Parse(dataReader["matricula"].ToString());
+                        aluno.Telefone = dataReader["telefone"].ToString();
+                        aluno.Email = dataReader["email"].ToString();
+                    }
+                    dataReader.Close();
+                    BancoDados.CloseConnection();
+
+                    return aluno;
+                }
+                else { return aluno; }
+            }
+            catch (Exception e)
+            {
+                return aluno = null;
+            }
+        }
+
+        public static bool InserirAluno(string nome, int matricula, string cpf, string telefone, string email)
+        {
+            string query = $"INSERT INTO aluno (nome, cpf, matricula, telefone, email) VALUES('{nome}', {cpf}, '{matricula}', '{telefone}', '{email}');";
 
             if (BancoDados.OpenConnection() == true)
             {
-                MySqlCommand cmd = new MySqlCommand(query, BancoDados.connection);
+                MySqlCommand cmd = new MySqlCommand(query, BancoDados.Connection);
 
                 cmd.ExecuteNonQuery();
 
@@ -75,19 +100,21 @@ namespace AmbienteEscolar.Business.Repositorios
             }
         }
 
-        public static bool AtualizarAluno(int id, string nome, string email, int id_curso)
+        public static bool AtualizarAluno(int id, string nome, int matricula, string cpf, string telefone, string email)
         {
             StringBuilder sb = new StringBuilder();
 
             sb.AppendLine("UPDATE aluno SET");
             sb.AppendLine("nome='" + nome + "',");
-            sb.AppendLine("email='" + email + "',");
-            sb.AppendLine("id_curso='" + id_curso + "'");
+            sb.AppendLine("cpf='" + cpf + "',");
+            sb.AppendLine("matricula='" + matricula + "',");
+            sb.AppendLine("telefone='" + telefone + "',");
+            sb.AppendLine("email='" + email + "'");
             sb.AppendLine("WHERE id='" + id + "'");
 
             if (BancoDados.OpenConnection() == true)
             {
-                MySqlCommand cmd = new MySqlCommand(sb.ToString(), BancoDados.connection);
+                MySqlCommand cmd = new MySqlCommand(sb.ToString(), BancoDados.Connection);
 
                 cmd.ExecuteNonQuery();
 
@@ -108,7 +135,7 @@ namespace AmbienteEscolar.Business.Repositorios
 
             if (BancoDados.OpenConnection() == true)
             {
-                MySqlCommand cmd = new MySqlCommand(sb.ToString(), BancoDados.connection);
+                MySqlCommand cmd = new MySqlCommand(sb.ToString(), BancoDados.Connection);
 
                 cmd.ExecuteNonQuery();
 

@@ -1,123 +1,109 @@
 ﻿@using AmbienteEscolar.Business.Classes
-@using AmbienteEscolar.Business.BancoDeDados
 @using AmbienteEscolar.Business.Repositorios
+@using IronPdf;
+
 @{
-    Layout = null;
-    BancoDados.DBConnect();
-
-    Aluno aluno = new Aluno();
-    aluno.Id = int.Parse(Request.Form["selectAlunoMatricula"]);
-    List<Matricula> listaMatriculas = MatriculaRepository.ListarMatriculas(aluno.Id);
-
-    Curso curso = new Curso();
-    Matricula matr = new Matricula();
-
-    bool idIsNotNull = aluno.Id != 0;
-    bool listaPreenchida = listaMatriculas != null;
-
-    bool itensPreenchidos = idIsNotNull && listaPreenchida;
-
-    if (itensPreenchidos)
+    Sessao sessao = Sessao.Current();
+    bool isADM = sessao.NivelAcesso.Id == 1;
+    Aluno aluno = null;
+    if (isADM)
     {
-        <text>
-            <html xmlns="http://www.w3.org/1999/xhtml">
-            <head>
-                <title>Visualização da Matrícula</title>
-                <meta charset="utf-8" />
-                <meta name="viewport" content="width=device-width" />
-                <link href="~/Models/css/matriculas.css" rel="stylesheet" />
-                <link rel="icon" type="image/x-icon" href="~/Button-Blank-Blue-icon.ico">
-            </head>
-            <body>
-                <main class="posmat-Main">
-                    <div class="posmat-gJKs">
-                        <div class="posmat-mat">Matrícula:</div>
-                        @foreach (Matricula m in listaMatriculas)
-                        {
-                            <div>
-                                <div class="posmat-VVggDD">
-                                    <p class="p-PP">Identificador:</p>
-                                    <div>
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-record-fill" viewBox="0 0 16 16">
-                                            <path fill-rule="evenodd" d="M8 13A5 5 0 1 0 8 3a5 5 0 0 0 0 10z" />
-                                        </svg>
-                                        - @m.Id
-                                    </div>
-                                </div>
-                                <div class="posmat-VVggDD">
-                                    <p class="p-PP">Número matrícula:</p>
-                                    <div>
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-zip-fill" viewBox="0 0 16 16">
-                                            <path d="M5.5 9.438V8.5h1v.938a1 1 0 0 0 .03.243l.4 1.598-.93.62-.93-.62.4-1.598a1 1 0 0 0 .03-.243z" />
-                                            <path d="M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0zM9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1zm-4-.5V2h-1V1H6v1h1v1H6v1h1v1H6v1h1v1H5.5V6h-1V5h1V4h-1V3h1zm0 4.5h1a1 1 0 0 1 1 1v.938l.4 1.599a1 1 0 0 1-.416 1.074l-.93.62a1 1 0 0 1-1.109 0l-.93-.62a1 1 0 0 1-.415-1.074l.4-1.599V8.5a1 1 0 0 1 1-1z" />
-                                        </svg>
-                                        - @m.Numero_matricula
-                                    </div>
-                                </div>
-                                <div class="posmat-VVggDD">
-                                    <p class="p-PP">Nome:</p>
-                                    <div>
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-bounding-box" viewBox="0 0 16 16">
-                                            <path d="M1.5 1a.5.5 0 0 0-.5.5v3a.5.5 0 0 1-1 0v-3A1.5 1.5 0 0 1 1.5 0h3a.5.5 0 0 1 0 1h-3zM11 .5a.5.5 0 0 1 .5-.5h3A1.5 1.5 0 0 1 16 1.5v3a.5.5 0 0 1-1 0v-3a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 1-.5-.5zM.5 11a.5.5 0 0 1 .5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 1 0 1h-3A1.5 1.5 0 0 1 0 14.5v-3a.5.5 0 0 1 .5-.5zm15 0a.5.5 0 0 1 .5.5v3a1.5 1.5 0 0 1-1.5 1.5h-3a.5.5 0 0 1 0-1h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 1 .5-.5z" />
-                                            <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm8-9a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
-                                        </svg>
-                                        - @m.Aluno.Nome
-                                    </div>
-                                </div>
-                                <div class="posmat-VVggDD">
-                                    <p class="p-PP">E-mail:</p>
-                                    <div>
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope-fill" viewBox="0 0 16 16">
-                                            <path d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414.05 3.555ZM0 4.697v7.104l5.803-3.558L0 4.697ZM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586l-1.239-.757Zm3.436-.586L16 11.801V4.697l-5.803 3.546Z" />
-                                        </svg>
-                                        - @m.Aluno.Email
-                                    </div>
-                                </div>
-                                <div class="posmat-VVggDD">
-                                    <p class="p-PP">Curso:</p>
-                                    <div>
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-journal-bookmark-fill" viewBox="0 0 16 16">
-                                            <path fill-rule="evenodd" d="M6 1h6v7a.5.5 0 0 1-.757.429L9 7.083 6.757 8.43A.5.5 0 0 1 6 8V1z" />
-                                            <path d="M3 0h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-1h1v1a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v1H1V2a2 2 0 0 1 2-2z" />
-                                            <path d="M1 5v-.5a.5.5 0 0 1 1 0V5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0V8h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0v.5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1z" />
-                                        </svg>
-                                        - @m.Aluno.Curso.Descricao
-                                    </div>
-                                </div>
-                                <div class="posmat-VVggDD">
-                                    <p class="p-PP">Turno:</p>
-                                    <div>
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bookmarks" viewBox="0 0 16 16">
-                                            <path d="M2 4a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v11.5a.5.5 0 0 1-.777.416L7 13.101l-4.223 2.815A.5.5 0 0 1 2 15.5V4zm2-1a1 1 0 0 0-1 1v10.566l3.723-2.482a.5.5 0 0 1 .554 0L11 14.566V4a1 1 0 0 0-1-1H4z" />
-                                            <path d="M4.268 1H12a1 1 0 0 1 1 1v11.768l.223.148A.5.5 0 0 0 14 13.5V2a2 2 0 0 0-2-2H6a2 2 0 0 0-1.732 1z" />
-                                        </svg>
-                                        - @m.Aluno.Curso.Turno
-                                    </div>
-                                </div>
-                            </div>
-                        }
+        int matricula = int.Parse(Request.Form["numeroMatricula"]);
+        aluno = AlunoRepository.BuscarAlunoPorMatricula(matricula);
+    }
+    else { aluno = AlunoRepository.BuscarAlunoPorMatricula(sessao.Matricula); }
 
-                        <button class="butSSSVFSD" onclick="redirecionarTelaMatricula()">Voltar</button>
-                        <button class="butSSSVFSD" onclick="window.print()">Gerar PDF</button>
-                    </div>
-                </main>
-            </body>
-        </html>
+    ChromePdfRenderer Renderer = new ChromePdfRenderer();
+
+    var dia = DateTime.Today.ToString("dd");
+    var mes = DateTime.Today.ToString("MMMM");
+    var ano = DateTime.Today.ToString("yyyy");
+
+    var pdf = Renderer.RenderHtmlAsPdf($@"
+
+<div>
+        <div style=""display:flex;width: 100%;align-items: center;justify-content: space-between;"">
+            <div>
+                <p>
+                <strong>{aluno.Nome}</strong><br>
+                Rua Araça, 192<br>
+                Canoas, Rio Grande do Sul, 92310-470<br>
+                {aluno.Email}<br>
+                {aluno.Telefone}
+                </p>
+            </div>
+            <img style=""width: 150px;height: 105px;border-radius: 10px"" src=""https://trello.com/1/cards/65422cff12a1b2ab8aebbdfd/attachments/65422d0e52f745c5bfc1046a/previews/65422d1052f745c5bfc10550/download/generate-a-logo-written-ava-upscaled_(1).png"">
+        </div>
+
+        <p>
+            <strong>{DateTime.Today}</strong>
+        </p>
+
+        <p>
+            <strong>Universidade La Salle</strong><br>
+            Rua 15 de Janeiro<br>
+            Canoas, Rio Grande do Sul, 93001-652
+        </p>
+    </div>
+
+    <div>
+        <hr>
+        <h2>ATESTADO DE MATRÍCULA</h2>
+
+        <p>
+            Eu, <strong>{aluno.Nome}</strong>, Solteiro, portador(a) do RG nº <strong>6118908547</strong>
+            e do CPF nº <strong>{aluno.Cpf}</strong>, declaro para os devidos fins que estou regularmente matriculado(a)
+            no <strong>Ciência da Computação</strong> da <strong>Universidade La Salle</strong>, com ingresso no ano letivo
+            de <strong>01/03/2021</strong> e semestre <strong>2º</strong>, conforme registro acadêmico sob o número
+            <strong>R{aluno.Matricula}&{aluno.Cpf}</strong>.
+        </p>
+
+        <p>
+            Segue abaixo as principais informações referentes à matrícula:
+        </p>
+
+        <ul>
+            <li>Curso: <strong>Ciência da Computação</strong></li>
+            <li>Período/Semestre: <strong>2°</strong></li>
+            <li>Ano de Ingresso: <strong>01/03/2021</strong></li>
+            <li>Número de Registro Acadêmico: <strong>R{aluno.Matricula}&{aluno.Cpf}</strong></li>
+        </ul>
+
+        <p>
+            Este atestado tem validade para o período de <strong>01/03/2021</strong> a <strong>01/12/2026</strong>,
+            referente ao ano letivo de <strong>{ano}</strong>, estando o(a) aluno(a) regularmente matriculado(a) e apto(a)
+            a frequentar as atividades acadêmicas.
+        </p>
+
+        <p>
+            Este documento é fornecido a pedido do(a) interessado(a), para os fins que julgar necessários.
+        </p>
+
+        <p>
+            Cidade, <strong>{dia}</strong> de <strong>{mes}</strong> de <strong>{ano}</strong>.
+        </p>
+        <div style=""text-align: end;"">
+            <p style=""margin: 0;font-size: 1px;"">
+            <img style=""width: 170px;height: 70px;"" src=""https://trello.com/1/cards/6542920a5e1ffe2547f3f201/attachments/6565fd9d4425c374bbb58ac0/download/assinatura_template.png""></p>
+            <div style=""display: flex;justify-content: flex-end;"">
+                <p style=""margin: 0;font-size: 6px;"">____________________________</p>
+                <p style=""margin: 0;font-size: 6px;"">____________________________</p>
+                <p style=""margin: 0;font-size: 6px;"">____________________________</p>
+            </div>
+            <p>{aluno.Nome}</p>
+            <p>Ciência da Computação</p>
+            <p>R{aluno.Matricula}&{aluno.Cpf}</p>
+        </div>
+    </div>");
+    string path = "C:/Users/erosk/OneDrive/Área de Trabalho/generated_matriculas/";
+    string file = AmbienteEscolar.Business.EncryptionHelper.EncryptString(sessao.Matricula.ToString());
+    string output = $"{path}{file}.pdf";
+    pdf.SaveAs(output);
+    System.Diagnostics.Process.Start(output);
+
+    <text>
         <script>
-
-            function redirecionarTelaMatricula() {
-                window.location.href = "/View/Home/Matriculas";
-            }
+            window.location.href = "/View/Home/Matriculas.cshtml";
         </script>
-        </text>
-    }
-    else
-    {
-        <text>
-            <script>
-                alert("Falha ao visualizar matrícula.");
-                window.location.href = "/View/Home/Matriculas";
-            </script>
-        </text>
-    }
+    </text>
 }

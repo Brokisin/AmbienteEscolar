@@ -1,5 +1,6 @@
 ﻿@{
     Layout = null;
+    @section SemMenu { }
 }
 
 <!DOCTYPE html>
@@ -10,50 +11,24 @@
     <title>Login</title>
     <link href="~/Models/css/reset.css" rel="stylesheet" />
     <link href="~/Models/css/login.css" rel="stylesheet" />
-    <link rel="icon" type="image/x-icon" href="~/User-blue-icon.ico">
+    <link rel="icon" type="image/x-icon" href="~/ava_iconx.ico">
+    <link href="~/Models/css/defaultStyle.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
 </head>
 
 <body>
-    <header>
-        <div class="CCvs">
-            <div>
-                <h1>AVA - Login</h1>
-            </div>
-            <div>
-                <span>Preencha os campos a seguir para realizar seu login</span>
-            </div>
-        </div>
-    </header>
-    <main>
+    <div id="container">
+        <h1>AVA</h1>
+        <h3>Portal do Aluno</h3>
+        <hr>
+        <h4>Entrar</h4>
         <form method="post" id="formulario" autocomplete="off" action="~/View/Validate/ValidateLogin.cshtml">
-            <div class="main-box">
-                <div class="info">
-                    <div class="dv-sCSA">
-                        <label class="usr">Usuário</label>
-                        <input id="login" name="login" type="text" placeholder="Insira seu nome" required maxlength="15" minlength="4">
-                    </div>
-                    <div class="dv-sCSA">
-                        <label class="usr">Senha</label>
-                        <input id="senha" name="senha" type="password" placeholder="Insira sua senha" required maxlength="15" minlength="4">
-                    </div>
-                    <input class="gdjNB" type="submit" value="Logar" />
-                </div>
-            </div>
+            <input id="login" name="login" type="text" placeholder="Usuário">
+            <input id="senha" name="senha" type="password" placeholder="Senha">
+            <input class="button-lg-session" type="submit" value="Logar" />
+            <a class="a-button-lg" href="~/RecuperarSenha.cshtml">Esqueci a minha senha</a>
         </form>
-    </main>
-    <div class="ink-butnn" hidden>
-        <div class="linkMenu" id="linkMenu" hidden>
-            <a id="linkMenu" href="~/View/Home/Menu.cshtml" hidden>Ir para o Menu</a>
-        </div>
     </div>
-    <div>
-        <a href="~/View/Home/Menu.cshtml" hidden>redirect</a>
-    </div>
-    <footer>
-        <div>
-            AVA © All rights reserved
-        </div>
-    </footer>
 </body>
 </html>
 

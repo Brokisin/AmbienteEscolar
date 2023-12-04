@@ -16,14 +16,13 @@ namespace AmbienteEscolar.Business.Repositorios
         {
             StringBuilder sb = new StringBuilder();
 
-            //sb.AppendLine("SELECT id, descricao FROM nivelacesso ORDER BY id;");
-            sb.AppendLine("SELECT id, descricao FROM nivelAcesso ORDER BY id;");
+            sb.AppendLine("SELECT id, descricao FROM nivel_acesso ORDER BY id;");
 
             List<NivelAcesso> listaNivelAcesso = new List<NivelAcesso>();
 
             if (BancoDados.OpenConnection() == true)
             {
-                MySqlCommand cmd = new MySqlCommand(sb.ToString(), BancoDados.connection);
+                MySqlCommand cmd = new MySqlCommand(sb.ToString(), BancoDados.Connection);
                 MySqlDataReader dataReader = cmd.ExecuteReader();
 
                 while (dataReader.Read())
@@ -46,26 +45,25 @@ namespace AmbienteEscolar.Business.Repositorios
             }
         }
 
-        public static int ListarAcessosDescricao(string descricao)
+        public static int ListarAcessosDescricao(int id)
         {
             StringBuilder sb = new StringBuilder();
 
-            //sb.AppendLine("SELECT * FROM curso");
-            sb.AppendLine("SELECT * FROM nivelAcesso"); //mysql
-            sb.AppendLine("WHERE descricao like '%" + descricao + "%' ORDER BY descricao;");
+            sb.AppendLine("SELECT id, descricao FROM nivel_acesso");
+            sb.AppendLine("WHERE id='" + id + "' ORDER BY descricao;");
 
             NivelAcesso na = new NivelAcesso();
             List<NivelAcesso> listaAcessos = new List<NivelAcesso>();
 
             if (BancoDados.OpenConnection() == true)
             {
-                MySqlCommand cmd = new MySqlCommand(sb.ToString(), BancoDados.connection);
+                MySqlCommand cmd = new MySqlCommand(sb.ToString(), BancoDados.Connection);
                 MySqlDataReader dataReader = cmd.ExecuteReader();
 
                 while (dataReader.Read())
                 {
                     na.Id = int.Parse(dataReader["id"].ToString());
-                    na.Descricao = "";
+                    na.Descricao = dataReader["descricao"].ToString();
 
                     listaAcessos.Add(na);
                 }

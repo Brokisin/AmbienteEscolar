@@ -23,7 +23,7 @@ namespace AmbienteEscolar.Business.Repositorios
 
             if (BancoDados.OpenConnection() == true)
             {
-                MySqlCommand cmd = new MySqlCommand(sb.ToString(), BancoDados.connection);
+                MySqlCommand cmd = new MySqlCommand(sb.ToString(), BancoDados.Connection);
                 MySqlDataReader dataReader = cmd.ExecuteReader();
 
                 while (dataReader.Read())
@@ -59,7 +59,7 @@ namespace AmbienteEscolar.Business.Repositorios
 
             if (BancoDados.OpenConnection() == true)
             {
-                MySqlCommand cmd = new MySqlCommand(sb.ToString(), BancoDados.connection);
+                MySqlCommand cmd = new MySqlCommand(sb.ToString(), BancoDados.Connection);
                 MySqlDataReader dataReader = cmd.ExecuteReader();
 
                 while (dataReader.Read())
@@ -96,7 +96,7 @@ namespace AmbienteEscolar.Business.Repositorios
 
             if (BancoDados.OpenConnection() == true)
             {
-                MySqlCommand cmd = new MySqlCommand(sb.ToString(), BancoDados.connection);
+                MySqlCommand cmd = new MySqlCommand(sb.ToString(), BancoDados.Connection);
                 MySqlDataReader dataReader = cmd.ExecuteReader();
 
                 while (dataReader.Read())
@@ -120,13 +120,12 @@ namespace AmbienteEscolar.Business.Repositorios
 
         public static void InserirCurso(string descricao, string turno)
         {
-            //string query = "INSERT INTO curso (descricao, turno) VALUES('" + descricao + "','" + turno + "');"; //php
             string query = "INSERT INTO curso (descricao, turno) VALUES('" + descricao + "', '" + turno + "');"; //mysql
 
             if (BancoDados.OpenConnection() == true)
             {
                 MySqlConnection connection = new MySqlConnection();
-                MySqlCommand cmd = new MySqlCommand(query, BancoDados.connection);
+                MySqlCommand cmd = new MySqlCommand(query, BancoDados.Connection);
 
                 cmd.ExecuteNonQuery();
 
@@ -136,13 +135,12 @@ namespace AmbienteEscolar.Business.Repositorios
 
         public static void DeletarCurso(int id)
         {
-            //string query = "DELETE FROM curso WHERE id=" + id + "";
             string query = "DELETE FROM cursos WHERE id=" + id + ""; //mysql
 
             if (BancoDados.OpenConnection() == true)
             {
                 MySqlConnection connection = new MySqlConnection();
-                MySqlCommand cmd = new MySqlCommand(query, BancoDados.connection);
+                MySqlCommand cmd = new MySqlCommand(query, BancoDados.Connection);
 
                 cmd.ExecuteNonQuery();
 

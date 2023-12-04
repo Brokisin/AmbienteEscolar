@@ -11,5 +11,8 @@ namespace AmbienteEscolar.Business.Classes
         public string Nome { get; set; }
         public string Email { get; set; }
         public Curso Curso { get; set; }
+
+        public string Registro { get; set; }
+        public string Cpf { get; set; }
     }
 }

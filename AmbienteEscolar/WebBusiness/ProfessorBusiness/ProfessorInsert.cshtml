@@ -1,32 +1,29 @@
 ﻿@using AmbienteEscolar.Business.Classes
 @using AmbienteEscolar.Business.BancoDeDados
 @using AmbienteEscolar.Business.Repositorios
-
 @{
     Layout = null;
     BancoDados.DBConnect();
-    Curso curso = new Curso();
     Professor professor = new Professor();
 
-    professor.Id = int.Parse(Request.Form["idProf"]);
+    professor.Id = int.Parse(Request.Form["id"]);
     professor.Nome = Request.Form["nome"];
+    professor.Registro = Request.Form["registro"];
+    professor.Cpf = Request.Form["cpf"];
     professor.Email = Request.Form["email"];
-    string descricaoCurso = Request.Form["idCursoId"];
-    int idCurso = CursoRepository.ListarCursosDescricao(descricaoCurso);
 
-    bool idIsNull = professor.Id == 0;
     bool nomePreenchido = professor.Nome != "";
     bool emailPreenchido = professor.Email != "";
-    bool idPreenchido = idCurso != 0;
 
-    bool camposPreenchidos = nomePreenchido && emailPreenchido && idPreenchido;
+    bool camposPreenchidos = nomePreenchido && emailPreenchido;
 
     if (camposPreenchidos)
     {
-        if (idIsNull)
+        if (professor.Id == 0)
         {
-            if (ProfessorRepository.InserirProfessor(professor.Nome, professor.Email, idCurso))
+            if (ProfessorRepository.InserirProfessor(professor.Nome, professor.Registro, professor.Cpf, professor.Email))
             {
+                @UsuarioRepository.InserirUsuario(professor.Registro, professor.Cpf, 3);
                 <text>
                     <script>
                         alert("Professor inserido com sucesso.");
@@ -38,7 +35,7 @@
             {
                 <text>
                     <script>
-                        alert("Ocorreu um erro ao inserir professor, tente novamente mais tarde.");
+                        alert("Ocorreu um erro ao inserir professor, tente novamente.");
                         window.location.href = "/View/Home/Professores";
                     </script>
                 </text>
@@ -46,7 +43,7 @@
         }
         else
         {
-            if (ProfessorRepository.AtualizarProfessor(professor.Id, professor.Nome, professor.Email, idCurso))
+            if (ProfessorRepository.AtualizarProfessor(professor.Id, professor.Nome, professor.Registro, professor.Cpf, professor.Email))
             {
                 <text>
                     <script>

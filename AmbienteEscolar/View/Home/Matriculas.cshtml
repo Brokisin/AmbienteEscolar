@@ -3,134 +3,75 @@
 @using AmbienteEscolar.Business.Classes;
 
 @{
-    Layout = null;
-    BancoDados.DBConnect();
-    List<Aluno> alunos = AlunoRepository.ListarAlunos();
-
-    Usuario usuario = new Usuario();
-    usuario.Login = Request.Form["login"];
-
-    Boolean logged = false;
-    HttpCookie cookie = Request.Cookies["UserLogin"];
-    if (cookie != null)
-    {
-        logged = true;
-    }
+    Layout = "_Layout.cshtml";
+    Sessao sessao = Sessao.Current();
+    List<Aluno> listaAlunos = AlunoRepository.ListarAlunos();
 }
 
-<!DOCTYPE html>
+<title>Matricula</title>
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<link href="~/Models/css/menu_lateral.css" rel="stylesheet" />
+<link href="~/Models/css/menu.css" rel="stylesheet" />
+<link href="~/Models/css/layout_scnd.css" rel="stylesheet" />
 
-<html>
-@if (logged == true)
-{
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width" />
-        <title>Matriculas</title>
-        <link href="~/Models/css/reset.css" rel="stylesheet" />
-        <link href="~/Models/css/menu.css" rel="stylesheet" />
-        <link href="~/Models/css/suporte.css" rel="stylesheet" />
-        <link href="~/Models/css/alunos.css" rel="stylesheet" />
-        <link href="~/Models/css/matriculas.css" rel="stylesheet" />
-        <link href="~/View/Validate/ValidateLogin.cshtml" rel="profile" />
-        <link rel="icon" type="image/x-icon" href="~/Button-Blank-Blue-icon.ico">
-        <script src="~/Models/js/logoffAction.js"></script>
-        <script src="~/Models/js/siteActions.js"></script>
-        <script src="~/Models/js/scripts.js"></script>
-    </head>
-    <body>
-
-        <!--Spinner Wrapper-->
-        <div id="spinMod" class="spinner-modal">
-            <div id="spinnerWrapper" class="ring">
-                Loading
-                <span></span>
-            </div>
-        </div>
-
-        <!--Main Header-->
-        <div id="hyperHeader">
-            <div class="header">
-                <h2>AVA - Ambiente Escolar</h2>
-                <p>Seja bem-vindo!</p>
-            </div>
-            <div class="cvSDgbcvD">
-                <ul>
-                    <li><a class="active" href="~/View/Home/Menu">Home</a></li>
-                    <li><a href="~/View/Home/Matriculas">Matrículas</a></li>
-                    <li class="dropdown">
-                        <a>
-                            Cadastro
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi-caret-down-fill" viewBox="0 0 16 16">
-                                <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
-                            </svg>
-                        </a>
-                        <div class="dropdown-content">
-                            <a href="~/View/Home/Alunos">Alunos</a>
-                            <a href="~/View/Home/Professores">Professores</a>
-                            <a href="~/View/Home/Usuarios">Usuários</a>
-                        </div>
-                    </li>
-                    <li><a href="~/View/Ext/Sobre">Suporte</a></li>
-                    <li class="dropdown">
-                        <a>
-                            Eu
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi-caret-down-fill" viewBox="0 0 16 16">
-                                <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
-                            </svg>
-                        </a>
-                        <div class="dropdown-content">
-                            <a onclick="LogOff()">Logoff</a>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </div>
-
-        <!--Matriculas Screen-->
-        <div id="matriculas" class="d-Matriculas">
-            <main class="div-mainCCVCD">
-                <div class="home-title">
-                    <p>SCHOOL REGISTER:</p>
-                </div>
-
-                <div class="mat-SWlfTy">
-                    <div class="mat-JJsWevg">Visualizar Matrícula: </div>
-                    <form action="~/WebBusiness/MatriculaBusiness/MatriculaSelect.cshtml" method="post">
-                        <select id="selectAlunoMatricula" name="selectAlunoMatricula">
-                            @foreach (Aluno al in alunos)
+<div class="container-lg container-default">
+    <div class="dft-header-title">
+        <h1>Matrícula</h1>
+    </div>
+    <div id="container-table" class="class-list">
+        @if (sessao.NivelAcesso.Id == 1)
+        {
+            <div>
+                <form action="/WebBusiness/MatriculaBusiness/MatriculaSelect.cshtml" method="post" class="frm-matricula">
+                    <span>Selecione uma matricula e clique no botão para visualizá-la.</span>
+                    <div style="display: flex;">
+                        <select name="numeroMatricula" class="slct-matricula">
+                            <option disabled>Selecione a matricula</option>
+                            @foreach (var item in listaAlunos)
                             {
-                                <option value="@al.Id">@al.Nome</option>
+                                <option value="@item.Matricula">@item.Matricula</option>
                             }
                         </select>
-                        <input id="selectMatricula" type="submit" value="Visualizar" />
-                    </form>
-                </div>
-            </main>
-        </div>
-
-        <!--Main Footer-->
-        <footer id="hyperFooter">
-            <div>
-                <p>2022 AVA &#169; - Todos os direitos reservados.</p>
+                        <button class="btn btn-add-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
+                                <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5"></path>
+                                <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"></path>
+                            </svg>
+                            Visualizar
+                        </button>
+                    </div>
+                </form>
             </div>
-        </footer>
-    </body>
-}
-else
-{
-    <head>
-        <link rel="icon" type="image/x-icon" href="~/View/Validate/notFound.ico">
-        <title>Not Found</title>
-    </head>
-    <body>
-        <br />
-        <img style="margin-left: 30px; display:inline-block;" src="~/View/Validate/notFound.ico" alt="notFound" />
-        <h1 style="display:inline-block; margin-left: 20px;"> Something went wrong. Return <a href="~/Login.cshtml">here</a>. </h1>
-    </body>
-}
-</html>
+        }
+        else
+        {
+
+            <div>
+                <form action="/WebBusiness/MatriculaBusiness/MatriculaSelect.cshtml" method="post" class="frm-matricula" style="width: 50%;">
+                    <span>Clique para visualizar seu atestado de matricula.</span>
+                    <button class="btn btn-add-item" style="width: 30%;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
+                            <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5"></path>
+                            <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"></path>
+                        </svg>
+                        Visualizar
+                    </button>
+                </form>
+            </div>
+        }
+    </div>
+</div>
+
+<!--Spinner Wrapper-->
+<div id="spinMod" class="spinner-modal">
+    <div id="spinnerWrapper" class="ring">
+        Loading
+        <span></span>
+    </div>
+</div>
+
 <script>
+
     // SPINNER WRAPPER =================
 
     var spinnerWrapper = document.getElementById("spinnerWrapper");
@@ -142,6 +83,4 @@ else
             spinnerWrapper.style.display = "none";
         }
     });
-
 </script>
-

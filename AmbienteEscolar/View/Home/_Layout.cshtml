@@ -1,0 +1,68 @@
+﻿@using AmbienteEscolar.Business.Classes
+
+@{
+    Sessao sessao = Sessao.Current();
+}
+
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width" />
+<link rel="stylesheet" href="avaicon.ico">
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+<link rel="stylesheet" href="~/css/defaultStyle.css" asp-append-version="true" />
+<link rel="icon" type="image/x-icon" href="~/ava_iconx.ico">
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<link href="~/Models/css/menu_lateral.css" rel="stylesheet" />
+<link href="~/Models/css/menu.css" rel="stylesheet" />
+<link href="~/Models/css/layout_scnd.css" rel="stylesheet" />
+<script src="~/Models/js/logoffAction.js"></script>
+<script src="~/Models/js/alunoScripts.js"></script>
+<script src="~/Models/js/scripts.js"></script>
+
+<body>
+    @if (sessao.Nome == null || sessao.NivelAcesso == null)
+    {
+        {
+            Layout = null;
+        }
+        @RenderPage("Shared/NotFound.cshtml", "NotFound")
+        <div style="visibility: hidden">
+            @RenderBody()
+        </div>
+    }
+    else
+    {
+        <div class="container">
+            <main role="main" class="main-container">
+                @RenderSection("SemMenu", required: false)
+                @if (!IsSectionDefined("SemMenu"))
+                {
+                    <div class="containerMenu">
+                        @RenderPage("Shared/SideBarMenu.cshtml", "SideBarMenu")
+                    </div>
+                }
+                @RenderBody()
+            </main>
+        </div>
+    }
+</body>
+
+<script>
+    window.addEventListener('load', function () {
+        var cookie = getCookie('UserLogin');
+        if (cookie == null) {
+            window.location.href = "/View/Home/Shared/NotFound.cshtml";
+        }
+    });
+
+    function getCookie(cookieName) {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = cookies[i].trim();
+            if (cookie.indexOf(cookieName + '=') === 0) {
+                return cookie.substring(cookieName.length + 1);
+            }
+        }
+        return null;
+    }
+</script>

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace AmbienteEscolar.Business.Classes
+﻿namespace AmbienteEscolar.Business.Classes
 {
     public class Banco
     {
