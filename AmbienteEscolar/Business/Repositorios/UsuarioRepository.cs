@@ -128,6 +128,7 @@ namespace AmbienteEscolar.Business.Repositorios
                 dataReader.Read();
                 if (!dataReader.HasRows)
                 {
+                    dataReader.Close();
                     return sessao = BuscarSessaoProfessor(login);
                 }
 

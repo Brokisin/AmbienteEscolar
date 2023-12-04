@@ -15,6 +15,7 @@
     bool contemDisciplinas = DisciplinasPorModulo.Count > 0;
     List<Disciplina> disciplinasAluno = DisciplinaRepository.BuscarDisciplinasAluno(1);
     List<Disciplina> disciplinasAluno2 = DisciplinaRepository.BuscarDisciplinasAluno(3);
+    Sessao sessao = Sessao.Current();
 }
 
 <meta charset="utf-8" />
@@ -36,13 +37,71 @@
 
     <div id="container-table" class="class-list">
         <div style="display: flex; justify-content: space-between; align-items: center;">
-            <span style="font-size: 18px;">Selecione o aluno que deseja visualizar as notas.</span>
-            <select id="alunoSelector" class="formbold-form-input" style="width: 20%;">
-                <option disabled selected>Selecione o aluno</option>
-                <option value="eros">Eros Karsburg</option>
-                <option value="dimitri">Dimitri Leibruk</option>
-            </select>
+            @if (sessao.NivelAcesso.Id != (int)EnumNivelAcesso.Aluno)
+            {
+                <span style="font-size: 18px;">Selecione o aluno que deseja visualizar as notas.</span>
+                <select id="alunoSelector" class="formbold-form-input" style="width: 20%;">
+                    <option disabled selected>Selecione o aluno</option>
+                    <option value="eros">Eros Karsburg</option>
+                    <option value="dimitri">Dimitri Leibruk</option>
+                </select>
+            }
+            else
+            {
+                <span style="font-size: 18px;">As notas serão lançadas aqui.</span>
+            }
         </div>
+
+        @if (sessao.NivelAcesso.Id == (int)EnumNivelAcesso.Aluno)
+        {
+            <div id="eros" class="table100 ver5 m-b-110">
+                @if (contemDisciplinas)
+                {
+                    <div class="table100-head">
+                        <table>
+                            <thead>
+                                <tr class="row100 head">
+                                    <th class="cell100 column1">Disciplina</th>
+                                    <th class="cell100 column2">Situação</th>
+                                    <th class="cell100 column3">Carga Horária</th>
+                                    <th class="cell100 column4">Nota</th>
+                                    <th class="cell100 column5"></th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                    foreach (var disciplina in disciplinasAluno)
+                    {
+                        string validaNota = disciplina.Nota == 0 ? "Não lançada" : disciplina.Nota.ToString();
+                        <div class="table100-body">
+                            <table>
+                                <tbody>
+                                    <tr class="row100 body">
+                                        <td class="cell100 column1">@disciplina.NomeDisciplina</td>
+                                        <td class="cell100 column2">Cursando</td>
+                                        <td class="cell100 column3">@disciplina.CargaHoraria</td>
+                                        <td class="cell100 column4">@validaNota</td>
+                                        <td>
+                                            @if (sessao.NivelAcesso.Id != (int)EnumNivelAcesso.Aluno)
+                                            {
+                                                <button class="btn" onclick="abrirModal(@disciplina.Id, '@disciplina.NomeDisciplina', @disciplina.Nota)">Alterar</button>
+                                            }
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    }
+                }
+                else
+                {
+                    <div>
+                        <span>Não há disciplinas para esse aluno</span>
+                    </div>
+                }
+            </div>
+        }
+
         <div id="eros" class="table100 ver5 m-b-110" hidden>
             @if (contemDisciplinas)
             {
@@ -70,7 +129,12 @@
                                     <td class="cell100 column2">Cursando</td>
                                     <td class="cell100 column3">@disciplina.CargaHoraria</td>
                                     <td class="cell100 column4">@validaNota</td>
-                                    <td><button class="btn" onclick="abrirModal(@disciplina.Id, '@disciplina.NomeDisciplina', @disciplina.Nota)">Alterar</button></td>
+                                    <td>
+                                        @if (sessao.NivelAcesso.Id != (int)EnumNivelAcesso.Aluno)
+                                        {
+                                            <button class="btn" onclick="abrirModal(@disciplina.Id, '@disciplina.NomeDisciplina', @disciplina.Nota)">Alterar</button>
+                                        }
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>

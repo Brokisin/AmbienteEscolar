@@ -116,7 +116,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Button-Blank-Blue-icon.ico" />
+    <Content Include="ava_iconx.ico" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-grid.rtl.css" />
@@ -160,7 +160,6 @@
     <Content Include="Scripts\jquery-3.6.0.min.js" />
     <Content Include="Scripts\jquery-3.6.0.slim.js" />
     <Content Include="Scripts\jquery-3.6.0.slim.min.js" />
-    <Content Include="User-blue-icon.ico" />
     <Content Include="View\Validate\notFound.ico" />
     <Content Include="Web.config" />
     <Content Include="WebBusiness\NotaBusiness\NotaInsert.cshtml" />
@@ -173,6 +172,7 @@
     <Compile Include="Business\Classes\Disciplina.cs" />
     <Compile Include="Business\Classes\Enum\Ativo.cs" />
     <Compile Include="Business\Classes\Enum\EnumModulos.cs" />
+    <Compile Include="Business\Classes\Enum\EnumNivelAcesso.cs" />
     <Compile Include="Business\Classes\Enum\NivelAcesso.cs" />
     <Compile Include="Business\Classes\Matricula.cs" />
     <Compile Include="Business\Classes\Modulo.cs" />

@@ -17,7 +17,6 @@
 <link href="~/Models/css/reset.css" rel="stylesheet" />
 <link href="~/Models/css/menu.css" rel="stylesheet" />
 <link href="~/View/Validate/ValidateLogin.cshtml" rel="profile" />
-<link rel="icon" type="image/x-icon" href="~/Button-Blank-Blue-icon.ico">
 <link href="~/Models/css/menu_lateral.css" rel="stylesheet" />
 <link href="~/Models/css/disciplinas.css" rel="stylesheet" />
 <link href="~/Models/css/layout_scnd.css" rel="stylesheet" />
@@ -56,6 +55,7 @@
                     </div>
                     foreach (var disciplina in modulo.Value)
                     {
+                        string notaValid = disciplina.Nota == 0 ? "" : disciplina.Nota.ToString();
                         <div class="table100-body">
                             <table>
                                 <tbody>
@@ -64,7 +64,7 @@
                                         <td class="cell100 column2">@disciplina.Requisitos</td>
                                         <td class="cell100 column3">@disciplina.Situacao</td>
                                         <td class="cell100 column4">@disciplina.CargaHoraria</td>
-                                        <td class="cell100 column5">@disciplina.Nota</td>
+                                        <td class="cell100 column5">@notaValid</td>
                                     </tr>
                                 </tbody>
                             </table>

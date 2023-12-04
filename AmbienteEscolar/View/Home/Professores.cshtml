@@ -7,6 +7,7 @@
     Layout = "_Layout.cshtml";
     BancoDados.DBConnect();
     List<Professor> professores = ProfessorRepository.ListarProfessores();
+    Sessao sessao = Sessao.Current();
 }
 
     <meta charset="utf-8" />
@@ -26,7 +27,10 @@
             <h1>Professores</h1>
         </div>
         <div id="container-table" class="class-list">
-            <button class="btn btn-add-item" type="button" onclick="abrirModal(0, '', '', '', '')">Adicionar Professor</button>
+            @if (sessao.NivelAcesso.Id == (int)EnumNivelAcesso.Administrador)
+            {
+                <button class="btn btn-add-item" type="button" onclick="abrirModal(0, '', '', '', '')">Adicionar Professor</button>
+            }
             <div class="table100 ver5 m-b-110">
                 <div class="table100-head">
                     <table>
