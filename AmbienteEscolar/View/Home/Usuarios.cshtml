@@ -11,6 +11,7 @@
     List<NivelAcesso> nivelAcesso = NivelAcessoRepository.ListarAcesso();
     List<Usuario> usuarios = UsuarioRepository.ListarUsuarios();
     Sessao sessao = Sessao.Current();
+    string validaAcesso = sessao.NivelAcesso.Id == (int)EnumNivelAcesso.Professor ? "hidden" : "";
 }
 
 <meta charset="utf-8" />
@@ -69,7 +70,7 @@
                                     <td class="cell100 column3" style="display: none">@us.Senha</td>
                                     <td class="cell100 column3">•••••••••</td>
                                     <td class="cell100 column4">@us.NivelAcesso.Descricao</td>
-                                    <td><button class="btn" onclick="abrirModal(@us.Id, '@us.Login', '@us.Senha', '@us.NivelAcesso.Id')">Alterar</button></td>
+                                    <td><button class="btn" onclick="abrirModal(@us.Id, '@us.Login', '@us.Senha', '@us.NivelAcesso.Id')" @validaAcesso>Alterar</button></td>
                                 </tr>
                             </tbody>
                         </table>

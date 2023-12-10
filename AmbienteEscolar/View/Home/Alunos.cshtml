@@ -9,6 +9,7 @@
     Usuario u = new Usuario();
     List<Aluno> alunos = AlunoRepository.ListarAlunos();
     Sessao sessao = Sessao.Current();
+    string validaAcesso = sessao.NivelAcesso.Id == (int)EnumNivelAcesso.Professor ? "hidden" : "";
 }
 
 <meta charset="utf-8" />
@@ -71,7 +72,7 @@
                                     <td class="cell100 column2">@us.Matricula</td>
                                     <td class="cell100 column2">@us.Telefone</td>
                                     <td class="cell100 column2">@us.Email</td>
-                                    <td><button class="btn" onclick="abrirModal(@us.Id, '@us.Nome', '@us.Cpf', @us.Matricula, '@us.Telefone', '@us.Email')">Alterar</button></td>
+                                    <td><button class="btn" onclick="abrirModal(@us.Id, '@us.Nome', '@us.Cpf', @us.Matricula, '@us.Telefone', '@us.Email')" @validaAcesso>Alterar</button></td>
                                 </tr>
                             </tbody>
                         </table>
